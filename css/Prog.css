@@ -27,8 +27,8 @@
 .listProg {
   list-style-type: none;
   margin: 10px 10px 10px 10px;
-  background-color: #f4f4f4;
-  border: 1px solid #ddd;
+  background-color: #1E1E1E;
+  border: 1px solid #2C3E50;
   padding: 10px;
   width: 300px;
   border-radius: 20px;
@@ -45,11 +45,11 @@
 }
 
 .languageProg::-webkit-progress-value {
-  background-color: #af4c4c;
+  background-color: #7209B7;
   border-radius: 10px;
 }
 
 .languageProg::-webkit-progress-bar {
-  background-color: #ddd;
+  background-color: #2C3E50;
   border-radius: 10px;
 }

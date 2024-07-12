@@ -28,7 +28,7 @@ nav ul li a {
 }
 
 nav ul li a:hover {
-  color: #1e90ff;
+  color: #007BFF;
 }
 
 @keyframes fadeIn {
