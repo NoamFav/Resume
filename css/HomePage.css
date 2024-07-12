@@ -1,0 +1,29 @@
+#logo {
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 2%;
+}
+
+#name, #title {
+  text-align: center;
+}
+
+#intro {
+  text-align: center;
+  padding: 50px 20px;
+}
+
+#intro h2 {
+  font-size: 2em;
+  margin-bottom: 20px;
+}
+
+#info {
+  max-width: 800px;
+  margin: 0 auto;
+  font-size: 1.2em;
+}
