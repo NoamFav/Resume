@@ -1,8 +1,17 @@
-@import "Navigation.css";
-@import "HomePage.css";
-@import "Default.css";
-@import "HomePage.css";
-@import "Prog.css";
+@import "navigation.css";
+@import "homepage.css";
+@import "default.css";
+@import "programming-language.css";
+
+:root {
+  --font_color: #B7D5D4;
+  --primary_background: #373E40;
+  --section_background: #2B3B3F;
+  --card_background: #305252;
+  --card_border: #164A41;
+  --progress_bar_background: #77878B;
+  --progress_bar_fill: #488286;
+}
 
 ::-moz-selection {
   background: #b3d4fc;
@@ -59,9 +68,9 @@
 }
 
 @media print,
-  (-webkit-min-device-pixel-ratio: 1.25),
-  (min-resolution: 1.25dppx),
-  (min-resolution: 120dpi) {
+(-webkit-min-device-pixel-ratio: 1.25),
+(min-resolution: 1.25dppx),
+(min-resolution: 120dpi) {
   /* Style adjustments for high resolution devices */
 }
 
