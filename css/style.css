@@ -1,7 +1,7 @@
 @import "Navigation.css";
 @import "HomePage.css";
 @import "Default.css";
-@import "Header.css";
+@import "HomePage.css";
 @import "Prog.css";
 
 ::-moz-selection {
