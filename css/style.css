@@ -13,6 +13,30 @@
   --progress_bar_fill: #488286;
 }
 
+/*
+:root {
+  --font_color: #F7F5FB;
+  --primary_background: #302631;
+  --section_background: #4C3E62;
+  --card_background: #7B5598;
+  --card_border: #64D8C7;
+  --progress_bar_background: #302631;
+  --progress_bar_fill: #DACAE4;
+}
+*/
+
+/*
+:root {
+  --font_color: #F7F5FB;
+--primary_background: #1E1E2F;
+--section_background: #252639;
+--card_background: #2D1E45;
+--card_border: #373E5A;
+--progress_bar_background: #373E5A;
+--progress_bar_fill: #64D8C7;
+}
+*/
+
 ::-moz-selection {
   background: #b3d4fc;
   text-shadow: none;
