@@ -12,8 +12,8 @@ nav {
 nav ul {
   list-style: none;
   padding: 0;
-  margin: 0;
   display: flex;
+  margin: 0 0 10px;
   justify-content: center;
 }
 
@@ -22,14 +22,21 @@ nav ul li {
 }
 
 nav ul li a {
-  color: white;
+  color: var(--font_color);
   text-decoration: none;
   font-size: 1.2em;
-  transition: color 0.3s ease;
+  transition: color 0.3s ease, background-color 0.3s ease;
+  padding: 10px 20px; /* Increased padding */
+  border: 1px solid #555; /* Slight border */
+  border-radius: 5px; /* Rounded corners */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2); /* Subtle shadow */
+  text-shadow: 0 1px 1px rgba(0,0,0,0.3); /* Text shadow for depth */
 }
 
 nav ul li a:hover {
-  color: #007BFF;
+  color: #fff;
+  background-color: var(--card_background); /* Background color change on hover */
+  border-color: var(--card_border); /* Border color change to match */
 }
 
 @keyframes fadeIn {
