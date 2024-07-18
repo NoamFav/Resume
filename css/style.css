@@ -2,6 +2,7 @@
 @import "homepage.css";
 @import "default.css";
 @import "programming-language.css";
+@import "frameworks.css";
 
 :root {
   --font_color: #B7D5D4;

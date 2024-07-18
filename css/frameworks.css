@@ -1,30 +1,30 @@
-#title-programming {
+#title-frameworks {
   text-align: center;
   font-size: 4em;
   font-weight: bold;
   margin-bottom: 20px;
 }
 
-#programming-list {
+#frameworks-list {
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
   margin: 10px;
 }
 
-.language {
+.frameworks {
   text-align: center;
   font-size: 1.5em;
   font-weight: bold;
   margin-bottom: 10px;
 }
 
-.language-image {
+.icon-framework {
   width: 100px;
   height: 100px;
 }
 
-.list-programming-letter {
+.list-framework-letter {
   margin: 10px 10px 10px 10px;
   background-color: var(--card_background);
   border: 2px solid var(--card_border);
@@ -33,12 +33,12 @@
   border-radius: 20px;
 }
 
-.progress-container-language {
+.progress-container-framework {
   position: relative;
 }
 
-.language-progress-bar {
-  width: 95%;
+.frameworks-progress-bar {
+  width: 50%;
   height: 20px;
   -webkit-appearance: none;
   appearance: none;
@@ -47,7 +47,7 @@
   overflow: hidden;
 }
 
-.progress-text-language {
+.progress-text-framework {
   position: absolute;
   top: 0;
   left: 0;
@@ -58,12 +58,12 @@
   font-weight: bold;
 }
 
-.language-progress-bar::-webkit-progress-value {
+.frameworks-progress-bar::-webkit-progress-value {
   background-color: var(--progress_bar_fill);
   border-radius: 10px;
 }
 
-.language-progress-bar::-webkit-progress-bar {
+.frameworks-progress-bar::-webkit-progress-bar {
   background-color: var(--progress_bar_background);
   border-radius: 10px;
 }
