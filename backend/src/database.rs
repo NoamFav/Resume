@@ -1,6 +1,11 @@
-use sqlx::{mysql::MySqlPool, Pool, MySql};
+// backend/src/database.rs
+use sqlx::{mysql::MySqlPoolOptions, MySqlPool};
 
-pub async fn connect() -> Pool<MySql> {
+pub async fn connect() -> MySqlPool {
     let db_url = crate::config::get_database_url();
-    MySqlPool::connect(&db_url).await.expect("Failed to connect to MySQL")
+    MySqlPoolOptions::new()
+        .max_connections(5)
+        .connect(&db_url)
+        .await
+        .expect("Failed to connect to MySQL")
 }
