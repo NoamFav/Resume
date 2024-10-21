@@ -1,0 +1,10 @@
+/Users/noamfavier/Git_projects/Resume/backend/target/debug/deps/libasync_process-2930dac8e843316e.rmeta: /Users/noamfavier/.cargo/registry/src/index.crates.io-6f17d22bba15001f/async-process-2.3.0/src/lib.rs /Users/noamfavier/.cargo/registry/src/index.crates.io-6f17d22bba15001f/async-process-2.3.0/src/unix.rs /Users/noamfavier/.cargo/registry/src/index.crates.io-6f17d22bba15001f/async-process-2.3.0/src/reaper/mod.rs /Users/noamfavier/.cargo/registry/src/index.crates.io-6f17d22bba15001f/async-process-2.3.0/src/reaper/signal.rs
+
+/Users/noamfavier/Git_projects/Resume/backend/target/debug/deps/libasync_process-2930dac8e843316e.rlib: /Users/noamfavier/.cargo/registry/src/index.crates.io-6f17d22bba15001f/async-process-2.3.0/src/lib.rs /Users/noamfavier/.cargo/registry/src/index.crates.io-6f17d22bba15001f/async-process-2.3.0/src/unix.rs /Users/noamfavier/.cargo/registry/src/index.crates.io-6f17d22bba15001f/async-process-2.3.0/src/reaper/mod.rs /Users/noamfavier/.cargo/registry/src/index.crates.io-6f17d22bba15001f/async-process-2.3.0/src/reaper/signal.rs
+
+/Users/noamfavier/Git_projects/Resume/backend/target/debug/deps/async_process-2930dac8e843316e.d: /Users/noamfavier/.cargo/registry/src/index.crates.io-6f17d22bba15001f/async-process-2.3.0/src/lib.rs /Users/noamfavier/.cargo/registry/src/index.crates.io-6f17d22bba15001f/async-process-2.3.0/src/unix.rs /Users/noamfavier/.cargo/registry/src/index.crates.io-6f17d22bba15001f/async-process-2.3.0/src/reaper/mod.rs /Users/noamfavier/.cargo/registry/src/index.crates.io-6f17d22bba15001f/async-process-2.3.0/src/reaper/signal.rs
+
+/Users/noamfavier/.cargo/registry/src/index.crates.io-6f17d22bba15001f/async-process-2.3.0/src/lib.rs:
+/Users/noamfavier/.cargo/registry/src/index.crates.io-6f17d22bba15001f/async-process-2.3.0/src/unix.rs:
+/Users/noamfavier/.cargo/registry/src/index.crates.io-6f17d22bba15001f/async-process-2.3.0/src/reaper/mod.rs:
+/Users/noamfavier/.cargo/registry/src/index.crates.io-6f17d22bba15001f/async-process-2.3.0/src/reaper/signal.rs:
