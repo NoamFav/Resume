@@ -1,21 +1,36 @@
+// backend/src/main.rs
 use actix_web::{web, App, HttpResponse, HttpServer, Responder};
-use env_logger::Env;
 use log::info;
 
+// Module declarations
+mod config;
+mod database;
+mod models;
+mod routes;
+mod services;
+
+// A simple handler for the root path
 async fn index() -> impl Responder {
     HttpResponse::Ok().body("Hello, world!")
 }
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
-    // Initialize the logger
-    env_logger::Builder::from_env(Env::default().default_filter_or("info")).init();
+    // Initialize configuration and logging
+    config::init();
 
     info!("Starting server at http://0.0.0.0:8000");
 
-    HttpServer::new(|| {
+    // Create the database pool
+    let pool = database::connect().await;
+
+    // Start the HTTP server
+    HttpServer::new(move || {
         App::new()
-            .route("/", web::get().to(index)) // Route for '/'
+            .data(pool.clone()) // Make the pool available to handlers
+            .configure(routes::user_routes::config) // Register user routes
+            .configure(routes::auth_routes::config) // Register auth routes
+            .route("/", web::get().to(index)) // Root route
     })
     .bind(("0.0.0.0", 8000))?
     .run()
