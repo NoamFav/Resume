@@ -5,6 +5,7 @@ edition = "2021"
 
 [dependencies]
 actix-web = "=4.9.0"
+diesel = { version = "2.0.0", features = ["mysql"] }
 sqlx = { version = "0.5", features = ["runtime-async-std-native-tls", "macros", "mysql"] }
 dotenv = "0.15"
 serde = { version = "1.0", features = ["derive"] }

@@ -1,3 +1,4 @@
+// backend/src/routes/auth_routes.rs
 use actix_web::{web, HttpResponse, Responder};
 
 pub fn config(cfg: &mut web::ServiceConfig) {
