@@ -1,4 +1,4 @@
-use sqlx::{MySqlPool, Pool};
+use sqlx::{mysql::MySqlPool, Pool, MySql};
 
 pub async fn connect() -> Pool<MySql> {
     let db_url = crate::config::get_database_url();
