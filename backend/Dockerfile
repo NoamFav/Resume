@@ -9,4 +9,4 @@ RUN cargo build --release
 FROM debian:buster-slim
 COPY --from=builder /usr/src/app/target/release/my_rust_project /usr/local/bin/my_rust_project
 
-CMD ["my_rust_project"]
+CMD ["my_resume"]
