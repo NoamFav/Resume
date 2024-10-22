@@ -1,29 +1,43 @@
 {
-  "name": "frontend",
+  "name": "querycrust",
   "version": "1.0.0",
-  "dependencies": {
-    "axios": "^1.7.7",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0",
-    "tailwindcss": "^2.2.19"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.25.8",
-    "@babel/preset-env": "^7.25.8",
-    "@babel/preset-react": "^7.25.7",
-    "@pmmmwh/react-refresh-webpack-plugin": "^0.5.15",
-    "autoprefixer": "^10.2.6",
-    "babel-loader": "^8.4.1",
-    "css-loader": "^5.2.5",
-    "postcss-loader": "^5.0.0",
-    "react-refresh": "^0.14.2",
-    "style-loader": "^2.0.0",
-    "webpack": "^5.95.0",
-    "webpack-cli": "^4.10.0",
-    "webpack-dev-server": "^4.15.2"
+  "description": "## Overview This template provides a structured format for managing SQL projects, including scripts for tables, views, procedures, functions, triggers, and initial data loading.",
+  "main": "webpack.config.js",
+  "directories": {
+    "test": "tests"
   },
   "scripts": {
-    "start": "webpack serve --mode development",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack serve --open",
     "build": "webpack --mode production"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.25.2",
+    "@babel/preset-env": "^7.25.4",
+    "@babel/preset-react": "^7.24.7",
+    "@types/react": "^18.3.10",
+    "@types/react-dom": "^18.3.0",
+    "autoprefixer": "^10.4.20",
+    "babel-loader": "^9.2.1",
+    "css-loader": "^7.1.2",
+    "html-webpack-plugin": "^5.6.0",
+    "postcss": "^8.4.47",
+    "postcss-loader": "^8.1.1",
+    "style-loader": "^4.0.0",
+    "tailwindcss": "^3.4.13",
+    "webpack": "^5.95.0",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^5.1.0"
+  },
+  "dependencies": {
+    "axios": "^1.7.7",
+    "chart.js": "^4.4.4",
+    "react": "^18.3.1",
+    "react-chartjs-2": "^5.2.0",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.26.2"
   }
 }
