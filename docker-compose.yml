@@ -42,15 +42,18 @@ services:
 
   flyway:
     image: flyway/flyway:latest
-    command: >
-      -url=jdbc:mysql://db:3306/my_resume?useSSL=false&allowPublicKeyRetrieval=true
-      -user=root
-      -password=your_secure_password
-      migrate
+    environment:
+      FLYWAY_URL: jdbc:mysql://db:3306/my_resume?useSSL=false&allowPublicKeyRetrieval=true
+      FLYWAY_USER: root
+      FLYWAY_PASSWORD: noamfav061105!
+    command: migrate
     volumes:
-      - ./migrations:/flyway/sql
+      - ./migrations:/flyway/sql  # Ensure your migration files are placed here
     depends_on:
-      - db
+      db:
+        condition: service_healthy  # Ensures Flyway only runs when MySQL is ready
+    networks:
+      - app-network
 
 volumes:
   db_data:
