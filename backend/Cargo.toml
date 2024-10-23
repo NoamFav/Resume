@@ -5,14 +5,13 @@ edition = "2021"
 
 [dependencies]
 actix-web = "=4.9.0"
-diesel = { version = "2.0.0", features = ["mysql"] }
-sqlx = { version = "0.5", features = ["runtime-async-std-native-tls", "macros", "mysql"] }
+diesel = { version = "2.0.0", features = ["mysql", "r2d2"] }
 dotenv = "0.15"
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
-tokio = { version = "1", features = ["full"] }
 env_logger = "0.9"
 log = "0.4"
+anyhow = "1.0"
 
 [build-dependencies]
 syn = { version = "1.0", features = ["derive", "parsing", "printing", "proc-macro"] }
