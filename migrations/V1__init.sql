@@ -16,7 +16,9 @@ CREATE TABLE user_image (
     caption VARCHAR(255),
     alt_text VARCHAR(255),
     uploaded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES users(user_id)
+    CONSTRAINT fk_user_image_user
+        FOREIGN KEY (user_id) REFERENCES users(user_id)
+        ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE socials (
@@ -51,7 +53,7 @@ CREATE TABLE work_experience (
     company_name VARCHAR(100) NOT NULL,
     position VARCHAR(100) NOT NULL,
     start_date DATE NOT NULL,
-    end_date DATE NOT NULL
+    end_date DATE NULL
 );
 
 CREATE TABLE achievements (
@@ -61,7 +63,16 @@ CREATE TABLE achievements (
     description TEXT,
     issued_by VARCHAR(100),
     issued_date DATE,
-    FOREIGN KEY (user_id) REFERENCES users(user_id)
+    CONSTRAINT fk_achievements_user
+        FOREIGN KEY (user_id) REFERENCES users(user_id)
+        ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE certifications (
+    certification_id INT PRIMARY KEY AUTO_INCREMENT,
+    certification_name VARCHAR(255) NOT NULL,
+    certification_date DATE NOT NULL,
+    grade FLOAT CHECK (grade >= 0 AND grade <= 100)
 );
 
 CREATE TABLE programming_languages (
@@ -79,7 +90,9 @@ CREATE TABLE programming_language_images (
     caption VARCHAR(255),
     alt_text VARCHAR(255),
     uploaded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (language_id) REFERENCES programming_languages(language_id)
+    CONSTRAINT fk_programming_language_images_language
+        FOREIGN KEY (language_id) REFERENCES programming_languages(language_id)
+        ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE frameworks (
@@ -89,7 +102,9 @@ CREATE TABLE frameworks (
     favorite BOOLEAN DEFAULT FALSE,
     learning BOOLEAN DEFAULT FALSE,
     language_id INT,
-    FOREIGN KEY (language_id) REFERENCES programming_languages(language_id)
+    CONSTRAINT fk_frameworks_language
+        FOREIGN KEY (language_id) REFERENCES programming_languages(language_id)
+        ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE framework_images (
@@ -99,7 +114,29 @@ CREATE TABLE framework_images (
     caption VARCHAR(255),
     alt_text VARCHAR(255),
     uploaded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (framework_id) REFERENCES frameworks(framework_id)
+    CONSTRAINT fk_framework_images_framework
+        FOREIGN KEY (framework_id) REFERENCES frameworks(framework_id)
+        ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE tools (
+    tools_id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,
+    percentage FLOAT CHECK (percentage >= 0 AND percentage <= 100) NOT NULL,
+    favorite BOOLEAN NOT NULL,
+    learning BOOLEAN NOT NULL
+);
+
+CREATE TABLE tools_image (
+    image_id INT PRIMARY KEY AUTO_INCREMENT,
+    tools_id INT NOT NULL,
+    image_url VARCHAR(255) NOT NULL,
+    caption VARCHAR(255),
+    alt_text VARCHAR(255),
+    uploaded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    CONSTRAINT fk_tools_image_tools
+        FOREIGN KEY (tools_id) REFERENCES tools(tools_id)
+        ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE blog_posts (
@@ -111,9 +148,15 @@ CREATE TABLE blog_posts (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     language_id INT,
     framework_id INT,
-    FOREIGN KEY (user_id) REFERENCES users(user_id),
-    FOREIGN KEY (language_id) REFERENCES programming_languages(language_id),
-    FOREIGN KEY (framework_id) REFERENCES frameworks(framework_id)
+    CONSTRAINT fk_blog_posts_user
+        FOREIGN KEY (user_id) REFERENCES users(user_id)
+        ON DELETE SET NULL ON UPDATE CASCADE,
+    CONSTRAINT fk_blog_posts_language
+        FOREIGN KEY (language_id) REFERENCES programming_languages(language_id)
+        ON DELETE SET NULL ON UPDATE CASCADE,
+    CONSTRAINT fk_blog_posts_framework
+        FOREIGN KEY (framework_id) REFERENCES frameworks(framework_id)
+        ON DELETE SET NULL ON UPDATE CASCADE
 );
 
 CREATE TABLE comments (
@@ -122,8 +165,12 @@ CREATE TABLE comments (
     user_id INT,
     comment TEXT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (post_id) REFERENCES blog_posts(post_id),
-    FOREIGN KEY (user_id) REFERENCES users(user_id)
+    CONSTRAINT fk_comments_post
+        FOREIGN KEY (post_id) REFERENCES blog_posts(post_id)
+        ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT fk_comments_user
+        FOREIGN KEY (user_id) REFERENCES users(user_id)
+        ON DELETE SET NULL ON UPDATE CASCADE
 );
 
 CREATE TABLE likes (
@@ -131,16 +178,27 @@ CREATE TABLE likes (
     post_id INT,
     user_id INT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (post_id) REFERENCES blog_posts(post_id),
-    FOREIGN KEY (user_id) REFERENCES users(user_id)
+    CONSTRAINT fk_likes_post
+        FOREIGN KEY (post_id) REFERENCES blog_posts(post_id)
+        ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT fk_likes_user
+        FOREIGN KEY (user_id) REFERENCES users(user_id)
+        ON DELETE SET NULL ON UPDATE CASCADE
 );
 
 CREATE TABLE comment_likes (
-    comment_id INT,
+    like_id INT PRIMARY KEY AUTO_INCREMENT,
+    comment_id INT NOT NULL,
     user_id INT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (comment_id) REFERENCES comments(comment_id),
-    FOREIGN KEY (user_id) REFERENCES users(user_id)
+    CONSTRAINT fk_comment_likes_comment
+        FOREIGN KEY (comment_id) REFERENCES comments(comment_id)
+        ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT fk_comment_likes_user
+        FOREIGN KEY (user_id) REFERENCES users(user_id)
+        ON DELETE SET NULL ON UPDATE CASCADE,
+    CONSTRAINT unique_comment_user
+        UNIQUE (comment_id, user_id)
 );
 
 CREATE TABLE projects (
@@ -149,11 +207,43 @@ CREATE TABLE projects (
     description TEXT NOT NULL,
     git_url VARCHAR(255) NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+CREATE TABLE project_languages (
+    project_id INT,
     language_id INT,
+    PRIMARY KEY (project_id, language_id),
+    CONSTRAINT fk_project_languages_project
+        FOREIGN KEY (project_id) REFERENCES projects(project_id)
+        ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT fk_project_languages_language
+        FOREIGN KEY (language_id) REFERENCES programming_languages(language_id)
+        ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE project_frameworks (
+    project_id INT,
     framework_id INT,
-    FOREIGN KEY (language_id) REFERENCES programming_languages(language_id),
-    FOREIGN KEY (framework_id) REFERENCES frameworks(framework_id)
+    PRIMARY KEY (project_id, framework_id),
+    CONSTRAINT fk_project_frameworks_project
+        FOREIGN KEY (project_id) REFERENCES projects(project_id)
+        ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT fk_project_frameworks_framework
+        FOREIGN KEY (framework_id) REFERENCES frameworks(framework_id)
+        ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE project_tools (
+    project_id INT,
+    tools_id INT,
+    PRIMARY KEY (project_id, tools_id),
+    CONSTRAINT fk_project_tools_project
+        FOREIGN KEY (project_id) REFERENCES projects(project_id)
+        ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT fk_project_tools_tools
+        FOREIGN KEY (tools_id) REFERENCES tools(tools_id)
+        ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE project_images (
@@ -163,14 +253,18 @@ CREATE TABLE project_images (
     caption VARCHAR(255),
     alt_text VARCHAR(255),
     uploaded_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (project_id) REFERENCES projects(project_id)
+    CONSTRAINT fk_project_images
+        FOREIGN KEY (project_id) REFERENCES projects(project_id)
+        ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE project_tags (
     tag_id INT PRIMARY KEY AUTO_INCREMENT,
     project_id INT,
     tag_name VARCHAR(50),
-    FOREIGN KEY (project_id) REFERENCES projects(project_id)
+    CONSTRAINT fk_project_tags_project
+        FOREIGN KEY (project_id) REFERENCES projects(project_id)
+        ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE project_links (
@@ -178,7 +272,9 @@ CREATE TABLE project_links (
     project_id INT,
     link_name VARCHAR(50),
     link_url VARCHAR(255),
-    FOREIGN KEY (project_id) REFERENCES projects(project_id)
+    CONSTRAINT fk_project_links_project
+        FOREIGN KEY (project_id) REFERENCES projects(project_id)
+        ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE project_comments (
@@ -187,8 +283,12 @@ CREATE TABLE project_comments (
     user_id INT,
     comment TEXT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (project_id) REFERENCES projects(project_id),
-    FOREIGN KEY (user_id) REFERENCES users(user_id)
+    CONSTRAINT fk_project_comments_project
+        FOREIGN KEY (project_id) REFERENCES projects(project_id)
+        ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT fk_project_comments_user
+        FOREIGN KEY (user_id) REFERENCES users(user_id)
+        ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE project_likes (
@@ -196,24 +296,41 @@ CREATE TABLE project_likes (
     project_id INT,
     user_id INT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (project_id) REFERENCES projects(project_id),
-    FOREIGN KEY (user_id) REFERENCES users(user_id)
+    CONSTRAINT fk_project_likes_project
+        FOREIGN KEY (project_id) REFERENCES projects(project_id)
+        ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT fk_project_likes_user
+        FOREIGN KEY (user_id) REFERENCES users(user_id)
+        ON DELETE SET NULL ON UPDATE CASCADE,
+    CONSTRAINT unique_project_user
+        UNIQUE (project_id, user_id)
 );
 
 CREATE TABLE project_comment_likes (
+    like_id INT PRIMARY KEY AUTO_INCREMENT,
     comment_id INT,
     user_id INT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (comment_id) REFERENCES project_comments(comment_id),
-    FOREIGN KEY (user_id) REFERENCES users(user_id)
+    CONSTRAINT fk_project_comment_likes_comment
+        FOREIGN KEY (comment_id) REFERENCES project_comments(comment_id)
+        ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT fk_project_comment_likes_user
+        FOREIGN KEY (user_id) REFERENCES users(user_id)
+        ON DELETE SET NULL ON UPDATE CASCADE,
+    CONSTRAINT unique_project_comment_user
+        UNIQUE (comment_id, user_id)
 );
 
 CREATE TABLE project_contributors (
-    contributor_id INT PRIMARY KEY AUTO_INCREMENT,
     project_id INT,
     user_id INT,
-    FOREIGN KEY (project_id) REFERENCES projects(project_id),
-    FOREIGN KEY (user_id) REFERENCES users(user_id)
+    PRIMARY KEY (project_id, user_id),
+    CONSTRAINT fk_project_contributors_project
+        FOREIGN KEY (project_id) REFERENCES projects(project_id)
+        ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT fk_project_contributors_user
+        FOREIGN KEY (user_id) REFERENCES users(user_id)
+        ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE git_updates (
@@ -225,7 +342,9 @@ CREATE TABLE git_updates (
     is_pull_request BOOLEAN DEFAULT FALSE,
     is_issue BOOLEAN DEFAULT FALSE,
     timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (project_id) REFERENCES projects(project_id)
+    CONSTRAINT fk_git_updates_project
+        FOREIGN KEY (project_id) REFERENCES projects(project_id)
+        ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE analytics (
@@ -233,7 +352,9 @@ CREATE TABLE analytics (
     page_name VARCHAR(100),
     views INT DEFAULT 0,
     user_id INT,
-    FOREIGN KEY (user_id) REFERENCES users(user_id)
+    CONSTRAINT fk_analytics_user
+        FOREIGN KEY (user_id) REFERENCES users(user_id)
+        ON DELETE SET NULL ON UPDATE CASCADE
 );
 
 CREATE TABLE roadmaps (
@@ -245,29 +366,61 @@ CREATE TABLE roadmaps (
 CREATE TABLE skill_roadmaps (
     roadmap_id INT,
     skill_id INT,
-    FOREIGN KEY (roadmap_id) REFERENCES roadmaps(roadmap_id),
-    FOREIGN KEY (skill_id) REFERENCES skills(skill_id)
+    PRIMARY KEY (roadmap_id, skill_id),
+    CONSTRAINT fk_skill_roadmaps_roadmap
+        FOREIGN KEY (roadmap_id) REFERENCES roadmaps(roadmap_id)
+        ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT fk_skill_roadmaps_skill
+        FOREIGN KEY (skill_id) REFERENCES skills(skill_id)
+        ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE programming_language_roadmaps (
     roadmap_id INT,
     language_id INT,
-    FOREIGN KEY (roadmap_id) REFERENCES roadmaps(roadmap_id),
-    FOREIGN KEY (language_id) REFERENCES programming_languages(language_id)
+    PRIMARY KEY (roadmap_id, language_id),
+    CONSTRAINT fk_plr_roadmap
+        FOREIGN KEY (roadmap_id) REFERENCES roadmaps(roadmap_id)
+        ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT fk_plr_language
+        FOREIGN KEY (language_id) REFERENCES programming_languages(language_id)
+        ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE framework_roadmaps (
     roadmap_id INT,
     framework_id INT,
-    FOREIGN KEY (roadmap_id) REFERENCES roadmaps(roadmap_id),
-    FOREIGN KEY (framework_id) REFERENCES frameworks(framework_id)
+    PRIMARY KEY (roadmap_id, framework_id),
+    CONSTRAINT fk_framework_roadmaps_roadmap
+        FOREIGN KEY (roadmap_id) REFERENCES roadmaps(roadmap_id)
+        ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT fk_framework_roadmaps_framework
+        FOREIGN KEY (framework_id) REFERENCES frameworks(framework_id)
+        ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE project_roadmaps (
     roadmap_id INT,
     project_id INT,
-    FOREIGN KEY (roadmap_id) REFERENCES roadmaps(roadmap_id),
-    FOREIGN KEY (project_id) REFERENCES projects(project_id)
+    PRIMARY KEY (roadmap_id, project_id),
+    CONSTRAINT fk_project_roadmaps_roadmap
+        FOREIGN KEY (roadmap_id) REFERENCES roadmaps(roadmap_id)
+        ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT fk_project_roadmaps_project
+        FOREIGN KEY (project_id) REFERENCES projects(project_id)
+        ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE tools_roadmaps (
+    roadmap_id INT,
+    tools_id INT,
+    PRIMARY KEY (roadmap_id, tools_id),
+    CONSTRAINT fk_tools_roadmaps_roadmap
+        FOREIGN KEY (roadmap_id) REFERENCES roadmaps(roadmap_id)
+        ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT fk_tools_roadmaps_tools
+        FOREIGN KEY (tools_id) REFERENCES tools(tools_id)
+        ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE milestones (
@@ -276,10 +429,11 @@ CREATE TABLE milestones (
     milestone_title VARCHAR(255) NOT NULL,
     milestone_description TEXT,
     milestone_link VARCHAR(255),
-    target_date DATE,
     completed BOOLEAN DEFAULT FALSE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (roadmap_id) REFERENCES roadmaps(roadmap_id)
+    CONSTRAINT fk_milestones_roadmap
+        FOREIGN KEY (roadmap_id) REFERENCES roadmaps(roadmap_id)
+        ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE roadmap_events (
@@ -289,7 +443,9 @@ CREATE TABLE roadmap_events (
     event_description TEXT,
     event_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     event_type ENUM('milestone', 'completed', 'in_progress') NOT NULL,
-    FOREIGN KEY (roadmap_id) REFERENCES roadmaps(roadmap_id)
+    CONSTRAINT fk_roadmap_events_roadmap
+        FOREIGN KEY (roadmap_id) REFERENCES roadmaps(roadmap_id)
+        ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE roadmap_progress (
@@ -297,13 +453,10 @@ CREATE TABLE roadmap_progress (
     roadmap_id INT,
     progress_percentage FLOAT CHECK (progress_percentage BETWEEN 0 AND 100),
     last_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (roadmap_id) REFERENCES roadmaps(roadmap_id)
+    CONSTRAINT fk_roadmap_progress_roadmap
+        FOREIGN KEY (roadmap_id) REFERENCES roadmaps(roadmap_id)
+        ON DELETE CASCADE ON UPDATE CASCADE
 );
-
--- Indexing frequently accessed foreign key columns
-CREATE INDEX idx_user_id ON users(user_id);
-CREATE INDEX idx_post_id ON blog_posts(post_id);
-CREATE INDEX idx_project_id ON projects(project_id);
 
 -- Indexing foreign key columns in related tables for faster lookups
 CREATE INDEX idx_comment_user ON comments(user_id);
@@ -311,43 +464,9 @@ CREATE INDEX idx_like_post ON likes(post_id);
 CREATE INDEX idx_project_contributors_user ON project_contributors(user_id);
 
 -- Indexing roadmaps for faster access
-CREATE INDEX idx_skill_roadmap ON skill_roadmaps(skill_id);
+CREATE INDEX idx_skill_roadmap_skill ON skill_roadmaps(skill_id);
 CREATE INDEX idx_milestone_roadmap ON milestones(roadmap_id);
 
--- Add cascade delete and update rules
-ALTER TABLE user_image
-ADD CONSTRAINT fk_user_image_user
-FOREIGN KEY (user_id) REFERENCES users(user_id)
-ON DELETE CASCADE ON UPDATE CASCADE;
-
-ALTER TABLE comments
-ADD CONSTRAINT fk_comments_user
-FOREIGN KEY (user_id) REFERENCES users(user_id)
-ON DELETE CASCADE ON UPDATE CASCADE;
-
-ALTER TABLE project_contributors
-ADD CONSTRAINT fk_project_contributors_user
-FOREIGN KEY (user_id) REFERENCES users(user_id)
-ON DELETE SET NULL ON UPDATE CASCADE;
-
--- Set comments to be deleted if the post is deleted
-ALTER TABLE comments
-ADD CONSTRAINT fk_comments_post
-FOREIGN KEY (post_id) REFERENCES blog_posts(post_id)
-ON DELETE CASCADE ON UPDATE CASCADE;
-
--- Handle projects and related data
-ALTER TABLE project_images
-ADD CONSTRAINT fk_project_images
-FOREIGN KEY (project_id) REFERENCES projects(project_id)
-ON DELETE CASCADE ON UPDATE CASCADE;
-
-ALTER TABLE project_comments
-ADD CONSTRAINT fk_project_comments
-FOREIGN KEY (project_id) REFERENCES projects(project_id)
-ON DELETE CASCADE ON UPDATE CASCADE;
-
-ALTER TABLE milestones
-ADD CONSTRAINT fk_milestones_roadmap
-FOREIGN KEY (roadmap_id) REFERENCES roadmaps(roadmap_id)
-ON DELETE CASCADE ON UPDATE CASCADE;
+CREATE INDEX idx_plr_language_roadmap_language ON programming_language_roadmaps(language_id);
+CREATE INDEX idx_tools_roadmap_tool ON tools_roadmaps(tools_id);
+CREATE INDEX idx_framework_roadmap_framework ON framework_roadmaps(framework_id);
