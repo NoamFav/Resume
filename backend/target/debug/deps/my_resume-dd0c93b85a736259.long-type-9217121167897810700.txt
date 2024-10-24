@@ -1,0 +1,1 @@
+SelectStatement<FromClause<programming_language_images::table>, query_builder::select_clause::SelectClause<(programming_language_images::columns::image_id, programming_language_images::columns::uploaded_at)>>
