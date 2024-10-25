@@ -7,6 +7,7 @@ use chrono::NaiveDateTime;
 use crate::schema::programming_languages;
 use crate::schema::programming_language_images;
 use crate::schema::programming_language_roadmaps;
+use crate::models::roadmaps::Roadmaps;
 
 #[derive(Queryable, Identifiable, Serialize, Deserialize, Debug)]
 #[table_name = "programming_languages"]
@@ -34,9 +35,9 @@ pub struct ProgrammingLanguageImage {
 
 #[derive(Queryable, Identifiable, Associations, Serialize, Deserialize, Debug)]
 #[table_name = "programming_language_roadmaps"]
-#[primary_key(roadmap_id)]
+#[primary_key(roadmap_id, language_id)]
 #[belongs_to(ProgrammingLanguage, foreign_key = "language_id")]
-//#[belongs_to(Rodmaps, foreign_key = "roadmap_id")]
+#[belongs_to(Rodmaps, foreign_key = "roadmap_id")]
 pub struct ProgrammingLanguageRoadmap {
     pub roadmap_id: i32,
     pub language_id: i32,
