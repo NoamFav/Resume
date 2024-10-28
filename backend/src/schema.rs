@@ -1,9 +1,3 @@
-pub mod sql_types {
-    #[derive(diesel::sql_types::SqlType)]
-    #[diesel(mysql_type(name = "Enum"))]
-    pub struct RoadmapEventsEventTypeEnum;
-}
-
 diesel::table! {
     achievements (achievement_id) {
         achievement_id -> Integer,
@@ -328,9 +322,6 @@ diesel::table! {
 }
 
 diesel::table! {
-    use diesel::sql_types::*;
-    use super::sql_types::RoadmapEventsEventTypeEnum;
-
     roadmap_events (event_id) {
         event_id -> Integer,
         roadmap_id -> Nullable<Integer>,
@@ -338,8 +329,8 @@ diesel::table! {
         event_title -> Varchar,
         event_description -> Nullable<Text>,
         event_date -> Nullable<Timestamp>,
-        #[max_length = 11]
-        event_type -> RoadmapEventsEventTypeEnum,
+        #[max_length = 50]
+        event_type -> Varchar,
     }
 }
 

@@ -5,7 +5,8 @@ edition = "2021"
 
 [dependencies]
 actix-web = "=4.9.0"
-diesel = { version = "2.0.0", features = ["mysql", "r2d2", "chrono", "diesel-derive-enum"] }
+diesel = { version = "2.0.0", features = ["mysql", "r2d2", "chrono"] }
+r2d2 = "0.8"
 diesel-derive-enum = "2.0"
 dotenv = "0.15"
 serde = { version = "1.0", features = ["derive"] }

@@ -1,13 +1,17 @@
 // backend/src/models/personal.rs
 use serde::{Deserialize, Serialize};
-use r2d2::{PooleConnection, PooledConnection};
+use diesel::r2d2::{ConnectionManager, PooledConnection};
 use diesel::prelude::*;
 use diesel::mysql::MysqlConnection;
-use crate::schema::personal;
+use crate::schema::work_experience;
+use crate::schema::socials;
+use crate::schema::contacts;
+use crate::schema::educations;
+use crate::schema::certifications;
 
 #[derive(Queryable, Identifiable, Serialize, Deserialize, Debug)]
-#[table_name = "work_experience"]
-#[primary_key(work_id)]
+#[diesel(table_name = work_experience)]
+#[diesel(primary_key(work_id))]
 pub struct WorkExperience {
     pub work_id: i32,
     pub company_name: String,
@@ -17,8 +21,8 @@ pub struct WorkExperience {
 }
 
 #[derive(Queryable, Identifiable, Serialize, Deserialize, Debug)]
-#[table_name = "socials"]
-#[primary_key(social_id)]
+#[diesel(table_name = socials)]
+#[diesel(primary_key(social_id))]
 pub struct Social {
     pub social_id: i32,
     pub social_name: String,
@@ -26,8 +30,8 @@ pub struct Social {
 }
 
 #[derive(Queryable, Identifiable, Serialize, Deserialize, Debug)]
-#[table_name = "contacts"]
-#[primary_key(contact_id)]
+#[diesel(table_name = contacts)]
+#[diesel(primary_key(contact_id))]
 pub struct Contact {
     pub contact_id: i32,
     pub contact_name: String,
@@ -35,8 +39,8 @@ pub struct Contact {
 }
 
 #[derive(Queryable, Identifiable, Serialize, Deserialize, Debug)]
-#[table_name = "educations"]
-#[primary_key(education_id)]
+#[diesel(table_name = educations)]
+#[diesel(primary_key(education_id))]
 pub struct Education {
     pub education_id: i32,
     pub school_name: String,
@@ -47,11 +51,45 @@ pub struct Education {
 }
 
 #[derive(Queryable, Identifiable, Serialize, Deserialize, Debug)]
-#[table_name = "certifications"]
-#[primary_key(certification_id)]
+#[diesel(table_name = certifications)]
+#[diesel(primary_key(certification_id))]
 pub struct Certification {
     pub certification_id: i32,
     pub certification_name: String,
     pub certification_date: chrono::NaiveDate,
     pub grade: Option<f32>,
 }
+
+type PersonalConnection = PooledConnection<ConnectionManager<MysqlConnection>>;
+
+impl WorkExperience {
+    pub fn all(conn: &mut PersonalConnection) -> QueryResult<Vec<WorkExperience>> {
+        work_experience::table.load::<WorkExperience>(conn)
+    }
+}
+
+impl Social {
+    pub fn all(conn: &mut PersonalConnection) -> QueryResult<Vec<Social>> {
+        socials::table.load::<Social>(conn)
+    }
+}
+
+impl Contact {
+    pub fn all(conn: &mut PersonalConnection) -> QueryResult<Vec<Contact>> {
+        contacts::table.load::<Contact>(conn)
+    }
+}
+
+impl Education {
+    pub fn all(conn: &mut PersonalConnection) -> QueryResult<Vec<Education>> {
+        educations::table.load::<Education>(conn)
+    }
+}
+
+impl Certification {
+    pub fn all(conn: &mut PersonalConnection) -> QueryResult<Vec<Certification>> {
+        certifications::table.load::<Certification>(conn)
+    }
+}
+
+

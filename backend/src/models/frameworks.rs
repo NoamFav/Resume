@@ -4,13 +4,15 @@ use diesel::r2d2::{ConnectionManager, PooledConnection};
 use diesel::prelude::*;
 use diesel::mysql::MysqlConnection;
 use crate::schema::frameworks;
+use crate::schema::framework_images;
+use crate::schema::framework_roadmaps;
 use crate::models::programming_languages::ProgrammingLanguage;
-use crate::models::roadmaps::Roadmaps;
+use crate::models::roadmaps::Roadmap;
 
-#[derive(Queryable, Serialize, Deserialize, Debug, Associations)]
-#[table_name = "frameworks"]
-#[primary_key(frameworks_id)]
-#[belongs_to(ProgrammingLanguage, foreign_key = "language_id")]
+#[derive(Queryable, Identifiable, Associations, Serialize, Deserialize, Debug)]
+#[diesel(table_name = frameworks)]
+#[diesel(primary_key(frameworks_id))]
+#[diesel(belongs_to(ProgrammingLanguage, foreign_key = language_id))]
 pub struct Framework {
     pub frameworks_id: i32,
     pub name: String,
@@ -21,9 +23,9 @@ pub struct Framework {
 }
 
 #[derive(Queryable, Identifiable, Associations, Serialize, Deserialize, Debug)]
-#[table_name = "framework_images"]
-#[primary_key(image_id)]
-#[belongs_to(Framework, foreign_key = "framework_id")]
+#[diesel(table_name = framework_images)]
+#[diesel(primary_key(image_id))]
+#[diesel(belongs_to(Framework, foreign_key = framework_id))]
 pub struct FrameworkImage {
     pub image_id: i32,
     pub framework_id: Option<i32>,
@@ -34,10 +36,10 @@ pub struct FrameworkImage {
 }
 
 #[derive(Queryable, Identifiable, Associations, Serialize, Deserialize, Debug)]
-#[table_name = "framework_roadmaps"]
-#[primary_key(roadmap_id, framework_id)]
-#[belongs_to(Framework, foreign_key = "framework_id")]
-#[belongs_to(Roadmaps, foreign_key = "roadmap_id")]
+#[diesel(table_name = framework_roadmaps)]
+#[diesel(primary_key(roadmap_id, framework_id))]
+#[diesel(belongs_to(Framework, foreign_key = framework_id))]
+#[diesel(belongs_to(Roadmap, foreign_key = roadmap_id))]
 pub struct FrameworkRoadmap {
     pub roadmap_id: i32,
     pub framework_id: i32,
@@ -46,25 +48,25 @@ pub struct FrameworkRoadmap {
 type DbConnection = PooledConnection<ConnectionManager<MysqlConnection>>;
 
 impl Framework {
-    pub fn all(conn: &DbConnection) -> QueryResult<Vec<Framework>> {
+    pub fn all(conn: &mut DbConnection) -> QueryResult<Vec<Framework>> {
         frameworks::table.load::<Framework>(conn)
     }
 }
 
 impl FrameworkImage {
-    pub fn all(conn: &DbConnection) -> QueryResult<Vec<FrameworkImage>> {
+    pub fn all(conn: &mut DbConnection) -> QueryResult<Vec<FrameworkImage>> {
         framework_images::table.load::<FrameworkImage>(conn)
     }
 }
 
 impl FrameworkRoadmap {
-    pub fn all(conn: &DbConnection) -> QueryResult<Vec<FrameworkRoadmap>> {
+    pub fn all(conn: &mut DbConnection) -> QueryResult<Vec<FrameworkRoadmap>> {
         framework_roadmaps::table.load::<FrameworkRoadmap>(conn)
     }
 }
 
 #[derive(Insertable, Serialize, Deserialize, Debug)]
-#[table_name = "frameworks"]
+#[diesel(table_name = frameworks)]
 pub struct NewFramework {
     pub name: String,
     pub percentage: f32,
@@ -74,7 +76,7 @@ pub struct NewFramework {
 }
 
 #[derive(Insertable, Serialize, Deserialize, Debug)]
-#[table_name = "framework_images"]
+#[diesel(table_name = framework_images)]
 pub struct NewFrameworkImage {
     pub framework_id: i32,
     pub image_url: String,
@@ -83,7 +85,7 @@ pub struct NewFrameworkImage {
 }
 
 #[derive(Insertable, Serialize, Deserialize, Debug)]
-#[table_name = "framework_roadmaps"]
+#[diesel(table_name = framework_roadmaps)]
 pub struct NewFrameworkRoadmap {
     pub framework_id: i32,
     pub roadmap_id: i32,
