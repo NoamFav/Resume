@@ -26,7 +26,7 @@ pub struct ProgrammingLanguage {
 #[diesel(belongs_to(ProgrammingLanguage, foreign_key = language_id))]
 pub struct ProgrammingLanguageImage {
     pub image_id: i32,
-    pub language_id: Option<i32>,
+    pub language_id: i32,
     pub image_url: String,
     pub caption: Option<String>,
     pub alt_text: Option<String>,

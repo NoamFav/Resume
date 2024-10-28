@@ -27,7 +27,7 @@ pub struct User {
 #[diesel(belongs_to(User, foreign_key = user_id))]
 pub struct UserImage {
     pub image_id: i32,
-    pub user_id: Option<i32>,
+    pub user_id: i32,
     pub image_url: String,
     pub caption: Option<String>,
     pub alt_text: Option<String>,
