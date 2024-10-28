@@ -1,6 +1,6 @@
 // src/main.rs
 use actix_web::{web, App, HttpResponse, HttpServer, Responder};
-use log::{info};
+use log::info;
 
 mod config;
 mod database;
@@ -10,6 +10,11 @@ mod services;
 mod schema;
 
 use models::ProgrammingLanguage;
+use models::Framework;
+use models::Tool;
+use models::Roadmap;
+use models::Project;
+use models::Skill;
 
 async fn index() -> impl Responder {
     HttpResponse::Ok().body("Hello, world!")
@@ -27,10 +32,45 @@ async fn main() -> std::io::Result<()> {
     let programming_languages = {
         let mut conn = pool.get().expect("Failed to get a connection from the pool");
 
-        ProgrammingLanguage::all(&mut conn).expect("Failed to load programming languages")
+        ProgrammingLanguage::all(&mut conn).expect("Failed to load programming languages");
+    };
+
+    let frameworks = {
+        let mut conn = pool.get().expect("Failed to get a connection from the pool");
+
+        Framework::all(&mut conn).expect("Failed to load frameworks");
+    };
+
+    let tools = {
+        let mut conn = pool.get().expect("Failed to get a connection from the pool");
+
+        Tool::all(&mut conn).expect("Failed to load tools");
+    };
+
+    let roadmaps = {
+        let mut conn = pool.get().expect("Failed to get a connection from the pool");
+
+        Roadmap::all(&mut conn).expect("Failed to load roadmaps");
+    };
+
+    let projects = {
+        let mut conn = pool.get().expect("Failed to get a connection from the pool");
+
+        Project::all(&mut conn).expect("Failed to load projects");
+    };
+
+    let skills = {
+        let mut conn = pool.get().expect("Failed to get a connection from the pool");
+
+        Skill::all(&mut conn).expect("Failed to load skills");
     };
 
     info!("Programming Languages: {:?}", programming_languages);
+    info!("Frameworks: {:?}", frameworks);
+    info!("Tools: {:?}", tools);
+    info!("Roadmaps: {:?}", roadmaps);
+    info!("Projects: {:?}", projects);
+    info!("Skills: {:?}", skills);
 
     HttpServer::new(move || {
         App::new()

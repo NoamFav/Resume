@@ -442,7 +442,7 @@ CREATE TABLE roadmap_events (
     event_title VARCHAR(255) NOT NULL,
     event_description TEXT,
     event_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    event_type ENUM('milestone', 'completed', 'in_progress') NOT NULL,
+    event_type VARCHAR(50) NOT NULL,
     CONSTRAINT fk_roadmap_events_roadmap
         FOREIGN KEY (roadmap_id) REFERENCES roadmaps(roadmap_id)
         ON DELETE CASCADE ON UPDATE CASCADE
