@@ -89,7 +89,7 @@ pub struct ProjectTool {
 #[diesel(belongs_to(Project, foreign_key = project_id))]
 pub struct ProjectImage {
     pub image_id: i32,
-    pub project_id: Option<i32>,
+    pub project_id: i32,
     pub image_url: String,
     pub caption: Option<String>,
     pub alt_text: Option<String>,

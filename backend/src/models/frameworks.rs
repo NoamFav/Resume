@@ -28,7 +28,7 @@ pub struct Framework {
 #[diesel(belongs_to(Framework, foreign_key = framework_id))]
 pub struct FrameworkImage {
     pub image_id: i32,
-    pub framework_id: Option<i32>,
+    pub framework_id: i32,
     pub image_url: String,
     pub caption: Option<String>,
     pub alt_text: Option<String>,

@@ -112,7 +112,7 @@ diesel::table! {
 diesel::table! {
     framework_images (image_id) {
         image_id -> Integer,
-        framework_id -> Nullable<Integer>,
+        framework_id -> Integer,
         #[max_length = 255]
         image_url -> Varchar,
         #[max_length = 255]
@@ -182,7 +182,7 @@ diesel::table! {
 diesel::table! {
     programming_language_images (image_id) {
         image_id -> Integer,
-        language_id -> Nullable<Integer>,
+        language_id -> Integer,
         #[max_length = 255]
         image_url -> Varchar,
         #[max_length = 255]
@@ -247,7 +247,7 @@ diesel::table! {
 diesel::table! {
     project_images (image_id) {
         image_id -> Integer,
-        project_id -> Nullable<Integer>,
+        project_id -> Integer,
         #[max_length = 255]
         image_url -> Varchar,
         #[max_length = 255]
@@ -413,7 +413,7 @@ diesel::table! {
 diesel::table! {
     user_image (image_id) {
         image_id -> Integer,
-        user_id -> Nullable<Integer>,
+        user_id -> Integer,
         #[max_length = 255]
         image_url -> Varchar,
         #[max_length = 255]
