@@ -11,7 +11,7 @@ CREATE TABLE users (
 
 CREATE TABLE user_image (
     image_id INT PRIMARY KEY AUTO_INCREMENT,
-    user_id INT,
+    user_id INT NOT NULL,
     image_url VARCHAR(255) NOT NULL,
     caption VARCHAR(255),
     alt_text VARCHAR(255),
@@ -85,7 +85,7 @@ CREATE TABLE programming_languages (
 
 CREATE TABLE programming_language_images (
     image_id INT PRIMARY KEY AUTO_INCREMENT,
-    language_id INT,
+    language_id INT NOT NULL,
     image_url VARCHAR(255) NOT NULL,
     caption VARCHAR(255),
     alt_text VARCHAR(255),
@@ -109,7 +109,7 @@ CREATE TABLE frameworks (
 
 CREATE TABLE framework_images (
     image_id INT PRIMARY KEY AUTO_INCREMENT,
-    framework_id INT,
+    framework_id INT NOT NULL,
     image_url VARCHAR(255) NOT NULL,
     caption VARCHAR(255),
     alt_text VARCHAR(255),
@@ -211,8 +211,8 @@ CREATE TABLE projects (
 );
 
 CREATE TABLE project_languages (
-    project_id INT,
-    language_id INT,
+    project_id INT NOT NULL,
+    language_id INT NOT NULL,
     PRIMARY KEY (project_id, language_id),
     CONSTRAINT fk_project_languages_project
         FOREIGN KEY (project_id) REFERENCES projects(project_id)
@@ -223,8 +223,8 @@ CREATE TABLE project_languages (
 );
 
 CREATE TABLE project_frameworks (
-    project_id INT,
-    framework_id INT,
+    project_id INT NOT NULL,
+    framework_id INT NOT NULL,
     PRIMARY KEY (project_id, framework_id),
     CONSTRAINT fk_project_frameworks_project
         FOREIGN KEY (project_id) REFERENCES projects(project_id)
@@ -235,8 +235,8 @@ CREATE TABLE project_frameworks (
 );
 
 CREATE TABLE project_tools (
-    project_id INT,
-    tools_id INT,
+    project_id INT NOT NULL,
+    tools_id INT NOT NULL,
     PRIMARY KEY (project_id, tools_id),
     CONSTRAINT fk_project_tools_project
         FOREIGN KEY (project_id) REFERENCES projects(project_id)
@@ -248,7 +248,7 @@ CREATE TABLE project_tools (
 
 CREATE TABLE project_images (
     image_id INT PRIMARY KEY AUTO_INCREMENT,
-    project_id INT,
+    project_id INT NOT NULL,
     image_url VARCHAR(255) NOT NULL,
     caption VARCHAR(255),
     alt_text VARCHAR(255),
