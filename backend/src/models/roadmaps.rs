@@ -23,8 +23,8 @@ pub struct Roadmap {
 #[diesel(belongs_to(Roadmap, foreign_key = roadmap_id))]
 pub struct RoadmapProgress {
     pub progress_id: i32,
-    pub roadmap_id: Option<i32>,
-    pub progress_percentage: Option<f32>,
+    pub roadmap_id: i32,
+    pub progress_percentage: f32,
     pub last_updated: Option<chrono::NaiveDateTime>,
 }
 
@@ -34,7 +34,7 @@ pub struct RoadmapProgress {
 #[diesel(belongs_to(Roadmap, foreign_key = roadmap_id))]
 pub struct RoadmapEvent {
     pub event_id: i32,
-    pub roadmap_id: Option<i32>,
+    pub roadmap_id: i32,
     pub event_title: String,
     pub event_description: Option<String>,
     pub event_date: Option<chrono::NaiveDateTime>,

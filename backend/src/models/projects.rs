@@ -39,8 +39,8 @@ pub struct Project {
 #[diesel(belongs_to(Project, foreign_key = project_id))]
 pub struct ProjectTag {
     pub project_tag_id: i32,
-    pub project_id: Option<i32>,
-    pub tag_name: Option<String>,
+    pub project_id: i32,
+    pub tag_name: String,
 }
 
 #[derive(Queryable, Identifiable, Associations, Serialize, Deserialize, Debug)]
@@ -102,9 +102,9 @@ pub struct ProjectImage {
 #[diesel(belongs_to(Project, foreign_key = project_id))]
 pub struct ProjectLink {
     pub link_id: i32,
-    pub project_id: Option<i32>,
-    pub link_name: Option<String>,
-    pub link_url: Option<String>,
+    pub project_id: i32,
+    pub link_name: String,
+    pub link_url: String,
 }
 
 #[derive(Queryable, Identifiable, Associations, Serialize, Deserialize, Debug)]
@@ -114,7 +114,7 @@ pub struct ProjectLink {
 #[diesel(belongs_to(User, foreign_key = user_id))]
 pub struct ProjectLike {
     pub like_id: i32,
-    pub project_id: Option<i32>,
+    pub project_id: i32,
     pub user_id: Option<i32>,
     pub created_at: Option<chrono::NaiveDateTime>,
 }
@@ -126,7 +126,7 @@ pub struct ProjectLike {
 #[diesel(belongs_to(User, foreign_key = user_id))]
 pub struct ProjectComment {
     pub comment_id: i32,
-    pub project_id: Option<i32>,
+    pub project_id: i32,
     pub user_id: Option<i32>,
     pub comment: String,
     pub created_at: Option<chrono::NaiveDateTime>,
@@ -139,7 +139,7 @@ pub struct ProjectComment {
 #[diesel(belongs_to(User, foreign_key = user_id))]
 pub struct ProjectCommentLike {
     pub like_id: i32,
-    pub comment_id: Option<i32>,
+    pub comment_id: i32,
     pub user_id: Option<i32>,
     pub created_at: Option<chrono::NaiveDateTime>,
 }

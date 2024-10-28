@@ -35,7 +35,7 @@ pub struct BlogPost {
 #[diesel(belongs_to(BlogPost, foreign_key = post_id))]
 pub struct Comment {
     pub comment_id: i32,
-    pub post_id: Option<i32>,
+    pub post_id: i32,
     pub user_id: Option<i32>,
     pub comment: String,
     pub created_at: Option<chrono::NaiveDateTime>,
@@ -48,7 +48,7 @@ pub struct Comment {
 #[diesel(belongs_to(User, foreign_key = user_id))]
 pub struct Like {
     pub like_id: i32,
-    pub post_id: Option<i32>,
+    pub post_id: i32,
     pub user_id: Option<i32>,
     pub created_at: Option<chrono::NaiveDateTime>,
 }
