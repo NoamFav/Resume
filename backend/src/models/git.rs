@@ -12,7 +12,7 @@ use crate::models::projects::Project;
 #[diesel(belongs_to(Project, foreign_key = project_id))]
 pub struct GitUpdate {
     pub update_id: i32,
-    pub project_id: Option<i32>,
+    pub project_id: i32,
     pub commit_hash: String,
     pub message: String,
     pub is_commit: Option<bool>,

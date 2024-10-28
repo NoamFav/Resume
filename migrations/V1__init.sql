@@ -58,7 +58,7 @@ CREATE TABLE work_experience (
 
 CREATE TABLE achievements (
     achievement_id INT PRIMARY KEY AUTO_INCREMENT,
-    user_id INT,
+    user_id INT NOT NULL,
     title VARCHAR(255) NOT NULL,
     description TEXT,
     issued_by VARCHAR(100),
@@ -161,7 +161,7 @@ CREATE TABLE blog_posts (
 
 CREATE TABLE comments (
     comment_id INT PRIMARY KEY AUTO_INCREMENT,
-    post_id INT,
+    post_id INT NOT NULL,
     user_id INT,
     comment TEXT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -175,7 +175,7 @@ CREATE TABLE comments (
 
 CREATE TABLE likes (
     like_id INT PRIMARY KEY AUTO_INCREMENT,
-    post_id INT,
+    post_id INT NOT NULL,
     user_id INT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT fk_likes_post
@@ -260,8 +260,8 @@ CREATE TABLE project_images (
 
 CREATE TABLE project_tags (
     tag_id INT PRIMARY KEY AUTO_INCREMENT,
-    project_id INT,
-    tag_name VARCHAR(50),
+    project_id INT NOT NULL,
+    tag_name VARCHAR(50) NOT NULL,
     CONSTRAINT fk_project_tags_project
         FOREIGN KEY (project_id) REFERENCES projects(project_id)
         ON DELETE CASCADE ON UPDATE CASCADE
@@ -269,9 +269,9 @@ CREATE TABLE project_tags (
 
 CREATE TABLE project_links (
     link_id INT PRIMARY KEY AUTO_INCREMENT,
-    project_id INT,
-    link_name VARCHAR(50),
-    link_url VARCHAR(255),
+    project_id INT NOT NULL,
+    link_name VARCHAR(50) NOT NULL,
+    link_url VARCHAR(255) NOT NULL,
     CONSTRAINT fk_project_links_project
         FOREIGN KEY (project_id) REFERENCES projects(project_id)
         ON DELETE CASCADE ON UPDATE CASCADE
@@ -279,7 +279,7 @@ CREATE TABLE project_links (
 
 CREATE TABLE project_comments (
     comment_id INT PRIMARY KEY AUTO_INCREMENT,
-    project_id INT,
+    project_id INT NOT NULL,
     user_id INT,
     comment TEXT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -293,7 +293,7 @@ CREATE TABLE project_comments (
 
 CREATE TABLE project_likes (
     like_id INT PRIMARY KEY AUTO_INCREMENT,
-    project_id INT,
+    project_id INT NOT NULL,
     user_id INT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT fk_project_likes_project
@@ -308,7 +308,7 @@ CREATE TABLE project_likes (
 
 CREATE TABLE project_comment_likes (
     like_id INT PRIMARY KEY AUTO_INCREMENT,
-    comment_id INT,
+    comment_id INT NOT NULL,
     user_id INT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT fk_project_comment_likes_comment
@@ -322,7 +322,7 @@ CREATE TABLE project_comment_likes (
 );
 
 CREATE TABLE project_contributors (
-    project_id INT,
+    project_id INT NOT NULL,
     user_id INT,
     PRIMARY KEY (project_id, user_id),
     CONSTRAINT fk_project_contributors_project
@@ -335,7 +335,7 @@ CREATE TABLE project_contributors (
 
 CREATE TABLE git_updates (
     update_id INT PRIMARY KEY AUTO_INCREMENT,
-    project_id INT,
+    project_id INT NOT NULL,
     commit_hash VARCHAR(40) NOT NULL,
     message TEXT NOT NULL,
     is_commit BOOLEAN DEFAULT TRUE,
@@ -364,8 +364,8 @@ CREATE TABLE roadmaps (
 );
 
 CREATE TABLE skill_roadmaps (
-    roadmap_id INT,
-    skill_id INT,
+    roadmap_id INT NOT NULL,
+    skill_id INT NOT NULL,
     PRIMARY KEY (roadmap_id, skill_id),
     CONSTRAINT fk_skill_roadmaps_roadmap
         FOREIGN KEY (roadmap_id) REFERENCES roadmaps(roadmap_id)
@@ -376,8 +376,8 @@ CREATE TABLE skill_roadmaps (
 );
 
 CREATE TABLE programming_language_roadmaps (
-    roadmap_id INT,
-    language_id INT,
+    roadmap_id INT NOT NULL,
+    language_id INT NOT NULL,
     PRIMARY KEY (roadmap_id, language_id),
     CONSTRAINT fk_plr_roadmap
         FOREIGN KEY (roadmap_id) REFERENCES roadmaps(roadmap_id)
@@ -388,8 +388,8 @@ CREATE TABLE programming_language_roadmaps (
 );
 
 CREATE TABLE framework_roadmaps (
-    roadmap_id INT,
-    framework_id INT,
+    roadmap_id INT NOT NULL,
+    framework_id INT NOT NULL,
     PRIMARY KEY (roadmap_id, framework_id),
     CONSTRAINT fk_framework_roadmaps_roadmap
         FOREIGN KEY (roadmap_id) REFERENCES roadmaps(roadmap_id)
@@ -400,8 +400,8 @@ CREATE TABLE framework_roadmaps (
 );
 
 CREATE TABLE project_roadmaps (
-    roadmap_id INT,
-    project_id INT,
+    roadmap_id INT NOT NULL,
+    project_id INT NOT NULL,
     PRIMARY KEY (roadmap_id, project_id),
     CONSTRAINT fk_project_roadmaps_roadmap
         FOREIGN KEY (roadmap_id) REFERENCES roadmaps(roadmap_id)
@@ -412,8 +412,8 @@ CREATE TABLE project_roadmaps (
 );
 
 CREATE TABLE tools_roadmaps (
-    roadmap_id INT,
-    tools_id INT,
+    roadmap_id INT NOT NULL,
+    tools_id INT NOT NULL,
     PRIMARY KEY (roadmap_id, tools_id),
     CONSTRAINT fk_tools_roadmaps_roadmap
         FOREIGN KEY (roadmap_id) REFERENCES roadmaps(roadmap_id)
@@ -425,7 +425,7 @@ CREATE TABLE tools_roadmaps (
 
 CREATE TABLE milestones (
     milestone_id INT PRIMARY KEY AUTO_INCREMENT,
-    roadmap_id INT,
+    roadmap_id INT NOT NULL,
     milestone_title VARCHAR(255) NOT NULL,
     milestone_description TEXT,
     milestone_link VARCHAR(255),
@@ -438,7 +438,7 @@ CREATE TABLE milestones (
 
 CREATE TABLE roadmap_events (
     event_id INT PRIMARY KEY AUTO_INCREMENT,
-    roadmap_id INT,
+    roadmap_id INT NOT NULL,
     event_title VARCHAR(255) NOT NULL,
     event_description TEXT,
     event_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
@@ -450,8 +450,8 @@ CREATE TABLE roadmap_events (
 
 CREATE TABLE roadmap_progress (
     progress_id INT PRIMARY KEY AUTO_INCREMENT,
-    roadmap_id INT,
-    progress_percentage FLOAT CHECK (progress_percentage BETWEEN 0 AND 100),
+    roadmap_id INT NOT NULL,
+    progress_percentage FLOAT CHECK (progress_percentage >= 0 AND progress_percentage <= 100) NOT NULL,
     last_updated TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT fk_roadmap_progress_roadmap
         FOREIGN KEY (roadmap_id) REFERENCES roadmaps(roadmap_id)

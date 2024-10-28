@@ -1,7 +1,7 @@
 diesel::table! {
     achievements (achievement_id) {
         achievement_id -> Integer,
-        user_id -> Nullable<Integer>,
+        user_id -> Integer,
         #[max_length = 255]
         title -> Varchar,
         description -> Nullable<Text>,
@@ -57,7 +57,7 @@ diesel::table! {
 diesel::table! {
     comments (comment_id) {
         comment_id -> Integer,
-        post_id -> Nullable<Integer>,
+        post_id -> Integer,
         user_id -> Nullable<Integer>,
         comment -> Text,
         created_at -> Nullable<Timestamp>,
@@ -145,7 +145,7 @@ diesel::table! {
 diesel::table! {
     git_updates (update_id) {
         update_id -> Integer,
-        project_id -> Nullable<Integer>,
+        project_id -> Integer,
         #[max_length = 40]
         commit_hash -> Varchar,
         message -> Text,
@@ -159,7 +159,7 @@ diesel::table! {
 diesel::table! {
     likes (like_id) {
         like_id -> Integer,
-        post_id -> Nullable<Integer>,
+        post_id -> Integer,
         user_id -> Nullable<Integer>,
         created_at -> Nullable<Timestamp>,
     }
@@ -168,7 +168,7 @@ diesel::table! {
 diesel::table! {
     milestones (milestone_id) {
         milestone_id -> Integer,
-        roadmap_id -> Nullable<Integer>,
+        roadmap_id -> Integer,
         #[max_length = 255]
         milestone_title -> Varchar,
         milestone_description -> Nullable<Text>,
@@ -214,7 +214,7 @@ diesel::table! {
 diesel::table! {
     project_comment_likes (like_id) {
         like_id -> Integer,
-        comment_id -> Nullable<Integer>,
+        comment_id -> Integer,
         user_id -> Nullable<Integer>,
         created_at -> Nullable<Timestamp>,
     }
@@ -223,7 +223,7 @@ diesel::table! {
 diesel::table! {
     project_comments (comment_id) {
         comment_id -> Integer,
-        project_id -> Nullable<Integer>,
+        project_id -> Integer,
         user_id -> Nullable<Integer>,
         comment -> Text,
         created_at -> Nullable<Timestamp>,
@@ -268,7 +268,7 @@ diesel::table! {
 diesel::table! {
     project_likes (like_id) {
         like_id -> Integer,
-        project_id -> Nullable<Integer>,
+        project_id -> Integer,
         user_id -> Nullable<Integer>,
         created_at -> Nullable<Timestamp>,
     }
@@ -277,11 +277,11 @@ diesel::table! {
 diesel::table! {
     project_links (link_id) {
         link_id -> Integer,
-        project_id -> Nullable<Integer>,
+        project_id -> Integer,
         #[max_length = 50]
-        link_name -> Nullable<Varchar>,
+        link_name -> Varchar,
         #[max_length = 255]
-        link_url -> Nullable<Varchar>,
+        link_url -> Varchar,
     }
 }
 
@@ -295,9 +295,9 @@ diesel::table! {
 diesel::table! {
     project_tags (tag_id) {
         tag_id -> Integer,
-        project_id -> Nullable<Integer>,
+        project_id -> Integer,
         #[max_length = 50]
-        tag_name -> Nullable<Varchar>,
+        tag_name -> Varchar,
     }
 }
 
@@ -324,7 +324,7 @@ diesel::table! {
 diesel::table! {
     roadmap_events (event_id) {
         event_id -> Integer,
-        roadmap_id -> Nullable<Integer>,
+        roadmap_id -> Integer,
         #[max_length = 255]
         event_title -> Varchar,
         event_description -> Nullable<Text>,
@@ -337,8 +337,8 @@ diesel::table! {
 diesel::table! {
     roadmap_progress (progress_id) {
         progress_id -> Integer,
-        roadmap_id -> Nullable<Integer>,
-        progress_percentage -> Nullable<Float>,
+        roadmap_id -> Integer,
+        progress_percentage -> Float,
         last_updated -> Nullable<Timestamp>,
     }
 }
