@@ -1,0 +1,1 @@
+fn(actix_web::web::Data<Pool<ConnectionManager<MysqlConnection>>>, actix_web::web::Path<(i32, i32)>, actix_web::web::Json<{type error}>) -> impl std::future::Future<Output = impl Responder> {put_user_image}
