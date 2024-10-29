@@ -26,6 +26,7 @@ pub use frameworks::FrameworkRoadmap;
 //Tool struct
 pub use tools::Tool;
 pub use tools::ToolImage;
+pub use tools::ToolRoadmap;
 
 //Roadmap struct
 pub use roadmaps::Roadmap;
