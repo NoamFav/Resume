@@ -37,6 +37,10 @@ impl SkillRoadmap {
     pub fn all(conn: &mut SkillConnection) -> QueryResult<Vec<SkillRoadmap>> {
         skill_roadmaps::table.load::<SkillRoadmap>(conn)
     }
+
+    pub fn find_by_skill_id(skill_id: i32, conn: &mut SkillConnection) -> QueryResult<Vec<SkillRoadmap>> {
+        skill_roadmaps::table.filter(skill_roadmaps::skill_id.eq(skill_id)).load::<SkillRoadmap>(conn)
+    }
 }
 
 #[derive(Insertable, Serialize, Deserialize, Debug)]
