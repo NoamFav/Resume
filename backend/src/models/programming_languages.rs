@@ -61,6 +61,12 @@ impl ProgrammingLanguageRoadmap {
     pub fn all(conn: &mut DbConnection) -> QueryResult<Vec<ProgrammingLanguageRoadmap>> {
         programming_language_roadmaps::table.load::<ProgrammingLanguageRoadmap>(conn)
     }
+
+    pub fn find_by_language_id(language_id: i32, conn: &mut DbConnection) -> QueryResult<Vec<ProgrammingLanguageRoadmap>> {
+        programming_language_roadmaps::table
+            .filter(programming_language_roadmaps::language_id.eq(language_id))
+            .load::<ProgrammingLanguageRoadmap>(conn)
+    }
 }
 
 #[derive(Insertable, Serialize, Deserialize, Debug)]
