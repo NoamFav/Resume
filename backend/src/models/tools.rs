@@ -56,6 +56,16 @@ impl ToolImage {
     }
 }
 
+impl ToolRoadmap {
+    pub fn find_by_tool_id(tool_id: i32, conn: &mut DbConnection) -> QueryResult<Vec<ToolRoadmap>> {
+        tools_roadmaps::table.filter(tools_roadmaps::tools_id.eq(tool_id)).load::<ToolRoadmap>(conn)
+    }
+
+    pub fn find_by_roadmap_id(roadmap_id: i32, conn: &mut DbConnection) -> QueryResult<Vec<ToolRoadmap>> {
+        tools_roadmaps::table.filter(tools_roadmaps::roadmap_id.eq(roadmap_id)).load::<ToolRoadmap>(conn)
+    }
+}
+
 #[derive(Insertable, Serialize, Deserialize, Debug)]
 #[diesel(table_name = tools)]
 pub struct NewTool {

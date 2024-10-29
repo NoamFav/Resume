@@ -63,6 +63,12 @@ impl FrameworkRoadmap {
     pub fn all(conn: &mut DbConnection) -> QueryResult<Vec<FrameworkRoadmap>> {
         framework_roadmaps::table.load::<FrameworkRoadmap>(conn)
     }
+
+    pub fn find_by_framework_id(framework_id: i32, conn: &mut DbConnection) -> QueryResult<Vec<FrameworkRoadmap>> {
+        framework_roadmaps::table
+            .filter(framework_roadmaps::framework_id.eq(framework_id))
+            .load::<FrameworkRoadmap>(conn)
+    }
 }
 
 #[derive(Insertable, Serialize, Deserialize, Debug)]
