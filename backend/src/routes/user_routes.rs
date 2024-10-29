@@ -15,15 +15,15 @@ type DbPool = Pool<ConnectionManager<MysqlConnection>>;
 pub fn config(cfg: &mut web::ServiceConfig) {
     cfg.route("/user", web::get().to(get_users));
     cfg.route("/user/{id}", web::get().to(get_user_by_id));
-    cfg.route("/user/{id}/achievements", web::get().to(get_user_achievements));
     cfg.route("/user/new", web::post().to(post_user));
+    cfg.route("/user/{id}/update", web::put().to(put_user));
+    cfg.route("/user/{id}/delete", web::delete().to(delete_user));
 
     cfg.route("/user/{id}/image/new", web::post().to(post_user_image));
     cfg.route("/user/{id}/image/{image_id}/update", web::put().to(put_user_image));
     cfg.route("/user/{id}/image/{image_id}/delete", web::delete().to(delete_user_image));
 
-    cfg.route("/user/{id}/update", web::put().to(put_user));
-    cfg.route("/user/{id}/delete", web::delete().to(delete_user));
+    cfg.route("/user/{id}/achievements", web::get().to(get_user_achievements));
     cfg.route("/user/{id}/achievements/new", web::post().to(post_user_achievement));
 }
 

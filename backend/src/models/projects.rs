@@ -160,11 +160,23 @@ impl Project {
     pub fn all(conn: &mut DbConnection) -> QueryResult<Vec<Project>> {
         projects::table.load::<Project>(conn)
     }
+
+    pub fn find_by_id(id: i32, conn: &mut DbConnection) -> QueryResult<Project> {
+        projects::table.find(id).first(conn)
+    }
 }
 
 impl ProjectTag {
     pub fn all(conn: &mut DbConnection) -> QueryResult<Vec<ProjectTag>> {
         project_tags::table.load::<ProjectTag>(conn)
+    }
+
+    pub fn find_by_id(id: i32, conn: &mut DbConnection) -> QueryResult<ProjectTag> {
+        project_tags::table.find(id).first(conn)
+    }
+
+    pub fn find_by_project_id(id: i32, conn: &mut DbConnection) -> QueryResult<Vec<ProjectTag>> {
+        project_tags::table.filter(project_tags::project_id.eq(id)).load::<ProjectTag>(conn)
     }
 }
 
@@ -172,11 +184,23 @@ impl ProjectContributor {
     pub fn all(conn: &mut DbConnection) -> QueryResult<Vec<ProjectContributor>> {
         project_contributors::table.load::<ProjectContributor>(conn)
     }
+
+    pub fn find_by_id(id: i32, conn: &mut DbConnection) -> QueryResult<ProjectContributor> {
+        project_contributors::table.find(id).first(conn)
+    }
+
+    pub fn find_by_project_id(id: i32, conn: &mut DbConnection) -> QueryResult<Vec<ProjectContributor>> {
+        project_contributors::table.filter(project_contributors::project_id.eq(id)).load::<ProjectContributor>(conn)
+    }
 }
 
 impl ProjectLanguage {
     pub fn all(conn: &mut DbConnection) -> QueryResult<Vec<ProjectLanguage>> {
         project_languages::table.load::<ProjectLanguage>(conn)
+    }
+
+    pub fn find_by_project_id(id: i32, conn: &mut DbConnection) -> QueryResult<Vec<ProjectLanguage>> {
+        project_languages::table.filter(project_languages::project_id.eq(id)).load::<ProjectLanguage>(conn)
     }
 }
 
@@ -184,11 +208,19 @@ impl ProjectFramework {
     pub fn all(conn: &mut DbConnection) -> QueryResult<Vec<ProjectFramework>> {
         project_frameworks::table.load::<ProjectFramework>(conn)
     }
+
+    pub fn find_by_project_id(id: i32, conn: &mut DbConnection) -> QueryResult<Vec<ProjectFramework>> {
+        project_frameworks::table.filter(project_frameworks::project_id.eq(id)).load::<ProjectFramework>(conn)
+    }
 }
 
 impl ProjectTool {
     pub fn all(conn: &mut DbConnection) -> QueryResult<Vec<ProjectTool>> {
         project_tools::table.load::<ProjectTool>(conn)
+    }
+
+    pub fn find_by_project_id(id: i32, conn: &mut DbConnection) -> QueryResult<Vec<ProjectTool>> {
+        project_tools::table.filter(project_tools::project_id.eq(id)).load::<ProjectTool>(conn)
     }
 }
 
@@ -196,11 +228,31 @@ impl ProjectImage {
     pub fn all(conn: &mut DbConnection) -> QueryResult<Vec<ProjectImage>> {
         project_images::table.load::<ProjectImage>(conn)
     }
+
+    pub fn find_by_project_id(id: i32, conn: &mut DbConnection) -> QueryResult<Vec<ProjectImage>> {
+        project_images::table.filter(project_images::project_id.eq(id)).load::<ProjectImage>(conn)
+    }
+
+    pub fn find_by_id(id: i32, conn: &mut DbConnection) -> QueryResult<ProjectImage> {
+        project_images::table.find(id).first(conn)
+    }
 }
 
 impl ProjectLink {
     pub fn all(conn: &mut DbConnection) -> QueryResult<Vec<ProjectLink>> {
         project_links::table.load::<ProjectLink>(conn)
+    }
+
+    pub fn find_by_project_id(id: i32, conn: &mut DbConnection) -> QueryResult<Vec<ProjectLink>> {
+        project_links::table.filter(project_links::project_id.eq(id)).load::<ProjectLink>(conn)
+    }
+
+    pub fn find_by_id(id: i32, conn: &mut DbConnection) -> QueryResult<ProjectLink> {
+        project_links::table.find(id).first(conn)
+    }
+
+    pub fn find_by_user_id(id: i32, conn: &mut DbConnection) -> QueryResult<Vec<ProjectLink>> {
+        project_links::table.filter(project_links::project_id.eq(id)).load::<ProjectLink>(conn)
     }
 }
 
@@ -208,11 +260,31 @@ impl ProjectLike {
     pub fn all(conn: &mut DbConnection) -> QueryResult<Vec<ProjectLike>> {
         project_likes::table.load::<ProjectLike>(conn)
     }
+
+    pub fn find_by_project_id(id: i32, conn: &mut DbConnection) -> QueryResult<Vec<ProjectLike>> {
+        project_likes::table.filter(project_likes::project_id.eq(id)).load::<ProjectLike>(conn)
+    }
+
+    pub fn find_by_id(id: i32, conn: &mut DbConnection) -> QueryResult<ProjectLike> {
+        project_likes::table.find(id).first(conn)
+    }
 }
 
 impl ProjectComment {
     pub fn all(conn: &mut DbConnection) -> QueryResult<Vec<ProjectComment>> {
         project_comments::table.load::<ProjectComment>(conn)
+    }
+
+    pub fn find_by_project_id(id: i32, conn: &mut DbConnection) -> QueryResult<Vec<ProjectComment>> {
+        project_comments::table.filter(project_comments::project_id.eq(id)).load::<ProjectComment>(conn)
+    }
+
+    pub fn find_by_id(id: i32, conn: &mut DbConnection) -> QueryResult<ProjectComment> {
+        project_comments::table.find(id).first(conn)
+    }
+
+    pub fn find_by_user_id(id: i32, conn: &mut DbConnection) -> QueryResult<Vec<ProjectComment>> {
+        project_comments::table.filter(project_comments::user_id.eq(id)).load::<ProjectComment>(conn)
     }
 }
 
@@ -220,11 +292,35 @@ impl ProjectCommentLike {
     pub fn all(conn: &mut DbConnection) -> QueryResult<Vec<ProjectCommentLike>> {
         project_comment_likes::table.load::<ProjectCommentLike>(conn)
     }
+
+    pub fn find_by_comment_id(id: i32, conn: &mut DbConnection) -> QueryResult<Vec<ProjectCommentLike>> {
+        project_comment_likes::table.filter(project_comment_likes::comment_id.eq(id)).load::<ProjectCommentLike>(conn)
+    }
+
+    pub fn find_by_id(id: i32, conn: &mut DbConnection) -> QueryResult<ProjectCommentLike> {
+        project_comment_likes::table.find(id).first(conn)
+    }
+
+    pub fn find_by_user_id(id: i32, conn: &mut DbConnection) -> QueryResult<Vec<ProjectCommentLike>> {
+        project_comment_likes::table.filter(project_comment_likes::user_id.eq(id)).load::<ProjectCommentLike>(conn)
+    }
+
+    pub fn find_by_project_id(id: i32, conn: &mut DbConnection) -> QueryResult<Vec<ProjectCommentLike>> {
+        project_comment_likes::table.filter(project_comment_likes::comment_id.eq(id)).load::<ProjectCommentLike>(conn)
+    }
 }
 
 impl ProjectRoadmap {
     pub fn all(conn: &mut DbConnection) -> QueryResult<Vec<ProjectRoadmap>> {
         project_roadmaps::table.load::<ProjectRoadmap>(conn)
+    }
+
+    pub fn find_by_project_id(id: i32, conn: &mut DbConnection) -> QueryResult<Vec<ProjectRoadmap>> {
+        project_roadmaps::table.filter(project_roadmaps::project_id.eq(id)).load::<ProjectRoadmap>(conn)
+    }
+
+    pub fn find_by_roadmap_id(id: i32, conn: &mut DbConnection) -> QueryResult<Vec<ProjectRoadmap>> {
+        project_roadmaps::table.filter(project_roadmaps::roadmap_id.eq(id)).load::<ProjectRoadmap>(conn)
     }
 }
 
