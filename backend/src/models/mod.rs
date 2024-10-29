@@ -71,5 +71,7 @@ pub use git::GitUpdate;
 pub use user::User;
 pub use user::UserImage;
 pub use user::Achievement;
-
-
+pub use user::NewUser;
+pub use user::NewUserImage;
+pub use user::NewAchievement;
+pub use user::UpdateUser;

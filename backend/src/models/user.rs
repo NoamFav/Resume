@@ -53,17 +53,29 @@ impl User {
     pub fn all(conn: &mut DbConnection) -> QueryResult<Vec<User>> {
         users::table.load::<User>(conn)
     }
+
+    pub fn find_by_id(user_id: i32, conn: &mut DbConnection) -> QueryResult<User> {
+        users::table.find(user_id).first(conn)
+    }
 }
 
 impl UserImage {
     pub fn all(conn: &mut DbConnection) -> QueryResult<Vec<UserImage>> {
         user_image::table.load::<UserImage>(conn)
     }
+
+    pub fn find_by_user_id(user_id: i32, conn: &mut DbConnection) -> QueryResult<Vec<UserImage>> {
+        user_image::table.filter(user_image::user_id.eq(user_id)).load::<UserImage>(conn)
+    }
 }
 
 impl Achievement {
     pub fn all(conn: &mut DbConnection) -> QueryResult<Vec<Achievement>> {
         achievements::table.load::<Achievement>(conn)
+    }
+
+    pub fn find_by_user_id(user_id: i32, conn: &mut DbConnection) -> QueryResult<Vec<Achievement>> {
+        achievements::table.filter(achievements::user_id.eq(user_id)).load::<Achievement>(conn)
     }
 }
 
@@ -74,6 +86,17 @@ pub struct NewUser {
     pub email: String,
     pub age: Option<i32>,
     pub password_hash: String,
+    pub is_admin: Option<bool>,
+    pub created_at: Option<chrono::NaiveDateTime>,
+    pub last_login: Option<chrono::NaiveDateTime>,
+}
+
+#[derive(Insertable, Serialize, Deserialize, Debug, AsChangeset)]
+#[diesel(table_name = users)]
+pub struct UpdateUser {
+    pub username: Option<String>,
+    pub email: Option<String>,
+    pub age: Option<i32>,
     pub is_admin: Option<bool>,
     pub created_at: Option<chrono::NaiveDateTime>,
     pub last_login: Option<chrono::NaiveDateTime>,
