@@ -5,34 +5,73 @@ pub fn config(cfg: &mut web::ServiceConfig) {
     cfg.route("/personal", web::get().to(get_all_personal_info));
 
     cfg.route("/personal/work", web::get().to(get_work_experience));
-    cfg.route("/personal/work/{id}", web::get().to(get_work_experience_by_id));
+    cfg.route(
+        "/personal/work/{id}",
+        web::get().to(get_work_experience_by_id),
+    );
     cfg.route("/personal/work/new", web::post().to(post_work_experience));
-    cfg.route("/personal/work/{id}/update", web::put().to(put_work_experience));
-    cfg.route("/personal/work/{id}/delete", web::delete().to(delete_work_experience));
+    cfg.route(
+        "/personal/work/{id}/update",
+        web::put().to(put_work_experience),
+    );
+    cfg.route(
+        "/personal/work/{id}/delete",
+        web::delete().to(delete_work_experience),
+    );
 
     cfg.route("/personal/socials", web::get().to(get_socials));
     cfg.route("/personal/socials/{id}", web::get().to(get_social_by_id));
     cfg.route("/personal/socials/new", web::post().to(post_social));
     cfg.route("/personal/socials/{id}/update", web::put().to(put_social));
-    cfg.route("/personal/socials/{id}/delete", web::delete().to(delete_social));
+    cfg.route(
+        "/personal/socials/{id}/delete",
+        web::delete().to(delete_social),
+    );
 
     cfg.route("/personal/contacts", web::get().to(get_contacts));
     cfg.route("/personal/contacts/{id}", web::get().to(get_contact_by_id));
     cfg.route("/personal/contacts/new", web::post().to(post_contact));
     cfg.route("/personal/contacts/{id}/update", web::put().to(put_contact));
-    cfg.route("/personal/contacts/{id}/delete", web::delete().to(delete_contact));
+    cfg.route(
+        "/personal/contacts/{id}/delete",
+        web::delete().to(delete_contact),
+    );
 
     cfg.route("/personal/educations", web::get().to(get_educations));
-    cfg.route("/personal/educations/{id}", web::get().to(get_education_by_id));
+    cfg.route(
+        "/personal/educations/{id}",
+        web::get().to(get_education_by_id),
+    );
     cfg.route("/personal/educations/new", web::post().to(post_education));
-    cfg.route("/personal/educations/{id}/update", web::put().to(put_education));
-    cfg.route("/personal/educations/{id}/delete", web::delete().to(delete_education));
+    cfg.route(
+        "/personal/educations/{id}/update",
+        web::put().to(put_education),
+    );
+    cfg.route(
+        "/personal/educations/{id}/delete",
+        web::delete().to(delete_education),
+    );
 
-    cfg.route("/personal/certifications", web::get().to(get_certifications));
-    cfg.route("/personal/certifications/{id}", web::get().to(get_certification_by_id));
-    cfg.route("/personal/certifications/new", web::post().to(post_certification));
-    cfg.route("/personal/certifications/{id}/update", web::put().to(put_certification));
-    cfg.route("/personal/certifications/{id}/delete", web::delete().to(delete_certification));
+    cfg.route(
+        "/personal/certifications",
+        web::get().to(get_certifications),
+    );
+    cfg.route(
+        "/personal/certifications/{id}",
+        web::get().to(get_certification_by_id),
+    );
+    cfg.route(
+        "/personal/certifications/new",
+        web::post().to(post_certification),
+    );
+    cfg.route(
+        "/personal/certifications/{id}/update",
+        web::put().to(put_certification),
+    );
+    cfg.route(
+        "/personal/certifications/{id}/delete",
+        web::delete().to(delete_certification),
+    );
 }
 
 async fn get_all_personal_info() -> impl Responder {

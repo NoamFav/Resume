@@ -1,14 +1,14 @@
 // backend/src/routes/user_routes.rs
+use crate::models::{Achievement, NewAchievement, NewUser, NewUserImage, UpdateUser, User};
+use crate::schema::{achievements, user_image, users};
+use actix_web::web::{Data, Json, Path};
 use actix_web::{web, HttpResponse, Responder};
-use crate::models::{User, Achievement, NewUser, NewUserImage, NewAchievement, UpdateUser};
-use crate::schema::{users, user_image, achievements};
-use diesel::r2d2::{ConnectionManager, Pool};
 use diesel::mysql::MysqlConnection;
-use actix_web::web::{Data, Path, Json};
-use serde_json::json;
 use diesel::prelude::*;
+use diesel::r2d2::{ConnectionManager, Pool};
 use diesel::QueryDsl;
 use diesel::RunQueryDsl;
+use serde_json::json;
 
 type DbPool = Pool<ConnectionManager<MysqlConnection>>;
 
@@ -20,11 +20,23 @@ pub fn config(cfg: &mut web::ServiceConfig) {
     cfg.route("/user/{id}/delete", web::delete().to(delete_user));
 
     cfg.route("/user/{id}/image/new", web::post().to(post_user_image));
-    cfg.route("/user/{id}/image/{image_id}/update", web::put().to(put_user_image));
-    cfg.route("/user/{id}/image/{image_id}/delete", web::delete().to(delete_user_image));
+    cfg.route(
+        "/user/{id}/image/{image_id}/update",
+        web::put().to(put_user_image),
+    );
+    cfg.route(
+        "/user/{id}/image/{image_id}/delete",
+        web::delete().to(delete_user_image),
+    );
 
-    cfg.route("/user/{id}/achievements", web::get().to(get_user_achievements));
-    cfg.route("/user/{id}/achievements/new", web::post().to(post_user_achievement));
+    cfg.route(
+        "/user/{id}/achievements",
+        web::get().to(get_user_achievements),
+    );
+    cfg.route(
+        "/user/{id}/achievements/new",
+        web::post().to(post_user_achievement),
+    );
 }
 
 async fn get_users(pool: Data<DbPool>) -> impl Responder {
@@ -69,11 +81,17 @@ async fn post_user(pool: Data<DbPool>, new_user: Json<NewUser>) -> impl Responde
 
     match result {
         Ok(_) => HttpResponse::Created().json("User created successfully"),
-        Err(err) => HttpResponse::InternalServerError().json(json!({"error": format!("Failed to create user: {:?}", err)})),
+        Err(err) => HttpResponse::InternalServerError().json(json!({
+            "error": format!("Failed to create user: {:?}", err)
+        })),
     }
 }
 
-async fn put_user(pool: Data<DbPool>, id: Path<i32>, updated_user: Json<UpdateUser>) -> impl Responder {
+async fn put_user(
+    pool: Data<DbPool>,
+    id: Path<i32>,
+    updated_user: Json<UpdateUser>,
+) -> impl Responder {
     let user_id = id.into_inner();
     let mut conn = pool.get().expect("Failed to get DB connection from pool");
 
@@ -83,7 +101,9 @@ async fn put_user(pool: Data<DbPool>, id: Path<i32>, updated_user: Json<UpdateUs
 
     match result {
         Ok(_) => HttpResponse::Ok().json("User updated successfully"),
-        Err(err) => HttpResponse::InternalServerError().json(json!({"error": format!("Failed to update user: {:?}", err)})),
+        Err(err) => HttpResponse::InternalServerError().json(json!({
+            "error": format!("Failed to update user: {:?}", err)
+        })),
     }
 }
 
@@ -95,11 +115,17 @@ async fn delete_user(pool: Data<DbPool>, id: Path<i32>) -> impl Responder {
 
     match result {
         Ok(_) => HttpResponse::Ok().json("User deleted successfully"),
-        Err(err) => HttpResponse::InternalServerError().json(json!({"error": format!("Failed to delete user: {:?}", err)})),
+        Err(err) => HttpResponse::InternalServerError().json(json!({
+            "error": format!("Failed to delete user: {:?}", err)
+        })),
     }
 }
 
-async fn post_user_achievement(pool: Data<DbPool>, id: Path<i32>, new_achievement: Json<NewAchievement>) -> impl Responder {
+async fn post_user_achievement(
+    pool: Data<DbPool>,
+    id: Path<i32>,
+    new_achievement: Json<NewAchievement>,
+) -> impl Responder {
     let user_id = id.into_inner();
     let mut conn = pool.get().expect("Failed to get DB connection from pool");
 
@@ -112,7 +138,9 @@ async fn post_user_achievement(pool: Data<DbPool>, id: Path<i32>, new_achievemen
 
     match result {
         Ok(_) => HttpResponse::Created().json("Achievement created successfully"),
-        Err(err) => HttpResponse::InternalServerError().json(json!({"error": format!("Failed to create achievement: {:?}", err)})),
+        Err(err) => HttpResponse::InternalServerError().json(json!({
+            "error": format!("Failed to create achievement: {:?}", err)
+        })),
     }
 }
 
@@ -130,14 +158,18 @@ async fn post_user_image(
         uploaded_at: Some(chrono::Local::now().naive_local()), // Optional timestamp
     };
 
-    let mut conn = pool.get().expect("Failed to get a DB connection from the pool");
+    let mut conn = pool
+        .get()
+        .expect("Failed to get a DB connection from the pool");
 
     match diesel::insert_into(user_image::table)
         .values(&new_image)
         .execute(&mut conn)
     {
         Ok(_) => HttpResponse::Ok().json("Image added successfully"),
-        Err(err) => HttpResponse::InternalServerError().json(json!({"error": format!("Failed to add image: {:?}", err)})),
+        Err(err) => HttpResponse::InternalServerError().json(json!({
+            "error": format!("Failed to add image: {:?}", err)
+        })),
     }
 }
 
@@ -148,7 +180,9 @@ async fn put_user_image(
 ) -> impl Responder {
     let (user_id, image_id) = path.into_inner();
 
-    let mut conn = pool.get().expect("Failed to get a DB connection from the pool");
+    let mut conn = pool
+        .get()
+        .expect("Failed to get a DB connection from the pool");
 
     let result = diesel::update(user_image::table.find(image_id))
         .set((
@@ -160,23 +194,25 @@ async fn put_user_image(
 
     match result {
         Ok(_) => HttpResponse::Ok().json("Image updated successfully"),
-        Err(err) => HttpResponse::InternalServerError().json(json!({"error": format!("Failed to update image: {:?}", err)})),
+        Err(err) => HttpResponse::InternalServerError().json(json!({
+            "error": format!("Failed to update image: {:?}", err)
+        })),
     }
 }
 
-async fn delete_user_image(
-    pool: web::Data<DbPool>,
-    path: web::Path<(i32, i32)>,
-) -> impl Responder {
+async fn delete_user_image(pool: web::Data<DbPool>, path: web::Path<(i32, i32)>) -> impl Responder {
     let (user_id, image_id) = path.into_inner();
 
-    let mut conn = pool.get().expect("Failed to get a DB connection from the pool");
+    let mut conn = pool
+        .get()
+        .expect("Failed to get a DB connection from the pool");
 
-    let result = diesel::delete(user_image::table.find(image_id))
-        .execute(&mut conn);
+    let result = diesel::delete(user_image::table.find(image_id)).execute(&mut conn);
 
     match result {
         Ok(_) => HttpResponse::Ok().json("Image deleted successfully"),
-        Err(err) => HttpResponse::InternalServerError().json(json!({"error": format!("Failed to delete image: {:?}", err)})),
+        Err(err) => HttpResponse::InternalServerError().json(json!({
+            "error": format!("Failed to delete image: {:?}", err)
+        })),
     }
 }

@@ -6,15 +6,15 @@ mod config;
 mod database;
 mod models;
 mod routes;
-mod services;
 mod schema;
+mod services;
 
-use models::ProgrammingLanguage;
 use models::Framework;
-use models::Tool;
-use models::Roadmap;
+use models::ProgrammingLanguage;
 use models::Project;
+use models::Roadmap;
 use models::Skill;
+use models::Tool;
 
 async fn index() -> impl Responder {
     HttpResponse::Ok().body("Hello, world!")
@@ -30,37 +30,49 @@ async fn main() -> std::io::Result<()> {
     info!("Connected to database");
 
     let programming_languages = {
-        let mut conn = pool.get().expect("Failed to get a connection from the pool");
+        let mut conn = pool
+            .get()
+            .expect("Failed to get a connection from the pool");
 
         ProgrammingLanguage::all(&mut conn).expect("Failed to load programming languages")
     };
 
     let frameworks = {
-        let mut conn = pool.get().expect("Failed to get a connection from the pool");
+        let mut conn = pool
+            .get()
+            .expect("Failed to get a connection from the pool");
 
         Framework::all(&mut conn).expect("Failed to load frameworks")
     };
 
     let tools = {
-        let mut conn = pool.get().expect("Failed to get a connection from the pool");
+        let mut conn = pool
+            .get()
+            .expect("Failed to get a connection from the pool");
 
         Tool::all(&mut conn).expect("Failed to load tools")
     };
 
     let roadmaps = {
-        let mut conn = pool.get().expect("Failed to get a connection from the pool");
+        let mut conn = pool
+            .get()
+            .expect("Failed to get a connection from the pool");
 
         Roadmap::all(&mut conn).expect("Failed to load roadmaps")
     };
 
     let projects = {
-        let mut conn = pool.get().expect("Failed to get a connection from the pool");
+        let mut conn = pool
+            .get()
+            .expect("Failed to get a connection from the pool");
 
         Project::all(&mut conn).expect("Failed to load projects")
     };
 
     let skills = {
-        let mut conn = pool.get().expect("Failed to get a connection from the pool");
+        let mut conn = pool
+            .get()
+            .expect("Failed to get a connection from the pool");
 
         Skill::all(&mut conn).expect("Failed to load skills")
     };

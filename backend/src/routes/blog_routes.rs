@@ -8,15 +8,36 @@ pub fn config(cfg: &mut web::ServiceConfig) {
     cfg.route("/blog/{id}/update", web::put().to(put_blog_post));
     cfg.route("/blog/{id}/delete", web::delete().to(delete_blog_post));
     cfg.route("/blog/{id}/comments", web::get().to(get_blog_post_comments));
-    cfg.route("/blog/{id}/comments/new", web::post().to(post_blog_post_comment));
-    cfg.route("/blog/{id}/comments/{comment_id}/update", web::put().to(put_blog_post_comment));
-    cfg.route("/blog/{id}/comments/{comment_id}/delete", web::delete().to(delete_blog_post_comment));
+    cfg.route(
+        "/blog/{id}/comments/new",
+        web::post().to(post_blog_post_comment),
+    );
+    cfg.route(
+        "/blog/{id}/comments/{comment_id}/update",
+        web::put().to(put_blog_post_comment),
+    );
+    cfg.route(
+        "/blog/{id}/comments/{comment_id}/delete",
+        web::delete().to(delete_blog_post_comment),
+    );
     cfg.route("/blog/{id}/likes", web::get().to(get_blog_post_likes));
     cfg.route("/blog/{id}/likes/new", web::post().to(post_blog_post_like));
-    cfg.route("/blog/{id}/likes/{like_id}/delete", web::delete().to(delete_blog_post_like));
-    cfg.route("/blog/{id}/comments/{comment_id}/likes", web::get().to(get_blog_post_comment_likes));
-    cfg.route("/blog/{id}/comments/{comment_id}/likes/new", web::post().to(post_blog_post_comment_like));
-    cfg.route("/blog/{id}/comments/{comment_id}/likes/{like_id}/delete", web::delete().to(delete_blog_post_comment_like));
+    cfg.route(
+        "/blog/{id}/likes/{like_id}/delete",
+        web::delete().to(delete_blog_post_like),
+    );
+    cfg.route(
+        "/blog/{id}/comments/{comment_id}/likes",
+        web::get().to(get_blog_post_comment_likes),
+    );
+    cfg.route(
+        "/blog/{id}/comments/{comment_id}/likes/new",
+        web::post().to(post_blog_post_comment_like),
+    );
+    cfg.route(
+        "/blog/{id}/comments/{comment_id}/likes/{like_id}/delete",
+        web::delete().to(delete_blog_post_comment_like),
+    );
 }
 
 async fn get_blog_posts() -> impl Responder {

@@ -1,22 +1,27 @@
-use actix_web::{web, HttpResponse, Responder};
 use crate::models::frameworks::{Framework, FrameworkImage, FrameworkRoadmap};
-use diesel::r2d2::{ConnectionManager, Pool};
-use diesel::mysql::MysqlConnection;
 use actix_web::web::{Data, Path};
+use actix_web::{web, HttpResponse, Responder};
+use diesel::mysql::MysqlConnection;
+use diesel::r2d2::{ConnectionManager, Pool};
 use serde_json::{json, Value};
 
 type DbPool = Pool<ConnectionManager<MysqlConnection>>;
 
 pub fn config(cfg: &mut web::ServiceConfig) {
     cfg.route("/frameworks", web::get().to(get_frameworks));
-    cfg.route("/frameworks/{id}/roadmaps", web::get().to(get_frameworks_roadmaps));
+    cfg.route(
+        "/frameworks/{id}/roadmaps",
+        web::get().to(get_frameworks_roadmaps),
+    );
 }
 
 async fn get_frameworks(pool: Data<DbPool>) -> impl Responder {
     let frameworks = {
         let mut conn = match pool.get() {
             Ok(conn) => conn,
-            Err(_) => return HttpResponse::InternalServerError().body("Failed to get DB connection"),
+            Err(_) => {
+                return HttpResponse::InternalServerError().body("Failed to get DB connection")
+            }
         };
         match Framework::all(&mut conn) {
             Ok(frameworks) => frameworks,
@@ -27,11 +32,15 @@ async fn get_frameworks(pool: Data<DbPool>) -> impl Responder {
     let framework_images = {
         let mut conn = match pool.get() {
             Ok(conn) => conn,
-            Err(_) => return HttpResponse::InternalServerError().body("Failed to get DB connection"),
+            Err(_) => {
+                return HttpResponse::InternalServerError().body("Failed to get DB connection")
+            }
         };
         match FrameworkImage::all(&mut conn) {
             Ok(images) => images,
-            Err(_) => return HttpResponse::InternalServerError().body("Failed to load framework images"),
+            Err(_) => {
+                return HttpResponse::InternalServerError().body("Failed to load framework images")
+            }
         }
     };
 
@@ -46,18 +55,26 @@ async fn get_frameworks_roadmaps(pool: Data<DbPool>, id: Path<i32>) -> impl Resp
     let framework_roadmaps = {
         let mut conn = match pool.get() {
             Ok(conn) => conn,
-            Err(_) => return HttpResponse::InternalServerError().body("Failed to get DB connection"),
+            Err(_) => {
+                return HttpResponse::InternalServerError().body("Failed to get DB connection")
+            }
         };
         match FrameworkRoadmap::find_by_framework_id(framework_id, &mut conn) {
             Ok(roadmaps) => roadmaps,
-            Err(_) => return HttpResponse::InternalServerError().body("Failed to load framework roadmaps"),
+            Err(_) => {
+                return HttpResponse::InternalServerError()
+                    .body("Failed to load framework roadmaps")
+            }
         }
     };
 
     HttpResponse::Ok().json(framework_roadmaps)
 }
 
-fn merge_frameworks(frameworks: Vec<Framework>, framework_images: Vec<FrameworkImage>) -> Vec<Value> {
+fn merge_frameworks(
+    frameworks: Vec<Framework>,
+    framework_images: Vec<FrameworkImage>,
+) -> Vec<Value> {
     let mut merged_list = Vec::new();
 
     for framework in frameworks {

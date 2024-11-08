@@ -1,13 +1,13 @@
 // backend/src/models/personal.rs
-use serde::{Deserialize, Serialize};
-use diesel::r2d2::{ConnectionManager, PooledConnection};
-use diesel::prelude::*;
-use diesel::mysql::MysqlConnection;
-use crate::schema::work_experience;
-use crate::schema::socials;
+use crate::schema::certifications;
 use crate::schema::contacts;
 use crate::schema::educations;
-use crate::schema::certifications;
+use crate::schema::socials;
+use crate::schema::work_experience;
+use diesel::mysql::MysqlConnection;
+use diesel::prelude::*;
+use diesel::r2d2::{ConnectionManager, PooledConnection};
+use serde::{Deserialize, Serialize};
 
 #[derive(Queryable, Identifiable, Serialize, Deserialize, Debug)]
 #[diesel(table_name = work_experience)]
@@ -91,5 +91,3 @@ impl Certification {
         certifications::table.load::<Certification>(conn)
     }
 }
-
-

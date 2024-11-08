@@ -1,12 +1,12 @@
 // backend/src/model/tools.rs
-use serde::{Deserialize, Serialize};
-use diesel::r2d2::{ConnectionManager, PooledConnection};
-use diesel::prelude::*;
-use diesel::mysql::MysqlConnection;
+use crate::models::roadmaps::Roadmap;
 use crate::schema::tools;
 use crate::schema::tools_image;
 use crate::schema::tools_roadmaps;
-use crate::models::roadmaps::Roadmap;
+use diesel::mysql::MysqlConnection;
+use diesel::prelude::*;
+use diesel::r2d2::{ConnectionManager, PooledConnection};
+use serde::{Deserialize, Serialize};
 
 #[derive(Queryable, Identifiable, Serialize, Deserialize, Debug)]
 #[diesel(table_name = tools)]
@@ -32,7 +32,7 @@ pub struct ToolImage {
     pub uploaded_at: Option<chrono::NaiveDateTime>,
 }
 
-#[derive(Queryable, Identifiable,Serialize, Deserialize, Debug, Associations)]
+#[derive(Queryable, Identifiable, Serialize, Deserialize, Debug, Associations)]
 #[diesel(table_name = tools_roadmaps)]
 #[diesel(primary_key(roadmap_id, tools_id))]
 #[diesel(belongs_to(Tool, foreign_key = tools_id))]
@@ -58,11 +58,18 @@ impl ToolImage {
 
 impl ToolRoadmap {
     pub fn find_by_tool_id(tool_id: i32, conn: &mut DbConnection) -> QueryResult<Vec<ToolRoadmap>> {
-        tools_roadmaps::table.filter(tools_roadmaps::tools_id.eq(tool_id)).load::<ToolRoadmap>(conn)
+        tools_roadmaps::table
+            .filter(tools_roadmaps::tools_id.eq(tool_id))
+            .load::<ToolRoadmap>(conn)
     }
 
-    pub fn find_by_roadmap_id(roadmap_id: i32, conn: &mut DbConnection) -> QueryResult<Vec<ToolRoadmap>> {
-        tools_roadmaps::table.filter(tools_roadmaps::roadmap_id.eq(roadmap_id)).load::<ToolRoadmap>(conn)
+    pub fn find_by_roadmap_id(
+        roadmap_id: i32,
+        conn: &mut DbConnection,
+    ) -> QueryResult<Vec<ToolRoadmap>> {
+        tools_roadmaps::table
+            .filter(tools_roadmaps::roadmap_id.eq(roadmap_id))
+            .load::<ToolRoadmap>(conn)
     }
 }
 

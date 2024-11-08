@@ -1,13 +1,13 @@
 // backend/src/models/programming_languages.rs
-use serde::{Deserialize, Serialize};
-use diesel::r2d2::{ConnectionManager, PooledConnection};
-use diesel::prelude::*;
-use diesel::mysql::MysqlConnection;
-use chrono::NaiveDateTime;
-use crate::schema::programming_languages;
+use crate::models::roadmaps::Roadmap;
 use crate::schema::programming_language_images;
 use crate::schema::programming_language_roadmaps;
-use crate::models::roadmaps::Roadmap;
+use crate::schema::programming_languages;
+use chrono::NaiveDateTime;
+use diesel::mysql::MysqlConnection;
+use diesel::prelude::*;
+use diesel::r2d2::{ConnectionManager, PooledConnection};
+use serde::{Deserialize, Serialize};
 
 #[derive(Queryable, Identifiable, Serialize, Deserialize, Debug)]
 #[diesel(table_name = programming_languages)]
@@ -62,7 +62,10 @@ impl ProgrammingLanguageRoadmap {
         programming_language_roadmaps::table.load::<ProgrammingLanguageRoadmap>(conn)
     }
 
-    pub fn find_by_language_id(language_id: i32, conn: &mut DbConnection) -> QueryResult<Vec<ProgrammingLanguageRoadmap>> {
+    pub fn find_by_language_id(
+        language_id: i32,
+        conn: &mut DbConnection,
+    ) -> QueryResult<Vec<ProgrammingLanguageRoadmap>> {
         programming_language_roadmaps::table
             .filter(programming_language_roadmaps::language_id.eq(language_id))
             .load::<ProgrammingLanguageRoadmap>(conn)
