@@ -1,11 +1,11 @@
 // backend/src/models/user.rs
-use serde::{Deserialize, Serialize};
-use diesel::r2d2::{ConnectionManager, PooledConnection};
-use diesel::prelude::*;
-use diesel::mysql::MysqlConnection;
-use crate::schema::users;
-use crate::schema::user_image;
 use crate::schema::achievements;
+use crate::schema::user_image;
+use crate::schema::users;
+use diesel::mysql::MysqlConnection;
+use diesel::prelude::*;
+use diesel::r2d2::{ConnectionManager, PooledConnection};
+use serde::{Deserialize, Serialize};
 
 #[derive(Queryable, Identifiable, Serialize, Deserialize, Debug)]
 #[diesel(table_name = users)]
@@ -65,7 +65,9 @@ impl UserImage {
     }
 
     pub fn find_by_user_id(user_id: i32, conn: &mut DbConnection) -> QueryResult<Vec<UserImage>> {
-        user_image::table.filter(user_image::user_id.eq(user_id)).load::<UserImage>(conn)
+        user_image::table
+            .filter(user_image::user_id.eq(user_id))
+            .load::<UserImage>(conn)
     }
 }
 
@@ -75,7 +77,9 @@ impl Achievement {
     }
 
     pub fn find_by_user_id(user_id: i32, conn: &mut DbConnection) -> QueryResult<Vec<Achievement>> {
-        achievements::table.filter(achievements::user_id.eq(user_id)).load::<Achievement>(conn)
+        achievements::table
+            .filter(achievements::user_id.eq(user_id))
+            .load::<Achievement>(conn)
     }
 }
 

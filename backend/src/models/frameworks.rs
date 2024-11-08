@@ -1,13 +1,13 @@
 // backend/src/model/framework.rs
-use serde::{Deserialize, Serialize};
-use diesel::r2d2::{ConnectionManager, PooledConnection};
-use diesel::prelude::*;
-use diesel::mysql::MysqlConnection;
-use crate::schema::frameworks;
-use crate::schema::framework_images;
-use crate::schema::framework_roadmaps;
 use crate::models::programming_languages::ProgrammingLanguage;
 use crate::models::roadmaps::Roadmap;
+use crate::schema::framework_images;
+use crate::schema::framework_roadmaps;
+use crate::schema::frameworks;
+use diesel::mysql::MysqlConnection;
+use diesel::prelude::*;
+use diesel::r2d2::{ConnectionManager, PooledConnection};
+use serde::{Deserialize, Serialize};
 
 #[derive(Queryable, Identifiable, Associations, Serialize, Deserialize, Debug)]
 #[diesel(table_name = frameworks)]
@@ -64,7 +64,10 @@ impl FrameworkRoadmap {
         framework_roadmaps::table.load::<FrameworkRoadmap>(conn)
     }
 
-    pub fn find_by_framework_id(framework_id: i32, conn: &mut DbConnection) -> QueryResult<Vec<FrameworkRoadmap>> {
+    pub fn find_by_framework_id(
+        framework_id: i32,
+        conn: &mut DbConnection,
+    ) -> QueryResult<Vec<FrameworkRoadmap>> {
         framework_roadmaps::table
             .filter(framework_roadmaps::framework_id.eq(framework_id))
             .load::<FrameworkRoadmap>(conn)

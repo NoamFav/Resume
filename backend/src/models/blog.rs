@@ -1,15 +1,15 @@
 // backend/src/models/blog.rs
-use serde::{Deserialize, Serialize};
-use diesel::r2d2::{ConnectionManager, PooledConnection};
-use diesel::prelude::*;
-use diesel::mysql::MysqlConnection;
+use crate::models::frameworks::Framework;
+use crate::models::programming_languages::ProgrammingLanguage;
+use crate::models::user::User;
 use crate::schema::blog_posts;
+use crate::schema::comment_likes;
 use crate::schema::comments;
 use crate::schema::likes;
-use crate::schema::comment_likes;
-use crate::models::user::User;
-use crate::models::programming_languages::ProgrammingLanguage;
-use crate::models::frameworks::Framework;
+use diesel::mysql::MysqlConnection;
+use diesel::prelude::*;
+use diesel::r2d2::{ConnectionManager, PooledConnection};
+use serde::{Deserialize, Serialize};
 
 #[derive(Queryable, Identifiable, Associations, Serialize, Deserialize, Debug)]
 #[diesel(table_name = blog_posts)]

@@ -1,11 +1,11 @@
 // backend/src/models/skills.rs
-use serde::{Deserialize, Serialize};
-use diesel::r2d2::{ConnectionManager, PooledConnection};
-use diesel::prelude::*;
-use diesel::mysql::MysqlConnection;
-use crate::schema::skills;
-use crate::schema::skill_roadmaps;
 use crate::models::roadmaps::Roadmap;
+use crate::schema::skill_roadmaps;
+use crate::schema::skills;
+use diesel::mysql::MysqlConnection;
+use diesel::prelude::*;
+use diesel::r2d2::{ConnectionManager, PooledConnection};
+use serde::{Deserialize, Serialize};
 
 #[derive(Queryable, Identifiable, Serialize, Deserialize, Debug)]
 #[diesel(table_name = skills)]
@@ -38,8 +38,13 @@ impl SkillRoadmap {
         skill_roadmaps::table.load::<SkillRoadmap>(conn)
     }
 
-    pub fn find_by_skill_id(skill_id: i32, conn: &mut SkillConnection) -> QueryResult<Vec<SkillRoadmap>> {
-        skill_roadmaps::table.filter(skill_roadmaps::skill_id.eq(skill_id)).load::<SkillRoadmap>(conn)
+    pub fn find_by_skill_id(
+        skill_id: i32,
+        conn: &mut SkillConnection,
+    ) -> QueryResult<Vec<SkillRoadmap>> {
+        skill_roadmaps::table
+            .filter(skill_roadmaps::skill_id.eq(skill_id))
+            .load::<SkillRoadmap>(conn)
     }
 }
 

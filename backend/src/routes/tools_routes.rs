@@ -1,9 +1,9 @@
 // backend/src/routes/tools_routes.rs
-use actix_web::{web, HttpResponse, Responder};
 use crate::models::{Tool, ToolImage, ToolRoadmap};
-use diesel::r2d2::{ConnectionManager, Pool};
-use diesel::mysql::MysqlConnection;
 use actix_web::web::{Data, Path};
+use actix_web::{web, HttpResponse, Responder};
+use diesel::mysql::MysqlConnection;
+use diesel::r2d2::{ConnectionManager, Pool};
 use serde_json::{json, Value};
 
 type DbPool = Pool<ConnectionManager<MysqlConnection>>;
@@ -17,7 +17,9 @@ async fn get_tools(pool: Data<DbPool>) -> impl Responder {
     let tools = {
         let mut conn = match pool.get() {
             Ok(conn) => conn,
-            Err(_) => return HttpResponse::InternalServerError().body("Failed to get DB connection"),
+            Err(_) => {
+                return HttpResponse::InternalServerError().body("Failed to get DB connection")
+            }
         };
         match Tool::all(&mut conn) {
             Ok(tools) => tools,
@@ -28,11 +30,15 @@ async fn get_tools(pool: Data<DbPool>) -> impl Responder {
     let tool_images = {
         let mut conn = match pool.get() {
             Ok(conn) => conn,
-            Err(_) => return HttpResponse::InternalServerError().body("Failed to get DB connection"),
+            Err(_) => {
+                return HttpResponse::InternalServerError().body("Failed to get DB connection")
+            }
         };
         match ToolImage::all(&mut conn) {
             Ok(images) => images,
-            Err(_) => return HttpResponse::InternalServerError().body("Failed to load tool images"),
+            Err(_) => {
+                return HttpResponse::InternalServerError().body("Failed to load tool images")
+            }
         }
     };
 
@@ -47,11 +53,15 @@ async fn get_tool_roadmaps(pool: Data<DbPool>, id: Path<i32>) -> impl Responder 
     let tool_roadmaps = {
         let mut conn = match pool.get() {
             Ok(conn) => conn,
-            Err(_) => return HttpResponse::InternalServerError().body("Failed to get DB connection"),
+            Err(_) => {
+                return HttpResponse::InternalServerError().body("Failed to get DB connection")
+            }
         };
         match ToolRoadmap::find_by_tool_id(tool_id, &mut conn) {
             Ok(roadmaps) => roadmaps,
-            Err(_) => return HttpResponse::InternalServerError().body("Failed to load tool roadmaps"),
+            Err(_) => {
+                return HttpResponse::InternalServerError().body("Failed to load tool roadmaps")
+            }
         }
     };
 
