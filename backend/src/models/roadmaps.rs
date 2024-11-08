@@ -1,12 +1,12 @@
 // backend/src/models/roadmaps.roadmaps
-use serde::{Deserialize, Serialize};
-use diesel::r2d2::{ConnectionManager, PooledConnection};
-use diesel::prelude::*;
-use diesel_derive_enum::DbEnum;
-use diesel::mysql::MysqlConnection;
-use crate::schema::roadmaps;
-use crate::schema::roadmap_progress;
 use crate::schema::roadmap_events;
+use crate::schema::roadmap_progress;
+use crate::schema::roadmaps;
+use diesel::mysql::MysqlConnection;
+use diesel::prelude::*;
+use diesel::r2d2::{ConnectionManager, PooledConnection};
+use diesel_derive_enum::DbEnum;
+use serde::{Deserialize, Serialize};
 
 #[derive(Queryable, Identifiable, Serialize, Deserialize, Debug)]
 #[diesel(table_name = roadmaps)]
@@ -28,7 +28,16 @@ pub struct RoadmapProgress {
     pub last_updated: Option<chrono::NaiveDateTime>,
 }
 
-#[derive(Debug, Serialize, Deserialize, Queryable, Identifiable, Associations, QueryableByName, Selectable)]
+#[derive(
+    Debug,
+    Serialize,
+    Deserialize,
+    Queryable,
+    Identifiable,
+    Associations,
+    QueryableByName,
+    Selectable,
+)]
 #[diesel(table_name = roadmap_events)]
 #[diesel(primary_key(event_id))]
 #[diesel(belongs_to(Roadmap, foreign_key = roadmap_id))]
@@ -40,7 +49,6 @@ pub struct RoadmapEvent {
     pub event_date: Option<chrono::NaiveDateTime>,
     pub event_type: String,
 }
-
 
 type DbConnection = PooledConnection<ConnectionManager<MysqlConnection>>;
 

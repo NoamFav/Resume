@@ -1,10 +1,10 @@
 // backend/src/models/git.rs
-use serde::{Deserialize, Serialize};
-use diesel::r2d2::{ConnectionManager, PooledConnection};
-use diesel::prelude::*;
-use diesel::mysql::MysqlConnection;
-use crate::schema::git_updates;
 use crate::models::projects::Project;
+use crate::schema::git_updates;
+use diesel::mysql::MysqlConnection;
+use diesel::prelude::*;
+use diesel::r2d2::{ConnectionManager, PooledConnection};
+use serde::{Deserialize, Serialize};
 
 #[derive(Queryable, Identifiable, Associations, Serialize, Deserialize, Debug)]
 #[diesel(table_name = git_updates)]
