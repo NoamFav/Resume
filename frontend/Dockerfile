@@ -1,21 +1,19 @@
-# Use an official Node.js image
-FROM node:16-alpine
+FROM node:18-slim
 
-# Set the working directory inside the container
+# Set the working directory
 WORKDIR /app
 
-# Copy package.json and install dependencies
+# Copy dependency files
 COPY package*.json ./
-RUN npm install
 
-# Copy the rest of your application code
+# Install dependencies
+RUN npm install --no-optional
+
+# Copy the rest of the application files
 COPY . .
 
-# Expose the port that the development server runs on
-EXPOSE 3000
+# Expose the Vite dev server port
+EXPOSE 5173
 
-# Set environment variable to development mode (if needed)
-ENV NODE_ENV=development
-
-# Run the development server
-CMD ["npm", "start"]
+# Start the Vite development server
+CMD ["npm", "run", "dev"]
