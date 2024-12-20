@@ -187,8 +187,12 @@ impl ProjectContributor {
         project_contributors::table.load::<ProjectContributor>(conn)
     }
 
-    pub fn find_by_id(id: i32, conn: &mut DbConnection) -> QueryResult<ProjectContributor> {
-        project_contributors::table.find(id).first(conn)
+    pub fn find_by_id(
+        id: i32,
+        user_id: i32,
+        conn: &mut DbConnection,
+    ) -> QueryResult<ProjectContributor> {
+        project_contributors::table.find((id, user_id)).first(conn)
     }
 
     pub fn find_by_project_id(
