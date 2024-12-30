@@ -1,0 +1,10 @@
+/Users/noamfavier/Git_projects/Resume/backend/target/debug/deps/libactix_cors-7bcde9d8d55c8f77.rmeta: /Users/noamfavier/.cargo/registry/src/index.crates.io-6f17d22bba15001f/actix-cors-0.6.5/src/lib.rs /Users/noamfavier/.cargo/registry/src/index.crates.io-6f17d22bba15001f/actix-cors-0.6.5/src/all_or_some.rs /Users/noamfavier/.cargo/registry/src/index.crates.io-6f17d22bba15001f/actix-cors-0.6.5/src/builder.rs /Users/noamfavier/.cargo/registry/src/index.crates.io-6f17d22bba15001f/actix-cors-0.6.5/src/error.rs /Users/noamfavier/.cargo/registry/src/index.crates.io-6f17d22bba15001f/actix-cors-0.6.5/src/inner.rs /Users/noamfavier/.cargo/registry/src/index.crates.io-6f17d22bba15001f/actix-cors-0.6.5/src/middleware.rs
+
+/Users/noamfavier/Git_projects/Resume/backend/target/debug/deps/actix_cors-7bcde9d8d55c8f77.d: /Users/noamfavier/.cargo/registry/src/index.crates.io-6f17d22bba15001f/actix-cors-0.6.5/src/lib.rs /Users/noamfavier/.cargo/registry/src/index.crates.io-6f17d22bba15001f/actix-cors-0.6.5/src/all_or_some.rs /Users/noamfavier/.cargo/registry/src/index.crates.io-6f17d22bba15001f/actix-cors-0.6.5/src/builder.rs /Users/noamfavier/.cargo/registry/src/index.crates.io-6f17d22bba15001f/actix-cors-0.6.5/src/error.rs /Users/noamfavier/.cargo/registry/src/index.crates.io-6f17d22bba15001f/actix-cors-0.6.5/src/inner.rs /Users/noamfavier/.cargo/registry/src/index.crates.io-6f17d22bba15001f/actix-cors-0.6.5/src/middleware.rs
+
+/Users/noamfavier/.cargo/registry/src/index.crates.io-6f17d22bba15001f/actix-cors-0.6.5/src/lib.rs:
+/Users/noamfavier/.cargo/registry/src/index.crates.io-6f17d22bba15001f/actix-cors-0.6.5/src/all_or_some.rs:
+/Users/noamfavier/.cargo/registry/src/index.crates.io-6f17d22bba15001f/actix-cors-0.6.5/src/builder.rs:
+/Users/noamfavier/.cargo/registry/src/index.crates.io-6f17d22bba15001f/actix-cors-0.6.5/src/error.rs:
+/Users/noamfavier/.cargo/registry/src/index.crates.io-6f17d22bba15001f/actix-cors-0.6.5/src/inner.rs:
+/Users/noamfavier/.cargo/registry/src/index.crates.io-6f17d22bba15001f/actix-cors-0.6.5/src/middleware.rs:

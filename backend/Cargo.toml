@@ -5,6 +5,7 @@ edition = "2021"
 
 [dependencies]
 actix-web = "=4.9.0"
+actix-cors = "0.6"
 diesel = { version = "2.0.0", features = ["mysql", "r2d2", "chrono"] }
 r2d2 = "0.8"
 diesel-derive-enum = "2.0"

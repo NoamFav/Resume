@@ -94,6 +94,7 @@ fn merged_programming_languages(
         let merged_json = json!({
             "id": programming_language.language_id,
             "name": programming_language.name,
+            "percentage": programming_language.percentage,
             "image_url": matching_image.map(|img| img.image_url.clone()),
             "caption": matching_image.and_then(|img| img.caption.clone()),
             "alt_text": matching_image.and_then(|img| img.alt_text.clone()),
