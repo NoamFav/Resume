@@ -1,4 +1,4 @@
-// src/main.rs
+use actix_cors::Cors; // Import the CORS middleware
 use actix_web::{web, App, HttpResponse, HttpServer, Responder};
 use log::info;
 
@@ -87,6 +87,12 @@ async fn main() -> std::io::Result<()> {
     HttpServer::new(move || {
         App::new()
             .app_data(web::Data::new(pool.clone()))
+            .wrap(
+                Cors::default()
+                    .allow_any_origin() // Allow requests from any origin
+                    .allow_any_method() // Allow any HTTP method (GET, POST, PUT, DELETE, etc.)
+                    .allow_any_header(), // Allow any headers in the request
+            )
             .configure(routes::user_routes::config)
             .configure(routes::auth_routes::config)
             .configure(routes::programming_languages_routes::config)
