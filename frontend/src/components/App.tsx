@@ -32,7 +32,7 @@ const App: React.FC = () => {
                 const projectsData = await projectsResponse.json();
 
                 setLanguages(languagesData);
-                setProjects(projectsData.slice(0, 3));
+                setProjects(projectsData.slice(0, 9));
             } catch (error) {
                 console.error("Error fetching data:", error);
             } finally {
