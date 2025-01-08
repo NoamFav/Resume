@@ -1,4 +1,4 @@
-FROM node:18-slim
+FROM node:18-bullseye-slim
 
 # Set the working directory
 WORKDIR /app
@@ -6,8 +6,8 @@ WORKDIR /app
 # Copy dependency files
 COPY package*.json ./
 
-# Install dependencies
-RUN npm install --no-optional
+# Install dependencies with `npm ci` for a clean and consistent install
+RUN npm ci
 
 # Copy the rest of the application files
 COPY . .
