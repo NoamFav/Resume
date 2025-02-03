@@ -52,6 +52,7 @@ CREATE TABLE work_experience (
     work_id INT PRIMARY KEY AUTO_INCREMENT,
     company_name VARCHAR(100) NOT NULL,
     position VARCHAR(100) NOT NULL,
+    description TEXT,
     start_date DATE NOT NULL,
     end_date DATE NULL
 );
@@ -72,7 +73,8 @@ CREATE TABLE certifications (
     certification_id INT PRIMARY KEY AUTO_INCREMENT,
     certification_name VARCHAR(255) NOT NULL,
     certification_date DATE NOT NULL,
-    grade FLOAT CHECK (grade >= 0 AND grade <= 100)
+    grade FLOAT CHECK (grade >= 0 AND grade <= 100),
+    organization VARCHAR(100)
 );
 
 CREATE TABLE programming_languages (
@@ -470,3 +472,4 @@ CREATE INDEX idx_milestone_roadmap ON milestones(roadmap_id);
 CREATE INDEX idx_plr_language_roadmap_language ON programming_language_roadmaps(language_id);
 CREATE INDEX idx_tools_roadmap_tool ON tools_roadmaps(tools_id);
 CREATE INDEX idx_framework_roadmap_framework ON framework_roadmaps(framework_id);
+
