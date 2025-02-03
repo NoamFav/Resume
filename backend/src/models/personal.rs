@@ -16,6 +16,7 @@ pub struct WorkExperience {
     pub work_id: i32,
     pub company_name: String,
     pub position: String,
+    pub description: String,
     pub start_date: chrono::NaiveDate,
     pub end_date: Option<chrono::NaiveDate>,
 }
@@ -58,6 +59,7 @@ pub struct Certification {
     pub certification_name: String,
     pub certification_date: chrono::NaiveDate,
     pub grade: Option<f32>,
+    pub organization: String,
 }
 
 type PersonalConnection = PooledConnection<ConnectionManager<MysqlConnection>>;

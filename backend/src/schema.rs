@@ -42,6 +42,7 @@ diesel::table! {
         certification_name -> Varchar,
         certification_date -> Date,
         grade -> Nullable<Float>,
+        organization -> Varchar,
     }
 }
 
@@ -447,6 +448,7 @@ diesel::table! {
         company_name -> Varchar,
         #[max_length = 100]
         position -> Varchar,
+        description -> Text,
         start_date -> Date,
         end_date -> Nullable<Date>,
     }
