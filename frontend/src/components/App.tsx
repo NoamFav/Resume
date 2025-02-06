@@ -73,13 +73,13 @@ const App: React.FC = () => {
     const [certifications, setCertifications] = useState<Certification[]>([]);
 
     const fetchContact = async () => {
-        const response = await fetch("http://localhost:8000/contact");
+        const response = await fetch("http://localhost:8000/personal/contacts");
         const data = await response.json();
         setContact(data);
     };
 
     const fetchSocials = async () => {
-        const response = await fetch("http://localhost:8000/socials");
+        const response = await fetch("http://localhost:8000/personal/socials");
         const data = await response.json();
         setSocials(data);
     };
