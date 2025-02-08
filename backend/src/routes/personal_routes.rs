@@ -1,9 +1,14 @@
 // backend/src/routes/personal_routes.rs
-use actix_web::{web, HttpResponse, Responder};
+use actix_web::{
+    web::{self, Data},
+    HttpResponse, Responder,
+};
+use diesel::{r2d2::ConnectionManager, MysqlConnection};
+use r2d2::Pool;
+
+use crate::models::{Contact, Education, Social, WorkExperience};
 
 pub fn config(cfg: &mut web::ServiceConfig) {
-    cfg.route("/personal", web::get().to(get_all_personal_info));
-
     cfg.route("/personal/work", web::get().to(get_work_experience));
     cfg.route(
         "/personal/work/{id}",
@@ -74,9 +79,7 @@ pub fn config(cfg: &mut web::ServiceConfig) {
     );
 }
 
-async fn get_all_personal_info() -> impl Responder {
-    HttpResponse::Ok().body("Personal information will be listed here")
-}
+type DbPool = Pool<ConnectionManager<MysqlConnection>>;
 
 async fn get_work_experience_by_id() -> impl Responder {
     HttpResponse::Ok().body("Work experience will be listed here")
@@ -94,12 +97,40 @@ async fn delete_work_experience() -> impl Responder {
     HttpResponse::Ok().body("Work experience will be listed here")
 }
 
-async fn get_work_experience() -> impl Responder {
-    HttpResponse::Ok().body("Work experience will be listed here")
+async fn get_work_experience(pool: Data<DbPool>) -> impl Responder {
+    let work_experience = {
+        let mut conn = match pool.get() {
+            Ok(conn) => conn,
+            Err(_) => {
+                return HttpResponse::InternalServerError().body("Failed to get DB connection")
+            }
+        };
+        match WorkExperience::all(&mut conn) {
+            Ok(experience) => experience,
+            Err(_) => {
+                return HttpResponse::InternalServerError().body("Failed to load work experience")
+            }
+        }
+    };
+
+    HttpResponse::Ok().json(work_experience)
 }
 
-async fn get_socials() -> impl Responder {
-    HttpResponse::Ok().body("Socials will be listed here")
+async fn get_socials(pool: Data<DbPool>) -> impl Responder {
+    let socials = {
+        let mut conn = match pool.get() {
+            Ok(conn) => conn,
+            Err(_) => {
+                return HttpResponse::InternalServerError().body("Failed to get DB connection")
+            }
+        };
+        match Social::all(&mut conn) {
+            Ok(socials) => socials,
+            Err(_) => return HttpResponse::InternalServerError().body("Failed to load socials"),
+        }
+    };
+
+    HttpResponse::Ok().json(socials)
 }
 
 async fn get_social_by_id() -> impl Responder {
@@ -118,8 +149,21 @@ async fn delete_social() -> impl Responder {
     HttpResponse::Ok().body("Socials will be listed here")
 }
 
-async fn get_contacts() -> impl Responder {
-    HttpResponse::Ok().body("Contacts will be listed here")
+async fn get_contacts(pool: Data<DbPool>) -> impl Responder {
+    let contacts = {
+        let mut conn = match pool.get() {
+            Ok(conn) => conn,
+            Err(_) => {
+                return HttpResponse::InternalServerError().body("Failed to get DB connection")
+            }
+        };
+        match Contact::all(&mut conn) {
+            Ok(contacts) => contacts,
+            Err(_) => return HttpResponse::InternalServerError().body("Failed to load contacts"),
+        }
+    };
+
+    HttpResponse::Ok().json(contacts)
 }
 
 async fn get_contact_by_id() -> impl Responder {
@@ -138,8 +182,21 @@ async fn delete_contact() -> impl Responder {
     HttpResponse::Ok().body("Contacts will be listed here")
 }
 
-async fn get_educations() -> impl Responder {
-    HttpResponse::Ok().body("Educations will be listed here")
+async fn get_educations(pool: Data<DbPool>) -> impl Responder {
+    let educations = {
+        let mut conn = match pool.get() {
+            Ok(conn) => conn,
+            Err(_) => {
+                return HttpResponse::InternalServerError().body("Failed to get DB connection")
+            }
+        };
+        match Education::all(&mut conn) {
+            Ok(educations) => educations,
+            Err(_) => return HttpResponse::InternalServerError().body("Failed to load educations"),
+        }
+    };
+
+    HttpResponse::Ok().json(educations)
 }
 
 async fn get_education_by_id() -> impl Responder {
