@@ -6,7 +6,7 @@ use actix_web::{
 use diesel::{r2d2::ConnectionManager, MysqlConnection};
 use r2d2::Pool;
 
-use crate::models::{Contact, Education, Social, WorkExperience};
+use crate::models::{Certification, Contact, Education, Social, WorkExperience};
 
 pub fn config(cfg: &mut web::ServiceConfig) {
     cfg.route("/personal/work", web::get().to(get_work_experience));
@@ -107,8 +107,9 @@ async fn get_work_experience(pool: Data<DbPool>) -> impl Responder {
         };
         match WorkExperience::all(&mut conn) {
             Ok(experience) => experience,
-            Err(_) => {
-                return HttpResponse::InternalServerError().body("Failed to load work experience")
+            Err(e) => {
+                println!("{}", e);
+                return HttpResponse::InternalServerError().body("Failed to load work experience");
             }
         }
     };
@@ -215,8 +216,23 @@ async fn delete_education() -> impl Responder {
     HttpResponse::Ok().body("Educations will be listed here")
 }
 
-async fn get_certifications() -> impl Responder {
-    HttpResponse::Ok().body("Certifications will be listed here")
+async fn get_certifications(pool: Data<DbPool>) -> impl Responder {
+    let certifications = {
+        let mut conn = match pool.get() {
+            Ok(conn) => conn,
+            Err(_) => {
+                return HttpResponse::InternalServerError().body("Failed to get DB connection")
+            }
+        };
+        match Certification::all(&mut conn) {
+            Ok(certifications) => certifications,
+            Err(_) => {
+                return HttpResponse::InternalServerError().body("Failed to load certifications")
+            }
+        }
+    };
+
+    HttpResponse::Ok().json(certifications)
 }
 
 async fn get_certification_by_id() -> impl Responder {

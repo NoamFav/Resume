@@ -1,4 +1,5 @@
-START TRANSACTION;
+start transaction
+;
 
 INSERT INTO socials (social_name, social_url) VALUES
     ('instagram', 'https://www.instagram.com/noam_fvr/?utm_source=ig_web_button_share_sheet'),
@@ -42,24 +43,61 @@ INSERT INTO educations (school_name, degree, field_of_study, start_date, end_dat
     ("Lycee Jeanne D'arc", 'French Baccalaureate', 'Math, Physics, English', '2020-09-01', '2023-06-30'),
     ('Maastricht University', 'Bachelor of Science', 'Data Science and Artificial Intelligence', '2023-09-01', '2026-06-30');
 
-INSERT INTO work_experience (company_name, position, start_date, end_date) VALUES
-    ('Freelance', 'Web Developer', '2020-09-01', NULL),
-    ('Freelance', 'Software Engineer', '2022-09-01', NULL),
-    ('Capgemini', 'Internship', '2020-02-01', '2020-03-01'),
-    ('Duplessi Farm', 'Data management', '2021-07-01', '2021-08-01'),
-    ('Maastricht University', 'Student Ambassador', '2024-10-12', '2026-06-30'),
-    ('Maastricht University', 'Project Manager', '2023-09-01', '2024-01-20'),
-    ('Maastricht University', 'Project Manager', '2024-02-01', '2024-06-30'),
-    ('Maastricht University', 'Project Manager', '2024-09-01', '2025-01-20');
+INSERT INTO work_experience (company_name, position, start_date, end_date, description) VALUES
+    ('Freelance', 'Web Developer', '2020-09-01', NULL, 'Developing websites for clients'),
+    ('Freelance','Software Engineer','2022-09-01',NULL,'Developing software solutions for clients'),
+(
+    'Capgemini',
+    'Internship',
+    '2020-02-01',
+    '2020-03-01',
+    'Developing web applications using Java and Spring'
+),
+(
+    'Duplessi Farm',
+    'Data management',
+    '2021-07-01',
+    '2021-08-01',
+    'Managing and analyzing data for the farm'
+),
+(
+    'Maastricht University',
+    'Student Ambassador',
+    '2024-10-12',
+    '2026-06-30',
+    'Representing the university at events and fairs'
+),
+(
+    'Maastricht University',
+    'Project Manager',
+    '2023-09-01',
+    '2024-01-20',
+    'Managing a team of developers on a research project'
+),
+(
+    'Maastricht University',
+    'Project Manager',
+    '2024-02-01',
+    '2024-06-30',
+    'Leading a team of researchers on a data analysis project'
+),
+(
+    'Maastricht University',
+    'Project Manager',
+    '2024-09-01',
+    '2025-01-20',
+    'Coordinating a team of developers on a software project'
+);
 
-INSERT INTO certifications (certification_name, certification_date, grade) VALUES
-    ('French Baccalaureate', '2023-06-30', 75),
-    ('TOEFL IBT', '2022-06-22', 85),
-    ('Python Sololearn', '2022-12-24', NULL),
-    ('Java Sololearn', '2023-11-01', NULL),
-    ('HTML Sololearn', '2022-04-07', NULL),
-    ('SQL Sololearn', '2024-10-13', NULL),
-    ('Machine Learning Sololearn', '2023-04-03', NULL);
+
+INSERT INTO certifications (certification_name, certification_date, grade, organization) VALUES
+    ('French Baccalaureate', '2023-06-30', 75, 'French Ministry of Educations'),
+    ('TOEFL IBT', '2022-06-22', 85, 'ETS'),
+    ('Python Sololearn', '2022-12-24', NULL, 'Sololearn'),
+    ('Java Sololearn', '2023-11-01', NULL, 'Sololearn'),
+    ('HTML Sololearn', '2022-04-07', NULL, 'Sololearn'),
+    ('SQL Sololearn', '2024-10-13', NULL, 'Sololearn'),
+    ('Machine Learning Sololearn', '2023-04-03', NULL, 'Sololearn');
 
 INSERT INTO programming_languages (name, percentage, favorite, learning) VALUES
     ('Java', 90, TRUE, FALSE),
@@ -128,7 +166,7 @@ INSERT INTO programming_languages (name, percentage, favorite, learning) VALUES
     ('OCaml', 0, FALSE, FALSE);
 
 INSERT INTO frameworks (name, percentage, favorite, learning, language_id) VALUES
-    -- Java frameworks (language_id = 1)
+-- Java frameworks (language_id = 1)
     ('Spring', 90, TRUE, FALSE, 1),
     ('Hibernate', 0, FALSE, FALSE, 1),
     ('LWJGL', 80, TRUE, TRUE, 1),
@@ -143,7 +181,7 @@ INSERT INTO frameworks (name, percentage, favorite, learning, language_id) VALUE
     ('JUnit', 0, FALSE, FALSE, 1),
     ('Mockito', 0, FALSE, FALSE, 1),
 
-    -- Python frameworks (language_id = 2)
+-- Python frameworks (language_id = 2)
     ('Flask', 70, FALSE, FALSE, 2),
     ('Django', 30, FALSE, FALSE, 2),
     ('Tkinter', 60, FALSE, TRUE, 2),
@@ -157,7 +195,7 @@ INSERT INTO frameworks (name, percentage, favorite, learning, language_id) VALUE
     ('Pydantic', 0, FALSE, FALSE, 2),
     ('Celery', 0, FALSE, FALSE, 2),
 
-    -- Rust frameworks (language_id = 3)
+-- Rust frameworks (language_id = 3)
     ('Rocket', 0, FALSE, FALSE, 3),
     ('Tide', 0, FALSE, FALSE, 3),
     ('Actix', 30, FALSE, FALSE, 3),
@@ -167,18 +205,18 @@ INSERT INTO frameworks (name, percentage, favorite, learning, language_id) VALUE
     ('Hyper', 0, FALSE, FALSE, 3),
     ('Warp', 0, FALSE, FALSE, 3),
 
-    -- C++ frameworks (language_id = 4)
+-- C++ frameworks (language_id = 4)
     ('Qt', 0, FALSE, FALSE, 4),
     ('Boost', 0, FALSE, FALSE, 4),
     ('OpenGL', 60, TRUE, FALSE, 4),
     ('Poco', 0, FALSE, FALSE, 4),
     ('Boost.Asio', 0, FALSE, FALSE, 4),
 
-    -- Swift frameworks (language_id = 5)
+-- Swift frameworks (language_id = 5)
     ('SwiftUI', 60, TRUE, TRUE, 5),
     ('Vapor', 0, FALSE, FALSE, 5),
 
-    -- JavaScript frameworks (language_id = 7)
+-- JavaScript frameworks (language_id = 7)
     ('React', 80, TRUE, TRUE, 7),
     ('Vue.js', 0, FALSE, FALSE, 7),
     ('Node.js', 70, TRUE, TRUE, 7),
@@ -189,74 +227,74 @@ INSERT INTO frameworks (name, percentage, favorite, learning, language_id) VALUE
     ('Jest', 0, FALSE, FALSE, 7),
     ('Mocha', 0, FALSE, FALSE, 7),
 
-    -- TypeScript frameworks (language_id = 8)
+-- TypeScript frameworks (language_id = 8)
     ('Next.js', 0, FALSE, FALSE, 8),
     ('Gatsby', 0, FALSE, FALSE, 8),
 
-    -- HTML/CSS frameworks (language_id = 9)
+-- HTML/CSS frameworks (language_id = 9)
     ('Tailwind', 30, TRUE, TRUE, 9),
     ('Bootstrap', 0, FALSE, FALSE, 9),
     ('Sass', 0, FALSE, FALSE, 9),
     ('Less', 0, FALSE, FALSE, 9),
 
-    -- Go frameworks (language_id = 11)
+-- Go frameworks (language_id = 11)
     ('GORM', 0, FALSE, FALSE, 11),
     ('Gin', 0, FALSE, FALSE, 11),
     ('Echo', 0, FALSE, FALSE, 11),
     ('Beego', 0, FALSE, FALSE, 11),
 
-    -- C# frameworks (language_id = 12)
+-- C# frameworks (language_id = 12)
     ('ASP.NET', 0, FALSE, FALSE, 12),
     ('Unity', 80, TRUE, TRUE, 12),
     ('Blazor', 0, FALSE, FALSE, 12),
     ('Entity Framework', 0, FALSE, FALSE, 12),
 
-    -- Ruby frameworks (language_id = 16)
+-- Ruby frameworks (language_id = 16)
     ('Rails', 0, FALSE, FALSE, 16),
     ('Sinatra', 0, FALSE, FALSE, 16),
 
-    -- PHP frameworks (language_id = 15)
+-- PHP frameworks (language_id = 15)
     ('Laravel', 0, FALSE, FALSE, 15),
     ('Symfony', 0, FALSE, FALSE, 15),
     ('Zend', 0, FALSE, FALSE, 15),
 
-    -- Elixir frameworks (language_id = 31)
+-- Elixir frameworks (language_id = 31)
     ('Phoenix', 0, FALSE, FALSE, 31),
 
-    -- Kotlin frameworks (language_id = 14)
+-- Kotlin frameworks (language_id = 14)
     ('Ktor', 0, FALSE, FALSE, 14),
     ('Exposed', 0, FALSE, FALSE, 14),
 
-    -- Scala frameworks (language_id = 18)
+-- Scala frameworks (language_id = 18)
     ('Play', 0, FALSE, FALSE, 18),
     ('Akka', 0, FALSE, FALSE, 18),
 
-    -- Haskell frameworks (language_id = 19)
+-- Haskell frameworks (language_id = 19)
     ('Yesod', 0, FALSE, FALSE, 19),
 
-    -- R frameworks (language_id = 20)
+-- R frameworks (language_id = 20)
     ('Shiny', 0, FALSE, FALSE, 20),
     ('ggplot2', 0, FALSE, FALSE, 20),
 
-    -- SQL frameworks (language_id = 10)
+-- SQL frameworks (language_id = 10)
     ('SQLAlchemy', 50, FALSE, FALSE, 10),
     ('Flyway', 70, FALSE, TRUE, 10),
     ('Liquibase', 0, FALSE, FALSE, 10),
 
-    -- Shell frameworks (language_id = 25)
+-- Shell frameworks (language_id = 25)
     ('Bash', 60, TRUE, TRUE, 25),  -- 'Shell' is language_id = 25
     ('Powershell', 40, FALSE, TRUE, 27),
 
-    -- Julia frameworks (language_id = 22)
+-- Julia frameworks (language_id = 22)
     ('Flux', 0, FALSE, FALSE, 22),
 
-    -- Dart frameworks (language_id = 23)
+-- Dart frameworks (language_id = 23)
     ('Flutter', 0, FALSE, FALSE, 23),
 
-    -- Lua frameworks (language_id = 13)
+-- Lua frameworks (language_id = 13)
     ('Love2D', 0, FALSE, FALSE, 13),
 
-    -- Lisp frameworks (language_id = 43)
+-- Lisp frameworks (language_id = 43)
     ('CLASP', 0, FALSE, FALSE, 43);
 
 INSERT INTO tools (name, percentage, favorite, learning) VALUES
@@ -320,73 +358,73 @@ INSERT INTO projects (title, description, git_url, created_at, updated_at) VALUE
     ('Mock-carpool', 'A basic destination app with pathfinding', 'https://github.com/NoamFav/Mock-Carpool', '2024-09-06','2024-09-17');
 
 INSERT INTO project_languages (project_id, language_id) VALUES
-    -- Resume
+-- Resume
     (1, 3), -- Rust (language_id = 3)
     (1, 7), -- JavaScript (language_id = 7)
     (1, 9), -- HTML/CSS (language_id = 9)
     (1, 26), -- Bash (language_id = 26)
 
-    -- Pot_Pot_Golf
+-- Pot_Pot_Golf
     (2, 1), -- Java (language_id = 1)
 
-    -- QueryCrust
+-- QueryCrust
     (3, 2), -- Python (language_id = 2)
     (3, 9), -- HTML/CSS (language_id = 9)
     (3, 10), -- SQL (language_id = 10)
     (3, 26), -- Bash (language_id = 26)
     (3, 7), -- JavaScript (language_id = 7)
 
-    -- Shadowed Hunter
+-- Shadowed Hunter
     (4, 1), -- Java (language_id = 1)
 
-    -- Neovim Config
+-- Neovim Config
     (5, 13), -- Lua (language_id = 13)
     (5, 28), -- Vimscript (language_id = 28)
 
-    -- Chess Bot
+-- Chess Bot
     (6, 3), -- Rust (language_id = 3)
 
-    -- PyNexus
+-- PyNexus
     (7, 5), -- Swift (language_id = 5)
 
-    -- 2077.nvim
+-- 2077.nvim
     (8, 13), -- Lua (language_id = 13)
     (8, 28), -- Vimscript (language_id = 28)
 
-    -- Jarvis
+-- Jarvis
     (9, 5), -- Swift (language_id = 5)
 
-    -- Mock-carpool
-    (10, 5); -- Swift (language_id = 5)
+-- Mock-carpool
+    (10, 5);  -- Swift (language_id = 5)
 
 INSERT INTO project_frameworks (project_id, framework_id) VALUES
-    -- Resume
+-- Resume
     (1, 30),  -- Diesel (framework_id = 30)
     (1, 41),  -- React (framework_id = 41)
     (1, 52),  -- Tailwind (framework_id = 52)
 
-    -- Pot_Pot_Golf
+-- Pot_Pot_Golf
     (2, 3),   -- LWJGL (framework_id = 3)
     (2, 5),   -- Maven (framework_id corrected from 6 to 5)
 
-    -- QueryCrust
+-- QueryCrust
     (3, 41),  -- React (framework_id = 41)
     (3, 52),  -- Tailwind (framework_id = 52)
     (3, 14),  -- Flask (framework_id = 14)
     (3, 77),  -- SQLAlchemy (framework_id = 77)
 
-    -- Shadowed Hunter
+-- Shadowed Hunter
     (4, 11),  -- Swing (framework_id = 11)
 
-    -- PyNexus
+-- PyNexus
     (7, 39),  -- SwiftUI (framework_id = 39)
 
-    -- Mock-Carpool
-    (10, 39); -- SwiftUI (framework_id = 39)
+-- Mock-Carpool
+    (10, 39);  -- SwiftUI (framework_id = 39)
 
 INSERT INTO project_tags (project_id, tag_name) VALUES
 
-    -- Resume
+-- Resume
     (1, 'Web Development'),
     (1, 'React-based'),
     (1, 'Rust backend'),
@@ -394,14 +432,14 @@ INSERT INTO project_tags (project_id, tag_name) VALUES
     (1, 'Databases'),
     (1, 'ORM'),
 
-    -- Pot_Pot_Golf
+-- Pot_Pot_Golf
     (2, 'Game Development'),
     (2, 'Java'),
     (2, '3D'),
     (2, 'Physics'),
     (2, 'Bots AI'),
 
-    -- QueryCrust
+-- QueryCrust
     (3, 'Web Development'),
     (3, 'Flask'),
     (3, 'SQLAlchemy'),
@@ -409,78 +447,78 @@ INSERT INTO project_tags (project_id, tag_name) VALUES
     (3, 'Tailwind CSS'),
     (3, 'ORM'),
 
-    -- Shadowed Hunter
+-- Shadowed Hunter
     (4, 'Game Development'),
     (4, 'Java'),
     (4, 'Text-based'),
     (4, 'Puzzle'),
     (4, 'Rogue-like'),
 
-    -- Neovim Config
+-- Neovim Config
     (5, 'Vim'),
     (5, 'Neovim'),
     (5, 'IDE'),
 
-    -- Chess Bot
+-- Chess Bot
     (6, 'Game Development'),
     (6, 'Chess'),
     (6, 'AI'),
 
-    -- PyNexus
+-- PyNexus
     (7, 'App Development'),
     (7, 'Learning'),
 
-    -- 2077.nvim
+-- 2077.nvim
     (8, 'Vim'),
     (8, 'Neovim'),
     (8, 'Theme'),
     (8, 'Lualine'),
 
-    -- Jarvis
+-- Jarvis
     (9, 'App Development'),
     (9, 'Personal Assistant'),
     (9, 'macOS'),
 
-    -- Mock-carpool
+-- Mock-carpool
     (10, 'App Development'),
     (10, 'Pathfinding'),
     (10, 'Destination');
 
 INSERT INTO project_tools (project_id, tools_id) VALUES
-    -- Resume
+-- Resume
     (1, 1),  -- Git (tools_id = 1)
     (1, 2),  -- Docker (tools_id = 2)
     (1, 7),  -- Github Actions (tools_id = 7)
     (1, 24), -- MySQL (tools_id = 24)
 
-    -- Pot_Pot_Golf
+-- Pot_Pot_Golf
     (2, 1),  -- Git (tools_id = 1)
 
-    -- QueryCrust
+-- QueryCrust
     (3, 1),  -- Git (tools_id = 1)
     (3, 7),  -- Github Actions (tools_id = 7)
     (3, 24), -- MySQL (tools_id = 24)
 
-    -- Shadowed Hunter
+-- Shadowed Hunter
     (4, 1),  -- Git (tools_id = 1)
 
-    -- Neovim Config
+-- Neovim Config
     (5, 1),  -- Git (tools_id = 1)
 
-    -- Chess Bot
+-- Chess Bot
     (6, 1),  -- Git (tools_id = 1)
 
-    -- PyNexus
+-- PyNexus
     (7, 1),  -- Git (tools_id = 1)
 
-    -- 2077.nvim
+-- 2077.nvim
     (8, 1),  -- Git (tools_id = 1)
 
-    -- Jarvis
+-- Jarvis
     (9, 1),  -- Git (tools_id = 1)
 
-    -- Mock-carpool
-    (10, 1); -- Git (tools_id = 1)
+-- Mock-carpool
+    (10, 1);  -- Git (tools_id = 1)
 
 INSERT INTO roadmaps (roadmap_id, roadmap_title, roadmap_description) VALUES
 (1, 'Programming Language Roadmap', 'Roadmap for mastering programming languages'),
@@ -530,4 +568,6 @@ INSERT INTO milestones (roadmap_id, milestone_title, milestone_description) VALU
 (4, 'Complex Applications', 'Build more complex applications'),
 (4, 'Master the Framework', 'Gain deep understanding and expertise');
 
-COMMIT;
+commit
+;
+
