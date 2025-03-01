@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import GitActivity from "./GitActivity";
+import Logo from "../assets/logo.png";
 
 interface Contact {
     contact_id: number;
@@ -8,8 +9,9 @@ interface Contact {
 }
 
 interface Socials {
-    name: string;
-    url: string;
+    social_id: number;
+    social_name: string;
+    social_url: string;
 }
 
 interface Skill {
@@ -228,6 +230,15 @@ const App: React.FC = () => {
         return tool ? tool.name : `Unknown Tool (ID: ${id})`;
     }
 
+    function getSocialById(id: number): Socials | undefined {
+        return socials.find((social) => social.social_id === id);
+    }
+
+    function getSocialNameById(id: number): string {
+        const social = getSocialById(id);
+        return social ? social.social_name : `Unknown Social (ID: ${id})`;
+    }
+
     // 4. If still loading, render a loading indicator
     if (loading) {
         return (
@@ -306,7 +317,11 @@ const App: React.FC = () => {
                 {/* Hero Section */}
                 <header className="mt-8 mb-12 md:mt-16 md:mb-24 py-12 flex flex-col items-center justify-center text-center">
                     <div className="w-32 h-32 rounded-full border-4 border-blue-500 mb-6 overflow-hidden bg-gray-800 flex items-center justify-center">
-                        <span className="text-4xl text-blue-400">NF</span>
+                        <img
+                            src={Logo}
+                            alt="Noam Favier"
+                            className="w-32 h-32 object-cover"
+                        />
                     </div>
                     <h1 className="text-4xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500 mb-2">
                         Noam Favier
@@ -318,12 +333,14 @@ const App: React.FC = () => {
                         {socials.map((item, index) => (
                             <a
                                 key={index}
-                                href={item.url}
+                                href={item.social_url}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="w-10 h-10 rounded-full bg-gray-800 hover:bg-blue-900 text-gray-300 hover:text-white flex items-center justify-center transition-colors duration-200"
                             >
-                                {/* Simple placeholder for social icons <span>{item.name.charAt(0)}</span>*/}
+                                <span className="">
+                                    {item.social_name.charAt(0).toUpperCase()}
+                                </span>
                             </a>
                         ))}
                     </div>
