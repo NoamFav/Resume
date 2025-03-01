@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import GitActivity from "./GitActivity";
 
 interface Contact {
     contact_id: number;
@@ -41,6 +42,19 @@ interface Language {
     alt: string;
 }
 
+interface Framework {
+    id: number;
+    name: string;
+    image_url: string;
+    caption?: string;
+    alt_text?: string;
+}
+
+interface Tool {
+    id: number;
+    name: string;
+}
+
 interface Work {
     company_name: string;
     position: string;
@@ -72,6 +86,8 @@ const App: React.FC = () => {
     const [skills, setSkills] = useState<Skill[]>([]);
     const [projects, setProjects] = useState<Project[]>([]);
     const [languages, setLanguages] = useState<Language[]>([]);
+    const [frameworks, setFrameworks] = useState<Framework[]>([]);
+    const [tools, setTools] = useState<Tool[]>([]);
     const [experience, setExperience] = useState<Work[]>([]);
     const [education, setEducation] = useState<Education[]>([]);
     const [certifications, setCertifications] = useState<Certification[]>([]);
@@ -105,8 +121,18 @@ const App: React.FC = () => {
         return response.json();
     };
 
+    const fetchFrameworks = async () => {
+        const response = await fetch("http://localhost:8000/frameworks");
+        return response.json();
+    };
+
     const fetchExperience = async () => {
         const response = await fetch("http://localhost:8000/personal/work");
+        return response.json();
+    };
+
+    const fetchTools = async () => {
+        const response = await fetch("http://localhost:8000/tools");
         return response.json();
     };
 
@@ -135,6 +161,8 @@ const App: React.FC = () => {
                     skillsData,
                     projectsData,
                     languagesData,
+                    frameworksData,
+                    toolsData,
                     experienceData,
                     educationData,
                     certificationsData,
@@ -144,6 +172,8 @@ const App: React.FC = () => {
                     fetchSkills(),
                     fetchProjects(),
                     fetchLanguages(),
+                    fetchFrameworks(),
+                    fetchTools(),
                     fetchExperience(),
                     fetchEducation(),
                     fetchCertifications(),
@@ -155,6 +185,8 @@ const App: React.FC = () => {
                 setSkills(skillsData);
                 setProjects(projectsData);
                 setLanguages(languagesData);
+                setFrameworks(frameworksData);
+                setTools(toolsData);
                 setExperience(experienceData);
                 setEducation(educationData);
                 setCertifications(certificationsData);
@@ -176,6 +208,24 @@ const App: React.FC = () => {
     function getLanguageNameById(id: number): string {
         const language = getLanguageById(id);
         return language ? language.name : `Unknown Language (ID: ${id})`;
+    }
+
+    function getFrameworkById(id: number): Framework | undefined {
+        return frameworks.find((framework) => framework.id === id);
+    }
+
+    function getFrameworkNameById(id: number): string {
+        const framework = getFrameworkById(id);
+        return framework ? framework.name : `Unknown Framework (ID: ${id})`;
+    }
+
+    function getToolById(id: number): Tool | undefined {
+        return tools.find((tool) => tool.id === id);
+    }
+
+    function getToolNameById(id: number): string {
+        const tool = getToolById(id);
+        return tool ? tool.name : `Unknown Tool (ID: ${id})`;
     }
 
     // 4. If still loading, render a loading indicator
@@ -552,8 +602,12 @@ const App: React.FC = () => {
                                                             key={idx}
                                                             className="px-2 py-1 bg-purple-900 text-purple-200 text-xs rounded"
                                                         >
-                                                            {framework.name
-                                                                ? framework.name
+                                                            {getFrameworkNameById(
+                                                                framework.id,
+                                                            )
+                                                                ? getFrameworkNameById(
+                                                                      framework.id,
+                                                                  )
                                                                 : `Unknown Framework (ID: ${framework.id})`}
                                                         </span>
                                                     ),
@@ -565,8 +619,12 @@ const App: React.FC = () => {
                                                             key={idx}
                                                             className="px-2 py-1 bg-green-900 text-green-200 text-xs rounded"
                                                         >
-                                                            {tool.name
-                                                                ? tool.name
+                                                            {getToolNameById(
+                                                                tool.id,
+                                                            )
+                                                                ? getToolNameById(
+                                                                      tool.id,
+                                                                  )
                                                                 : `Unknown Tool (ID: ${tool.id})`}
                                                         </span>
                                                     ),
@@ -773,43 +831,7 @@ const App: React.FC = () => {
                 )}
 
                 {/* Recent Git Activity */}
-                <section className="py-8 max-w-4xl mx-auto">
-                    <h2 className="text-2xl md:text-3xl font-bold text-blue-400 mb-6 flex items-center">
-                        <span className="mr-2">
-                            <svg
-                                className="w-6 h-6"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                stroke="currentColor"
-                            >
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth="2"
-                                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
-                                />
-                            </svg>
-                        </span>
-                        Recent Git Activity
-                    </h2>
-                    <div className="bg-gray-800 rounded-xl p-6 shadow-lg border border-gray-700">
-                        <div className="flex items-center justify-center h-40 text-gray-500">
-                            <div className="text-center">
-                                <svg
-                                    className="w-12 h-12 mx-auto mb-2"
-                                    fill="currentColor"
-                                    viewBox="0 0 24 24"
-                                >
-                                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-                                </svg>
-                                <p>GitHub activity data will be loaded here</p>
-                                <button className="mt-3 px-4 py-2 bg-blue-900 hover:bg-blue-800 text-blue-200 rounded-lg transition-colors duration-200">
-                                    Refresh Activity
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </section>
+                <GitActivity />
             </div>
 
             {/* Footer */}
