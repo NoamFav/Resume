@@ -354,7 +354,7 @@ INSERT INTO projects (title, description, git_url, created_at, updated_at) VALUE
     ('Chess Bot', 'A chess bot in rust', 'https://github.com/NoamFav/chess-bot', '2024-09-02', '2024-10-08'),
     ('PyNexus', 'An app in swift for learning Python (on hold)', 'https://github.com/NoamFav/PyNexus', '2024-09-03', '2024-09-17'),
     ('2077.nvim', 'Forked from 2077 theme, upgraded with lualine', 'https://github.com/NoamFav/2077.nvim', '2024-09-07', '2024-09-17'),
-    ('Jarvis', 'Creating a personal assistant for macOS, in swift', 'https://github.com/NoamFav/daddy-s-home', '2024-09-23', '2024-10-04'),
+    ('Jarvis', 'Creating a personal assistant for macOS, in swift', 'https://github.com/NoamFav/daddy-s-home', '2024-09-23', '2024-10-04'), -- TOTDO SWITCH WITH IRIS
     ('Mock-carpool', 'A basic destination app with pathfinding', 'https://github.com/NoamFav/Mock-Carpool', '2024-09-06','2024-09-17');
 
 INSERT INTO project_languages (project_id, language_id) VALUES
