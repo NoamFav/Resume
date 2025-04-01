@@ -1,0 +1,160 @@
+# Frameworks
+[[framework]]
+name = "Spring"
+percentage = 90
+favorite = true
+learning = false
+language = "Java"
+image = "https://cdn.simpleicons.org/spring"
+
+[[framework]]
+name = "LWJGL"
+percentage = 80
+favorite = true
+learning = true
+language = "Java"
+image = "https://cdn.simpleicons.org/lwjgl"
+
+[[framework]]
+name = "Maven"
+percentage = 80
+favorite = true
+learning = true
+language = "Java"
+image = "https://cdn.simpleicons.org/maven"
+
+[[framework]]
+name = "JavaFX"
+percentage = 90
+favorite = true
+learning = false
+language = "Java"
+image = "https://cdn.simpleicons.org/javafx"
+
+[[framework]]
+name = "Swing"
+percentage = 70
+favorite = false
+learning = false
+language = "Java"
+image = "https://cdn.simpleicons.org/swing"
+
+[[framework]]
+name = "React"
+percentage = 80
+favorite = true
+learning = true
+language = "Javascript"
+image = "https://cdn.simpleicons.org/react"
+
+[[framework]]
+name = "Node.js"
+percentage = 70
+favorite = true
+learning = true
+language = "Javascript"
+image = "https://cdn.simpleicons.org/nodejs"
+
+[[framework]]
+name = "Flask"
+percentage = 70
+favorite = false
+learning = false
+language = "Python"
+image = "https://cdn.simpleicons.org/flask"
+
+[[framework]]
+name = "Matplotlib"
+percentage = 90
+favorite = false
+learning = true
+language = "Python"
+image = "https://cdn.simpleicons.org/matplotlib"
+
+[[framework]]
+name = "Pandas"
+percentage = 80
+favorite = true
+learning = false
+language = "Python"
+image = "https://cdn.simpleicons.org/pandas"
+
+[[framework]]
+name = "Scikit-learn"
+percentage = 60
+favorite = true
+learning = true
+language = "Python"
+image = "https://cdn.simpleicons.org/scikit-learn"
+
+[[framework]]
+name = "TensorFlow"
+percentage = 60
+favorite = false
+learning = true
+language = "Python"
+image = "https://cdn.simpleicons.org/tensorflow"
+
+[[framework]]
+name = "PyTorch"
+percentage = 50
+favorite = true
+learning = true
+language = "Python"
+image = "https://cdn.simpleicons.org/pytorch"
+
+[[framework]]
+name = "Diesel"
+percentage = 60
+favorite = false
+learning = true
+language = "Rust"
+image = "https://cdn.simpleicons.org/diesel"
+
+[[framework]]
+name = "SwiftUI"
+percentage = 60
+favorite = true
+learning = true
+language = "Swift"
+image = "https://cdn.simpleicons.org/swiftui"
+
+[[framework]]
+name = "Unity"
+percentage = 80
+favorite = true
+learning = true
+language = "C#"
+image = "https://cdn.simpleicons.org/unity"
+
+[[framework]]
+name = "OpenGL"
+percentage = 60
+favorite = true
+learning = false
+language = "C++"
+image = "https://cdn.simpleicons.org/opengl"
+
+[[framework]]
+name = "Tailwind"
+percentage = 30
+favorite = true
+learning = true
+language = "HTML/CSS"
+image = "https://cdn.simpleicons.org/tailwind"
+
+[[framework]]
+name = "SQLAlchemy"
+percentage = 50
+favorite = false
+learning = false
+language = "SQL"
+image = "https://cdn.simpleicons.org/sqlalchemy"
+
+[[framework]]
+name = "Flyway"
+percentage = 70
+favorite = false
+learning = true
+language = "SQL"
+image = "https://cdn.simpleicons.org/flyway"

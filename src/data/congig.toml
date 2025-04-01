@@ -1,0 +1,47 @@
+# Configuration file for the resume site
+
+# Site information
+[site]
+title = "Noam Favier - Personal Portfolio"
+description = "Software Engineer and Data Science Student"
+base_url = "https://noamfavier.dev"
+language = "en"
+theme = "modern"
+
+# Display preferences
+[display]
+# Whether to show projects in chronological or priority order
+project_order = "chrono"  # Options: "chrono" or "priority"
+
+# How to group programming languages
+language_grouping = "proficiency"  # Options: "proficiency", "favorite", "learning"
+
+# Number of highlighted items to show on homepage
+featured_projects = 3
+featured_skills = 5
+featured_languages = 4
+
+# File paths for content
+[paths]
+contact = "contact.toml"
+education = "education.toml" 
+experience = "experience.toml"
+skills = "skills.toml"
+programming_languages = "programming_languages.toml"
+frameworks = "frameworks.toml"
+tools = "tools.toml"
+projects = "projects.toml"
+roadmaps = "roadmaps.toml"
+
+# SEO and analytics settings
+[seo]
+enable_analytics = true
+enable_structured_data = true
+keywords = ["software engineer", "developer", "portfolio", "rust", "java", "python", "resume"]
+
+# Build settings
+[build]
+output_dir = "dist"
+assets_dir = "assets"
+enable_minification = true
+enable_compression = true
