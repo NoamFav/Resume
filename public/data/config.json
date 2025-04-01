@@ -2,6 +2,7 @@
   "site": {
     "title": "Noam Favier - Personal Portfolio",
     "description": "Software Engineer and Data Science Student",
+    "intro": "I’m Noam Favier — a 19-year-old software developer with a passion for building bold, intelligent systems that push boundaries. With four years of hands-on experience across C++, Rust, Swift, and more, I specialize in crafting high-performance tools, immersive games, and AI-driven applications. Currently, I’m developing Iris, a local-first AI coding assistant, and BitVoyager, a gamified platform that makes learning to code engaging and intuitive. My goal? To bridge the gap between humans and machines—through design, code, and a relentless drive to rethink what software can be.",
     "base_url": "https://noamfavier.dev",
     "language": "en",
     "theme": "modern"

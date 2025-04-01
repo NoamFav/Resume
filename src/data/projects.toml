@@ -253,29 +253,3 @@ tags = ["Education", "iOS", "Python", "Learning"]
 progress = "Initial concept and design completed. Project currently on hold."
 progress_percentage = 15
 
-# Mobile Apps
-[[project]]
-title = "Mock-carpool"
-description = "A basic destination app with pathfinding functionality."
-git_url = "https://github.com/NoamFav/Mock-Carpool"
-category = "Mobile Apps"
-icon = "Route"
-languages = ["Swift"]
-frameworks = ["SwiftUI"]
-tools = ["Git"]
-tags = ["App Development", "Pathfinding", "Destination"]
-progress = "Completed prototype with basic functionality"
-progress_percentage = 70
-
-[[project]]
-title = "Jarvis"
-description = "Creating a personal assistant for macOS, in swift"
-git_url = "https://github.com/NoamFav/daddy-s-home"
-category = "Developer Tools & Productivity" 
-icon = "Robot"
-languages = ["Swift"]
-frameworks = []
-tools = ["Git"]
-tags = ["App Development", "Personal Assistant", "macOS"]
-progress = "Early development phase"
-progress_percentage = 25
