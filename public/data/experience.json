@@ -1,0 +1,60 @@
+{
+  "experience": [
+    {
+      "company": "Freelance",
+      "position": "Web Developer",
+      "start_date": "2020-09-01",
+      "end_date": "",
+      "description": "Developing websites for clients"
+    },
+    {
+      "company": "Freelance",
+      "position": "Software Engineer",
+      "start_date": "2022-09-01",
+      "end_date": "",
+      "description": "Developing software solutions for clients"
+    },
+    {
+      "company": "Capgemini",
+      "position": "Internship",
+      "start_date": "2020-02-01",
+      "end_date": "2020-03-01",
+      "description": "Developing web applications using Java and Spring"
+    },
+    {
+      "company": "Duplessi Farm",
+      "position": "Data management",
+      "start_date": "2021-07-01",
+      "end_date": "2021-08-01",
+      "description": "Managing and analyzing data for the farm"
+    },
+    {
+      "company": "Maastricht University",
+      "position": "Student Ambassador",
+      "start_date": "2024-10-12",
+      "end_date": "2026-06-30",
+      "description": "Representing the university at events and fairs"
+    },
+    {
+      "company": "Maastricht University",
+      "position": "Project Manager",
+      "start_date": "2023-09-01",
+      "end_date": "2024-01-20",
+      "description": "Managing a team of developers on a research project"
+    },
+    {
+      "company": "Maastricht University",
+      "position": "Project Manager",
+      "start_date": "2024-02-01",
+      "end_date": "2024-06-30",
+      "description": "Leading a team of researchers on a data analysis project"
+    },
+    {
+      "company": "Maastricht University",
+      "position": "Project Manager",
+      "start_date": "2024-09-01",
+      "end_date": "2025-01-20",
+      "description": "Coordinating a team of developers on a software project"
+    }
+  ]
+}

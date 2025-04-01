@@ -1,0 +1,46 @@
+{
+  "site": {
+    "title": "Noam Favier - Personal Portfolio",
+    "description": "Software Engineer and Data Science Student",
+    "base_url": "https://noamfavier.dev",
+    "language": "en",
+    "theme": "modern"
+  },
+  "display": {
+    "project_order": "chrono",
+    "language_grouping": "proficiency",
+    "featured_projects": 3,
+    "featured_skills": 5,
+    "featured_languages": 4
+  },
+  "paths": {
+    "contact": "contact.toml",
+    "education": "education.toml",
+    "experience": "experience.toml",
+    "skills": "skills.toml",
+    "programming_languages": "programming_languages.toml",
+    "frameworks": "frameworks.toml",
+    "tools": "tools.toml",
+    "projects": "projects.toml",
+    "roadmaps": "roadmaps.toml"
+  },
+  "seo": {
+    "enable_analytics": true,
+    "enable_structured_data": true,
+    "keywords": [
+      "software engineer",
+      "developer",
+      "portfolio",
+      "rust",
+      "java",
+      "python",
+      "resume"
+    ]
+  },
+  "build": {
+    "output_dir": "dist",
+    "assets_dir": "assets",
+    "enable_minification": true,
+    "enable_compression": true
+  }
+}

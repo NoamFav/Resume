@@ -1,0 +1,425 @@
+{
+  "skill": [
+    {
+      "name": "Programming",
+      "percentage": 90,
+      "category": "Technical",
+      "description": "Proficient in multiple programming paradigms and languages"
+    },
+    {
+      "name": "Data Analysis",
+      "percentage": 80,
+      "category": "Technical",
+      "description": "Analyzing and processing large datasets to extract meaningful insights"
+    },
+    {
+      "name": "Machine Learning",
+      "percentage": 75,
+      "category": "Technical",
+      "description": "Implementing and integrating ML models into applications"
+    },
+    {
+      "name": "Web Development",
+      "percentage": 85,
+      "category": "Technical",
+      "description": "Building responsive and interactive web applications"
+    },
+    {
+      "name": "DevOps",
+      "percentage": 70,
+      "category": "Technical",
+      "description": "Setting up and maintaining CI/CD pipelines and infrastructure"
+    },
+    {
+      "name": "Networking",
+      "percentage": 75,
+      "category": "Technical",
+      "description": "Understanding of network protocols and traffic analysis"
+    },
+    {
+      "name": "Databases",
+      "percentage": 80,
+      "category": "Technical",
+      "description": "Designing and optimizing database structures and queries"
+    },
+    {
+      "name": "Software Engineering",
+      "percentage": 90,
+      "category": "Technical",
+      "description": "Applying engineering principles to software development"
+    },
+    {
+      "name": "Team Management",
+      "percentage": 75,
+      "category": "Soft",
+      "description": "Leading and coordinating development teams effectively"
+    },
+    {
+      "name": "Project Management",
+      "percentage": 70,
+      "category": "Soft",
+      "description": "Planning, executing, and closing projects successfully"
+    },
+    {
+      "name": "Problem Solving",
+      "percentage": 95,
+      "category": "Soft",
+      "description": "Analyzing complex issues and developing effective solutions"
+    },
+    {
+      "name": "Communication",
+      "percentage": 85,
+      "category": "Soft",
+      "description": "Clearly conveying technical concepts to various audiences"
+    },
+    {
+      "name": "Creativity",
+      "percentage": 80,
+      "category": "Soft",
+      "description": "Thinking outside the box to solve challenging problems"
+    },
+    {
+      "name": "Algorithms",
+      "percentage": 85,
+      "category": "Technical",
+      "description": "Designing and implementing efficient algorithms"
+    },
+    {
+      "name": "Data Structures",
+      "percentage": 85,
+      "category": "Technical",
+      "description": "Utilizing appropriate data structures for optimal performance"
+    }
+  ],
+  "specialization": [
+    {
+      "name": "Low-level System Programming & Hardware Integration",
+      "description": "Developing efficient software with direct hardware access and control",
+      "proficiency": 85,
+      "related_skills": [
+        "Programming",
+        "Problem Solving",
+        "Performance Optimization"
+      ],
+      "key_projects": [
+        "Sysmon-CLI",
+        "SysDash Ultra"
+      ],
+      "languages": [
+        "C/C++",
+        "Rust"
+      ]
+    },
+    {
+      "name": "Real-time Data Processing, Monitoring & Analytics",
+      "description": "Building systems that collect, process, and visualize data with minimal latency",
+      "proficiency": 80,
+      "related_skills": [
+        "Data Analysis",
+        "Algorithms",
+        "Databases"
+      ],
+      "key_projects": [
+        "SysDash Ultra",
+        "NetViz Pro",
+        "WorkTime"
+      ],
+      "languages": [
+        "Rust",
+        "Swift",
+        "Python"
+      ]
+    },
+    {
+      "name": "AI/ML Integration & Data-driven Insights",
+      "description": "Incorporating machine learning models and AI capabilities into applications",
+      "proficiency": 75,
+      "related_skills": [
+        "Machine Learning",
+        "Data Analysis",
+        "Problem Solving"
+      ],
+      "key_projects": [
+        "Smart-Commit",
+        "Iris - AI Coding Assistant",
+        "Chess Bot"
+      ],
+      "languages": [
+        "Python",
+        "C++",
+        "Rust"
+      ]
+    },
+    {
+      "name": "UI/UX Design & Interactive Visualization",
+      "description": "Creating intuitive interfaces and data visualizations for complex information",
+      "proficiency": 80,
+      "related_skills": [
+        "Web Development",
+        "Creativity",
+        "Communication"
+      ],
+      "key_projects": [
+        "SysDash Ultra",
+        "NetViz Pro",
+        "QueryCrust"
+      ],
+      "languages": [
+        "Swift",
+        "TypeScript",
+        "React"
+      ]
+    },
+    {
+      "name": "Performance Optimization & Resource Efficiency",
+      "description": "Tuning software for maximum speed and minimal resource consumption",
+      "proficiency": 85,
+      "related_skills": [
+        "Algorithms",
+        "Data Structures",
+        "Problem Solving"
+      ],
+      "key_projects": [
+        "Sysmon-CLI",
+        "CodeGrep",
+        "Chess Bot"
+      ],
+      "languages": [
+        "C/C++",
+        "Rust",
+        "Go"
+      ]
+    },
+    {
+      "name": "Cross-platform & Distributed Development",
+      "description": "Building applications that work across different operating systems and distributed environments",
+      "proficiency": 75,
+      "related_skills": [
+        "Programming",
+        "DevOps",
+        "Networking"
+      ],
+      "key_projects": [
+        "Sysmon-CLI",
+        "IDraughts Pro",
+        "QueryCrust"
+      ],
+      "languages": [
+        "Rust",
+        "Swift",
+        "TypeScript"
+      ]
+    },
+    {
+      "name": "Network Traffic Analysis & Security Monitoring",
+      "description": "Analyzing network data for performance optimization and security purposes",
+      "proficiency": 70,
+      "related_skills": [
+        "Networking",
+        "Data Analysis",
+        "Security"
+      ],
+      "key_projects": [
+        "NetViz Pro"
+      ],
+      "languages": [
+        "Rust",
+        "TypeScript"
+      ]
+    },
+    {
+      "name": "Automated Workflow & Productivity Tools",
+      "description": "Developing tools to streamline and automate development workflows",
+      "proficiency": 90,
+      "related_skills": [
+        "Programming",
+        "DevOps",
+        "Problem Solving"
+      ],
+      "key_projects": [
+        "Smart-Commit",
+        "CodeGrep",
+        "Neovim Config",
+        "AutoSort"
+      ],
+      "languages": [
+        "C++",
+        "Rust",
+        "Lua",
+        "Go"
+      ]
+    }
+  ],
+  "paradigm": [
+    {
+      "name": "Functional & Reactive Programming",
+      "description": "Using immutable data and function composition to build reactive systems",
+      "proficiency": 80,
+      "related_skills": [
+        "Programming",
+        "Data Structures"
+      ],
+      "key_languages": [
+        "Rust",
+        "TypeScript"
+      ]
+    },
+    {
+      "name": "Object-Oriented & Component-based Design",
+      "description": "Structuring code around objects and reusable components",
+      "proficiency": 85,
+      "related_skills": [
+        "Programming",
+        "Software Engineering"
+      ],
+      "key_languages": [
+        "C++",
+        "Swift",
+        "Java",
+        "C#"
+      ]
+    },
+    {
+      "name": "Systems Architecture & Microservices",
+      "description": "Designing complex software systems with modular, independent services",
+      "proficiency": 75,
+      "related_skills": [
+        "DevOps",
+        "Software Engineering",
+        "Networking"
+      ],
+      "key_projects": [
+        "NetViz Pro",
+        "QueryCrust"
+      ]
+    },
+    {
+      "name": "Concurrent & Parallel Programming",
+      "description": "Developing software that effectively utilizes multiple threads and processes",
+      "proficiency": 80,
+      "related_skills": [
+        "Programming",
+        "Performance Optimization"
+      ],
+      "key_languages": [
+        "Rust",
+        "C++",
+        "Go"
+      ]
+    },
+    {
+      "name": "Data-driven & Event-driven Development",
+      "description": "Building applications that respond to data changes and events",
+      "proficiency": 85,
+      "related_skills": [
+        "Data Analysis",
+        "Programming"
+      ],
+      "key_projects": [
+        "SysDash Ultra",
+        "WorkTime",
+        "NetViz Pro"
+      ]
+    },
+    {
+      "name": "Test-driven & Behavior-driven Development",
+      "description": "Writing tests before implementation to ensure software meets requirements",
+      "proficiency": 75,
+      "related_skills": [
+        "Programming",
+        "Software Engineering"
+      ],
+      "key_projects": [
+        "Smart-Commit",
+        "CodeGrep",
+        "QueryCrust"
+      ]
+    },
+    {
+      "name": "Agile Methodologies & Iterative Prototyping",
+      "description": "Using flexible, collaborative approaches to software development",
+      "proficiency": 80,
+      "related_skills": [
+        "Project Management",
+        "Team Management",
+        "Communication"
+      ],
+      "key_projects": [
+        "ShadowedHunter",
+        "BitVoyager",
+        "Thynkly"
+      ]
+    },
+    {
+      "name": "Secure Coding Practices & Robust Engineering",
+      "description": "Implementing security best practices throughout the development lifecycle",
+      "proficiency": 75,
+      "related_skills": [
+        "Programming",
+        "Software Engineering",
+        "Security"
+      ],
+      "key_projects": [
+        "NetViz Pro",
+        "QueryCrust",
+        "Iris - AI Coding Assistant"
+      ]
+    }
+  ],
+  "language_categories": {
+    "systems_programming": [
+      "C/C++",
+      "Rust",
+      "Go"
+    ],
+    "application_development": [
+      "Swift",
+      "Java",
+      "C#",
+      "Python"
+    ],
+    "web_technologies": [
+      "JavaScript/TypeScript",
+      "HTML/CSS",
+      "React"
+    ],
+    "scripting": [
+      "Lua/VimScript",
+      "Bash/Shell",
+      "AppleScript",
+      "Python"
+    ],
+    "data_processing": [
+      "SQL",
+      "Python",
+      "Julia",
+      "R"
+    ]
+  },
+  "tool_categories": {
+    "development_environments": [
+      "Neovim/VS Code",
+      "Unity",
+      "Xcode"
+    ],
+    "version_control": [
+      "Git/CI/CD",
+      "libgit2"
+    ],
+    "containerization": [
+      "Docker/K8s"
+    ],
+    "databases": [
+      "MySQL",
+      "SQLite",
+      "PostgreSQL",
+      "Redis"
+    ],
+    "frameworks": [
+      "SwiftUI",
+      "React/TailwindCSS",
+      "Flask",
+      "UIKit"
+    ]
+  }
+}
