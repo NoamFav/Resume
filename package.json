@@ -6,13 +6,16 @@
     "scripts": {
         "dev": "vite",
         "build": "vite build",
+        "build:data": "node scripts/toml-to-json.js",
         "lint": "eslint .",
         "preview": "vite preview",
         "deploy": "gh-pages -d dist"
     },
     "dependencies": {
         "react": "^19.0.0",
-        "react-dom": "^19.0.0"
+        "react-dom": "^19.0.0",
+        "react-icons": "^5.5.0",
+        "toml": "^3.0.0"
     },
     "devDependencies": {
         "@eslint/js": "^9.21.0",
