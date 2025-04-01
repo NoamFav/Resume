@@ -1,0 +1,39 @@
+{
+  "tool": [
+    {
+      "name": "Git",
+      "percentage": 90,
+      "favorite": true,
+      "learning": true,
+      "image": "https://cdn.simpleicons.org/git"
+    },
+    {
+      "name": "Docker",
+      "percentage": 70,
+      "favorite": false,
+      "learning": true,
+      "image": "https://cdn.simpleicons.org/docker"
+    },
+    {
+      "name": "Github Actions",
+      "percentage": 40,
+      "favorite": false,
+      "learning": false,
+      "image": "https://cdn.simpleicons.org/githubactions"
+    },
+    {
+      "name": "MySQL",
+      "percentage": 60,
+      "favorite": true,
+      "learning": true,
+      "image": "https://cdn.simpleicons.org/mysql"
+    },
+    {
+      "name": "Kubernetes",
+      "percentage": 0,
+      "favorite": false,
+      "learning": true,
+      "image": "https://cdn.simpleicons.org/kubernetes"
+    }
+  ]
+}
