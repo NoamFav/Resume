@@ -1,0 +1,93 @@
+# Programming Languages
+[[programming_language]]
+name = "Java"
+percentage = 90
+favorite = true
+learning = false
+image = "https://cdn.simpleicons.org/java"
+
+[[programming_language]]
+name = "Python"
+percentage = 70
+favorite = false
+learning = false
+image = "https://cdn.simpleicons.org/python"
+
+[[programming_language]]
+name = "Rust"
+percentage = 50
+favorite = true
+learning = true
+image = "https://cdn.simpleicons.org/rust"
+
+[[programming_language]]
+name = "C++"
+percentage = 30
+favorite = true
+learning = true
+image = "https://cdn.simpleicons.org/c++"
+
+[[programming_language]]
+name = "Swift"
+percentage = 20
+favorite = false
+learning = true
+image = "https://cdn.simpleicons.org/swift"
+
+[[programming_language]]
+name = "C"
+percentage = 70
+favorite = false
+learning = false
+image = "https://cdn.simpleicons.org/c"
+
+[[programming_language]]
+name = "Javascript"
+percentage = 60
+favorite = false
+learning = true
+image = "https://cdn.simpleicons.org/javascript"
+
+[[programming_language]]
+name = "Typescript"
+percentage = 50
+favorite = true
+learning = false
+image = "https://cdn.simpleicons.org/typescript"
+
+[[programming_language]]
+name = "HTML/CSS"
+percentage = 90
+favorite = false
+learning = false
+image = "https://cdn.simpleicons.org/htmlcss"
+
+[[programming_language]]
+name = "SQL"
+percentage = 50
+favorite = false
+learning = true
+image = "https://cdn.simpleicons.org/sql"
+
+[[programming_language]]
+name = "Lua"
+percentage = 60
+favorite = true
+learning = true
+image = "https://cdn.simpleicons.org/lua"
+
+[[programming_language]]
+name = "Bash"
+percentage = 60
+favorite = false
+learning = true
+image = "https://cdn.simpleicons.org/bash"
+
+[[programming_language]]
+name = "Vimscript"
+percentage = 40
+favorite = false
+learning = true
+image = "https://cdn.simpleicons.org/vimscript"
+
+# Only active/focused languages included - add more as needed

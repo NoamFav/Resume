@@ -1,0 +1,52 @@
+# Education history
+[[education]]
+school = "Lycee Jeanne D'arc"
+degree = "French Baccalaureate"
+field = "Math, Physics, English"
+start_date = "2020-09-01"
+end_date = "2023-06-30"
+
+[[education]]
+school = "Maastricht University"
+degree = "Bachelor of Science"
+field = "Data Science and Artificial Intelligence"
+start_date = "2023-09-01"
+end_date = "2026-06-30"
+
+# Certifications
+[[certification]]
+name = "French Baccalaureate"
+date = "2023-06-30"
+grade = 75
+organization = "French Ministry of Educations"
+
+[[certification]]
+name = "TOEFL IBT"
+date = "2022-06-22"
+grade = 85
+organization = "ETS"
+
+[[certification]]
+name = "Python Sololearn"
+date = "2022-12-24"
+organization = "Sololearn"
+
+[[certification]]
+name = "Java Sololearn"
+date = "2023-11-01"
+organization = "Sololearn"
+
+[[certification]]
+name = "HTML Sololearn"
+date = "2022-04-07"
+organization = "Sololearn"
+
+[[certification]]
+name = "SQL Sololearn"
+date = "2024-10-13"
+organization = "Sololearn"
+
+[[certification]]
+name = "Machine Learning Sololearn"
+date = "2023-04-03"
+organization = "Sololearn"
