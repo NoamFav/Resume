@@ -708,14 +708,15 @@ export default function Projects() {
                     </motion.div>
 
                     {/* Back to Home Button */}
-                    <motion.a
-                        variants={fadeIn}
-                        href="/"
-                        className="inline-flex items-center gap-2 px-6 py-3 bg-white/10 hover:bg-white/20 border border-white/20 backdrop-blur-sm text-white rounded-full font-medium transition-all hover:scale-105"
-                    >
-                        <FaArrowUp className="h-4 w-4 rotate-45" />
-                        Back to Home
-                    </motion.a>
+                    <motion.div variants={fadeIn}>
+                        <Link
+                            to="/"
+                            className="inline-flex items-center gap-2 px-6 py-3 bg-white/10 hover:bg-white/20 border border-white/20 backdrop-blur-sm text-white rounded-full font-medium transition-all hover:scale-105"
+                        >
+                            <FaArrowUp className="h-4 w-4 rotate-45" />
+                            Back to Home
+                        </Link>
+                    </motion.div>
                 </motion.div>
 
                 {/* Statistics */}
