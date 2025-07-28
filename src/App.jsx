@@ -1,5 +1,9 @@
 import { HashRouter as Router, Route, Routes } from "react-router-dom";
 import Hero from "./components/Hero";
+import Projects from "./components/Projects";
+import Language from "./components/Language";
+import Skills from "./components/Skills";
+import Frameworks from "./components/Frameworks";
 
 function App() {
     return (
@@ -9,6 +13,13 @@ function App() {
                     <main>
                         <Routes>
                             <Route path="/" element={<Hero />} />
+                            <Route path="/projects" element={<Projects />} />
+                            <Route path="/languages" element={<Language />} />
+                            <Route path="/skills" element={<Skills />} />
+                            <Route
+                                path="/frameworks"
+                                element={<Frameworks />}
+                            />
                         </Routes>
                     </main>
                 </div>
