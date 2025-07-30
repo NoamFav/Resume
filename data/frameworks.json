@@ -1,164 +1,212 @@
 {
-  "framework": [
-    {
-      "name": "Spring",
-      "percentage": 90,
-      "favorite": true,
-      "learning": false,
-      "language": "Java",
-      "image": "https://cdn.simpleicons.org/spring"
-    },
-    {
-      "name": "LWJGL",
-      "percentage": 80,
-      "favorite": true,
-      "learning": true,
-      "language": "Java",
-      "image": "https://cdn.simpleicons.org/lwjgl"
-    },
-    {
-      "name": "Maven",
-      "percentage": 80,
-      "favorite": true,
-      "learning": true,
-      "language": "Java",
-      "image": "https://cdn.simpleicons.org/maven"
-    },
-    {
-      "name": "JavaFX",
-      "percentage": 90,
-      "favorite": true,
-      "learning": false,
-      "language": "Java",
-      "image": "https://cdn.simpleicons.org/javafx"
-    },
-    {
-      "name": "Swing",
-      "percentage": 70,
-      "favorite": false,
-      "learning": false,
-      "language": "Java",
-      "image": "https://cdn.simpleicons.org/swing"
-    },
-    {
-      "name": "React",
-      "percentage": 80,
-      "favorite": true,
-      "learning": true,
-      "language": "Javascript",
-      "image": "https://cdn.simpleicons.org/react"
-    },
-    {
-      "name": "Node.js",
-      "percentage": 70,
-      "favorite": true,
-      "learning": true,
-      "language": "Javascript",
-      "image": "https://cdn.simpleicons.org/nodejs"
-    },
-    {
-      "name": "Flask",
-      "percentage": 70,
-      "favorite": false,
-      "learning": false,
-      "language": "Python",
-      "image": "https://cdn.simpleicons.org/flask"
-    },
-    {
-      "name": "Matplotlib",
-      "percentage": 90,
-      "favorite": false,
-      "learning": true,
-      "language": "Python",
-      "image": "https://cdn.simpleicons.org/matplotlib"
-    },
-    {
-      "name": "Pandas",
-      "percentage": 80,
-      "favorite": true,
-      "learning": false,
-      "language": "Python",
-      "image": "https://cdn.simpleicons.org/pandas"
-    },
-    {
-      "name": "Scikit-learn",
-      "percentage": 60,
-      "favorite": true,
-      "learning": true,
-      "language": "Python",
-      "image": "https://cdn.simpleicons.org/scikit-learn"
-    },
-    {
-      "name": "TensorFlow",
-      "percentage": 60,
-      "favorite": false,
-      "learning": true,
-      "language": "Python",
-      "image": "https://cdn.simpleicons.org/tensorflow"
-    },
-    {
-      "name": "PyTorch",
-      "percentage": 50,
-      "favorite": true,
-      "learning": true,
-      "language": "Python",
-      "image": "https://cdn.simpleicons.org/pytorch"
-    },
-    {
-      "name": "Diesel",
-      "percentage": 60,
-      "favorite": false,
-      "learning": true,
-      "language": "Rust",
-      "image": "https://cdn.simpleicons.org/diesel"
-    },
-    {
-      "name": "SwiftUI",
-      "percentage": 60,
-      "favorite": true,
-      "learning": true,
-      "language": "Swift",
-      "image": "https://cdn.simpleicons.org/swiftui"
-    },
-    {
-      "name": "Unity",
-      "percentage": 80,
-      "favorite": true,
-      "learning": true,
-      "language": "C#",
-      "image": "https://cdn.simpleicons.org/unity"
-    },
-    {
-      "name": "OpenGL",
-      "percentage": 60,
-      "favorite": true,
-      "learning": false,
-      "language": "C++",
-      "image": "https://cdn.simpleicons.org/opengl"
-    },
-    {
-      "name": "Tailwind",
-      "percentage": 30,
-      "favorite": true,
-      "learning": true,
-      "language": "HTML/CSS",
-      "image": "https://cdn.simpleicons.org/tailwind"
-    },
-    {
-      "name": "SQLAlchemy",
-      "percentage": 50,
-      "favorite": false,
-      "learning": false,
-      "language": "SQL",
-      "image": "https://cdn.simpleicons.org/sqlalchemy"
-    },
-    {
-      "name": "Flyway",
-      "percentage": 70,
-      "favorite": false,
-      "learning": true,
-      "language": "SQL",
-      "image": "https://cdn.simpleicons.org/flyway"
-    }
-  ]
+    "framework": [
+        {
+            "name": "Spring",
+            "percentage": 90,
+            "favorite": true,
+            "learning": false,
+            "language": "Java",
+            "image": "https://cdn.simpleicons.org/spring"
+        },
+        {
+            "name": "LWJGL",
+            "percentage": 80,
+            "favorite": true,
+            "learning": true,
+            "language": "Java",
+            "image": "https://cdn.simpleicons.org/lwjgl"
+        },
+        {
+            "name": "Maven",
+            "percentage": 80,
+            "favorite": true,
+            "learning": true,
+            "language": "Java",
+            "image": "https://cdn.simpleicons.org/maven"
+        },
+        {
+            "name": "JavaFX",
+            "percentage": 90,
+            "favorite": true,
+            "learning": false,
+            "language": "Java",
+            "image": "https://cdn.simpleicons.org/javafx"
+        },
+        {
+            "name": "Swing",
+            "percentage": 70,
+            "favorite": false,
+            "learning": false,
+            "language": "Java",
+            "image": "https://cdn.simpleicons.org/swing"
+        },
+        {
+            "name": "React",
+            "percentage": 80,
+            "favorite": true,
+            "learning": true,
+            "language": "Javascript",
+            "image": "https://cdn.simpleicons.org/react"
+        },
+        {
+            "name": "Node.js",
+            "percentage": 70,
+            "favorite": true,
+            "learning": true,
+            "language": "Javascript",
+            "image": "https://cdn.simpleicons.org/nodejs"
+        },
+        {
+            "name": "Flask",
+            "percentage": 70,
+            "favorite": false,
+            "learning": false,
+            "language": "Python",
+            "image": "https://cdn.simpleicons.org/flask"
+        },
+        {
+            "name": "Matplotlib",
+            "percentage": 90,
+            "favorite": false,
+            "learning": true,
+            "language": "Python",
+            "image": "https://cdn.simpleicons.org/matplotlib"
+        },
+        {
+            "name": "Pandas",
+            "percentage": 80,
+            "favorite": true,
+            "learning": false,
+            "language": "Python",
+            "image": "https://cdn.simpleicons.org/pandas"
+        },
+        {
+            "name": "Scikit-learn",
+            "percentage": 60,
+            "favorite": true,
+            "learning": true,
+            "language": "Python",
+            "image": "https://cdn.simpleicons.org/scikit-learn"
+        },
+        {
+            "name": "TensorFlow",
+            "percentage": 60,
+            "favorite": false,
+            "learning": true,
+            "language": "Python",
+            "image": "https://cdn.simpleicons.org/tensorflow"
+        },
+        {
+            "name": "PyTorch",
+            "percentage": 50,
+            "favorite": true,
+            "learning": true,
+            "language": "Python",
+            "image": "https://cdn.simpleicons.org/pytorch"
+        },
+        {
+            "name": "Diesel",
+            "percentage": 60,
+            "favorite": false,
+            "learning": true,
+            "language": "Rust",
+            "image": "https://cdn.simpleicons.org/diesel"
+        },
+        {
+            "name": "SwiftUI",
+            "percentage": 60,
+            "favorite": true,
+            "learning": true,
+            "language": "Swift",
+            "image": "https://cdn.simpleicons.org/swiftui"
+        },
+        {
+            "name": "Unity",
+            "percentage": 80,
+            "favorite": true,
+            "learning": true,
+            "language": "C#",
+            "image": "https://cdn.simpleicons.org/unity"
+        },
+        {
+            "name": "OpenGL",
+            "percentage": 60,
+            "favorite": true,
+            "learning": false,
+            "language": "C++",
+            "image": "https://cdn.simpleicons.org/opengl"
+        },
+        {
+            "name": "Tailwind",
+            "percentage": 30,
+            "favorite": true,
+            "learning": true,
+            "language": "HTML/CSS",
+            "image": "https://cdn.simpleicons.org/tailwind"
+        },
+        {
+            "name": "SQLAlchemy",
+            "percentage": 50,
+            "favorite": false,
+            "learning": false,
+            "language": "SQL",
+            "image": "https://cdn.simpleicons.org/sqlalchemy"
+        },
+        {
+            "name": "Flyway",
+            "percentage": 70,
+            "favorite": false,
+            "learning": true,
+            "language": "SQL",
+            "image": "https://cdn.simpleicons.org/flyway"
+        },
+        {
+            "name": "Framer Motion",
+            "percentage": 70,
+            "favorite": true,
+            "learning": false,
+            "language": "JavaScript",
+            "image": "https://cdn.simpleicons.org/framer"
+        },
+        {
+            "name": "Tauri",
+            "percentage": 40,
+            "favorite": true,
+            "learning": true,
+            "language": "Rust",
+            "image": "https://cdn.simpleicons.org/tauri"
+        },
+        {
+            "name": "Bubble Tea",
+            "percentage": 70,
+            "favorite": true,
+            "learning": false,
+            "language": "Go",
+            "image": "https://cdn.simpleicons.org/go"
+        },
+        {
+            "name": "Lipgloss",
+            "percentage": 60,
+            "favorite": true,
+            "learning": true,
+            "language": "Go",
+            "image": "https://cdn.simpleicons.org/go"
+        },
+        {
+            "name": "FastAPI",
+            "percentage": 60,
+            "favorite": true,
+            "learning": false,
+            "language": "Python",
+            "image": "https://cdn.simpleicons.org/fastapi"
+        },
+        {
+            "name": "Tree-sitter",
+            "percentage": 70,
+            "favorite": true,
+            "learning": false,
+            "language": "Rust",
+            "image": "https://cdn.simpleicons.org/tree-sitter"
+        }
+    ]
 }
