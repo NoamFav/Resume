@@ -32,7 +32,27 @@ import {
     FaBalanceScale,
     FaCubes,
     FaProjectDiagram,
+    FaTools,
+    FaLanguage,
+    FaServer,
+    FaMobile,
+    FaDesktop,
+    FaCloud,
+    FaEdit,
+    FaChartLine,
+    FaFile,
+    FaPlay,
+    FaGamepad,
+    FaEye,
+    FaBox,
+    FaWrench,
+    FaBolt,
+    FaCodeBranch,
+    FaTable,
+    FaReact,
 } from "react-icons/fa";
+
+import { GoContainer } from "react-icons/go";
 
 // Animation variants
 const fadeIn = {
@@ -53,7 +73,7 @@ const scaleIn = {
     visible: { opacity: 1, scale: 1, transition: { duration: 0.5 } },
 };
 
-// Icon mapping for different skill categories and types
+// Enhanced icon mapping for different skill categories and types
 const getSkillIcon = (category, name) => {
     const iconMap = {
         // Category icons
@@ -77,6 +97,36 @@ const getSkillIcon = (category, name) => {
         Creativity: FaPalette,
         Algorithms: FaBrain,
         "Data Structures": FaCubes,
+
+        // Language category icons
+        "Systems Programming": FaTerminal,
+        "Application Development": FaDesktop,
+        "Web Technologies": FaGlobe,
+        Scripting: FaPlay,
+        "Data Processing": FaChartLine,
+        "Config and Markup": FaFile,
+
+        // Tool category icons
+        "Development Environments": FaEdit,
+        "Version Control": FaCodeBranch,
+        Containerization: GoContainer,
+        "Network Analysis": FaNetworkWired,
+        "Data Visualization": FaEye,
+        Automation: FaBolt,
+        "Server and Proxy": FaServer,
+
+        // Framework category icons
+        "Web Frontend": FaReact,
+        "Web Backend": FaServer,
+        "Mobile UI": FaMobile,
+        "Game Engines": FaGamepad,
+        "Data Science": FaChartLine,
+        "Database ORM": FaTable,
+        "CLI and TUI": FaTerminal,
+        "Native UI": FaDesktop,
+        Graphics: FaPalette,
+        "Infra and DevOps": FaCloud,
+        "Parsing and Lang Tools": FaWrench,
 
         // Specialization icons
         "Low-level System Programming": FaTerminal,
@@ -111,6 +161,9 @@ const ProgressBar = ({ percentage, color = "blue", size = "normal" }) => {
         yellow: "from-yellow-500 to-yellow-400",
         red: "from-red-500 to-red-400",
         pink: "from-pink-500 to-pink-400",
+        orange: "from-orange-500 to-orange-400",
+        teal: "from-teal-500 to-teal-400",
+        indigo: "from-indigo-500 to-indigo-400",
     };
 
     const height = size === "large" ? "h-3" : "h-2";
@@ -141,110 +194,32 @@ const useDataLoader = () => {
 
         const loadData = async () => {
             try {
-                const response = await fetch(`${base}data/skills.json`);
-                const skillsData = await response.json();
-                setData(skillsData);
-            } catch (error) {
-                console.error("Error loading skills data:", error);
-                // Fallback data for demo
+                const [skillsRes, langsRes, toolsRes, frameworksRes] =
+                    await Promise.all([
+                        fetch(`${base}data/skills.json`),
+                        fetch(`${base}data/programming_languages.json`),
+                        fetch(`${base}data/tools.json`),
+                        fetch(`${base}data/frameworks.json`),
+                    ]);
+
+                const [skillsData, langs, tools, frameworks] =
+                    await Promise.all([
+                        skillsRes.json(),
+                        langsRes.json(),
+                        toolsRes.json(),
+                        frameworksRes.json(),
+                    ]);
+
                 setData({
-                    skill: [
-                        {
-                            name: "Programming",
-                            percentage: 95,
-                            category: "Technical",
-                            description:
-                                "Proficient in multiple programming languages and paradigms",
-                        },
-                        {
-                            name: "Web Development",
-                            percentage: 90,
-                            category: "Technical",
-                            description:
-                                "Full-stack web development with modern frameworks",
-                        },
-                        {
-                            name: "Problem Solving",
-                            percentage: 95,
-                            category: "Soft",
-                            description:
-                                "Analyzing complex issues and developing effective solutions",
-                        },
-                        {
-                            name: "Communication",
-                            percentage: 85,
-                            category: "Soft",
-                            description:
-                                "Clearly conveying technical concepts to various audiences",
-                        },
-                        {
-                            name: "Machine Learning",
-                            percentage: 80,
-                            category: "Technical",
-                            description:
-                                "Building and deploying ML models for real-world applications",
-                        },
-                        {
-                            name: "Team Management",
-                            percentage: 75,
-                            category: "Soft",
-                            description:
-                                "Leading and coordinating development teams effectively",
-                        },
-                    ],
-                    specialization: [
-                        {
-                            name: "Low-level System Programming & Hardware Integration",
-                            description:
-                                "Developing efficient software with direct hardware access and control",
-                            proficiency: 85,
-                            related_skills: [
-                                "Programming",
-                                "Problem Solving",
-                                "Performance Optimization",
-                            ],
-                            key_projects: ["Sysmon-CLI", "SysDash Ultra"],
-                            languages: ["C/C++", "Rust"],
-                        },
-                        {
-                            name: "AI/ML Integration & Data-driven Insights",
-                            description:
-                                "Incorporating machine learning models and AI capabilities into applications",
-                            proficiency: 75,
-                            related_skills: [
-                                "Machine Learning",
-                                "Data Analysis",
-                                "Problem Solving",
-                            ],
-                            key_projects: [
-                                "Smart-Commit",
-                                "Iris - AI Coding Assistant",
-                            ],
-                            languages: ["Python", "C++", "Rust"],
-                        },
-                    ],
-                    paradigm: [
-                        {
-                            name: "Functional & Reactive Programming",
-                            description:
-                                "Using immutable data and function composition to build reactive systems",
-                            proficiency: 80,
-                            related_skills: ["Programming", "Data Structures"],
-                            key_languages: ["Rust", "TypeScript"],
-                        },
-                        {
-                            name: "Object-Oriented & Component-based Design",
-                            description:
-                                "Structuring code around objects and reusable components",
-                            proficiency: 85,
-                            related_skills: [
-                                "Programming",
-                                "Software Engineering",
-                            ],
-                            key_languages: ["C++", "Swift", "Java", "C#"],
-                        },
-                    ],
+                    ...skillsData,
+                    programming_language: langs.programming_language || [],
+                    tool: tools.tool || [],
+                    framework: frameworks.framework || [],
                 });
+            } catch (err) {
+                console.error("Data load error:", err);
+                // Optional: fallback
+                setData({});
             } finally {
                 setIsLoading(false);
             }
@@ -255,8 +230,145 @@ const useDataLoader = () => {
 
     return { data, isLoading };
 };
+// Category display component
+const CategorySection = ({ title, categories, type, index }) => {
+    const [ref, inView] = useInView({
+        triggerOnce: true,
+        threshold: 0.1,
+    });
 
-// Skill card component
+    const getCategoryColor = (categoryKey) => {
+        const colorMap = {
+            // Language categories
+            systems_programming: "red",
+            application_development: "blue",
+            web_technologies: "green",
+            scripting: "yellow",
+            data_processing: "purple",
+            config_and_markup: "orange",
+
+            // Tool categories
+            development_environments: "indigo",
+            version_control: "green",
+            containerization: "blue",
+            databases: "purple",
+            frameworks: "pink",
+            network_analysis: "red",
+            data_visualization: "teal",
+            automation: "yellow",
+            server_and_proxy: "orange",
+
+            // Framework categories
+            web_frontend: "blue",
+            web_backend: "green",
+            mobile_ui: "purple",
+            game_engines: "red",
+            data_science: "teal",
+            database_orm: "purple",
+            cli_and_tui: "yellow",
+            native_ui: "indigo",
+            graphics: "pink",
+            infra_and_devops: "orange",
+            parsing_and_lang_tools: "teal",
+        };
+        return colorMap[categoryKey] || "blue";
+    };
+
+    const formatCategoryName = (key) => {
+        return key
+            .split("_")
+            .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+            .join(" ");
+    };
+
+    return (
+        <motion.div
+            ref={ref}
+            initial="hidden"
+            animate={inView ? "visible" : "hidden"}
+            variants={scaleIn}
+            transition={{ delay: 0.1 * index }}
+            className="mb-8"
+        >
+            <div className="flex items-center gap-3 mb-6">
+                <div className="p-3 bg-white/10 rounded-lg">
+                    {type === "language" && (
+                        <FaLanguage className="h-6 w-6 text-blue-400" />
+                    )}
+                    {type === "tool" && (
+                        <FaTools className="h-6 w-6 text-green-400" />
+                    )}
+                    {type === "framework" && (
+                        <FaBox className="h-6 w-6 text-purple-400" />
+                    )}
+                </div>
+                <h3 className="text-2xl font-bold text-white">{title}</h3>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {Object.entries(categories).map(
+                    ([categoryKey, items], catIndex) => {
+                        const color = getCategoryColor(categoryKey);
+                        const CategoryIcon = getSkillIcon(
+                            formatCategoryName(categoryKey),
+                        );
+
+                        return (
+                            <motion.div
+                                key={categoryKey}
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: 0.1 * catIndex }}
+                                className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/5 hover:border-white/10 hover:bg-white/10 transition-all duration-300 group"
+                            >
+                                {/* Category Header */}
+                                <div className="flex items-center gap-3 mb-4">
+                                    <div
+                                        className={`p-2 bg-${color}-600/20 rounded-lg group-hover:bg-${color}-600/30 transition-colors`}
+                                    >
+                                        <CategoryIcon
+                                            className={`h-5 w-5 text-${color}-400`}
+                                        />
+                                    </div>
+                                    <h4 className="text-lg font-semibold text-white group-hover:text-white/90 transition-colors">
+                                        {formatCategoryName(categoryKey)}
+                                    </h4>
+                                </div>
+
+                                {/* Items */}
+                                <div className="flex flex-wrap gap-2">
+                                    {items.map((item, itemIndex) => (
+                                        <motion.span
+                                            key={item}
+                                            initial={{ opacity: 0, scale: 0.8 }}
+                                            animate={{ opacity: 1, scale: 1 }}
+                                            transition={{
+                                                delay: 0.05 * itemIndex,
+                                            }}
+                                            className={`text-xs px-3 py-1.5 rounded-full bg-${color}-500/20 text-${color}-300 border border-${color}-500/30 hover:bg-${color}-500/30 hover:scale-105 transition-all cursor-default`}
+                                        >
+                                            {item}
+                                        </motion.span>
+                                    ))}
+                                </div>
+
+                                {/* Count badge */}
+                                <div className="mt-4 pt-3 border-t border-white/5">
+                                    <span className="text-xs text-white/60">
+                                        {items.length}{" "}
+                                        {items.length === 1 ? "item" : "items"}
+                                    </span>
+                                </div>
+                            </motion.div>
+                        );
+                    },
+                )}
+            </div>
+        </motion.div>
+    );
+};
+
+// Skill card component (existing)
 const SkillCard = ({ skill, index, type = "skill" }) => {
     const [ref, inView] = useInView({
         triggerOnce: true,
@@ -438,7 +550,7 @@ const SkillCard = ({ skill, index, type = "skill" }) => {
     );
 };
 
-// Filter component
+// Filter component (existing but enhanced)
 const SkillsFilters = ({ data, filters, setFilters }) => {
     const categories = useMemo(() => {
         if (!data.skill) return [];
@@ -448,12 +560,8 @@ const SkillsFilters = ({ data, filters, setFilters }) => {
 
     const filterTypes = [
         { key: "all", label: "All Skills", icon: FaLayerGroup },
-        { key: "skills", label: "Core Skills", icon: FaStar },
-        {
-            key: "specializations",
-            label: "Specializations",
-            icon: FaBullseye,
-        },
+        { key: "core", label: "Core Skills", icon: FaStar },
+        { key: "specializations", label: "Specializations", icon: FaBullseye },
         { key: "paradigms", label: "Paradigms", icon: FaBrain },
     ];
 
@@ -464,7 +572,7 @@ const SkillsFilters = ({ data, filters, setFilters }) => {
                 <FaSearch className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white/40 h-4 w-4" />
                 <input
                     type="text"
-                    placeholder="Search skills..."
+                    placeholder="Search skills, technologies, or categories..."
                     value={filters.search}
                     onChange={(e) =>
                         setFilters((prev) => ({
@@ -502,57 +610,68 @@ const SkillsFilters = ({ data, filters, setFilters }) => {
                 })}
             </div>
 
-            {/* Category Filter for Skills */}
-            {filters.type === "all" || filters.type === "skills"
-                ? categories.length > 1 && (
-                      <div className="flex flex-wrap gap-2">
-                          <button
-                              onClick={() =>
-                                  setFilters((prev) => ({
-                                      ...prev,
-                                      category: "all",
-                                  }))
-                              }
-                              className={`px-3 py-1 rounded-full text-sm transition-all ${
-                                  filters.category === "all"
-                                      ? "bg-purple-600 text-white"
-                                      : "bg-white/5 text-white/70 hover:bg-white/10"
-                              }`}
-                          >
-                              All Categories
-                          </button>
-                          {categories.map((category) => (
-                              <button
-                                  key={category}
-                                  onClick={() =>
-                                      setFilters((prev) => ({
-                                          ...prev,
-                                          category,
-                                      }))
-                                  }
-                                  className={`px-3 py-1 rounded-full text-sm transition-all ${
-                                      filters.category === category
-                                          ? "bg-purple-600 text-white"
-                                          : "bg-white/5 text-white/70 hover:bg-white/10"
-                                  }`}
-                              >
-                                  {category}
-                              </button>
-                          ))}
-                      </div>
-                  )
-                : null}
+            {/* Category Filter for Core Skills */}
+            {(filters.type === "all" || filters.type === "core") &&
+                categories.length > 1 && (
+                    <div className="flex flex-wrap gap-2">
+                        <button
+                            onClick={() =>
+                                setFilters((prev) => ({
+                                    ...prev,
+                                    category: "all",
+                                }))
+                            }
+                            className={`px-3 py-1 rounded-full text-sm transition-all ${
+                                filters.category === "all"
+                                    ? "bg-purple-600 text-white"
+                                    : "bg-white/5 text-white/70 hover:bg-white/10"
+                            }`}
+                        >
+                            All Categories
+                        </button>
+                        {categories.map((category) => (
+                            <button
+                                key={category}
+                                onClick={() =>
+                                    setFilters((prev) => ({
+                                        ...prev,
+                                        category,
+                                    }))
+                                }
+                                className={`px-3 py-1 rounded-full text-sm transition-all ${
+                                    filters.category === category
+                                        ? "bg-purple-600 text-white"
+                                        : "bg-white/5 text-white/70 hover:bg-white/10"
+                                }`}
+                            >
+                                {category}
+                            </button>
+                        ))}
+                    </div>
+                )}
         </div>
     );
 };
 
-// Statistics component
+// Statistics component (enhanced)
 const SkillsStats = ({ data }) => {
     const stats = useMemo(() => {
         const skillCount = data.skill?.length || 0;
         const specializationCount = data.specialization?.length || 0;
         const paradigmCount = data.paradigm?.length || 0;
-        const total = skillCount + specializationCount + paradigmCount;
+
+        // Count categories
+        const languageCount = data.programming_language?.length || 0;
+        const toolCount = data.tool?.length || 0;
+        const frameworkCount = data.framework?.length || 0;
+
+        const total =
+            skillCount +
+            specializationCount +
+            paradigmCount +
+            languageCount +
+            toolCount +
+            frameworkCount;
 
         const avgSkillLevel = data.skill?.length
             ? Math.round(
@@ -569,6 +688,9 @@ const SkillsStats = ({ data }) => {
             skillCount,
             specializationCount,
             paradigmCount,
+            languageCount,
+            toolCount,
+            frameworkCount,
             avgSkillLevel,
             topSkills,
         };
@@ -578,7 +700,7 @@ const SkillsStats = ({ data }) => {
         <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-8"
+            className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-9 gap-4 mb-8"
         >
             <div className="bg-white/5 backdrop-blur-sm rounded-lg p-4 border border-white/10">
                 <div className="flex items-center gap-2 mb-2">
@@ -624,6 +746,36 @@ const SkillsStats = ({ data }) => {
 
             <div className="bg-white/5 backdrop-blur-sm rounded-lg p-4 border border-white/10">
                 <div className="flex items-center gap-2 mb-2">
+                    <FaLanguage className="h-5 w-5 text-blue-500" />
+                    <span className="text-sm text-white/60">Languages</span>
+                </div>
+                <span className="text-2xl font-bold text-white">
+                    {stats.languageCount}
+                </span>
+            </div>
+
+            <div className="bg-white/5 backdrop-blur-sm rounded-lg p-4 border border-white/10">
+                <div className="flex items-center gap-2 mb-2">
+                    <FaTools className="h-5 w-5 text-orange-400" />
+                    <span className="text-sm text-white/60">Tools</span>
+                </div>
+                <span className="text-2xl font-bold text-white">
+                    {stats.toolCount}
+                </span>
+            </div>
+
+            <div className="bg-white/5 backdrop-blur-sm rounded-lg p-4 border border-white/10">
+                <div className="flex items-center gap-2 mb-2">
+                    <FaBox className="h-5 w-5 text-teal-400" />
+                    <span className="text-sm text-white/60">Frameworks</span>
+                </div>
+                <span className="text-2xl font-bold text-white">
+                    {stats.frameworkCount}
+                </span>
+            </div>
+
+            <div className="bg-white/5 backdrop-blur-sm rounded-lg p-4 border border-white/10">
+                <div className="flex items-center gap-2 mb-2">
                     <FaChartBar className="h-5 w-5 text-yellow-400" />
                     <span className="text-sm text-white/60">Avg Level</span>
                 </div>
@@ -664,7 +816,7 @@ export default function Skills() {
         let items = [];
 
         // Add skills if type allows
-        if (filters.type === "all" || filters.type === "skills") {
+        if (filters.type === "all" || filters.type === "core") {
             const skills = (data.skill || []).map((skill) => ({
                 ...skill,
                 type: "skill",
@@ -877,7 +1029,59 @@ export default function Skills() {
                     </motion.div>
                 )}
 
-                {/* Skills Categories Overview */}
+                {/* Technology Categories Section */}
+                {(data.language_categories ||
+                    data.tool_categories ||
+                    data.framework_categories) && (
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.3 }}
+                        className="mt-20 pt-16 border-t border-white/10"
+                    >
+                        <div className="text-center mb-12">
+                            <h2 className="text-3xl font-bold text-white mb-4">
+                                Technology Stack
+                            </h2>
+                            <p className="text-white/70 max-w-2xl mx-auto">
+                                A detailed breakdown of programming languages,
+                                development tools, and frameworks I work with
+                                across different categories.
+                            </p>
+                        </div>
+
+                        <div className="space-y-12">
+                            {data.language_categories && (
+                                <CategorySection
+                                    title="Programming Languages"
+                                    categories={data.language_categories}
+                                    type="language"
+                                    index={0}
+                                />
+                            )}
+
+                            {data.tool_categories && (
+                                <CategorySection
+                                    title="Development Tools"
+                                    categories={data.tool_categories}
+                                    type="tool"
+                                    index={1}
+                                />
+                            )}
+
+                            {data.framework_categories && (
+                                <CategorySection
+                                    title="Frameworks & Libraries"
+                                    categories={data.framework_categories}
+                                    type="framework"
+                                    index={2}
+                                />
+                            )}
+                        </div>
+                    </motion.div>
+                )}
+
+                {/* Skills Overview */}
                 {data.skill && data.specialization && data.paradigm && (
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
@@ -891,9 +1095,9 @@ export default function Skills() {
 
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
                             {/* Core Skills */}
-                            <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10">
+                            <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 hover:border-white/20 transition-all duration-300 group">
                                 <div className="flex items-center gap-3 mb-4">
-                                    <div className="p-3 bg-green-600/20 rounded-lg">
+                                    <div className="p-3 bg-green-600/20 rounded-lg group-hover:bg-green-600/30 transition-colors">
                                         <FaStar className="h-6 w-6 text-green-400" />
                                     </div>
                                     <h3 className="text-xl font-semibold text-white">
@@ -910,18 +1114,18 @@ export default function Skills() {
                                         .map((skill, idx) => (
                                             <div
                                                 key={idx}
-                                                className="flex justify-between items-center"
+                                                className="flex justify-between items-center py-1"
                                             >
                                                 <span className="text-sm text-white/80">
                                                     {skill.name}
                                                 </span>
-                                                <span className="text-xs text-green-300 font-medium">
+                                                <span className="text-xs text-green-300 font-medium bg-green-600/20 px-2 py-1 rounded-full">
                                                     {skill.percentage}%
                                                 </span>
                                             </div>
                                         ))}
                                     {data.skill?.length > 3 && (
-                                        <p className="text-xs text-white/50 pt-2">
+                                        <p className="text-xs text-white/50 pt-2 border-t border-white/5">
                                             +{data.skill.length - 3} more skills
                                         </p>
                                     )}
@@ -929,9 +1133,9 @@ export default function Skills() {
                             </div>
 
                             {/* Specializations */}
-                            <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10">
+                            <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 hover:border-white/20 transition-all duration-300 group">
                                 <div className="flex items-center gap-3 mb-4">
-                                    <div className="p-3 bg-purple-600/20 rounded-lg">
+                                    <div className="p-3 bg-purple-600/20 rounded-lg group-hover:bg-purple-600/30 transition-colors">
                                         <FaBullseye className="h-6 w-6 text-purple-400" />
                                     </div>
                                     <h3 className="text-xl font-semibold text-white">
@@ -948,18 +1152,18 @@ export default function Skills() {
                                         .map((spec, idx) => (
                                             <div
                                                 key={idx}
-                                                className="flex justify-between items-center"
+                                                className="flex justify-between items-center py-1"
                                             >
                                                 <span className="text-sm text-white/80 line-clamp-1">
                                                     {spec.name.split(" &")[0]}
                                                 </span>
-                                                <span className="text-xs text-purple-300 font-medium">
+                                                <span className="text-xs text-purple-300 font-medium bg-purple-600/20 px-2 py-1 rounded-full">
                                                     {spec.proficiency}%
                                                 </span>
                                             </div>
                                         ))}
                                     {data.specialization?.length > 2 && (
-                                        <p className="text-xs text-white/50 pt-2">
+                                        <p className="text-xs text-white/50 pt-2 border-t border-white/5">
                                             +{data.specialization.length - 2}{" "}
                                             more specializations
                                         </p>
@@ -968,9 +1172,9 @@ export default function Skills() {
                             </div>
 
                             {/* Paradigms */}
-                            <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10">
+                            <div className="bg-white/5 backdrop-blur-sm rounded-xl p-6 border border-white/10 hover:border-white/20 transition-all duration-300 group">
                                 <div className="flex items-center gap-3 mb-4">
-                                    <div className="p-3 bg-pink-600/20 rounded-lg">
+                                    <div className="p-3 bg-pink-600/20 rounded-lg group-hover:bg-pink-600/30 transition-colors">
                                         <FaBrain className="h-6 w-6 text-pink-400" />
                                     </div>
                                     <h3 className="text-xl font-semibold text-white">
@@ -987,7 +1191,7 @@ export default function Skills() {
                                         .map((paradigm, idx) => (
                                             <div
                                                 key={idx}
-                                                className="flex justify-between items-center"
+                                                className="flex justify-between items-center py-1"
                                             >
                                                 <span className="text-sm text-white/80 line-clamp-1">
                                                     {
@@ -996,13 +1200,13 @@ export default function Skills() {
                                                         )[0]
                                                     }
                                                 </span>
-                                                <span className="text-xs text-pink-300 font-medium">
+                                                <span className="text-xs text-pink-300 font-medium bg-pink-600/20 px-2 py-1 rounded-full">
                                                     {paradigm.proficiency}%
                                                 </span>
                                             </div>
                                         ))}
                                     {data.paradigm?.length > 2 && (
-                                        <p className="text-xs text-white/50 pt-2">
+                                        <p className="text-xs text-white/50 pt-2 border-t border-white/5">
                                             +{data.paradigm.length - 2} more
                                             paradigms
                                         </p>
@@ -1020,27 +1224,65 @@ export default function Skills() {
                     transition={{ delay: 0.6 }}
                     className="text-center mt-20 pt-16 border-t border-white/10"
                 >
-                    <h2 className="text-2xl font-bold text-white mb-4">
-                        Ready to leverage these skills?
-                    </h2>
-                    <p className="text-white/70 mb-8 max-w-2xl mx-auto">
-                        I'm passionate about applying my diverse skill set to
-                        solve complex problems and create innovative solutions.
-                        Let's discuss how I can contribute to your next project!
-                    </p>
-                    <div className="flex flex-wrap gap-4 justify-center">
-                        <a
-                            href="/contact"
-                            className="px-8 py-3 bg-gradient-to-r from-green-600 to-green-500 hover:from-green-500 hover:to-green-400 text-white rounded-full font-medium transition-all shadow-lg hover:shadow-green-500/30 flex items-center gap-2"
-                        >
-                            Let's Connect <FaHeart />
-                        </a>
-                        <a
-                            href="/projects"
-                            className="px-8 py-3 bg-white/10 hover:bg-white/20 border border-white/20 backdrop-blur-sm text-white rounded-full font-medium transition-all flex items-center gap-2"
-                        >
-                            View Projects <FaChevronRight />
-                        </a>
+                    <div className="max-w-4xl mx-auto">
+                        <h2 className="text-3xl font-bold text-white mb-4">
+                            Ready to leverage these skills?
+                        </h2>
+                        <p className="text-white/70 mb-8 text-lg max-w-2xl mx-auto">
+                            I'm passionate about applying my diverse skill set
+                            to solve complex problems and create innovative
+                            solutions. Let's discuss how I can contribute to
+                            your next project!
+                        </p>
+                        <div className="flex flex-wrap gap-4 justify-center">
+                            <Link
+                                to="/contact"
+                                className="px-8 py-4 bg-gradient-to-r from-green-600 to-green-500 hover:from-green-500 hover:to-green-400 text-white rounded-full font-medium transition-all shadow-lg hover:shadow-green-500/30 flex items-center gap-2 hover:scale-105"
+                            >
+                                <FaHeart className="h-4 w-4" />
+                                Let's Connect
+                            </Link>
+                            <Link
+                                to="/projects"
+                                className="px-8 py-4 bg-white/10 hover:bg-white/20 border border-white/20 backdrop-blur-sm text-white rounded-full font-medium transition-all flex items-center gap-2 hover:scale-105"
+                            >
+                                View Projects
+                                <FaChevronRight className="h-4 w-4" />
+                            </Link>
+                        </div>
+
+                        {/* Additional CTA Stats */}
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
+                            <div className="text-center">
+                                <div className="text-2xl font-bold text-green-400 mb-1">
+                                    {data.skill?.length || 0}+
+                                </div>
+                                <div className="text-sm text-white/60">
+                                    Core Skills Mastered
+                                </div>
+                            </div>
+                            <div className="text-center">
+                                <div className="text-2xl font-bold text-purple-400 mb-1">
+                                    {
+                                        Object.values(
+                                            data.language_categories || {},
+                                        ).flat().length
+                                    }
+                                    +
+                                </div>
+                                <div className="text-sm text-white/60">
+                                    Technologies Used
+                                </div>
+                            </div>
+                            <div className="text-center">
+                                <div className="text-2xl font-bold text-blue-400 mb-1">
+                                    {data.specialization?.length || 0}+
+                                </div>
+                                <div className="text-sm text-white/60">
+                                    Areas of Expertise
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </motion.div>
             </div>

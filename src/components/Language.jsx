@@ -119,7 +119,9 @@ const useDataLoader = () => {
 
         const loadData = async () => {
             try {
-                const response = await fetch(`${base}data/languages.json`);
+                const response = await fetch(
+                    `${base}data/programming_languages.json`,
+                );
                 const languagesData = await response.json();
                 setData(languagesData);
             } catch (error) {

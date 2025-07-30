@@ -1,95 +1,172 @@
 {
-  "programming_language": [
-    {
-      "name": "Java",
-      "percentage": 90,
-      "favorite": true,
-      "learning": false,
-      "image": "https://cdn.simpleicons.org/java"
-    },
-    {
-      "name": "Python",
-      "percentage": 70,
-      "favorite": false,
-      "learning": false,
-      "image": "https://cdn.simpleicons.org/python"
-    },
-    {
-      "name": "Rust",
-      "percentage": 50,
-      "favorite": true,
-      "learning": true,
-      "image": "https://cdn.simpleicons.org/rust"
-    },
-    {
-      "name": "C++",
-      "percentage": 30,
-      "favorite": true,
-      "learning": true,
-      "image": "https://cdn.simpleicons.org/c++"
-    },
-    {
-      "name": "Swift",
-      "percentage": 20,
-      "favorite": false,
-      "learning": true,
-      "image": "https://cdn.simpleicons.org/swift"
-    },
-    {
-      "name": "C",
-      "percentage": 70,
-      "favorite": false,
-      "learning": false,
-      "image": "https://cdn.simpleicons.org/c"
-    },
-    {
-      "name": "Javascript",
-      "percentage": 60,
-      "favorite": false,
-      "learning": true,
-      "image": "https://cdn.simpleicons.org/javascript"
-    },
-    {
-      "name": "Typescript",
-      "percentage": 50,
-      "favorite": true,
-      "learning": false,
-      "image": "https://cdn.simpleicons.org/typescript"
-    },
-    {
-      "name": "HTML/CSS",
-      "percentage": 90,
-      "favorite": false,
-      "learning": false,
-      "image": "https://cdn.simpleicons.org/htmlcss"
-    },
-    {
-      "name": "SQL",
-      "percentage": 50,
-      "favorite": false,
-      "learning": true,
-      "image": "https://cdn.simpleicons.org/sql"
-    },
-    {
-      "name": "Lua",
-      "percentage": 60,
-      "favorite": true,
-      "learning": true,
-      "image": "https://cdn.simpleicons.org/lua"
-    },
-    {
-      "name": "Bash",
-      "percentage": 60,
-      "favorite": false,
-      "learning": true,
-      "image": "https://cdn.simpleicons.org/bash"
-    },
-    {
-      "name": "Vimscript",
-      "percentage": 40,
-      "favorite": false,
-      "learning": true,
-      "image": "https://cdn.simpleicons.org/vimscript"
-    }
-  ]
+    "programming_language": [
+        {
+            "name": "Java",
+            "percentage": 90,
+            "favorite": true,
+            "learning": false,
+            "image": "https://cdn.simpleicons.org/java"
+        },
+        {
+            "name": "Python",
+            "percentage": 70,
+            "favorite": false,
+            "learning": false,
+            "image": "https://cdn.simpleicons.org/python"
+        },
+        {
+            "name": "Rust",
+            "percentage": 50,
+            "favorite": true,
+            "learning": true,
+            "image": "https://cdn.simpleicons.org/rust"
+        },
+        {
+            "name": "C++",
+            "percentage": 30,
+            "favorite": true,
+            "learning": true,
+            "image": "https://cdn.simpleicons.org/c++"
+        },
+        {
+            "name": "Swift",
+            "percentage": 20,
+            "favorite": false,
+            "learning": true,
+            "image": "https://cdn.simpleicons.org/swift"
+        },
+        {
+            "name": "C",
+            "percentage": 70,
+            "favorite": false,
+            "learning": false,
+            "image": "https://cdn.simpleicons.org/c"
+        },
+        {
+            "name": "Javascript",
+            "percentage": 60,
+            "favorite": false,
+            "learning": true,
+            "image": "https://cdn.simpleicons.org/javascript"
+        },
+        {
+            "name": "Typescript",
+            "percentage": 50,
+            "favorite": true,
+            "learning": false,
+            "image": "https://cdn.simpleicons.org/typescript"
+        },
+        {
+            "name": "HTML & CSS",
+            "percentage": 90,
+            "favorite": false,
+            "learning": false,
+            "image": "https://cdn.simpleicons.org/htmlcss"
+        },
+        {
+            "name": "SQL",
+            "percentage": 50,
+            "favorite": false,
+            "learning": true,
+            "image": "https://cdn.simpleicons.org/sql"
+        },
+        {
+            "name": "Lua",
+            "percentage": 60,
+            "favorite": true,
+            "learning": true,
+            "image": "https://cdn.simpleicons.org/lua"
+        },
+        {
+            "name": "Bash",
+            "percentage": 60,
+            "favorite": false,
+            "learning": true,
+            "image": "https://cdn.simpleicons.org/bash"
+        },
+        {
+            "name": "Vimscript",
+            "percentage": 40,
+            "favorite": false,
+            "learning": true,
+            "image": "https://cdn.simpleicons.org/vimscript"
+        },
+        {
+            "name": "Go",
+            "percentage": 65,
+            "favorite": true,
+            "learning": false,
+            "image": "https://cdn.simpleicons.org/go"
+        },
+        {
+            "name": "Julia",
+            "percentage": 20,
+            "favorite": false,
+            "learning": true,
+            "image": "https://cdn.simpleicons.org/julia"
+        },
+        {
+            "name": "AppleScript",
+            "percentage": 15,
+            "favorite": false,
+            "learning": true,
+            "image": "https://cdn.simpleicons.org/applescript"
+        },
+        {
+            "name": "Markdown",
+            "percentage": 80,
+            "favorite": false,
+            "learning": false,
+            "image": "https://cdn.simpleicons.org/markdown"
+        },
+        {
+            "name": "C#",
+            "percentage": 60,
+            "favorite": true,
+            "learning": false,
+            "image": "https://cdn.simpleicons.org/csharp"
+        },
+        {
+            "name": "LaTeX",
+            "percentage": 40,
+            "favorite": false,
+            "learning": true,
+            "image": "https://cdn.simpleicons.org/latex"
+        },
+        {
+            "name": "Regex",
+            "percentage": 70,
+            "favorite": true,
+            "learning": false,
+            "image": "https://cdn.simpleicons.org/gnubash"
+        },
+        {
+            "name": "YAML",
+            "percentage": 70,
+            "favorite": false,
+            "learning": false,
+            "image": "https://cdn.simpleicons.org/yaml"
+        },
+        {
+            "name": "JSON",
+            "percentage": 90,
+            "favorite": false,
+            "learning": false,
+            "image": "https://cdn.simpleicons.org/json"
+        },
+        {
+            "name": "Zsh",
+            "percentage": 85,
+            "favorite": true,
+            "learning": false,
+            "image": "https://cdn.simpleicons.org/gnubash"
+        },
+        {
+            "name": "GraphQL",
+            "percentage": 40,
+            "favorite": false,
+            "learning": true,
+            "image": "https://cdn.simpleicons.org/graphql"
+        }
+    ]
 }
