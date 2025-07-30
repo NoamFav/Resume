@@ -1,466 +1,299 @@
 {
-  "project": [
-    {
-      "title": "Sysmon-CLI",
-      "description": "A lightweight terminal-based system monitoring utility optimized for Mac & Linux power users. Delivers real-time visualization of CPU utilization, memory allocation, disk I/O activity, and network statistics. Leverages efficient low-level system calls to ensure minimal performance impact while providing comprehensive system insights.",
-      "git_url": "",
-      "category": "System Utilities & Monitoring",
-      "icon": "TERMINAL",
-      "languages": [
-        "C"
-      ],
-      "frameworks": [
-        "POSIX syscalls",
-        "IOKit",
-        "procfs"
-      ],
-      "tools": [],
-      "tags": [
-        "System Monitoring",
-        "Terminal",
-        "Performance",
-        "Low-level"
-      ],
-      "progress": "Architecture planning completed. Initial implementation of CPU/memory tracking modules in progress.",
-      "progress_percentage": 30
-    },
-    {
-      "title": "SysDash Ultra",
-      "description": "An advanced system monitoring dashboard that provides real-time visualization of CPU, RAM, process trees, GPU utilization, disk activity, and power metrics through an interactive interface. Features predictive performance analytics, hierarchical process visualization, and customizable threshold-based alerting.",
-      "git_url": "",
-      "category": "System Utilities & Monitoring",
-      "icon": "Chart-line",
-      "languages": [
-        "Rust",
-        "Swift"
-      ],
-      "frameworks": [
-        "SwiftUI",
-        "sysctl",
-        "WebGL",
-        "D3.js"
-      ],
-      "tools": [],
-      "tags": [
-        "Dashboard",
-        "Visualization",
-        "Performance",
-        "Analytics"
-      ],
-      "progress": "Backend core development underway with UI wireframing in progress.",
-      "progress_percentage": 25
-    },
-    {
-      "title": "NetViz Pro",
-      "description": "A cutting-edge network traffic analysis tool that renders inbound and outbound connections as an interactive 3D force-directed graph. Provides application-specific traffic monitoring, anomalous connection detection, and sophisticated filtering capabilities with stunning visual representations.",
-      "git_url": "",
-      "category": "System Utilities & Monitoring",
-      "icon": "PROJECT-DIAGRAM",
-      "languages": [
-        "Rust",
-        "Swift",
-        "TypeScript"
-      ],
-      "frameworks": [
-        "SwiftUI",
-        "TypeScript",
-        "libpcap",
-        "BPF",
-        "WebGL",
-        "GraphQL"
-      ],
-      "tools": [],
-      "tags": [
-        "Network Analysis",
-        "Visualization",
-        "Security",
-        "Traffic Monitoring"
-      ],
-      "progress": "Concept design and planning completed with UI prototype in active development.",
-      "progress_percentage": 20
-    },
-    {
-      "title": "Smart-Commit",
-      "description": "An AI-powered Git commit assistant that analyzes code changes to automatically generate contextually relevant commit messages. Ensures commits are descriptive, properly structured, and follow best practices through machine learning models trained on high-quality open-source repositories.",
-      "git_url": "",
-      "category": "Developer Tools & Productivity",
-      "icon": "CODE",
-      "languages": [
-        "C++"
-      ],
-      "frameworks": [
-        "OpenAI API",
-        "libgit2",
-        "NLP"
-      ],
-      "tools": [],
-      "tags": [
-        "Git",
-        "AI",
-        "Productivity",
-        "Version Control"
-      ],
-      "progress": "Research and model training phase completed. Base commit message generation functionality implemented.",
-      "progress_percentage": 50
-    },
-    {
-      "title": "CodeGrep",
-      "description": "A high-performance, syntax-aware code search tool that understands programming language structures including function definitions, variable declarations, and partial queries. Utilizes abstract syntax tree parsing via Tree-sitter to deliver precise search results that respect code semantics rather than mere text matching.",
-      "git_url": "",
-      "category": "Developer Tools & Productivity",
-      "icon": "SEARCH",
-      "languages": [
-        "Rust"
-      ],
-      "frameworks": [
-        "Tree-sitter",
-        "Regex",
-        "Fuzzy Matching Algorithms"
-      ],
-      "tools": [],
-      "tags": [
-        "Code Search",
-        "Syntax-Aware",
-        "Developer Tools"
-      ],
-      "progress": "Implementation with advanced file indexing and search optimization in active development.",
-      "progress_percentage": 60
-    },
-    {
-      "title": "Iris - AI Coding Assistant",
-      "description": "A fully on-device AI-powered coding assistant for Neovim/VS Code that provides contextual code suggestions, intelligent refactoring recommendations, and interactive debugging assistance. Leverages locally-running language models to ensure privacy and eliminate cloud API dependencies.",
-      "git_url": "",
-      "category": "Developer Tools & Productivity",
-      "icon": "MICROCHIP",
-      "languages": [
-        "C++",
-        "Rust",
-        "Julia"
-      ],
-      "frameworks": [
-        "SQLite",
-        "Redis",
-        "LLMs",
-        "Coqui TTS",
-        "Speech Recognition"
-      ],
-      "tools": [],
-      "tags": [
-        "AI",
-        "Coding Assistant",
-        "On-device",
-        "Privacy"
-      ],
-      "progress": "Neovim integration completed with AI reasoning module in active development.",
-      "progress_percentage": 40
-    },
-    {
-      "title": "Neovim Config",
-      "description": "A meticulously crafted Neovim configuration optimized for professional software development workflows. Features custom plugins, intuitive keybindings, intelligent code completion, and language-specific optimizations designed to maximize productivity and reduce context-switching.",
-      "git_url": "https://github.com/NoamFav/Nvim-config",
-      "category": "Developer Tools & Productivity",
-      "icon": "Keyboard",
-      "languages": [
-        "Lua",
-        "VimScript"
-      ],
-      "frameworks": [
-        "Tree-sitter",
-        "LSP"
-      ],
-      "tools": [],
-      "tags": [
-        "Neovim",
-        "IDE",
-        "Productivity",
-        "Configuration"
-      ],
-      "progress": "Ongoing refinement with regular updates based on workflow improvements.",
-      "progress_percentage": 85
-    },
-    {
-      "title": "apple_music.nvim",
-      "description": "A Neovim plugin that integrates with Apple Music, allowing users to control playback directly from their editor. Features include play/pause, track skipping, and real-time display of the currently playing song. Designed for seamless music control without leaving the coding environment.",
-      "git_url": "",
-      "category": "Developer Tools & Productivity",
-      "icon": "Music",
-      "languages": [
-        "Lua",
-        "AppleScript"
-      ],
-      "frameworks": [],
-      "tools": [],
-      "tags": [
-        "Neovim",
-        "Plugin",
-        "Music",
-        "Integration"
-      ],
-      "progress": "In development.",
-      "progress_percentage": 35
-    },
-    {
-      "title": "2077.nvim",
-      "description": "A Cyberpunk 2077-inspired Neovim theme designed with a futuristic neon aesthetic. Features optimized syntax highlighting, seamless lualine integration, and customizable UI elements. Provides an immersive and highly readable coding experience with vibrant color contrasts and ergonomic design considerations.",
-      "git_url": "https://github.com/NoamFav/2077.nvim",
-      "category": "Developer Tools & Productivity",
-      "icon": "Palette",
-      "languages": [
-        "Lua"
-      ],
-      "frameworks": [],
-      "tools": [],
-      "tags": [
-        "Neovim",
-        "Theme",
-        "UI",
-        "Design"
-      ],
-      "progress": "Fully completed and available for use.",
-      "progress_percentage": 100
-    },
-    {
-      "title": "QueryCrust",
-      "description": "A sophisticated web-based database query management tool with an intuitive interface for optimizing and executing complex database operations. Built with modern web technologies and designed to simplify working with large and complex datasets through visual query building and optimization suggestions.",
-      "git_url": "https://github.com/NoamFav/QueryCrust",
-      "category": "Developer Tools & Productivity",
-      "icon": "Database",
-      "languages": [
-        "React",
-        "TailwindCSS",
-        "Python",
-        "Flask",
-        "MySQL"
-      ],
-      "frameworks": [
-        "React",
-        "TailwindCSS",
-        "Flask",
-        "SQLAlchemy"
-      ],
-      "tools": [
-        "MySQL"
-      ],
-      "tags": [
-        "Database",
-        "Query Tool",
-        "Visualization",
-        "Web App"
-      ],
-      "progress": "Completed and fully functional with all core features implemented.",
-      "progress_percentage": 100
-    },
-    {
-      "title": "AutoSort",
-      "description": "A background file organization daemon that automatically categorizes and sorts files based on configurable rule sets. Supports intelligent sorting based on file type, naming patterns, metadata extraction, and content recognition through OCR processing.",
-      "git_url": "",
-      "category": "Content Management & Organization",
-      "icon": "FOLDER-OPEN",
-      "languages": [
-        "Go"
-      ],
-      "frameworks": [
-        "fsnotify",
-        "YAML/JSON",
-        "OCR",
-        "Tesseract"
-      ],
-      "tools": [],
-      "tags": [
-        "File Organization",
-        "Automation",
-        "Metadata",
-        "OCR"
-      ],
-      "progress": "Core file detection and rule-based sorting logic implemented with OCR support in development.",
-      "progress_percentage": 45
-    },
-    {
-      "title": "WorkTime",
-      "description": "An intelligent iOS application designed to automatically track productive hours through smart detection of active work sessions. Analyzes app usage patterns, device movement signatures, and Screen Time API data to generate comprehensive productivity analytics and trend visualizations.",
-      "git_url": "",
-      "category": "Content Management & Organization",
-      "icon": "CLOCK",
-      "languages": [
-        "Swift"
-      ],
-      "frameworks": [
-        "SwiftUI",
-        "CoreData",
-        "Screen Time API"
-      ],
-      "tools": [],
-      "tags": [
-        "Productivity",
-        "Time Tracking",
-        "iOS",
-        "Analytics"
-      ],
-      "progress": "User interface design completed with data tracking integration in progress.",
-      "progress_percentage": 30
-    },
-    {
-      "title": "ShadowedHunter",
-      "description": "A sophisticated Metroidvania-style game featuring intricate puzzles, advanced combat mechanics, and immersive storytelling. Built with a compelling narrative arc, character progression systems, and dynamic level design. Incorporates physics-based interactions, AI-driven enemy behaviors, and a comprehensive inventory management system.",
-      "git_url": "https://github.com/NoamFav/ShadowedHunter",
-      "category": "Games & Interactive Entertainment",
-      "icon": "Gamepad",
-      "languages": [
-        "C#"
-      ],
-      "frameworks": [
-        "Unity",
-        "DOTween",
-        "A* Pathfinding"
-      ],
-      "tools": [],
-      "tags": [
-        "Game",
-        "Metroidvania",
-        "Puzzle",
-        "AI"
-      ],
-      "progress": "Planning and development phase. Character animations and level layouts in active design.",
-      "progress_percentage": 35
-    },
-    {
-      "title": "Pot Pot Golf",
-      "description": "A physics-based 2D mini-golf simulation featuring realistic ball dynamics, variable terrain properties, and intelligent AI opponents. Players strategically control initial velocities and angles to navigate challenging courses with the fewest shots possible while contending with customizable friction and obstacle settings.",
-      "git_url": "https://github.com/NoamFav/Pot_Pot_Golf",
-      "category": "Games & Interactive Entertainment",
-      "icon": "GOLF-BALL",
-      "languages": [
-        "Java"
-      ],
-      "frameworks": [
-        "LWJGL",
-        "Box2D Physics"
-      ],
-      "tools": [],
-      "tags": [
-        "Game",
-        "Physics",
-        "Simulation",
-        "Golf"
-      ],
-      "progress": "Completed with full gameplay features, multiple courses, and AI opponent functionality.",
-      "progress_percentage": 100
-    },
-    {
-      "title": "Chess Bot",
-      "description": "An intelligent chess engine implementing advanced heuristic-based decision making algorithms for move analysis and execution. Features positional evaluation, tactical calculation, and strategic planning capabilities that adapt to opponent play patterns through runtime optimization.",
-      "git_url": "https://github.com/NoamFav/chess-bot",
-      "category": "Games & Interactive Entertainment",
-      "icon": "Chess",
-      "languages": [
-        "Rust"
-      ],
-      "frameworks": [
-        "minimax algorithm",
-        "alpha-beta pruning"
-      ],
-      "tools": [],
-      "tags": [
-        "Chess",
-        "AI",
-        "Game",
-        "Algorithms"
-      ],
-      "progress": "Core move generation and board representation implemented. Strategic evaluation algorithms in development.",
-      "progress_percentage": 50
-    },
-    {
-      "title": "IDraughts Pro",
-      "description": "A multiplayer Frisian Draughts game featuring real-time move validation, player-vs-player mode, and AI opponents. Implements a robust WebSocket server for seamless online play with intelligent move validation, disconnection handling, and game state recovery. AI opponents utilize Minimax and Deep Q-Network (DQN) algorithms for challenging gameplay.",
-      "git_url": "",
-      "category": "Games & Interactive Entertainment",
-      "icon": "Chess-Board",
-      "languages": [
-        "Rust"
-      ],
-      "frameworks": [
-        "WebSockets",
-        "Minimax",
-        "DQN AI",
-        "Heroku"
-      ],
-      "tools": [
-        "Heroku"
-      ],
-      "tags": [
-        "Game",
-        "Multiplayer",
-        "AI",
-        "Board Game"
-      ],
-      "progress": "Core game logic implemented with multiplayer server deployment in progress.",
-      "progress_percentage": 45
-    },
-    {
-      "title": "Thynkly",
-      "description": "A comprehensive knowledge management platform combining note-taking, interactive mind mapping, and AI-driven flashcard generation. Designed to help users organize, visualize, and retain information efficiently. Features include real-time data synchronization, LaTeX support, collaborative editing, and AI-powered insights to enhance learning.",
-      "git_url": "",
-      "category": "Knowledge Management & Learning",
-      "icon": "LIGHTBULB",
-      "languages": [],
-      "frameworks": [],
-      "tools": [],
-      "tags": [
-        "Knowledge Management",
-        "Mind Mapping",
-        "AI",
-        "Learning"
-      ],
-      "progress": "Application in active development, focusing on expanding features and refining user experience.",
-      "progress_percentage": 20
-    },
-    {
-      "title": "BitVoyager",
-      "description": "A browser-based gamified programming education platform where users complete interactive coding challenges in a simulated development environment. Features an XP-based progression system, skill trees, and a comprehensive curriculum covering multiple programming paradigms.",
-      "git_url": "",
-      "category": "Educational Technology",
-      "icon": "GRADUATION-CAP",
-      "languages": [
-        "TypeScript",
-        "WebAssembly",
-        "Python",
-        "Rust"
-      ],
-      "frameworks": [
-        "xterm.js"
-      ],
-      "tools": [],
-      "tags": [
-        "Education",
-        "Programming",
-        "Gamification",
-        "Interactive"
-      ],
-      "progress": "Interactive shell prototype completed with curriculum content in ongoing development.",
-      "progress_percentage": 55
-    },
-    {
-      "title": "PyNexus",
-      "description": "An intuitive iOS application designed to introduce beginners to Python programming through interactive exercises, visual feedback, and progressive challenges. Features step-by-step tutorials, real-time code execution, and achievement-based learning to keep users engaged and motivated.",
-      "git_url": "https://github.com/NoamFav/PyNexus",
-      "category": "Educational Technology",
-      "icon": "MOBILE-ALT",
-      "languages": [
-        "Swift"
-      ],
-      "frameworks": [
-        "UIKit",
-        "Python interpreter"
-      ],
-      "tools": [],
-      "tags": [
-        "Education",
-        "iOS",
-        "Python",
-        "Learning"
-      ],
-      "progress": "Initial concept and design completed. Project currently on hold.",
-      "progress_percentage": 15
-    }
-  ]
+    "project": [
+        {
+            "title": "Sysmon-CLI",
+            "description": "A lightweight terminal-based system monitoring utility optimized for Mac & Linux power users. Delivers real-time visualization of CPU utilization, memory allocation, disk I/O activity, and network statistics. Leverages efficient low-level system calls to ensure minimal performance impact while providing comprehensive system insights.",
+            "git_url": "",
+            "category": "System Utilities & Monitoring",
+            "icon": "TERMINAL",
+            "languages": ["C"],
+            "frameworks": ["POSIX syscalls", "IOKit", "procfs"],
+            "tools": [],
+            "tags": [
+                "System Monitoring",
+                "Terminal",
+                "Performance",
+                "Low-level"
+            ],
+            "progress": "Architecture planning completed. Initial implementation of CPU/memory tracking modules in progress.",
+            "progress_percentage": 30
+        },
+        {
+            "title": "SysDash Ultra",
+            "description": "An advanced system monitoring dashboard that provides real-time visualization of CPU, RAM, process trees, GPU utilization, disk activity, and power metrics through an interactive interface. Features predictive performance analytics, hierarchical process visualization, and customizable threshold-based alerting.",
+            "git_url": "",
+            "category": "System Utilities & Monitoring",
+            "icon": "Chart-line",
+            "languages": ["Rust", "Swift"],
+            "frameworks": ["SwiftUI", "sysctl", "WebGL", "D3.js"],
+            "tools": [],
+            "tags": ["Dashboard", "Visualization", "Performance", "Analytics"],
+            "progress": "Backend core development underway with UI wireframing in progress.",
+            "progress_percentage": 25
+        },
+        {
+            "title": "NetViz Pro",
+            "description": "A cutting-edge network traffic analysis tool that renders inbound and outbound connections as an interactive 3D force-directed graph. Provides application-specific traffic monitoring, anomalous connection detection, and sophisticated filtering capabilities with stunning visual representations.",
+            "git_url": "",
+            "category": "System Utilities & Monitoring",
+            "icon": "PROJECT-DIAGRAM",
+            "languages": ["Rust", "Swift", "TypeScript"],
+            "frameworks": [
+                "SwiftUI",
+                "TypeScript",
+                "libpcap",
+                "BPF",
+                "WebGL",
+                "GraphQL"
+            ],
+            "tools": [],
+            "tags": [
+                "Network Analysis",
+                "Visualization",
+                "Security",
+                "Traffic Monitoring"
+            ],
+            "progress": "Concept design and planning completed with UI prototype in active development.",
+            "progress_percentage": 20
+        },
+        {
+            "title": "CodeGrep",
+            "description": "A high-performance, syntax-aware code search tool that understands programming language structures including function definitions, variable declarations, and partial queries. Utilizes abstract syntax tree parsing via Tree-sitter to deliver precise search results that respect code semantics rather than mere text matching.",
+            "git_url": "",
+            "category": "Developer Tools & Productivity",
+            "icon": "SEARCH",
+            "languages": ["Rust"],
+            "frameworks": ["Tree-sitter", "Regex", "Fuzzy Matching Algorithms"],
+            "tools": [],
+            "tags": ["Code Search", "Syntax-Aware", "Developer Tools"],
+            "progress": "Implementation with advanced file indexing and search optimization in active development.",
+            "progress_percentage": 60
+        },
+        {
+            "title": "Neovim Config",
+            "description": "A meticulously crafted Neovim configuration optimized for professional software development workflows. Features custom plugins, intuitive keybindings, intelligent code completion, and language-specific optimizations designed to maximize productivity and reduce context-switching.",
+            "git_url": "https://github.com/NoamFav/Nvim-config",
+            "category": "Developer Tools & Productivity",
+            "icon": "Keyboard",
+            "languages": ["Lua", "VimScript"],
+            "frameworks": ["Tree-sitter", "LSP"],
+            "tools": [],
+            "tags": ["Neovim", "IDE", "Productivity", "Configuration"],
+            "progress": "Ongoing refinement with regular updates based on workflow improvements.",
+            "progress_percentage": 85
+        },
+        {
+            "title": "apple_music.nvim",
+            "description": "A Neovim plugin that integrates with Apple Music, allowing users to control playback directly from their editor. Features include play/pause, track skipping, and real-time display of the currently playing song. Designed for seamless music control without leaving the coding environment.",
+            "git_url": "https://github.com/NoamFav/apple_music.nvim",
+            "category": "Developer Tools & Productivity",
+            "icon": "Music",
+            "languages": ["Lua", "AppleScript"],
+            "frameworks": [],
+            "tools": [],
+            "tags": ["Neovim", "Plugin", "Music", "Integration"],
+            "progress": "In development.",
+            "progress_percentage": 35
+        },
+        {
+            "title": "2077.nvim",
+            "description": "A Cyberpunk 2077-inspired Neovim theme designed with a futuristic neon aesthetic. Features optimized syntax highlighting, seamless lualine integration, and customizable UI elements. Provides an immersive and highly readable coding experience with vibrant color contrasts and ergonomic design considerations.",
+            "git_url": "https://github.com/NoamFav/2077.nvim",
+            "category": "Developer Tools & Productivity",
+            "icon": "Palette",
+            "languages": ["Lua"],
+            "frameworks": [],
+            "tools": [],
+            "tags": ["Neovim", "Theme", "UI", "Design"],
+            "progress": "Fully completed and available for use.",
+            "progress_percentage": 100
+        },
+        {
+            "title": "QueryCrust",
+            "description": "A sophisticated web-based database query management tool with an intuitive interface for optimizing and executing complex database operations. Built with modern web technologies and designed to simplify working with large and complex datasets through visual query building and optimization suggestions.",
+            "git_url": "https://github.com/NoamFav/QueryCrust",
+            "category": "Developer Tools & Productivity",
+            "icon": "Database",
+            "languages": ["React", "TailwindCSS", "Python", "Flask", "MySQL"],
+            "frameworks": ["React", "TailwindCSS", "Flask", "SQLAlchemy"],
+            "tools": ["MySQL"],
+            "tags": ["Database", "Query Tool", "Visualization", "Web App"],
+            "progress": "Completed and fully functional with all core features implemented.",
+            "progress_percentage": 100
+        },
+        {
+            "title": "AutoSort",
+            "description": "A background file organization daemon that automatically categorizes and sorts files based on configurable rule sets. Supports intelligent sorting based on file type, naming patterns, metadata extraction, and content recognition through OCR processing.",
+            "git_url": "",
+            "category": "Content Management & Organization",
+            "icon": "FOLDER-OPEN",
+            "languages": ["Go"],
+            "frameworks": ["fsnotify", "YAML/JSON", "OCR", "Tesseract"],
+            "tools": [],
+            "tags": ["File Organization", "Automation", "Metadata", "OCR"],
+            "progress": "Core file detection and rule-based sorting logic implemented with OCR support in development.",
+            "progress_percentage": 45
+        },
+        {
+            "title": "WorkTime",
+            "description": "An intelligent iOS application designed to automatically track productive hours through smart detection of active work sessions. Analyzes app usage patterns, device movement signatures, and Screen Time API data to generate comprehensive productivity analytics and trend visualizations.",
+            "git_url": "",
+            "category": "Content Management & Organization",
+            "icon": "CLOCK",
+            "languages": ["Swift"],
+            "frameworks": ["SwiftUI", "CoreData", "Screen Time API"],
+            "tools": [],
+            "tags": ["Productivity", "Time Tracking", "iOS", "Analytics"],
+            "progress": "User interface design completed with data tracking integration in progress.",
+            "progress_percentage": 30
+        },
+        {
+            "title": "ShadowedHunter",
+            "description": "A sophisticated Metroidvania-style game featuring intricate puzzles, advanced combat mechanics, and immersive storytelling. Built with a compelling narrative arc, character progression systems, and dynamic level design. Incorporates physics-based interactions, AI-driven enemy behaviors, and a comprehensive inventory management system.",
+            "git_url": "https://github.com/NoamFav/ShadowedHunter",
+            "category": "Games & Interactive Entertainment",
+            "icon": "Gamepad",
+            "languages": ["C#"],
+            "frameworks": ["Unity", "DOTween", "A* Pathfinding"],
+            "tools": [],
+            "tags": ["Game", "Metroidvania", "Puzzle", "AI"],
+            "progress": "Planning and development phase. Character animations and level layouts in active design.",
+            "progress_percentage": 35
+        },
+        {
+            "title": "Pot Pot Golf",
+            "description": "A physics-based 2D mini-golf simulation featuring realistic ball dynamics, variable terrain properties, and intelligent AI opponents. Players strategically control initial velocities and angles to navigate challenging courses with the fewest shots possible while contending with customizable friction and obstacle settings.",
+            "git_url": "https://github.com/NoamFav/Pot_Pot_Golf",
+            "category": "Games & Interactive Entertainment",
+            "icon": "GOLF-BALL",
+            "languages": ["Java"],
+            "frameworks": ["LWJGL", "Box2D Physics"],
+            "tools": [],
+            "tags": ["Game", "Physics", "Simulation", "Golf"],
+            "progress": "Completed with full gameplay features, multiple courses, and AI opponent functionality.",
+            "progress_percentage": 100
+        },
+        {
+            "title": "Frisia",
+            "description": "A multiplayer Frisian Draughts game featuring real-time move validation, player-vs-player mode, and AI opponents. Implements a robust WebSocket server for seamless online play with intelligent move validation, disconnection handling, and game state recovery. AI opponents utilize Minimax and Deep Q-Network (DQN) algorithms for challenging gameplay.",
+            "git_url": "https://github.com/NoamFav/Frisia",
+            "category": "Games & Interactive Entertainment",
+            "icon": "Chess-Board",
+            "languages": ["Rust"],
+            "frameworks": ["WebSockets", "Minimax", "DQN AI", "Heroku"],
+            "tools": ["Heroku"],
+            "tags": ["Game", "Multiplayer", "AI", "Board Game"],
+            "progress": "Core game logic implemented with multiplayer server deployment in progress.",
+            "progress_percentage": 45
+        },
+        {
+            "title": "Thynkly",
+            "description": "A comprehensive knowledge management platform combining note-taking, interactive mind mapping, and AI-driven flashcard generation. Designed to help users organize, visualize, and retain information efficiently. Features include real-time data synchronization, LaTeX support, collaborative editing, and AI-powered insights to enhance learning.",
+            "git_url": "https://github.com/NoamFav/Thynkly",
+            "category": "Knowledge Management & Learning",
+            "icon": "LIGHTBULB",
+            "languages": [],
+            "frameworks": [],
+            "tools": [],
+            "tags": ["Knowledge Management", "Mind Mapping", "AI", "Learning"],
+            "progress": "Application in active development, focusing on expanding features and refining user experience.",
+            "progress_percentage": 20
+        },
+        {
+            "title": "BitVoyager",
+            "description": "A browser-based gamified programming education platform where users complete interactive coding challenges in a simulated development environment. Features an XP-based progression system, skill trees, and a comprehensive curriculum covering multiple programming paradigms.",
+            "git_url": "https://github.com/NoamFav/bitvoyager",
+            "category": "Educational Technology",
+            "icon": "GRADUATION-CAP",
+            "languages": ["TypeScript", "WebAssembly", "Python", "Rust"],
+            "frameworks": ["xterm.js"],
+            "tools": [],
+            "tags": ["Education", "Programming", "Gamification", "Interactive"],
+            "progress": "Interactive shell prototype completed with curriculum content in ongoing development.",
+            "progress_percentage": 55
+        },
+        {
+            "title": "PyNexus",
+            "description": "An intuitive iOS application designed to introduce beginners to Python programming through interactive exercises, visual feedback, and progressive challenges. Features step-by-step tutorials, real-time code execution, and achievement-based learning to keep users engaged and motivated.",
+            "git_url": "https://github.com/NoamFav/PyNexus",
+            "category": "Educational Technology",
+            "icon": "MOBILE-ALT",
+            "languages": ["Swift"],
+            "frameworks": ["UIKit", "Python interpreter"],
+            "tools": [],
+            "tags": ["Education", "iOS", "Python", "Learning"],
+            "progress": "Initial concept and design completed. Project currently on hold.",
+            "progress_percentage": 15
+        },
+        {
+            "title": "Zvezda",
+            "description": "A terminal-based Git repository manager and dashboard built using the Charm stack. Zvezda provides real-time insights, visual summaries, and interactive tooling for developers managing multiple repositories. Features include commit analytics, scheduled routines, AI commit suggestions, and integrated repository cleanup utilities.",
+            "git_url": "https://github.com/NoamFav/Zvezda",
+            "category": "Developer Tools & Productivity",
+            "icon": "TERMINAL",
+            "languages": ["Go"],
+            "frameworks": ["Bubble Tea", "Lipgloss", "Onefetch", "Git"],
+            "tools": ["Git", "Ollama", "fsnotify"],
+            "tags": ["Git", "Terminal UI", "Dashboard", "Automation", "AI"],
+            "progress": "Repo overview dashboard completed with commit tools and AI integration actively developed.",
+            "progress_percentage": 70
+        },
+        {
+            "title": "Project Vault",
+            "description": "A confidential long-term initiative exploring new human-computer interfaces. Currently under wraps. Details will be revealed in a later development phase.",
+            "git_url": "",
+            "category": "Classified Research",
+            "icon": "USER-SECRET",
+            "languages": [],
+            "frameworks": [],
+            "tools": [],
+            "tags": ["Confidential", "Experimental", "Stealth"],
+            "progress": "Internal R&D ongoing.",
+            "progress_percentage": 5
+        },
+        {
+            "title": "EnronBox",
+            "description": "A local search and analysis tool designed to explore and dissect the Enron email dataset with forensic precision. Provides semantic search, social graph mapping, and metadata filtering capabilities for investigative or educational purposes.",
+            "git_url": "",
+            "category": "Data Analysis & Research",
+            "icon": "ENVELOPE-OPEN-TEXT",
+            "languages": ["Python", "Go"],
+            "frameworks": ["Whoosh", "FastAPI", "NetworkX", "NLTK"],
+            "tools": ["SQLite", "Pandas"],
+            "tags": [
+                "Data Mining",
+                "Search",
+                "Email Analysis",
+                "Investigation"
+            ],
+            "progress": "Search indexing complete. Metadata graphing and NLP-based filtering in development.",
+            "progress_percentage": 40
+        },
+        {
+            "title": "Psycho",
+            "description": "A professional portfolio website built for a certified psychopedagogue. Showcases her services, background, and philosophy with a modern, animated interface. Emphasizes clarity, elegance, and emotional warmth through floating elements, carousel images, and subtle interactivity.",
+            "git_url": "https://github.com/NoamFav/Psycho",
+            "category": "Portfolio & Personal Websites",
+            "icon": "USER-NURSE",
+            "languages": ["TypeScript", "JavaScript"],
+            "frameworks": ["React", "TailwindCSS", "Framer Motion"],
+            "tools": [],
+            "tags": ["Portfolio", "Psychology", "Personal Site", "Web Design"],
+            "progress": "Live and production-ready. Regular updates for styling, SEO, and accessibility improvements.",
+            "progress_percentage": 100
+        },
+        {
+            "title": "Zarya",
+            "description": "A planned self-hosted infrastructure hub designed to consolidate personal services like file sync, notes, scheduling, AI inference endpoints, and dashboarding. Envisioned as a modular, privacy-focused, locally controlled system for developers and power users.",
+            "git_url": "",
+            "category": "Self-Hosting & Infrastructure",
+            "icon": "SERVER",
+            "languages": [],
+            "frameworks": [],
+            "tools": [],
+            "tags": ["Concept", "Self-Hosted", "Privacy", "Automation"],
+            "progress": "Initial architecture drafted. Development not yet started.",
+            "progress_percentage": 0
+        }
+    ]
 }

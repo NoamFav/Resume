@@ -1,39 +1,137 @@
 {
-  "tool": [
-    {
-      "name": "Git",
-      "percentage": 90,
-      "favorite": true,
-      "learning": true,
-      "image": "https://cdn.simpleicons.org/git"
-    },
-    {
-      "name": "Docker",
-      "percentage": 70,
-      "favorite": false,
-      "learning": true,
-      "image": "https://cdn.simpleicons.org/docker"
-    },
-    {
-      "name": "Github Actions",
-      "percentage": 40,
-      "favorite": false,
-      "learning": false,
-      "image": "https://cdn.simpleicons.org/githubactions"
-    },
-    {
-      "name": "MySQL",
-      "percentage": 60,
-      "favorite": true,
-      "learning": true,
-      "image": "https://cdn.simpleicons.org/mysql"
-    },
-    {
-      "name": "Kubernetes",
-      "percentage": 0,
-      "favorite": false,
-      "learning": true,
-      "image": "https://cdn.simpleicons.org/kubernetes"
-    }
-  ]
+    "tool": [
+        {
+            "name": "Git",
+            "percentage": 90,
+            "favorite": true,
+            "learning": true,
+            "image": "https://cdn.simpleicons.org/git"
+        },
+        {
+            "name": "Docker",
+            "percentage": 70,
+            "favorite": false,
+            "learning": true,
+            "image": "https://cdn.simpleicons.org/docker"
+        },
+        {
+            "name": "Github Actions",
+            "percentage": 40,
+            "favorite": false,
+            "learning": false,
+            "image": "https://cdn.simpleicons.org/githubactions"
+        },
+        {
+            "name": "MySQL",
+            "percentage": 60,
+            "favorite": true,
+            "learning": true,
+            "image": "https://cdn.simpleicons.org/mysql"
+        },
+        {
+            "name": "Kubernetes",
+            "percentage": 0,
+            "favorite": false,
+            "learning": true,
+            "image": "https://cdn.simpleicons.org/kubernetes"
+        },
+        {
+            "name": "Zsh",
+            "percentage": 85,
+            "favorite": true,
+            "learning": false,
+            "image": "https://cdn.simpleicons.org/gnubash"
+        },
+        {
+            "name": "Neovim",
+            "percentage": 90,
+            "favorite": true,
+            "learning": false,
+            "image": "https://cdn.simpleicons.org/neovim"
+        },
+        {
+            "name": "iTerm2",
+            "percentage": 80,
+            "favorite": true,
+            "learning": false,
+            "image": "https://cdn.simpleicons.org/apple"
+        },
+        {
+            "name": "Tmux",
+            "percentage": 75,
+            "favorite": true,
+            "learning": false,
+            "image": "https://cdn.simpleicons.org/tmux"
+        },
+        {
+            "name": "Homebrew",
+            "percentage": 85,
+            "favorite": true,
+            "learning": false,
+            "image": "https://cdn.simpleicons.org/homebrew"
+        },
+        {
+            "name": "SQLite",
+            "percentage": 70,
+            "favorite": true,
+            "learning": true,
+            "image": "https://cdn.simpleicons.org/sqlite"
+        },
+        {
+            "name": "MongoDB",
+            "percentage": 60,
+            "favorite": false,
+            "learning": true,
+            "image": "https://cdn.simpleicons.org/mongodb"
+        },
+        {
+            "name": "Redis",
+            "percentage": 50,
+            "favorite": false,
+            "learning": true,
+            "image": "https://cdn.simpleicons.org/redis"
+        },
+        {
+            "name": "Make",
+            "percentage": 40,
+            "favorite": false,
+            "learning": true,
+            "image": "https://cdn.simpleicons.org/gnubash"
+        },
+        {
+            "name": "QEMU/UTM",
+            "percentage": 35,
+            "favorite": true,
+            "learning": true,
+            "image": "https://cdn.simpleicons.org/linux"
+        },
+        {
+            "name": "Warp Terminal",
+            "percentage": 60,
+            "favorite": false,
+            "learning": false,
+            "image": "https://cdn.simpleicons.org/warp"
+        },
+        {
+            "name": "Postman",
+            "percentage": 55,
+            "favorite": false,
+            "learning": false,
+            "image": "https://cdn.simpleicons.org/postman"
+        },
+        {
+            "name": "VS Code",
+            "percentage": 50,
+            "favorite": false,
+            "learning": false,
+            "image": "https://cdn.simpleicons.org/visualstudiocode"
+        },
+        {
+            "name": "Xcode",
+            "percentage": 65,
+            "favorite": false,
+            "learning": true,
+            "image": "https://cdn.simpleicons.org/xcode"
+        }
+    ]
 }
