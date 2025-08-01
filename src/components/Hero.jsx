@@ -21,6 +21,7 @@ import {
 } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
+import { DynamicBackgroundEffects } from "./Background";
 
 // Helper functions
 const formatDate = (dateString, format = "short") => {
@@ -190,13 +191,6 @@ const EducationTab = ({ education }) => (
                 <FaGraduationCap className="mr-2 text-blue-400" />
                 Education & Certifications
             </h2>
-            <a
-                href="/education"
-                className="text-blue-300 hover:text-blue-200 text-sm font-medium flex items-center gap-1 hover:underline group"
-            >
-                View full education
-                <FaChevronRight className="h-3 w-3 group-hover:translate-x-1 transition-transform" />
-            </a>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
