@@ -3,21 +3,16 @@ import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { Link } from "react-router-dom";
 import UnifiedSkillCard from "./Cards";
+import UnifiedFilters from "./Sorting";
+import UnifiedStats from "./Stats";
 
 import {
     FaTools,
     FaSearch,
-    FaGraduationCap,
-    FaLayerGroup,
-    FaChartBar,
     FaArrowUp,
     FaSpinner,
-    FaHeart,
-    FaCheckCircle,
-    FaSort,
     FaGithub,
     FaEnvelope,
-    FaTrophy,
 } from "react-icons/fa";
 
 // Animation variants
@@ -86,55 +81,6 @@ const useDataLoader = () => {
                             description:
                                 "Popular relational database management system",
                         },
-                        {
-                            name: "React",
-                            percentage: 85,
-                            favorite: true,
-                            learning: false,
-                            image: "https://cdn.simpleicons.org/react",
-                            category: "Frontend",
-                            description:
-                                "JavaScript library for building user interfaces",
-                        },
-                        {
-                            name: "Node.js",
-                            percentage: 75,
-                            favorite: true,
-                            learning: false,
-                            image: "https://cdn.simpleicons.org/nodedotjs",
-                            category: "Backend",
-                            description:
-                                "JavaScript runtime for server-side development",
-                        },
-                        {
-                            name: "Python",
-                            percentage: 80,
-                            favorite: true,
-                            learning: true,
-                            image: "https://cdn.simpleicons.org/python",
-                            category: "Language",
-                            description:
-                                "Versatile programming language for various applications",
-                        },
-                        {
-                            name: "MongoDB",
-                            percentage: 65,
-                            favorite: false,
-                            learning: true,
-                            image: "https://cdn.simpleicons.org/mongodb",
-                            category: "Database",
-                            description: "NoSQL document-based database",
-                        },
-                        {
-                            name: "VS Code",
-                            percentage: 95,
-                            favorite: true,
-                            learning: false,
-                            image: "https://cdn.simpleicons.org/visualstudiocode",
-                            category: "Editor",
-                            description:
-                                "Powerful code editor with extensive extension support",
-                        },
                     ],
                 });
             } finally {
@@ -148,208 +94,14 @@ const useDataLoader = () => {
     return { data, isLoading };
 };
 
-// Filter component
-const ToolFilters = ({ tools, filters, setFilters }) => {
-    const categories = useMemo(() => {
-        const cats = [...new Set(tools.map((t) => t.category).filter(Boolean))];
-        return cats.sort();
-    }, [tools]);
-
-    const statusOptions = [
-        { key: "all", label: "All Tools", icon: FaLayerGroup },
-        { key: "favorites", label: "Favorites", icon: FaHeart },
-        { key: "learning", label: "Learning", icon: FaGraduationCap },
-        { key: "expert", label: "Expert (90%+)", icon: FaTrophy },
-        { key: "advanced", label: "Advanced (70%+)", icon: FaCheckCircle },
-    ];
-
-    const sortOptions = [
-        { key: "name", label: "Name" },
-        { key: "percentage", label: "Proficiency" },
-        { key: "category", label: "Category" },
-        { key: "favorites", label: "Favorites First" },
-    ];
-
-    return (
-        <div className="mb-8 space-y-4">
-            {/* Search */}
-            <div className="relative">
-                <FaSearch className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white/40 h-4 w-4" />
-                <input
-                    type="text"
-                    placeholder="Search tools..."
-                    value={filters.search}
-                    onChange={(e) =>
-                        setFilters((prev) => ({
-                            ...prev,
-                            search: e.target.value,
-                        }))
-                    }
-                    className="w-full pl-12 pr-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent backdrop-blur-sm"
-                />
-            </div>
-
-            <div className="flex flex-wrap gap-4">
-                {/* Status Filter */}
-                <div className="flex flex-wrap gap-2">
-                    {statusOptions.map((status) => {
-                        const StatusIcon = status.icon;
-                        return (
-                            <button
-                                key={status.key}
-                                onClick={() =>
-                                    setFilters((prev) => ({
-                                        ...prev,
-                                        status: status.key,
-                                    }))
-                                }
-                                className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all ${
-                                    filters.status === status.key
-                                        ? "bg-blue-600 text-white shadow-lg"
-                                        : "bg-white/5 text-white/70 hover:bg-white/10 hover:text-white"
-                                }`}
-                            >
-                                <StatusIcon className="h-4 w-4" />
-                                {status.label}
-                            </button>
-                        );
-                    })}
-                </div>
-
-                {/* Sort */}
-                <div className="flex items-center gap-2">
-                    <FaSort className="h-4 w-4 text-white/40" />
-                    <select
-                        value={filters.sort}
-                        onChange={(e) =>
-                            setFilters((prev) => ({
-                                ...prev,
-                                sort: e.target.value,
-                            }))
-                        }
-                        className="bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                    >
-                        {sortOptions.map((option) => (
-                            <option
-                                key={option.key}
-                                value={option.key}
-                                className="bg-slate-800"
-                            >
-                                Sort by {option.label}
-                            </option>
-                        ))}
-                    </select>
-                </div>
-            </div>
-
-            {/* Category Filter */}
-            {categories.length > 1 && (
-                <div className="flex flex-wrap gap-2">
-                    <button
-                        onClick={() =>
-                            setFilters((prev) => ({ ...prev, category: "all" }))
-                        }
-                        className={`px-3 py-1 rounded-full text-sm transition-all ${
-                            filters.category === "all"
-                                ? "bg-purple-600 text-white"
-                                : "bg-white/5 text-white/70 hover:bg-white/10"
-                        }`}
-                    >
-                        All Categories
-                    </button>
-                    {categories.map((category) => (
-                        <button
-                            key={category}
-                            onClick={() =>
-                                setFilters((prev) => ({ ...prev, category }))
-                            }
-                            className={`px-3 py-1 rounded-full text-sm transition-all ${
-                                filters.category === category
-                                    ? "bg-purple-600 text-white"
-                                    : "bg-white/5 text-white/70 hover:bg-white/10"
-                            }`}
-                        >
-                            {category}
-                        </button>
-                    ))}
-                </div>
-            )}
-        </div>
-    );
-};
-
-// Statistics component
-const ToolStats = ({ tools }) => {
-    const stats = useMemo(() => {
-        const total = tools.length;
-        const favorites = tools.filter((t) => t.favorite).length;
-        const learning = tools.filter((t) => t.learning).length;
-        const expert = tools.filter((t) => t.percentage >= 90).length;
-        const avgProficiency = Math.round(
-            tools.reduce((acc, t) => acc + t.percentage, 0) / total,
-        );
-
-        return { total, favorites, learning, expert, avgProficiency };
-    }, [tools]);
-
-    return (
-        <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-8"
-        >
-            <div className="bg-white/5 backdrop-blur-sm rounded-lg p-4 border border-white/10">
-                <div className="flex items-center gap-2 mb-2">
-                    <FaTools className="h-5 w-5 text-blue-400" />
-                    <span className="text-sm text-white/60">Total Tools</span>
-                </div>
-                <span className="text-2xl font-bold text-white">
-                    {stats.total}
-                </span>
-            </div>
-
-            <div className="bg-white/5 backdrop-blur-sm rounded-lg p-4 border border-white/10">
-                <div className="flex items-center gap-2 mb-2">
-                    <FaHeart className="h-5 w-5 text-pink-400" />
-                    <span className="text-sm text-white/60">Favorites</span>
-                </div>
-                <span className="text-2xl font-bold text-white">
-                    {stats.favorites}
-                </span>
-            </div>
-
-            <div className="bg-white/5 backdrop-blur-sm rounded-lg p-4 border border-white/10">
-                <div className="flex items-center gap-2 mb-2">
-                    <FaGraduationCap className="h-5 w-5 text-green-400" />
-                    <span className="text-sm text-white/60">Learning</span>
-                </div>
-                <span className="text-2xl font-bold text-white">
-                    {stats.learning}
-                </span>
-            </div>
-
-            <div className="bg-white/5 backdrop-blur-sm rounded-lg p-4 border border-white/10">
-                <div className="flex items-center gap-2 mb-2">
-                    <FaTrophy className="h-5 w-5 text-purple-400" />
-                    <span className="text-sm text-white/60">Expert</span>
-                </div>
-                <span className="text-2xl font-bold text-white">
-                    {stats.expert}
-                </span>
-            </div>
-
-            <div className="bg-white/5 backdrop-blur-sm rounded-lg p-4 border border-white/10">
-                <div className="flex items-center gap-2 mb-2">
-                    <FaChartBar className="h-5 w-5 text-orange-400" />
-                    <span className="text-sm text-white/60">Avg Skill</span>
-                </div>
-                <span className="text-2xl font-bold text-white">
-                    {stats.avgProficiency}%
-                </span>
-            </div>
-        </motion.div>
-    );
-};
+const ToolFilters = ({ tools, filters, setFilters }) => (
+    <UnifiedFilters
+        items={tools}
+        filters={filters}
+        setFilters={setFilters}
+        config={{ type: "tools" }}
+    />
+);
 
 // Main Tools component
 export default function Tools() {
@@ -358,7 +110,7 @@ export default function Tools() {
         search: "",
         category: "all",
         status: "all",
-        sort: "percentage",
+        sort: "proficiency",
     });
 
     const [headerRef, headerInView] = useInView({
@@ -391,15 +143,24 @@ export default function Tools() {
             }
 
             // Status filter
-            if (filters.status !== "all") {
-                if (filters.status === "favorites" && !tool.favorite)
+            const { status } = filters;
+            const { percentage, favorite, learning } = tool;
+
+            if (status !== "all") {
+                if (status === "favorites" && !favorite) return false;
+                if (status === "learning" && !learning) return false;
+                if (status === "expert" && percentage < 90) return false;
+                if (
+                    status === "advanced" &&
+                    (percentage < 70 || percentage >= 90)
+                )
                     return false;
-                if (filters.status === "learning" && !tool.learning)
+                if (
+                    status === "intermediate" &&
+                    (percentage < 50 || percentage >= 70)
+                )
                     return false;
-                if (filters.status === "expert" && tool.percentage < 90)
-                    return false;
-                if (filters.status === "advanced" && tool.percentage < 70)
-                    return false;
+                if (status === "beginner" && percentage >= 50) return false;
             }
 
             return true;
@@ -410,7 +171,7 @@ export default function Tools() {
             switch (filters.sort) {
                 case "name":
                     return a.name.localeCompare(b.name);
-                case "percentage":
+                case "proficiency":
                     return b.percentage - a.percentage;
                 case "category":
                     return (a.category || "").localeCompare(b.category || "");
@@ -501,7 +262,7 @@ export default function Tools() {
                 </motion.div>
 
                 {/* Statistics */}
-                <ToolStats tools={data.tool} />
+                <UnifiedStats items={data.tool} type="tools" topItem="Git" />
 
                 {/* Filters */}
                 <ToolFilters

@@ -3,18 +3,14 @@ import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { Link } from "react-router-dom";
 import UnifiedSkillCard from "./Cards";
+import UnifiedFilters from "./Sorting";
+import UnifiedStats from "./Stats";
 
 import {
     FaLayerGroup,
     FaSearch,
-    FaHeart,
-    FaGraduationCap,
-    FaChartBar,
-    FaCode,
     FaSpinner,
     FaArrowUp,
-    FaTrophy,
-    FaCertificate,
     FaLightbulb,
     FaRocket,
 } from "react-icons/fa";
@@ -31,30 +27,6 @@ const staggerChildren = {
         opacity: 1,
         transition: { staggerChildren: 0.1 },
     },
-};
-
-// Progress bar component
-const ProgressBar = ({ percentage, color = "blue" }) => {
-    const colorMap = {
-        blue: "from-blue-500 to-blue-400",
-        purple: "from-purple-500 to-purple-400",
-        green: "from-green-500 to-green-400",
-        indigo: "from-indigo-500 to-indigo-400",
-        yellow: "from-yellow-500 to-yellow-400",
-        red: "from-red-500 to-red-400",
-        pink: "from-pink-500 to-pink-400",
-    };
-
-    return (
-        <div className="w-full bg-white/5 rounded-full h-2 overflow-hidden">
-            <motion.div
-                initial={{ width: 0 }}
-                animate={{ width: `${percentage}%` }}
-                transition={{ duration: 1, delay: 0.2 }}
-                className={`h-2 rounded-full bg-gradient-to-r ${colorMap[color]}`}
-            />
-        </div>
-    );
 };
 
 // Custom hook for data loading
@@ -101,46 +73,6 @@ const useDataLoader = () => {
                             language: "JavaScript",
                             image: "https://cdn.simpleicons.org/nodedotjs",
                         },
-                        {
-                            name: "TensorFlow",
-                            percentage: 60,
-                            favorite: false,
-                            learning: true,
-                            language: "Python",
-                            image: "https://cdn.simpleicons.org/tensorflow",
-                        },
-                        {
-                            name: "Vue.js",
-                            percentage: 70,
-                            favorite: false,
-                            learning: false,
-                            language: "JavaScript",
-                            image: "https://cdn.simpleicons.org/vuedotjs",
-                        },
-                        {
-                            name: "SwiftUI",
-                            percentage: 50,
-                            favorite: true,
-                            learning: true,
-                            language: "Swift",
-                            image: "https://cdn.simpleicons.org/swift",
-                        },
-                        {
-                            name: "Unity",
-                            percentage: 80,
-                            favorite: true,
-                            learning: false,
-                            language: "C#",
-                            image: "https://cdn.simpleicons.org/unity",
-                        },
-                        {
-                            name: "Express.js",
-                            percentage: 90,
-                            favorite: true,
-                            learning: false,
-                            language: "JavaScript",
-                            image: "https://cdn.simpleicons.org/express",
-                        },
                     ],
                 });
             } finally {
@@ -154,201 +86,14 @@ const useDataLoader = () => {
     return { data, isLoading };
 };
 
-// Filter component
-const FrameworkFilters = ({ frameworks, filters, setFilters }) => {
-    const languages = useMemo(() => {
-        const langs = [...new Set(frameworks.map((f) => f.language))];
-        return langs.sort();
-    }, [frameworks]);
-
-    const statusFilters = [
-        { key: "all", label: "All Frameworks", icon: FaLayerGroup },
-        { key: "favorites", label: "Favorites", icon: FaHeart },
-        { key: "learning", label: "Currently Learning", icon: FaGraduationCap },
-        { key: "expert", label: "Expert Level", icon: FaTrophy },
-        { key: "advanced", label: "Advanced", icon: FaCertificate },
-    ];
-
-    return (
-        <div className="mb-8 space-y-4">
-            {/* Search */}
-            <div className="relative">
-                <FaSearch className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white/40 h-4 w-4" />
-                <input
-                    type="text"
-                    placeholder="Search frameworks..."
-                    value={filters.search}
-                    onChange={(e) =>
-                        setFilters((prev) => ({
-                            ...prev,
-                            search: e.target.value,
-                        }))
-                    }
-                    className="w-full pl-12 pr-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent backdrop-blur-sm"
-                />
-            </div>
-
-            {/* Status Filters */}
-            <div className="flex flex-wrap gap-2">
-                {statusFilters.map((status) => {
-                    const StatusIcon = status.icon;
-                    return (
-                        <button
-                            key={status.key}
-                            onClick={() =>
-                                setFilters((prev) => ({
-                                    ...prev,
-                                    status: status.key,
-                                }))
-                            }
-                            className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all ${
-                                filters.status === status.key
-                                    ? "bg-blue-600 text-white shadow-lg"
-                                    : "bg-white/5 text-white/70 hover:bg-white/10 hover:text-white"
-                            }`}
-                        >
-                            <StatusIcon className="h-4 w-4" />
-                            {status.label}
-                        </button>
-                    );
-                })}
-            </div>
-
-            {/* Language Filter */}
-            {languages.length > 1 && (
-                <div className="flex flex-wrap gap-2">
-                    <button
-                        onClick={() =>
-                            setFilters((prev) => ({ ...prev, language: "all" }))
-                        }
-                        className={`px-3 py-1 rounded-full text-sm transition-all ${
-                            filters.language === "all"
-                                ? "bg-purple-600 text-white"
-                                : "bg-white/5 text-white/70 hover:bg-white/10"
-                        }`}
-                    >
-                        All Languages
-                    </button>
-                    {languages.map((language) => (
-                        <button
-                            key={language}
-                            onClick={() =>
-                                setFilters((prev) => ({ ...prev, language }))
-                            }
-                            className={`px-3 py-1 rounded-full text-sm transition-all ${
-                                filters.language === language
-                                    ? "bg-purple-600 text-white"
-                                    : "bg-white/5 text-white/70 hover:bg-white/10"
-                            }`}
-                        >
-                            {language}
-                        </button>
-                    ))}
-                </div>
-            )}
-        </div>
-    );
-};
-
-// Statistics component
-const FrameworkStats = ({ frameworks }) => {
-    const stats = useMemo(() => {
-        const total = frameworks.length;
-        const favorites = frameworks.filter((f) => f.favorite).length;
-        const learning = frameworks.filter((f) => f.learning).length;
-        const expert = frameworks.filter((f) => f.percentage >= 90).length;
-        const avgProficiency = Math.round(
-            frameworks.reduce((acc, f) => acc + f.percentage, 0) / total,
-        );
-
-        const languageDistribution = frameworks.reduce((acc, f) => {
-            acc[f.language] = (acc[f.language] || 0) + 1;
-            return acc;
-        }, {});
-
-        const topLanguage = Object.entries(languageDistribution).sort(
-            ([, a], [, b]) => b - a,
-        )[0];
-
-        return {
-            total,
-            favorites,
-            learning,
-            expert,
-            avgProficiency,
-            topLanguage: topLanguage ? topLanguage[0] : "N/A",
-            topLanguageCount: topLanguage ? topLanguage[1] : 0,
-        };
-    }, [frameworks]);
-
-    return (
-        <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 mb-8"
-        >
-            <div className="bg-white/5 backdrop-blur-sm rounded-lg p-4 border border-white/10">
-                <div className="flex items-center gap-2 mb-2">
-                    <FaLayerGroup className="h-5 w-5 text-blue-400" />
-                    <span className="text-sm text-white/60">Total</span>
-                </div>
-                <span className="text-2xl font-bold text-white">
-                    {stats.total}
-                </span>
-            </div>
-
-            <div className="bg-white/5 backdrop-blur-sm rounded-lg p-4 border border-white/10">
-                <div className="flex items-center gap-2 mb-2">
-                    <FaHeart className="h-5 w-5 text-red-400" />
-                    <span className="text-sm text-white/60">Favorites</span>
-                </div>
-                <span className="text-2xl font-bold text-white">
-                    {stats.favorites}
-                </span>
-            </div>
-
-            <div className="bg-white/5 backdrop-blur-sm rounded-lg p-4 border border-white/10">
-                <div className="flex items-center gap-2 mb-2">
-                    <FaGraduationCap className="h-5 w-5 text-green-400" />
-                    <span className="text-sm text-white/60">Learning</span>
-                </div>
-                <span className="text-2xl font-bold text-white">
-                    {stats.learning}
-                </span>
-            </div>
-
-            <div className="bg-white/5 backdrop-blur-sm rounded-lg p-4 border border-white/10">
-                <div className="flex items-center gap-2 mb-2">
-                    <FaTrophy className="h-5 w-5 text-purple-400" />
-                    <span className="text-sm text-white/60">Expert</span>
-                </div>
-                <span className="text-2xl font-bold text-white">
-                    {stats.expert}
-                </span>
-            </div>
-
-            <div className="bg-white/5 backdrop-blur-sm rounded-lg p-4 border border-white/10">
-                <div className="flex items-center gap-2 mb-2">
-                    <FaChartBar className="h-5 w-5 text-yellow-400" />
-                    <span className="text-sm text-white/60">Avg Level</span>
-                </div>
-                <span className="text-2xl font-bold text-white">
-                    {stats.avgProficiency}%
-                </span>
-            </div>
-
-            <div className="bg-white/5 backdrop-blur-sm rounded-lg p-4 border border-white/10">
-                <div className="flex items-center gap-2 mb-2">
-                    <FaCode className="h-5 w-5 text-indigo-400" />
-                    <span className="text-sm text-white/60">Top Lang</span>
-                </div>
-                <span className="text-lg font-bold text-white">
-                    {stats.topLanguage}
-                </span>
-            </div>
-        </motion.div>
-    );
-};
+const FrameworkFilters = ({ frameworks, filters, setFilters }) => (
+    <UnifiedFilters
+        items={frameworks}
+        filters={filters}
+        setFilters={setFilters}
+        config={{ type: "frameworks" }}
+    />
+);
 
 // Main Frameworks component
 export default function Frameworks() {
@@ -357,6 +102,7 @@ export default function Frameworks() {
         search: "",
         language: "all",
         status: "all",
+        sort: "proficiency",
     });
 
     const [headerRef, headerInView] = useInView({
@@ -364,11 +110,12 @@ export default function Frameworks() {
         threshold: 0.2,
     });
 
-    // Filter frameworks based on current filters
-    const filteredFrameworks = useMemo(() => {
+    // Filter AND SORT frameworks based on current filters
+    const filteredAndSortedFrameworks = useMemo(() => {
         if (!data.framework) return [];
 
-        return data.framework.filter((framework) => {
+        // First, filter the frameworks
+        let filtered = data.framework.filter((framework) => {
             // Search filter
             if (filters.search) {
                 const searchLower = filters.search.toLowerCase();
@@ -381,29 +128,54 @@ export default function Frameworks() {
 
             // Language filter
             if (
-                filters.language !== "all" &&
-                framework.language !== filters.language
+                filters.category !== "all" &&
+                framework.language !== filters.category
             ) {
                 return false;
             }
 
             // Status filter
-            if (filters.status !== "all") {
-                if (filters.status === "favorites" && !framework.favorite)
-                    return false;
-                if (filters.status === "learning" && !framework.learning)
-                    return false;
-                if (filters.status === "expert" && framework.percentage < 90)
-                    return false;
+            const { status } = filters;
+            const { percentage, favorite, learning } = framework;
+
+            if (status !== "all") {
+                if (status === "favorites" && !favorite) return false;
+                if (status === "learning" && !learning) return false;
+                if (status === "expert" && percentage < 90) return false;
                 if (
-                    filters.status === "advanced" &&
-                    (framework.percentage < 75 || framework.percentage >= 90)
+                    status === "advanced" &&
+                    (percentage < 70 || percentage >= 90)
                 )
                     return false;
+                if (
+                    status === "intermediate" &&
+                    (percentage < 50 || percentage >= 70)
+                )
+                    return false;
+                if (status === "beginner" && percentage >= 50) return false;
             }
-
             return true;
         });
+
+        // Then, sort the filtered results
+        filtered.sort((a, b) => {
+            switch (filters.sort) {
+                case "name":
+                    return a.name.localeCompare(b.name);
+                case "proficiency":
+                    return b.percentage - a.percentage;
+                case "category":
+                    return (a.category || "").localeCompare(b.category || "");
+                case "favorites":
+                    return (
+                        b.favorite - a.favorite || b.percentage - a.percentage
+                    );
+                default:
+                    return 0;
+            }
+        });
+
+        return filtered;
     }, [data.framework, filters]);
 
     if (isLoading) {
@@ -480,7 +252,11 @@ export default function Frameworks() {
                 </motion.div>
 
                 {/* Statistics */}
-                <FrameworkStats frameworks={data.framework} />
+                <UnifiedStats
+                    items={data.framework}
+                    type="frameworks"
+                    topItem="React"
+                />
 
                 {/* Filters */}
                 <FrameworkFilters
@@ -498,7 +274,7 @@ export default function Frameworks() {
                     <p className="text-white/60 text-sm">
                         Showing{" "}
                         <span className="font-medium text-white">
-                            {filteredFrameworks.length}
+                            {filteredAndSortedFrameworks.length}
                         </span>{" "}
                         of{" "}
                         <span className="font-medium text-white">
@@ -519,26 +295,20 @@ export default function Frameworks() {
                 </motion.div>
 
                 {/* Frameworks Grid */}
-                {filteredFrameworks.length > 0 ? (
+                {filteredAndSortedFrameworks.length > 0 ? (
                     <motion.div
                         initial="hidden"
                         animate="visible"
                         variants={staggerChildren}
                         className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
                     >
-                        {filteredFrameworks
-                            .sort(
-                                (a, b) =>
-                                    b.percentage - a.percentage ||
-                                    (b.favorite ? 1 : 0) - (a.favorite ? 1 : 0),
-                            )
-                            .map((framework, index) => (
-                                <UnifiedSkillCard
-                                    item={framework}
-                                    index={index}
-                                    type="framework"
-                                />
-                            ))}
+                        {filteredAndSortedFrameworks.map((framework, index) => (
+                            <UnifiedSkillCard
+                                item={framework}
+                                index={index}
+                                type="framework"
+                            />
+                        ))}
                     </motion.div>
                 ) : (
                     <motion.div
@@ -559,6 +329,7 @@ export default function Frameworks() {
                                     search: "",
                                     language: "all",
                                     status: "all",
+                                    sort: "percentage",
                                 })
                             }
                             className="px-6 py-3 bg-indigo-600 hover:bg-indigo-500 text-white rounded-full font-medium transition-all"
