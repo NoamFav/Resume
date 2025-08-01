@@ -3,18 +3,15 @@ import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { Link } from "react-router-dom";
 import UnifiedSkillCard from "./Cards";
+import UnifiedFilters from "./Sorting";
+import UnifiedStats from "./Stats";
+
 import {
     FaCode,
     FaSearch,
-    FaHeart,
-    FaGraduationCap,
-    FaChartBar,
-    FaLayerGroup,
     FaArrowUp,
     FaEnvelope,
     FaRocket,
-    FaCrown,
-    FaTrophy,
     FaSpinner,
 } from "react-icons/fa";
 
@@ -68,62 +65,6 @@ const useDataLoader = () => {
                             learning: false,
                             image: "https://cdn.simpleicons.org/python",
                         },
-                        {
-                            name: "JavaScript",
-                            percentage: 80,
-                            favorite: true,
-                            learning: false,
-                            image: "https://cdn.simpleicons.org/javascript",
-                        },
-                        {
-                            name: "TypeScript",
-                            percentage: 75,
-                            favorite: false,
-                            learning: false,
-                            image: "https://cdn.simpleicons.org/typescript",
-                        },
-                        {
-                            name: "Rust",
-                            percentage: 50,
-                            favorite: true,
-                            learning: true,
-                            image: "https://cdn.simpleicons.org/rust",
-                        },
-                        {
-                            name: "Go",
-                            percentage: 45,
-                            favorite: false,
-                            learning: true,
-                            image: "https://cdn.simpleicons.org/go",
-                        },
-                        {
-                            name: "C++",
-                            percentage: 70,
-                            favorite: false,
-                            learning: false,
-                            image: "https://cdn.simpleicons.org/cplusplus",
-                        },
-                        {
-                            name: "Swift",
-                            percentage: 35,
-                            favorite: false,
-                            learning: true,
-                            image: "https://cdn.simpleicons.org/swift",
-                        },
-                        {
-                            name: "PHP",
-                            percentage: 65,
-                            favorite: false,
-                            learning: false,
-                            image: "https://cdn.simpleicons.org/php",
-                        },
-                        {
-                            name: "C#",
-                            percentage: 60,
-                            favorite: false,
-                            learning: false,
-                            image: "https://cdn.simpleicons.org/csharp",
-                        },
                     ],
                 });
             } finally {
@@ -137,165 +78,14 @@ const useDataLoader = () => {
     return { data, isLoading };
 };
 
-// Filter component
-const LanguageFilters = ({ filters, setFilters }) => {
-    const filterOptions = [
-        { key: "all", label: "All Languages", icon: FaLayerGroup },
-        { key: "favorites", label: "Favorites", icon: FaHeart },
-        { key: "learning", label: "Currently Learning", icon: FaGraduationCap },
-        { key: "expert", label: "Expert Level", icon: FaCrown },
-        { key: "advanced", label: "Advanced", icon: FaTrophy },
-    ];
-
-    return (
-        <div className="mb-8 space-y-4">
-            {/* Search */}
-            <div className="relative">
-                <FaSearch className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white/40 h-4 w-4" />
-                <input
-                    type="text"
-                    placeholder="Search languages..."
-                    value={filters.search}
-                    onChange={(e) =>
-                        setFilters((prev) => ({
-                            ...prev,
-                            search: e.target.value,
-                        }))
-                    }
-                    className="w-full pl-12 pr-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder-white/40 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent backdrop-blur-sm"
-                />
-            </div>
-
-            {/* Filter buttons */}
-            <div className="flex flex-wrap gap-2">
-                {filterOptions.map((option) => {
-                    const OptionIcon = option.icon;
-                    return (
-                        <button
-                            key={option.key}
-                            onClick={() =>
-                                setFilters((prev) => ({
-                                    ...prev,
-                                    filter: option.key,
-                                }))
-                            }
-                            className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all ${
-                                filters.filter === option.key
-                                    ? "bg-blue-600 text-white shadow-lg"
-                                    : "bg-white/5 text-white/70 hover:bg-white/10 hover:text-white"
-                            }`}
-                        >
-                            <OptionIcon className="h-4 w-4" />
-                            {option.label}
-                        </button>
-                    );
-                })}
-            </div>
-
-            {/* Sort options */}
-            <div className="flex flex-wrap gap-2">
-                <span className="text-sm text-white/60 self-center">
-                    Sort by:
-                </span>
-                {[
-                    { key: "proficiency", label: "Proficiency" },
-                    { key: "name", label: "Name" },
-                    { key: "favorites", label: "Favorites First" },
-                ].map((sort) => (
-                    <button
-                        key={sort.key}
-                        onClick={() =>
-                            setFilters((prev) => ({
-                                ...prev,
-                                sort: sort.key,
-                            }))
-                        }
-                        className={`px-3 py-1 rounded-full text-sm transition-all ${
-                            filters.sort === sort.key
-                                ? "bg-purple-600 text-white"
-                                : "bg-white/5 text-white/70 hover:bg-white/10"
-                        }`}
-                    >
-                        {sort.label}
-                    </button>
-                ))}
-            </div>
-        </div>
-    );
-};
-
-// Statistics component
-const LanguageStats = ({ languages }) => {
-    const stats = useMemo(() => {
-        const total = languages.length;
-        const favorites = languages.filter((lang) => lang.favorite).length;
-        const learning = languages.filter((lang) => lang.learning).length;
-        const expert = languages.filter((lang) => lang.percentage >= 90).length;
-        const avgProficiency = Math.round(
-            languages.reduce((acc, lang) => acc + lang.percentage, 0) / total,
-        );
-
-        return { total, favorites, learning, expert, avgProficiency };
-    }, [languages]);
-
-    return (
-        <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="grid grid-cols-2 md:grid-cols-5 gap-4 mb-8"
-        >
-            <div className="bg-white/5 backdrop-blur-sm rounded-lg p-4 border border-white/10">
-                <div className="flex items-center gap-2 mb-2">
-                    <FaLayerGroup className="h-5 w-5 text-blue-400" />
-                    <span className="text-sm text-white/60">Total</span>
-                </div>
-                <span className="text-2xl font-bold text-white">
-                    {stats.total}
-                </span>
-            </div>
-
-            <div className="bg-white/5 backdrop-blur-sm rounded-lg p-4 border border-white/10">
-                <div className="flex items-center gap-2 mb-2">
-                    <FaHeart className="h-5 w-5 text-red-400" />
-                    <span className="text-sm text-white/60">Favorites</span>
-                </div>
-                <span className="text-2xl font-bold text-white">
-                    {stats.favorites}
-                </span>
-            </div>
-
-            <div className="bg-white/5 backdrop-blur-sm rounded-lg p-4 border border-white/10">
-                <div className="flex items-center gap-2 mb-2">
-                    <FaGraduationCap className="h-5 w-5 text-green-400" />
-                    <span className="text-sm text-white/60">Learning</span>
-                </div>
-                <span className="text-2xl font-bold text-white">
-                    {stats.learning}
-                </span>
-            </div>
-
-            <div className="bg-white/5 backdrop-blur-sm rounded-lg p-4 border border-white/10">
-                <div className="flex items-center gap-2 mb-2">
-                    <FaCrown className="h-5 w-5 text-purple-400" />
-                    <span className="text-sm text-white/60">Expert</span>
-                </div>
-                <span className="text-2xl font-bold text-white">
-                    {stats.expert}
-                </span>
-            </div>
-
-            <div className="bg-white/5 backdrop-blur-sm rounded-lg p-4 border border-white/10">
-                <div className="flex items-center gap-2 mb-2">
-                    <FaChartBar className="h-5 w-5 text-yellow-400" />
-                    <span className="text-sm text-white/60">Avg Level</span>
-                </div>
-                <span className="text-2xl font-bold text-white">
-                    {stats.avgProficiency}%
-                </span>
-            </div>
-        </motion.div>
-    );
-};
+const LanguageFilters = ({ filters, setFilters }) => (
+    <UnifiedFilters
+        items={[]} // languages don't need items for categories
+        filters={filters}
+        setFilters={setFilters}
+        config={{ type: "languages" }}
+    />
+);
 
 // Main Languages component
 export default function Languages() {
@@ -312,50 +102,70 @@ export default function Languages() {
     });
 
     // Filter and sort languages
-    const filteredLanguages = useMemo(() => {
+    const filteredAndSortedLanguages = useMemo(() => {
         if (!data.programming_language) return [];
 
-        let filtered = data.programming_language.filter((language) => {
+        let filtered = data.programming_language.filter((languages) => {
             // Search filter
             if (filters.search) {
                 const searchLower = filters.search.toLowerCase();
-                if (!language.name.toLowerCase().includes(searchLower)) {
-                    return false;
-                }
+                const matchesSearch =
+                    languages.name.toLowerCase().includes(searchLower) ||
+                    languages.category?.toLowerCase().includes(searchLower) ||
+                    languages.description?.toLowerCase().includes(searchLower);
+
+                if (!matchesSearch) return false;
             }
 
             // Category filter
-            switch (filters.filter) {
-                case "favorites":
-                    return language.favorite;
-                case "learning":
-                    return language.learning;
-                case "expert":
-                    return language.percentage >= 90;
-                case "advanced":
-                    return (
-                        language.percentage >= 75 && language.percentage < 90
-                    );
-                default:
-                    return true;
+            if (
+                filters.category !== "all" &&
+                languages.category !== filters.category
+            ) {
+                return false;
             }
+
+            // Status filter
+            const { status } = filters;
+            const { percentage, favorite, learning } = languages;
+
+            if (status !== "all") {
+                if (status === "favorites" && !favorite) return false;
+                if (status === "learning" && !learning) return false;
+                if (status === "expert" && percentage < 90) return false;
+                if (
+                    status === "advanced" &&
+                    (percentage < 70 || percentage >= 90)
+                )
+                    return false;
+                if (
+                    status === "intermediate" &&
+                    (percentage < 50 || percentage >= 70)
+                )
+                    return false;
+                if (status === "beginner" && percentage >= 50) return false;
+            }
+
+            return true;
         });
 
         // Sort
-        switch (filters.sort) {
-            case "proficiency":
-                filtered.sort((a, b) => b.percentage - a.percentage);
-                break;
-            case "name":
-                filtered.sort((a, b) => a.name.localeCompare(b.name));
-                break;
-            case "favorites":
-                filtered.sort(
-                    (a, b) =>
-                        b.favorite - a.favorite || b.percentage - a.percentage,
-                );
-                break;
-        }
+        filtered.sort((a, b) => {
+            switch (filters.sort) {
+                case "name":
+                    return a.name.localeCompare(b.name);
+                case "proficiency":
+                    return b.percentage - a.percentage;
+                case "category":
+                    return (a.category || "").localeCompare(b.category || "");
+                case "favorites":
+                    return (
+                        b.favorite - a.favorite || b.percentage - a.percentage
+                    );
+                default:
+                    return 0;
+            }
+        });
 
         return filtered;
     }, [data.programming_language, filters]);
@@ -435,7 +245,11 @@ export default function Languages() {
                 </motion.div>
 
                 {/* Statistics */}
-                <LanguageStats languages={data.programming_language} />
+                <UnifiedStats
+                    items={data.programming_language}
+                    type="languages"
+                    topItem="Go"
+                />
 
                 {/* Filters */}
                 <LanguageFilters
@@ -453,7 +267,7 @@ export default function Languages() {
                     <p className="text-white/60 text-sm">
                         Showing{" "}
                         <span className="font-medium text-white">
-                            {filteredLanguages.length}
+                            {filteredAndSortedLanguages.length}
                         </span>{" "}
                         of{" "}
                         <span className="font-medium text-white">
@@ -474,14 +288,14 @@ export default function Languages() {
                 </motion.div>
 
                 {/* Languages Grid */}
-                {filteredLanguages.length > 0 ? (
+                {filteredAndSortedLanguages.length > 0 ? (
                     <motion.div
                         initial="hidden"
                         animate="visible"
                         variants={staggerChildren}
                         className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
                     >
-                        {filteredLanguages.map((language, index) => (
+                        {filteredAndSortedLanguages.map((language, index) => (
                             <UnifiedSkillCard
                                 item={language}
                                 index={index}

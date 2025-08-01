@@ -5,133 +5,152 @@
             "percentage": 90,
             "favorite": true,
             "learning": true,
-            "image": "https://cdn.simpleicons.org/git"
+            "image": "https://cdn.simpleicons.org/git",
+            "category": "DevOps & CI/CD"
         },
         {
             "name": "Docker",
             "percentage": 70,
             "favorite": false,
             "learning": true,
-            "image": "https://cdn.simpleicons.org/docker"
+            "image": "https://cdn.simpleicons.org/docker",
+            "category": "DevOps & CI/CD"
         },
         {
             "name": "Github Actions",
             "percentage": 40,
             "favorite": false,
             "learning": false,
-            "image": "https://cdn.simpleicons.org/githubactions"
+            "image": "https://cdn.simpleicons.org/githubactions",
+            "category": "DevOps & CI/CD"
         },
         {
             "name": "MySQL",
             "percentage": 60,
             "favorite": true,
             "learning": true,
-            "image": "https://cdn.simpleicons.org/mysql"
+            "image": "https://cdn.simpleicons.org/mysql",
+            "category": "Databases"
         },
         {
             "name": "Kubernetes",
             "percentage": 0,
             "favorite": false,
             "learning": true,
-            "image": "https://cdn.simpleicons.org/kubernetes"
+            "image": "https://cdn.simpleicons.org/kubernetes",
+            "category": "DevOps & CI/CD"
         },
         {
             "name": "Zsh",
             "percentage": 85,
             "favorite": true,
             "learning": false,
-            "image": "https://cdn.simpleicons.org/gnubash"
+            "image": "https://cdn.simpleicons.org/gnubash",
+            "category": "Shell & Scripting"
         },
         {
             "name": "Neovim",
             "percentage": 90,
             "favorite": true,
             "learning": false,
-            "image": "https://cdn.simpleicons.org/neovim"
+            "image": "https://cdn.simpleicons.org/neovim",
+            "category": "Editors & Terminals"
         },
         {
             "name": "iTerm2",
             "percentage": 80,
             "favorite": true,
             "learning": false,
-            "image": "https://cdn.simpleicons.org/apple"
+            "image": "https://cdn.simpleicons.org/apple",
+            "category": "Editors & Terminals"
         },
         {
             "name": "Tmux",
             "percentage": 75,
             "favorite": true,
             "learning": false,
-            "image": "https://cdn.simpleicons.org/tmux"
+            "image": "https://cdn.simpleicons.org/tmux",
+            "category": "Editors & Terminals"
         },
         {
             "name": "Homebrew",
             "percentage": 85,
             "favorite": true,
             "learning": false,
-            "image": "https://cdn.simpleicons.org/homebrew"
+            "image": "https://cdn.simpleicons.org/homebrew",
+            "category": "Shell & Scripting"
         },
         {
             "name": "SQLite",
             "percentage": 70,
             "favorite": true,
             "learning": true,
-            "image": "https://cdn.simpleicons.org/sqlite"
+            "image": "https://cdn.simpleicons.org/sqlite",
+            "category": "Databases"
         },
         {
             "name": "MongoDB",
             "percentage": 60,
             "favorite": false,
             "learning": true,
-            "image": "https://cdn.simpleicons.org/mongodb"
+            "image": "https://cdn.simpleicons.org/mongodb",
+            "category": "Databases"
         },
         {
             "name": "Redis",
             "percentage": 50,
             "favorite": false,
             "learning": true,
-            "image": "https://cdn.simpleicons.org/redis"
+            "image": "https://cdn.simpleicons.org/redis",
+            "category": "Databases"
         },
         {
             "name": "Make",
             "percentage": 40,
             "favorite": false,
             "learning": true,
-            "image": "https://cdn.simpleicons.org/gnubash"
+            "image": "https://cdn.simpleicons.org/gnubash",
+            "category": "DevOps & CI/CD"
         },
         {
             "name": "QEMU/UTM",
             "percentage": 35,
             "favorite": true,
             "learning": true,
-            "image": "https://cdn.simpleicons.org/linux"
+            "image": "https://cdn.simpleicons.org/linux",
+            "category": "Virtualization"
         },
         {
             "name": "Warp Terminal",
             "percentage": 60,
             "favorite": false,
             "learning": false,
-            "image": "https://cdn.simpleicons.org/warp"
+            "image": "https://cdn.simpleicons.org/warp",
+            "category": "Editors & Terminals"
         },
         {
             "name": "Postman",
             "percentage": 55,
             "favorite": false,
             "learning": false,
-            "image": "https://cdn.simpleicons.org/postman"
+            "image": "https://cdn.simpleicons.org/postman",
+            "category": "API & Testing"
         },
         {
             "name": "VS Code",
             "percentage": 50,
             "favorite": false,
             "learning": false,
-            "image": "https://cdn.simpleicons.org/textpattern"
+            "image": "https://cdn.simpleicons.org/textpattern",
+            "category": "Editors & Terminals"
         },
         {
             "name": "Xcode",
             "percentage": 65,
             "favorite": false,
             "learning": true,
-            "image": "https://cdn.simpleicons.org/xcode"
+            "image": "https://cdn.simpleicons.org/xcode",
+            "category": "Platform & IDEs"
         }
     ]
 }
