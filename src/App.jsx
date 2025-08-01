@@ -4,6 +4,7 @@ import Projects from "./components/Projects";
 import Language from "./components/Language";
 import Skills from "./components/Skills";
 import Frameworks from "./components/Frameworks";
+import Tools from "./components/Tools";
 
 function App() {
     return (
@@ -20,6 +21,7 @@ function App() {
                                 path="/frameworks"
                                 element={<Frameworks />}
                             />
+                            <Route path="/tools" element={<Tools />} />
                         </Routes>
                     </main>
                 </div>
