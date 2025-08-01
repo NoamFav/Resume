@@ -5,7 +5,7 @@
             "percentage": 90,
             "favorite": true,
             "learning": false,
-            "image": "https://cdn.simpleicons.org/java"
+            "image": "https://cdn.simpleicons.org/openjdk"
         },
         {
             "name": "Python",
@@ -26,7 +26,7 @@
             "percentage": 30,
             "favorite": true,
             "learning": true,
-            "image": "https://cdn.simpleicons.org/c++"
+            "image": "https://cdn.simpleicons.org/cplusplus"
         },
         {
             "name": "Swift",
@@ -61,14 +61,14 @@
             "percentage": 90,
             "favorite": false,
             "learning": false,
-            "image": "https://cdn.simpleicons.org/htmlcss"
+            "image": "https://cdn.simpleicons.org/html5"
         },
         {
             "name": "SQL",
             "percentage": 50,
             "favorite": false,
             "learning": true,
-            "image": "https://cdn.simpleicons.org/sql"
+            "image": "https://cdn.simpleicons.org/mysql"
         },
         {
             "name": "Lua",
@@ -82,14 +82,14 @@
             "percentage": 60,
             "favorite": false,
             "learning": true,
-            "image": "https://cdn.simpleicons.org/bash"
+            "image": "https://cdn.simpleicons.org/gnubash"
         },
         {
             "name": "Vimscript",
             "percentage": 40,
             "favorite": false,
             "learning": true,
-            "image": "https://cdn.simpleicons.org/vimscript"
+            "image": "https://cdn.simpleicons.org/vim"
         },
         {
             "name": "Go",
@@ -110,7 +110,7 @@
             "percentage": 15,
             "favorite": false,
             "learning": true,
-            "image": "https://cdn.simpleicons.org/applescript"
+            "image": "https://cdn.simpleicons.org/apple"
         },
         {
             "name": "Markdown",
@@ -124,7 +124,7 @@
             "percentage": 60,
             "favorite": true,
             "learning": false,
-            "image": "https://cdn.simpleicons.org/csharp"
+            "image": "https://cdn.simpleicons.org/dotnet"
         },
         {
             "name": "LaTeX",
@@ -159,7 +159,7 @@
             "percentage": 85,
             "favorite": true,
             "learning": false,
-            "image": "https://cdn.simpleicons.org/gnubash"
+            "image": "https://cdn.simpleicons.org/zsh"
         },
         {
             "name": "GraphQL",

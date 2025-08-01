@@ -14,7 +14,7 @@
             "favorite": true,
             "learning": true,
             "language": "Java",
-            "image": "https://cdn.simpleicons.org/lwjgl"
+            "image": "https://cdn.simpleicons.org/webgl"
         },
         {
             "name": "Maven",
@@ -22,7 +22,7 @@
             "favorite": true,
             "learning": true,
             "language": "Java",
-            "image": "https://cdn.simpleicons.org/maven"
+            "image": "https://cdn.simpleicons.org/apachemaven"
         },
         {
             "name": "JavaFX",
@@ -30,7 +30,7 @@
             "favorite": true,
             "learning": false,
             "language": "Java",
-            "image": "https://cdn.simpleicons.org/javafx"
+            "image": "https://cdn.simpleicons.org/openjdk"
         },
         {
             "name": "Swing",
@@ -38,7 +38,7 @@
             "favorite": false,
             "learning": false,
             "language": "Java",
-            "image": "https://cdn.simpleicons.org/swing"
+            "image": "https://cdn.simpleicons.org/openjdk"
         },
         {
             "name": "React",
@@ -54,7 +54,7 @@
             "favorite": true,
             "learning": true,
             "language": "Javascript",
-            "image": "https://cdn.simpleicons.org/nodejs"
+            "image": "https://cdn.simpleicons.org/nodedotjs"
         },
         {
             "name": "Flask",
@@ -70,7 +70,7 @@
             "favorite": false,
             "learning": true,
             "language": "Python",
-            "image": "https://cdn.simpleicons.org/matplotlib"
+            "image": "https://cdn.simpleicons.org/python"
         },
         {
             "name": "Pandas",
@@ -86,7 +86,7 @@
             "favorite": true,
             "learning": true,
             "language": "Python",
-            "image": "https://cdn.simpleicons.org/scikit-learn"
+            "image": "https://cdn.simpleicons.org/scikitlearn"
         },
         {
             "name": "TensorFlow",
@@ -110,7 +110,7 @@
             "favorite": false,
             "learning": true,
             "language": "Rust",
-            "image": "https://cdn.simpleicons.org/diesel"
+            "image": "https://cdn.simpleicons.org/rust"
         },
         {
             "name": "SwiftUI",
@@ -118,7 +118,7 @@
             "favorite": true,
             "learning": true,
             "language": "Swift",
-            "image": "https://cdn.simpleicons.org/swiftui"
+            "image": "https://cdn.simpleicons.org/swift"
         },
         {
             "name": "Unity",
@@ -142,7 +142,7 @@
             "favorite": true,
             "learning": true,
             "language": "HTML/CSS",
-            "image": "https://cdn.simpleicons.org/tailwind"
+            "image": "https://cdn.simpleicons.org/tailwindcss"
         },
         {
             "name": "SQLAlchemy",
@@ -199,14 +199,6 @@
             "learning": false,
             "language": "Python",
             "image": "https://cdn.simpleicons.org/fastapi"
-        },
-        {
-            "name": "Tree-sitter",
-            "percentage": 70,
-            "favorite": true,
-            "learning": false,
-            "language": "Rust",
-            "image": "https://cdn.simpleicons.org/tree-sitter"
         }
     ]
 }
