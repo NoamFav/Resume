@@ -2,6 +2,7 @@ import React, { useEffect, useState, useMemo } from "react";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { Link } from "react-router-dom";
+import UnifiedSkillCard from "./Cards";
 
 import {
     FaLayerGroup,
@@ -9,21 +10,13 @@ import {
     FaHeart,
     FaGraduationCap,
     FaChartBar,
-    FaStar,
     FaCode,
     FaSpinner,
     FaArrowUp,
-    FaChevronRight,
-    FaExternalLinkAlt,
-    FaFilter,
     FaTrophy,
     FaCertificate,
-    FaBookOpen,
     FaLightbulb,
     FaRocket,
-    FaTools,
-    FaGithub,
-    FaGlobe,
 } from "react-icons/fa";
 
 // Animation variants
@@ -38,11 +31,6 @@ const staggerChildren = {
         opacity: 1,
         transition: { staggerChildren: 0.1 },
     },
-};
-
-const scaleIn = {
-    hidden: { opacity: 0, scale: 0.8 },
-    visible: { opacity: 1, scale: 1, transition: { duration: 0.5 } },
 };
 
 // Progress bar component
@@ -67,39 +55,6 @@ const ProgressBar = ({ percentage, color = "blue" }) => {
             />
         </div>
     );
-};
-
-// Get skill level based on percentage
-const getSkillLevel = (percentage) => {
-    if (percentage >= 90)
-        return {
-            level: "Expert",
-            color: "text-purple-400",
-            bgColor: "bg-purple-500/20",
-        };
-    if (percentage >= 75)
-        return {
-            level: "Advanced",
-            color: "text-blue-400",
-            bgColor: "bg-blue-500/20",
-        };
-    if (percentage >= 50)
-        return {
-            level: "Intermediate",
-            color: "text-green-400",
-            bgColor: "bg-green-500/20",
-        };
-    if (percentage >= 25)
-        return {
-            level: "Beginner",
-            color: "text-yellow-400",
-            bgColor: "bg-yellow-500/20",
-        };
-    return {
-        level: "Learning",
-        color: "text-orange-400",
-        bgColor: "bg-orange-500/20",
-    };
 };
 
 // Custom hook for data loading
@@ -197,148 +152,6 @@ const useDataLoader = () => {
     }, []);
 
     return { data, isLoading };
-};
-
-// Framework card component
-const FrameworkCard = ({ framework, index }) => {
-    const [ref, inView] = useInView({
-        triggerOnce: true,
-        threshold: 0.1,
-    });
-
-    const skillLevel = getSkillLevel(framework.percentage);
-
-    return (
-        <motion.div
-            ref={ref}
-            initial="hidden"
-            animate={inView ? "visible" : "hidden"}
-            variants={scaleIn}
-            transition={{ delay: 0.1 * index }}
-            className="bg-white/5 backdrop-blur-sm rounded-xl p-6 hover:bg-white/10 transition-all duration-300 border border-white/5 hover:border-white/10 group hover:shadow-xl hover:-translate-y-2"
-        >
-            {/* Header with gradient based on skill level */}
-            <div
-                className={`h-1 rounded-t-xl mb-4 ${
-                    framework.percentage >= 90
-                        ? "bg-gradient-to-r from-purple-600 to-pink-600"
-                        : framework.percentage >= 75
-                          ? "bg-gradient-to-r from-blue-600 to-indigo-600"
-                          : framework.percentage >= 50
-                            ? "bg-gradient-to-r from-green-600 to-emerald-600"
-                            : framework.percentage >= 25
-                              ? "bg-gradient-to-r from-yellow-600 to-orange-600"
-                              : "bg-gradient-to-r from-orange-600 to-red-600"
-                }`}
-            />
-
-            {/* Framework Info */}
-            <div className="flex items-start justify-between mb-4">
-                <div className="flex items-center gap-3">
-                    {framework.image && (
-                        <div className="relative">
-                            <img
-                                src={framework.image}
-                                alt={framework.name}
-                                className="w-12 h-12 rounded-lg group-hover:scale-110 transition-transform duration-300"
-                                onError={(e) => {
-                                    e.target.style.display = "none";
-                                }}
-                            />
-                            <div className="absolute inset-0 bg-white/10 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity" />
-                        </div>
-                    )}
-                    <div>
-                        <h3 className="text-xl font-bold text-white group-hover:text-blue-300 transition-colors">
-                            {framework.name}
-                        </h3>
-                        <div className="flex items-center gap-2 mt-1">
-                            <span className="text-sm text-white/60">
-                                {framework.language}
-                            </span>
-                            <span
-                                className={`text-xs px-2 py-1 rounded-full ${skillLevel.bgColor} ${skillLevel.color} font-medium`}
-                            >
-                                {skillLevel.level}
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                <div className="text-right">
-                    <span className="text-2xl font-bold text-white">
-                        {framework.percentage}%
-                    </span>
-                </div>
-            </div>
-
-            {/* Progress Bar */}
-            <div className="mb-4">
-                <ProgressBar
-                    percentage={framework.percentage}
-                    color={
-                        framework.percentage >= 90
-                            ? "purple"
-                            : framework.percentage >= 75
-                              ? "blue"
-                              : framework.percentage >= 50
-                                ? "green"
-                                : framework.percentage >= 25
-                                  ? "yellow"
-                                  : "red"
-                    }
-                />
-            </div>
-
-            {/* Status Badges */}
-            <div className="flex flex-wrap gap-2 mb-4">
-                {framework.favorite && (
-                    <div className="flex items-center gap-1 px-3 py-1.5 rounded-full bg-red-500/20 text-red-300 border border-red-500/30 group-hover:bg-red-500/30 transition-colors">
-                        <FaHeart className="h-3 w-3" />
-                        <span className="text-xs font-medium">Favorite</span>
-                    </div>
-                )}
-                {framework.learning && (
-                    <div className="flex items-center gap-1 px-3 py-1.5 rounded-full bg-green-500/20 text-green-300 border border-green-500/30 group-hover:bg-green-500/30 transition-colors">
-                        <FaGraduationCap className="h-3 w-3" />
-                        <span className="text-xs font-medium">Learning</span>
-                    </div>
-                )}
-                {framework.percentage >= 90 && (
-                    <div className="flex items-center gap-1 px-3 py-1.5 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30">
-                        <FaTrophy className="h-3 w-3" />
-                        <span className="text-xs font-medium">Expert</span>
-                    </div>
-                )}
-            </div>
-
-            {/* Additional Info */}
-            <div className="space-y-2 text-sm text-white/70">
-                <div className="flex items-center justify-between">
-                    <span>Proficiency Level:</span>
-                    <span className={`font-medium ${skillLevel.color}`}>
-                        {skillLevel.level}
-                    </span>
-                </div>
-                <div className="flex items-center justify-between">
-                    <span>Primary Language:</span>
-                    <span className="font-medium text-blue-300">
-                        {framework.language}
-                    </span>
-                </div>
-            </div>
-
-            {/* Action Buttons */}
-            <div className="flex gap-2 mt-4 pt-4 border-t border-white/10">
-                <button className="flex-1 flex items-center justify-center gap-2 px-3 py-2 bg-blue-600/20 hover:bg-blue-600/30 text-blue-300 rounded-lg text-sm font-medium transition-colors">
-                    <FaBookOpen className="h-3 w-3" />
-                    Learn More
-                </button>
-                <button className="flex items-center justify-center p-2 bg-white/10 hover:bg-white/20 text-white/70 hover:text-white rounded-lg transition-colors">
-                    <FaExternalLinkAlt className="h-3 w-3" />
-                </button>
-            </div>
-        </motion.div>
-    );
 };
 
 // Filter component
@@ -720,10 +533,10 @@ export default function Frameworks() {
                                     (b.favorite ? 1 : 0) - (a.favorite ? 1 : 0),
                             )
                             .map((framework, index) => (
-                                <FrameworkCard
-                                    key={`${framework.name}-${index}`}
-                                    framework={framework}
+                                <UnifiedSkillCard
+                                    item={framework}
                                     index={index}
+                                    type="framework"
                                 />
                             ))}
                     </motion.div>

@@ -2,24 +2,18 @@ import React, { useEffect, useState, useMemo } from "react";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
 import { Link } from "react-router-dom";
-
+import UnifiedSkillCard from "./Cards";
 import {
     FaCode,
     FaSearch,
     FaHeart,
     FaGraduationCap,
-    FaStar,
     FaChartBar,
     FaLayerGroup,
     FaArrowUp,
     FaEnvelope,
-    FaGithub,
-    FaFilter,
-    FaBookOpen,
-    FaLightbulb,
     FaRocket,
     FaCrown,
-    FaFire,
     FaTrophy,
     FaSpinner,
 } from "react-icons/fa";
@@ -36,75 +30,6 @@ const staggerChildren = {
         opacity: 1,
         transition: { staggerChildren: 0.1 },
     },
-};
-
-const scaleIn = {
-    hidden: { opacity: 0, scale: 0.8 },
-    visible: { opacity: 1, scale: 1, transition: { duration: 0.5 } },
-};
-
-// Progress bar component
-const ProgressBar = ({ percentage, color = "blue" }) => {
-    const colorMap = {
-        blue: "from-blue-500 to-blue-400",
-        green: "from-green-500 to-green-400",
-        purple: "from-purple-500 to-purple-400",
-        orange: "from-orange-500 to-orange-400",
-        red: "from-red-500 to-red-400",
-        yellow: "from-yellow-500 to-yellow-400",
-        pink: "from-pink-500 to-pink-400",
-        indigo: "from-indigo-500 to-indigo-400",
-    };
-
-    return (
-        <div className="w-full bg-white/5 rounded-full h-2.5 overflow-hidden">
-            <motion.div
-                initial={{ width: 0 }}
-                animate={{ width: `${percentage}%` }}
-                transition={{ duration: 1, delay: 0.2 }}
-                className={`h-2.5 rounded-full bg-gradient-to-r ${colorMap[color]}`}
-            />
-        </div>
-    );
-};
-
-// Proficiency level component
-const ProficiencyLevel = ({ percentage }) => {
-    let level, color, icon;
-
-    if (percentage >= 90) {
-        level = "Expert";
-        color = "text-purple-400";
-        icon = FaCrown;
-    } else if (percentage >= 75) {
-        level = "Advanced";
-        color = "text-blue-400";
-        icon = FaTrophy;
-    } else if (percentage >= 60) {
-        level = "Intermediate";
-        color = "text-green-400";
-        icon = FaRocket;
-    } else if (percentage >= 40) {
-        level = "Beginner";
-        color = "text-yellow-400";
-        icon = FaLightbulb;
-    } else {
-        level = "Learning";
-        color = "text-orange-400";
-        icon = FaGraduationCap;
-    }
-
-    const Icon = icon;
-
-    return (
-        <div className={`flex items-center gap-2 ${color}`}>
-            <Icon className="h-4 w-4" />
-            <span className="text-sm font-medium">{level}</span>
-            <span className="text-xs bg-white/10 px-2 py-0.5 rounded-full">
-                {percentage}%
-            </span>
-        </div>
-    );
 };
 
 // Custom hook for data loading
@@ -212,148 +137,8 @@ const useDataLoader = () => {
     return { data, isLoading };
 };
 
-// Language card component
-const LanguageCard = ({ language, index }) => {
-    const [ref, inView] = useInView({
-        triggerOnce: true,
-        threshold: 0.1,
-    });
-
-    const getColorByPercentage = (percentage) => {
-        if (percentage >= 90) return "purple";
-        if (percentage >= 75) return "blue";
-        if (percentage >= 60) return "green";
-        if (percentage >= 40) return "yellow";
-        return "orange";
-    };
-
-    const color = getColorByPercentage(language.percentage);
-
-    return (
-        <motion.div
-            ref={ref}
-            initial="hidden"
-            animate={inView ? "visible" : "hidden"}
-            variants={scaleIn}
-            transition={{ delay: 0.1 * index }}
-            className="bg-white/5 backdrop-blur-sm rounded-xl overflow-hidden hover:bg-white/10 transition-all duration-300 border border-white/5 hover:border-white/10 group hover:shadow-xl hover:-translate-y-2"
-        >
-            {/* Header with gradient */}
-            <div
-                className={`h-2 bg-gradient-to-r ${
-                    color === "purple"
-                        ? "from-purple-600 via-pink-600 to-purple-600"
-                        : color === "blue"
-                          ? "from-blue-600 via-cyan-600 to-blue-600"
-                          : color === "green"
-                            ? "from-green-600 via-emerald-600 to-green-600"
-                            : color === "yellow"
-                              ? "from-yellow-600 via-orange-600 to-yellow-600"
-                              : "from-orange-600 via-red-600 to-orange-600"
-                } group-hover:from-purple-500 group-hover:via-pink-500 group-hover:to-purple-500`}
-            />
-
-            <div className="p-6">
-                {/* Header with image and proficiency */}
-                <div className="flex items-start justify-between mb-4">
-                    <div className="flex items-center gap-4">
-                        {language.image && (
-                            <div className="p-2 bg-white/10 rounded-lg group-hover:bg-white/20 transition-colors overflow-hidden">
-                                <img
-                                    src={language.image}
-                                    alt={language.name}
-                                    className="w-8 h-8 group-hover:scale-110 transition-transform"
-                                    onError={(e) => {
-                                        e.target.style.display = "none";
-                                        e.target.nextSibling.style.display =
-                                            "flex";
-                                    }}
-                                />
-                                <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-500 rounded hidden items-center justify-center">
-                                    <FaCode className="w-4 h-4 text-white" />
-                                </div>
-                            </div>
-                        )}
-                        <div>
-                            <h3 className="text-xl font-semibold text-white group-hover:text-blue-300 transition-colors">
-                                {language.name}
-                            </h3>
-                            <div className="flex items-center gap-2 mt-1">
-                                {language.favorite && (
-                                    <FaHeart className="h-3 w-3 text-red-400" />
-                                )}
-                                {language.learning && (
-                                    <FaGraduationCap className="h-3 w-3 text-green-400" />
-                                )}
-                            </div>
-                        </div>
-                    </div>
-                    <ProficiencyLevel percentage={language.percentage} />
-                </div>
-
-                {/* Progress Bar */}
-                <div className="mb-4">
-                    <div className="flex justify-between items-center mb-2">
-                        <span className="text-sm text-white/60">
-                            Proficiency
-                        </span>
-                        <span className="text-sm font-medium text-white">
-                            {language.percentage}%
-                        </span>
-                    </div>
-                    <ProgressBar
-                        percentage={language.percentage}
-                        color={color}
-                    />
-                </div>
-
-                {/* Status badges */}
-                <div className="flex flex-wrap gap-2 mb-4">
-                    {language.favorite && (
-                        <span className="text-xs px-3 py-1.5 rounded-full bg-red-500/20 text-red-300 border border-red-500/30 flex items-center gap-1.5">
-                            <FaHeart className="h-3 w-3" />
-                            Favorite
-                        </span>
-                    )}
-                    {language.learning && (
-                        <span className="text-xs px-3 py-1.5 rounded-full bg-green-500/20 text-green-300 border border-green-500/30 flex items-center gap-1.5">
-                            <FaGraduationCap className="h-3 w-3" />
-                            Learning
-                        </span>
-                    )}
-                    {language.percentage >= 90 && (
-                        <span className="text-xs px-3 py-1.5 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30 flex items-center gap-1.5">
-                            <FaCrown className="h-3 w-3" />
-                            Expert
-                        </span>
-                    )}
-                </div>
-
-                {/* Experience indicator */}
-                <div className="pt-3 border-t border-white/5">
-                    <div className="flex items-center justify-between text-xs text-white/60">
-                        <span>Experience Level</span>
-                        <div className="flex items-center gap-1">
-                            {[...Array(5)].map((_, i) => (
-                                <FaStar
-                                    key={i}
-                                    className={`h-3 w-3 ${
-                                        i < Math.ceil(language.percentage / 20)
-                                            ? "text-yellow-400"
-                                            : "text-white/20"
-                                    }`}
-                                />
-                            ))}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </motion.div>
-    );
-};
-
 // Filter component
-const LanguageFilters = ({ languages, filters, setFilters }) => {
+const LanguageFilters = ({ filters, setFilters }) => {
     const filterOptions = [
         { key: "all", label: "All Languages", icon: FaLayerGroup },
         { key: "favorites", label: "Favorites", icon: FaHeart },
@@ -697,10 +482,10 @@ export default function Languages() {
                         className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
                     >
                         {filteredLanguages.map((language, index) => (
-                            <LanguageCard
-                                key={`${language.name}-${index}`}
-                                language={language}
+                            <UnifiedSkillCard
+                                item={language}
                                 index={index}
+                                type="language"
                             />
                         ))}
                     </motion.div>
