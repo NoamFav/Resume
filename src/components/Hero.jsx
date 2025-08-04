@@ -21,7 +21,6 @@ import {
 } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { useInView } from "react-intersection-observer";
-import { DynamicBackgroundEffects } from "./Background";
 
 // Helper functions
 const formatDate = (dateString, format = "short") => {
@@ -935,6 +934,15 @@ export default function Hero() {
                                 >
                                     Download CV <FaFileDownload />
                                 </motion.a>
+                                <motion.div variants={fadeIn}>
+                                    <Link
+                                        to="/blog"
+                                        className="px-8 py-3 bg-white/10 hover:bg-white/20 border border-white/20 backdrop-blur-sm text-white rounded-full font-medium transition-all flex items-center gap-2 hover:scale-105"
+                                    >
+                                        Read Blog{" "}
+                                        <FaExternalLinkAlt className="h-3 w-3" />
+                                    </Link>
+                                </motion.div>
                             </motion.div>
 
                             {/* Social Links */}
