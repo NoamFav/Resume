@@ -42,8 +42,8 @@ Check out the live demo: [My Portfolio](https://example.com)
 
 What do you think? Drop your thoughts in the comments! 💭`,
         author: {
-            name: "Alex Thompson",
-            avatar: "AT",
+            name: "Noam Favier",
+            avatar: "NF",
             isOnline: true,
         },
         timestamp: "2 hours ago",
@@ -63,8 +63,8 @@ Sometimes the best solutions come when your brain is running on pure caffeine an
 
 The bug I've been chasing for 3 days finally revealed itself... it was a missing semicolon. Classic! 🤦‍♂️`,
         author: {
-            name: "Alex Thompson",
-            avatar: "AT",
+            name: "Noam Favier",
+            avatar: "NF",
             isOnline: true,
         },
         timestamp: "1 day ago",
@@ -86,8 +86,8 @@ What excites me most is how accessible web development has become. Anyone with d
 
 What are your predictions for the next 5 years?`,
         author: {
-            name: "Alex Thompson",
-            avatar: "AT",
+            name: "Noam Favier",
+            avatar: "NF",
             isOnline: true,
         },
         timestamp: "3 days ago",
@@ -225,12 +225,12 @@ const BlogSidebar = ({ onCategoryFilter, onSearch }) => {
                 <div className="text-center mb-6">
                     <div className="w-20 h-20 bg-gradient-to-r from-pink-500 to-purple-500 rounded-full flex items-center justify-center mx-auto mb-4 border-4 border-white/20 relative">
                         <span className="text-white text-2xl font-bold">
-                            AT
+                            NF
                         </span>
                         <div className="absolute -bottom-1 -right-1 w-6 h-6 bg-green-500 rounded-full border-2 border-white"></div>
                     </div>
                     <h3 className="text-white font-bold text-lg">
-                        Alex's DevBlog
+                        Noam's DevBlog
                     </h3>
                     <p className="text-pink-300 text-sm">
                         Coding my way through life! ✨
