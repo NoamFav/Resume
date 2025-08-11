@@ -27,140 +27,8 @@ import {
 import { FaArrowTrendUp } from "react-icons/fa6";
 import { motion, AnimatePresence } from "framer-motion";
 
-// Mock blog data
-const mockBlogPosts = [
-    {
-        id: 1,
-        title: "Building My Dream Portfolio Site 🚀",
-        content: `Just finished working on a new portfolio project and I'm absolutely thrilled with how it turned out!
-
-The tech stack includes React, Tailwind CSS, and some sweet animations with Framer Motion. The gradient backgrounds are giving me major early 2000s vibes but with a modern twist.
-
-![Portfolio Screenshot](https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=300&fit=crop)
-
-Check out the live demo: [My Portfolio](https://example.com)
-
-What do you think? Drop your thoughts in the comments! 💭`,
-        author: {
-            name: "Noam Favier",
-            avatar: "NF",
-            isOnline: true,
-        },
-        timestamp: "2 hours ago",
-        likes: 42,
-        comments: 18,
-        views: 156,
-        tags: ["coding", "portfolio", "react", "design"],
-        isLiked: false,
-        isBookmarked: true,
-    },
-    {
-        id: 2,
-        title: "Late Night Coding Sessions & Coffee ☕",
-        content: `Nothing beats the vibe of coding at 2 AM with some lo-fi beats playing in the background. Currently working on a new feature that's been haunting my dreams (in a good way).
-
-Sometimes the best solutions come when your brain is running on pure caffeine and determination. Anyone else relate? 😅
-
-The bug I've been chasing for 3 days finally revealed itself... it was a missing semicolon. Classic! 🤦‍♂️`,
-        author: {
-            name: "Noam Favier",
-            avatar: "NF",
-            isOnline: true,
-        },
-        timestamp: "1 day ago",
-        likes: 87,
-        comments: 32,
-        views: 234,
-        tags: ["coding", "lifestyle", "coffee", "debugging"],
-        isLiked: true,
-        isBookmarked: false,
-    },
-    {
-        id: 3,
-        title: "Thoughts on the Future of Web Development 🌐",
-        content: `Been reflecting on how fast our industry moves. Remember when jQuery was the hottest thing? Now we have React, Vue, Svelte, and so many amazing tools.
-
-The AI revolution is also changing how we code. GitHub Copilot has become my coding buddy, though I still believe in understanding the fundamentals.
-
-What excites me most is how accessible web development has become. Anyone with dedication can learn and build amazing things. That's beautiful! ✨
-
-What are your predictions for the next 5 years?`,
-        author: {
-            name: "Noam Favier",
-            avatar: "NF",
-            isOnline: true,
-        },
-        timestamp: "3 days ago",
-        likes: 156,
-        comments: 67,
-        views: 445,
-        tags: ["webdev", "future", "ai", "thoughts"],
-        isLiked: true,
-        isBookmarked: true,
-    },
-];
-
-const mockComments = {
-    1: [
-        {
-            id: 1,
-            user: { name: "Sarah Chen", avatar: "SC", isOnline: true },
-            content:
-                "This looks absolutely amazing! The gradient effects are so smooth 🔥",
-            timestamp: "1 hour ago",
-            likes: 5,
-            isLiked: false,
-        },
-        {
-            id: 2,
-            user: { name: "Mike Rodriguez", avatar: "MR", isOnline: false },
-            content:
-                "Dude, that portfolio is sick! Can you share the GitHub repo?",
-            timestamp: "45 minutes ago",
-            likes: 3,
-            isLiked: true,
-        },
-        {
-            id: 3,
-            user: { name: "Emma Wilson", avatar: "EW", isOnline: true },
-            content:
-                "The animations are so buttery smooth! Framer Motion is the best 💫",
-            timestamp: "30 minutes ago",
-            likes: 7,
-            isLiked: false,
-        },
-    ],
-    2: [
-        {
-            id: 4,
-            user: { name: "John Davis", avatar: "JD", isOnline: true },
-            content: "2 AM coding hits different! Been there so many times 😴",
-            timestamp: "12 hours ago",
-            likes: 12,
-            isLiked: true,
-        },
-        {
-            id: 5,
-            user: { name: "Lisa Park", avatar: "LP", isOnline: false },
-            content:
-                "The missing semicolon struggle is REAL! We've all been there 😂",
-            timestamp: "8 hours ago",
-            likes: 8,
-            isLiked: false,
-        },
-    ],
-    3: [
-        {
-            id: 6,
-            user: { name: "David Kim", avatar: "DK", isOnline: true },
-            content:
-                "Great thoughts! AI is definitely changing the game, but fundamentals will always be important 💯",
-            timestamp: "2 days ago",
-            likes: 15,
-            isLiked: true,
-        },
-    ],
-};
+import { API_BASE } from "../lib/api";
+import { getJSON } from "../lib/fetcher";
 
 // Sidebar component with practical blog features
 const BlogSidebar = ({ onCategoryFilter, onSearch }) => {
@@ -407,9 +275,22 @@ const Comment = ({ comment, onLike }) => {
 };
 
 // Blog post component
-const BlogPost = ({ post, comments, onLike, onBookmark, onComment }) => {
+const BlogPost = ({
+    post,
+    comments,
+    onLike,
+    onBookmark,
+    onComment,
+    onToggleComments,
+}) => {
     const [showComments, setShowComments] = useState(false);
     const [newComment, setNewComment] = useState("");
+
+    const toggle = async () => {
+        const next = !showComments;
+        setShowComments(next);
+        if (next && onToggleComments) await onToggleComments();
+    };
 
     const renderContent = (content) => {
         // Simple markdown-like rendering
@@ -557,7 +438,7 @@ const BlogPost = ({ post, comments, onLike, onBookmark, onComment }) => {
                         Like
                     </button>
                     <button
-                        onClick={() => setShowComments(!showComments)}
+                        onClick={toggle}
                         className="flex items-center gap-2 px-4 py-2 rounded-lg bg-white/10 text-white/70 hover:bg-white/20 hover:text-blue-400 transition-all"
                     >
                         <FaComment />
@@ -659,37 +540,69 @@ const BlogPost = ({ post, comments, onLike, onBookmark, onComment }) => {
 
 // Main Blog component
 export default function Blog() {
-    const [posts, setPosts] = useState(mockBlogPosts);
-    const [comments, setComments] = useState(mockComments);
+    const [posts, setPosts] = useState([]); // from API
+    const [comments, setComments] = useState({}); // { [postId]: Comment[] }
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState("");
+
     const [selectedCategory, setSelectedCategory] = useState("All Posts");
     const [searchTerm, setSearchTerm] = useState("");
 
+    useEffect(() => {
+        let alive = true;
+        (async () => {
+            try {
+                const data = await getJSON(`${API_BASE}/api/blog`);
+                if (!alive) return;
+                setPosts(data);
+            } catch (e) {
+                if (!alive) return;
+                setError("Failed to load posts");
+            } finally {
+                if (alive) setLoading(false);
+            }
+        })();
+        return () => {
+            alive = false;
+        };
+    }, []);
+
+    // On-demand comments loader
+    const loadComments = async (postId) => {
+        // don’t refetch if we already have them
+        if (comments[postId]) return;
+        try {
+            const data = await getJSON(`${API_BASE}/api/comments/${postId}`);
+            setComments((prev) => ({ ...prev, [postId]: data }));
+        } catch {
+            setComments((prev) => ({ ...prev, [postId]: [] }));
+        }
+    };
+
     const handleLike = (postId) => {
-        setPosts(
-            posts.map((post) =>
-                post.id === postId
+        setPosts((ps) =>
+            ps.map((p) =>
+                p.id === postId
                     ? {
-                          ...post,
-                          isLiked: !post.isLiked,
-                          likes: post.isLiked ? post.likes - 1 : post.likes + 1,
+                          ...p,
+                          isLiked: !p.isLiked,
+                          likes: p.isLiked ? p.likes - 1 : p.likes + 1,
                       }
-                    : post,
+                    : p,
             ),
         );
     };
 
     const handleBookmark = (postId) => {
-        setPosts(
-            posts.map((post) =>
-                post.id === postId
-                    ? { ...post, isBookmarked: !post.isBookmarked }
-                    : post,
+        setPosts((ps) =>
+            ps.map((p) =>
+                p.id === postId ? { ...p, isBookmarked: !p.isBookmarked } : p,
             ),
         );
     };
 
     const handleComment = (postId, content) => {
-        const newComment = {
+        const newC = {
             id: Date.now(),
             user: { name: "You", avatar: "YU", isOnline: true },
             content,
@@ -697,20 +610,30 @@ export default function Blog() {
             likes: 0,
             isLiked: false,
         };
-
-        setComments({
-            ...comments,
-            [postId]: [...(comments[postId] || []), newComment],
-        });
-
-        setPosts(
-            posts.map((post) =>
-                post.id === postId
-                    ? { ...post, comments: post.comments + 1 }
-                    : post,
+        setComments((prev) => ({
+            ...prev,
+            [postId]: [...(prev[postId] || []), newC],
+        }));
+        setPosts((ps) =>
+            ps.map((p) =>
+                p.id === postId ? { ...p, comments: p.comments + 1 } : p,
             ),
         );
     };
+
+    const filteredPosts = posts.filter((p) => {
+        const catsOk =
+            selectedCategory === "All Posts" ||
+            p.tags?.includes(selectedCategory.toLowerCase());
+        const searchOk =
+            !searchTerm ||
+            p.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            p.content.toLowerCase().includes(searchTerm.toLowerCase());
+        return catsOk && searchOk;
+    });
+
+    if (loading) return <div className="p-6">Loading…</div>;
+    if (error) return <div className="p-6 text-red-400">{error}</div>;
 
     const handleCategoryFilter = (category) => {
         setSelectedCategory(category);
@@ -757,23 +680,22 @@ export default function Blog() {
                 <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
                     {/* Blog Posts */}
                     <div className="lg:col-span-3 space-y-8">
-                        {posts.map((post, index) => (
-                            <motion.div
-                                key={post.id}
-                                initial={{ opacity: 0, y: 20 }}
-                                animate={{ opacity: 1, y: 0 }}
-                                transition={{ delay: index * 0.1 }}
-                            >
-                                <BlogPost
-                                    post={post}
-                                    comments={comments[post.id]}
-                                    onLike={handleLike}
-                                    onBookmark={handleBookmark}
-                                    onComment={handleComment}
-                                />
-                            </motion.div>
-                        ))}
-
+                        <div className="lg:col-span-3 space-y-8">
+                            {filteredPosts.map((post) => (
+                                <div key={post.id}>
+                                    <BlogPost
+                                        post={post}
+                                        comments={comments[post.id]}
+                                        onLike={handleLike}
+                                        onBookmark={handleBookmark}
+                                        onComment={handleComment}
+                                        onToggleComments={async () =>
+                                            loadComments(post.id)
+                                        }
+                                    />
+                                </div>
+                            ))}
+                        </div>
                         {/* Load More Button */}
                         <motion.div
                             initial={{ opacity: 0 }}
