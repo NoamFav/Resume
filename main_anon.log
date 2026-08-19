@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.3.23)  19 AUG 2026 12:00
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (TeX Live 2026) (preloaded format=pdflatex 2026.3.23)  19 AUG 2026 12:35
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1112,35 +1112,43 @@ LaTeX Font Info:    Font shape `T1/Raleway-OsF/regular/it' aliased to
 LaTeX Font Info:    Font shape `T1/Raleway-OsF/m/it' will be
 (Font)              scaled to size 8.0pt on input line 82.
 LaTeX Font Info:    Font shape `T1/Raleway-OsF/regular/n' aliased to
-(Font)              `T1/Raleway-OsF/m/n' on input line 114.
+(Font)              `T1/Raleway-OsF/m/n' on input line 112.
 LaTeX Font Info:    Font shape `T1/Raleway-OsF/m/n' will be
-(Font)              scaled to size 9.0pt on input line 114.
+(Font)              scaled to size 9.0pt on input line 112.
 LaTeX Font Info:    Font shape `T1/Raleway-OsF/regular/sc' aliased to
-(Font)              `T1/Raleway-OsF/m/sc' on input line 115.
+(Font)              `T1/Raleway-OsF/m/sc' on input line 113.
 LaTeX Font Info:    Font shape `T1/Raleway-OsF/m/sc' will be
-(Font)              scaled to size 9.0pt on input line 115.
+(Font)              scaled to size 9.0pt on input line 113.
 LaTeX Font Info:    Font shape `T1/Raleway-OsF/regular/sc' aliased to
-(Font)              `T1/Raleway-OsF/m/sc' on input line 115.
+(Font)              `T1/Raleway-OsF/m/sc' on input line 113.
 LaTeX Font Info:    Font shape `T1/Raleway-OsF/m/sc' will be
-(Font)              scaled to size 14.4pt on input line 115.
+(Font)              scaled to size 14.4pt on input line 113.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <9> on input line 117.
+(Font)              <9> on input line 115.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 117.
+(Font)              <6> on input line 115.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 117.
+(Font)              <5> on input line 115.
 LaTeX Font Info:    Font shape `T1/Raleway-OsF/bold/n' aliased to
-(Font)              `T1/Raleway-OsF/b/n' on input line 118.
+(Font)              `T1/Raleway-OsF/b/n' on input line 116.
 LaTeX Font Info:    Font shape `T1/Raleway-OsF/b/n' will be
-(Font)              scaled to size 9.0pt on input line 118.
+(Font)              scaled to size 9.0pt on input line 116.
 LaTeX Font Info:    Font shape `TS1/Raleway-OsF/regular/n' aliased to
-(Font)              `TS1/Raleway-OsF/m/n' on input line 118.
+(Font)              `TS1/Raleway-OsF/m/n' on input line 116.
 LaTeX Font Info:    Font shape `TS1/Raleway-OsF/m/n' will be
-(Font)              scaled to size 9.0pt on input line 118.
+(Font)              scaled to size 9.0pt on input line 116.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 131.
+(Font)              <8> on input line 132.
 
-Overfull \hbox (132.21603pt too wide) in paragraph at lines 160--189
+Underfull \hbox (badness 10000) in paragraph at lines 138--138
+[]|\T1/Raleway-OsF/m/n/8 Tokyo Night-themed Sketchy-Bar con-fig (Lua, Sbar-Lua)
+ with multi-monitor
+ []
+
+LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <9> not available
+(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 143.
+
+Overfull \hbox (132.21603pt too wide) in paragraph at lines 164--193
 [][] [] 
  []
 
@@ -1159,22 +1167,24 @@ Package rerunfilecheck Info: File `main_anon.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 28438 strings out of 469006
- 575904 string characters out of 5454813
- 1025836 words of memory out of 5000000
- 56621 multiletter control sequences out of 15000+600000
- 827625 words of font info for 76 fonts, out of 8000000 for 9000
+ 28444 strings out of 469006
+ 575969 string characters out of 5454813
+ 1029836 words of memory out of 5000000
+ 56625 multiletter control sequences out of 15000+600000
+ 828251 words of font info for 78 fonts, out of 8000000 for 9000
  319 hyphenation exceptions out of 8191
- 131i,10n,135p,468b,673s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/local/texlive/2026basic/texmf-dist/fonts/type1/impallari/raleway/Ralewa
-y-Bold.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/type1/impallari/ralew
-ay/Raleway-Italic.pfb></usr/local/texlive/2026basic/texmf-dist/fonts/type1/impa
-llari/raleway/Raleway-Regular.pfb></usr/local/texlive/2026basic/texmf-dist/font
-s/type1/public/amsfonts/cm/cmsy8.pfb>
-Output written on main_anon.pdf (1 page, 58389 bytes).
+ 131i,10n,135p,442b,673s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ </Users/noamfavier/Library/texlive/2026basic/texmf-var/fonts/pk/ljfour/jknap
+pen/ec/ectt0900.600pk> </Users/noamfavier/Library/texlive/2026basic/texmf-var/f
+onts/pk/ljfour/jknappen/ec/ectt0800.600pk></usr/local/texlive/2026basic/texmf-d
+ist/fonts/type1/impallari/raleway/Raleway-Bold.pfb></usr/local/texlive/2026basi
+c/texmf-dist/fonts/type1/impallari/raleway/Raleway-Italic.pfb></usr/local/texli
+ve/2026basic/texmf-dist/fonts/type1/impallari/raleway/Raleway-Regular.pfb></usr
+/local/texlive/2026basic/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb>
+Output written on main_anon.pdf (1 page, 63829 bytes).
 PDF statistics:
- 72 PDF objects out of 1000 (max. 8388607)
- 40 compressed objects within 1 object stream
+ 98 PDF objects out of 1000 (max. 8388607)
+ 48 compressed objects within 1 object stream
  2 named destinations out of 1000 (max. 500000)
  121 words of extra memory for PDF output out of 10000 (max. 10000000)
 
