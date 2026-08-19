@@ -1,0 +1,192 @@
+% Anonymized CV
+\documentclass[lighthipster]{simplehipstercv}
+\usepackage[utf8]{inputenc}
+\usepackage[default]{raleway}
+\usepackage[margin=0.8cm, a4paper]{geometry}
+
+\newlength{\rightcolwidth}
+\newlength{\leftcolwidth}
+\setlength{\leftcolwidth}{0.23\textwidth}
+\setlength{\rightcolwidth}{0.75\textwidth}
+
+\title{Anonymized CV}
+\author{}
+\date{2025}
+
+\pagestyle{empty}
+\begin{document}
+\thispagestyle{empty}
+
+\tikz[remember picture,overlay] {%
+\node[rectangle, fill=headercolour, anchor=north, minimum width=\paperwidth, minimum height=3.5cm](header) at (current page.north){};%
+\node[draw=none, align=left](name) at (header) {%
+{\Huge \color{white} \textbf{Candidate} }%
+};%
+\node[draw=none, below](description) at (name.south) {\color{white}Software Engineer · Systems Architect · AI Tooling Specialist};%
+}\vspace{-0.7cm}%
+
+\subsection*{}
+\vspace{3em}
+
+\setlength{\columnsep}{1.5cm}
+\columnratio{0.23}[0.75]
+\begin{paracol}{2}
+\hbadness5000
+
+\paracolbackgroundoptions
+
+\footnotesize
+{\setasidefontcolour
+\flushleft
+
+\vspace{1em}
+
+\bg{cvgreen}{white}{About me}\\[0.5em]
+
+{\footnotesize
+Full-stack engineer specializing in local-first AI, real-time processing, and high-performance developer tools. Founder of an independent software company. I architect systems from scratch—pipelines, agents, CLIs, TUIs, memory graphs, and OS-level tooling.}
+\bigskip
+
+\bg{cvgreen}{white}{Core Expertise} \\[0.5em]
+
+Local-First Architecture ~•~
+Real-Time Systems ~•~
+AI Agents ~•~
+DevOps Automation ~•~
+TUI/CLI Design ~•~
+Systems Programming
+
+\bigskip
+
+\bg{cvgreen}{white}{Tech Stack}\\[0.5em]
+
+\textbf{Primary:}
+Go, Python, Java, C
+
+\textbf{Advanced:}
+C++, TypeScript, Lua, Rust, Swift
+
+\textbf{Tools:}
+Docker, GitHub Actions, Neovim, Bubble Tea, Whisper.cpp, Ollama, OpenGL, Terraform, Tauri
+
+\bigskip
+
+\bg{cvgreen}{white}{Soft Skills}\\[0.5em]
+
+Discipline (10+ years gymnastics), Team leadership, Technical writing, Product ownership, Full-stack thinking, Creative problem solving
+
+\bigskip
+
+\bg{cvgreen}{white}{Philosophy}\\[0.5em]
+
+{\footnotesize\textit{Local-first over cloud. Terminal workflows. Readable architecture beats clever code.}}
+
+\bigskip
+
+\bg{cvgreen}{white}{Languages}\\[0.5em]
+
+French (C2 - Native)
+
+English (C2)
+
+Spanish (B1)
+
+Italian (B1)
+
+Dutch (A2)
+
+\bigskip
+
+\bg{cvgreen}{white}{Certifications}\\[0.5em]
+
+{\footnotesize TOEFL 106/120
+
+Java, Python, Go (SoloLearn)
+
+AI \& DevOps specializations}
+
+\vfill
+
+}
+%-----------------------------------------------------------
+\switchcolumn
+
+\small
+\section*{Professional Experience}
+
+\begin{tabular}{r| p{0.55\textwidth}}
+    \textbf{2023--Present} & \textbf{Founder \& Lead Engineer} · \textcolor{cvgreen}{Independent Software Company} \\
+    & {\footnotesize Architected an on-device voice AI assistant (Go, wake word to STT to LLM to TTS). Built a Git automation CLI in Go with AI-generated commits and bulk multi-repo sync. Developed a real-time network flow visualizer (Go, libpcap, WebSocket) and a Go license server with Stripe billing on Postgres. Full ownership: systems design, AI pipelines, UI/UX, DevOps, product direction.} \\[0.8em]
+
+    \textbf{2024--2025} & \textbf{Software Engineer} · \textcolor{cvgreen}{Freelance} · Remote \\
+    & {\footnotesize Delivered custom LLM pipelines, automation tools, and local-first AI solutions for clients. Integrated AI workflows into existing infrastructure.} \\
+\end{tabular}
+
+\vspace{1.2em}
+
+\section*{Key Projects Portfolio}
+
+\begin{tabular}{r| p{0.55\textwidth}}
+    \textbf{Iris} & \textbf{Local Voice AI Assistant} \\
+    & {\footnotesize On-device pipeline (wake word $\to$ STT $\to$ LLM $\to$ TTS) in Go, powered by sherpa-onnx, running fully offline on Apple Silicon. No cloud dependency.} \\[0.8em]
+
+    \textbf{Iskra} & \textbf{Git Automation CLI} \\
+    & {\footnotesize Single Go binary handling AI-generated commit messages, bulk multi-repo sync, and status overviews. Successor to an earlier tool, rebuilt for speed and simplicity.} \\[0.8em]
+
+    \textbf{Setka} & \textbf{Network Flow Visualizer} \\
+    & {\footnotesize Go/libpcap packet capture piped through flow aggregation to a WebSocket-driven live browser dashboard. Functional end-to-end capture, enrichment, and streaming pipeline.} \\[0.8em]
+
+    \textbf{NF-ToolBox} & \textbf{License Server \& CLI} \\
+    & {\footnotesize Go backend for the NF Software tool line: auth, device activation, and Stripe-powered billing on Postgres, plus a companion CLI and verification SDK.} \\[0.8em]
+
+    \textbf{Zarya.nvim} & \textbf{Neovim Plugin Ecosystem} \\
+    & {\footnotesize Floating Apple Music control UI for Neovim (track info, playback, Telescope-powered playlist picker), plus a personal IDE-level Neovim configuration and colorscheme work.} \\
+\end{tabular}
+
+\vspace{1.2em}
+
+\section*{Academic Projects}
+
+\begin{tabular}{r| p{0.55\textwidth}}
+    \textbf{2024--Present} & \textbf{Team Lead -- Frisian Draught} · Maastricht University \\
+    & {\footnotesize Leading 5-developer team building Java/JavaFX application with DQN and Minimax AI agents, state management, and multiplayer engine. Implementing reinforcement learning strategies.} \\[0.7em]
+
+    \textbf{2023--2024} & \textbf{Lead Developer -- PotPotGolf} · Maastricht University \\
+    & {\footnotesize Built 3D engine from scratch using Java/LWJGL/OpenGL with physics simulation, HDR lighting, shader pipeline, terrain rendering. Created ML agents for procedural courses with A* pathfinding validation. Won best project award.} \\
+\end{tabular}
+
+\vspace{1.2em}
+
+\begin{minipage}[t]{0.45\textwidth}
+\section*{Programming Skills}
+\begin{tabular}{r @{\hspace{0.3em}}l}
+     \bg{skilllabelcolour}{iconcolour}{Go} & \barrule{0.65}{0.5em}{cvgreen} {\footnotesize 90\%} \\
+     \bg{skilllabelcolour}{iconcolour}{Python} & \barrule{0.6}{0.5em}{cvpurple} {\footnotesize 85\%} \\
+     \bg{skilllabelcolour}{iconcolour}{Java} & \barrule{0.6}{0.5em}{cvgreen} {\footnotesize 85\%} \\
+     \bg{skilllabelcolour}{iconcolour}{C} & \barrule{0.55}{0.5em}{cvpurple} {\footnotesize 75\%} \\
+     \bg{skilllabelcolour}{iconcolour}{C++} & \barrule{0.45}{0.5em}{cvgreen} {\footnotesize 65\%} \\
+     \bg{skilllabelcolour}{iconcolour}{TypeScript} & \barrule{0.4}{0.5em}{cvpurple} {\footnotesize 60\%} \\
+     \bg{skilllabelcolour}{iconcolour}{Lua} & \barrule{0.35}{0.5em}{cvgreen} {\footnotesize 55\%} \\
+     \bg{skilllabelcolour}{iconcolour}{Rust} & \barrule{0.3}{0.5em}{cvpurple} {\footnotesize 45\%} \\
+     \bg{skilllabelcolour}{iconcolour}{Swift} & \barrule{0.25}{0.5em}{cvgreen} {\footnotesize 40\%} \\
+\end{tabular}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.5\textwidth}
+\section*{Education}
+\begin{tabular}{>{\footnotesize}p{0.9\textwidth}}
+    \textbf{42 Paris} \\
+    Software Engineering · Starting Nov 2026 \\
+    Admitted after passing the Piscine \\[0.5em]
+
+    \textbf{BSc Data Science \& AI} \\
+    Maastricht University · 2022--2025 \\[0.5em]
+
+    \textbf{Baccalauréat} (Mention Bien) \\
+    Lycée Français \\
+    20/20 Math, 17/20 Physics \\
+\end{tabular}
+\end{minipage}
+
+\end{paracol}
+
+\end{document}
