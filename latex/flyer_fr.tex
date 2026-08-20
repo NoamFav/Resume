@@ -1,0 +1,215 @@
+% NF Software - Plaquette de services (recto A4)
+% Charte graphique alignee sur le CV (simplehipstercv, option lighthipster)
+
+\documentclass[10pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[french]{babel}
+\usepackage[default]{raleway}
+\usepackage[margin=1.1cm, bottom=1.0cm, a4paper]{geometry}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usepackage{graphicx}
+\usepackage{fontawesome}
+\usepackage[most]{tcolorbox}
+\usepackage{enumitem}
+\usepackage{etoolbox}
+\usepackage{microtype}
+\usepackage[hidelinks]{hyperref}
+
+%------------------------------------------------------- Coordonnees
+% Renseignez ces deux champs et ils apparaitront automatiquement dans le
+% pied de page. Laissez-les vides pour qu'ils n'apparaissent pas du tout.
+\newcommand{\nftelephone}{}   % ex. : 06 12 34 56 78
+\newcommand{\nfsiret}{}       % ex. : 123 456 789 00012
+
+\newcommand{\nfsite}{nf-software.com}
+\newcommand{\nfmail}{noamfav@nf-software.com}
+\newcommand{\nfgithub}{github.com/NoamFav}
+
+%------------------------------------------------------- Charte
+\definecolor{nfcyan}{HTML}{2EB6E1}
+\definecolor{nforange}{HTML}{E1592E}
+\definecolor{nfdark}{HTML}{404040}
+\definecolor{nfgrey}{HTML}{E8E8E8}
+\definecolor{nftext}{HTML}{333333}
+
+\color{nftext}
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+
+%------------------------------------------------------- Briques
+% Titre de section : filet colore + intitule
+\newcommand{\nfsection}[1]{%
+  \par\vspace{0.7em}%
+  {\color{nfdark}\large\bfseries #1}\\[0.25em]%
+  {\color{nfcyan}\rule{\linewidth}{1.2pt}}\par\vspace{-0.15em}%
+}
+
+% Carte de service
+\newtcolorbox{nfcard}[1]{%
+  enhanced, sharp corners, boxrule=0pt,
+  colback=nfgrey, colframe=nfgrey,
+  borderline west={2.5pt}{0pt}{nfcyan},
+  left=7pt, right=7pt, top=6pt, bottom=6pt,
+  before skip=0pt, after skip=0pt,
+  title={\bfseries\color{nfdark} #1},
+  coltitle=nfdark, colbacktitle=nfgrey,
+  fonttitle=\normalsize, toptitle=1pt, bottomtitle=1pt,
+}
+
+% Ligne de realisation : nom en orange + description
+\newcommand{\nfwork}[2]{%
+  {\bfseries\color{nforange} #1} \textemdash{} #2\par\vspace{0.35em}%
+}
+
+% Puce personnalisee
+\newcommand{\nfbullet}{{\color{nfcyan}\faCheck}~}
+
+% Etape numerotee du deroule projet
+\newcommand{\nfstep}[3]{%
+  \begin{minipage}[t]{0.227\linewidth}\raggedright
+    {\color{nfcyan}\fontsize{19}{19}\selectfont\bfseries #1}\\[0.25em]
+    {\bfseries\footnotesize\color{nfdark} #2}\\[0.2em]
+    {\scriptsize #3}
+  \end{minipage}%
+}
+
+\begin{document}
+
+%------------------------------------------------------- Bandeau
+\begin{tikzpicture}[remember picture, overlay]
+  \node[rectangle, fill=nfdark, anchor=north, minimum width=\paperwidth,
+        minimum height=3.2cm] (header) at (current page.north) {};
+  \node[anchor=west] at ([xshift=1.1cm]header.west) {%
+    \begin{minipage}{12cm}
+      {\color{white}\fontsize{30}{34}\selectfont NF\,\textbf{Software}}\\[0.35em]
+      {\color{nfcyan}\large Logiciels sur mesure · IA locale · Automatisation}\\[0.25em]
+      {\color{white}\footnotesize Développeur indépendant — Paris \& à distance}
+    \end{minipage}};
+  \node[anchor=east] at ([xshift=-1.1cm]header.east)
+    {\includegraphics[height=2.3cm]{logo.png}};
+\end{tikzpicture}
+\vspace*{2.4cm}
+
+%------------------------------------------------------- Accroche
+{\setlength{\fboxsep}{9pt}%
+\colorbox{nfgrey}{%
+\begin{minipage}{\dimexpr\linewidth-18pt\relax}
+Je conçois et développe des outils logiciels sur mesure : automatisation de vos
+tâches répétitives, intégration de l'intelligence artificielle dans vos
+processus, applications métier. \textbf{Ma spécialité : faire tourner l'IA
+directement sur vos machines}, sans passer par le cloud — vos données ne sortent
+jamais de chez vous.
+\end{minipage}}}
+
+\nfsection{Ce que je peux faire pour vous}
+
+\begin{tcbraster}[raster columns=2, raster column skip=5mm, raster row skip=3.5mm,
+                  raster equal height=rows]%
+\begin{nfcard}{Intelligence artificielle sur mesure}
+\footnotesize
+Assistants vocaux, traitement automatique de documents et de courriels,
+recherche intelligente dans vos données, réponses générées automatiquement.
+Les modèles tournent en local : \textbf{aucune donnée envoyée à un service
+externe}, une réponse simple aux exigences du RGPD.
+\end{nfcard}%
+\begin{nfcard}{Automatisation \& outils internes}
+\footnotesize
+Vous répétez chaque semaine la même manipulation ? Je la transforme en un outil
+qui la fait pour vous. Scripts, applications en ligne de commande,
+synchronisation entre vos logiciels, rapports générés automatiquement.
+\end{nfcard}%
+\begin{nfcard}{Applications \& interfaces}
+\footnotesize
+Applications de bureau (Windows, macOS, Linux), interfaces web, outils métier
+adaptés à votre activité. De la maquette à la version installée chez vous,
+en passant par la prise en main de vos équipes.
+\end{nfcard}%
+\begin{nfcard}{Mise en production \& infrastructure}
+\footnotesize
+Hébergement, déploiement automatisé, sauvegardes, mises à jour. Également la
+partie commerciale de vos logiciels : gestion des licences et encaissement des
+paiements (Stripe).
+\end{nfcard}%
+\end{tcbraster}
+
+\nfsection{Quelques réalisations}
+
+\nfwork{Iris}{assistant vocal par intelligence artificielle fonctionnant
+\textbf{entièrement hors ligne}. De la phrase d'activation à la réponse parlée,
+sans aucune connexion internet.}
+
+\nfwork{Iskra}{outil d'automatisation pour développeurs : rédige les messages de
+suivi de version par IA et synchronise des dizaines de projets en une commande.}
+
+\nfwork{NF-ToolBox}{serveur de licences et de facturation en ligne, avec
+paiement par carte bancaire intégré.}
+
+\nfwork{Projets libres}{mes configurations et outils publiés en open source sont
+suivis et réutilisés par une communauté de développeurs sur GitHub.}
+
+\nfsection{Ma façon de travailler}
+
+\vspace{-0.6em}
+\begin{minipage}[t]{0.485\linewidth}
+\footnotesize
+\nfbullet\textbf{Le local avant le cloud.} Vos données restent sur vos
+machines. Pas d'abonnement imposé, pas de dépendance à un service étranger.\\[0.5em]
+\nfbullet\textbf{Vous êtes propriétaire du résultat.} Code source livré,
+documenté et commenté. Vous n'êtes pas prisonnier de moi.
+\end{minipage}\hfill
+\begin{minipage}[t]{0.485\linewidth}
+\footnotesize
+\nfbullet\textbf{Un seul interlocuteur.} De la conception à la mise en service,
+c'est moi qui suis votre projet du début à la fin.\\[0.5em]
+\nfbullet\textbf{En français ou en anglais.} Échanges, documentation et
+formation dans les deux langues.
+\end{minipage}
+
+\vspace{0.9em}
+
+{\footnotesize\color{nfdark}\textbf{Technologies :} Go · Python · Java · C · JavaScript ·
+Rust · Swift · Docker · Terraform · React · Tauri · PostgreSQL · Ollama\par}
+\vspace{0.45em}
+
+\nfsection{Comment se déroule un projet}
+
+\vspace{-0.4em}
+\nfstep{1}{On échange}{Un premier rendez-vous pour cerner votre besoin, vos
+contraintes et votre budget.}\hfill
+\nfstep{2}{Je chiffre}{Un devis clair : ce qui sera livré, dans quel délai et
+à quel prix. Sans surprise.}\hfill
+\nfstep{3}{Je développe}{Des points d'avancement réguliers. Vous voyez l'outil
+prendre forme et vous pouvez le réorienter.}\hfill
+\nfstep{4}{Je livre \& j'accompagne}{Installation, prise en main de vos équipes,
+documentation et corrections.}
+
+\vspace{1.1em}
+
+{\setlength{\fboxsep}{8pt}%
+\colorbox{nfgrey}{%
+\begin{minipage}{\dimexpr\linewidth-16pt\relax}
+\footnotesize\textbf{Pour qui ?} Indépendants, associations, TPE et PME, jeunes
+entreprises — toute structure qui préfère un outil taillé pour son
+fonctionnement plutôt qu'un logiciel générique auquel il faut s'adapter.
+\end{minipage}}}
+
+%------------------------------------------------------- Pied de page
+\vfill
+
+{\setlength{\fboxsep}{10pt}%
+\colorbox{nfdark}{%
+\begin{minipage}{\dimexpr\linewidth-20pt\relax}
+\color{white}
+{\large\bfseries Parlons de votre projet.}\hfill
+{\footnotesize Étude du besoin et tarifs sur devis.}\\[0.7em]
+{\color{nfcyan}\faGlobe}~\textbf{\nfsite}\hfill
+{\color{nfcyan}\faAt}~\nfmail\hfill
+{\color{nfcyan}\faGithub}~\nfgithub%
+\ifdefempty{\nftelephone}{}{\\[0.6em]{\color{nfcyan}\faPhone}~\nftelephone}
+\ifdefempty{\nfsiret}{}{\\[0.5em]{\scriptsize SIRET : \nfsiret}}
+\end{minipage}}}
+
+\end{document}
