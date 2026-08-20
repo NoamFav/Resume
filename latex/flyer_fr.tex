@@ -21,8 +21,8 @@
 %------------------------------------------------------- Coordonnees
 % Renseignez ces deux champs et ils apparaitront automatiquement dans le
 % pied de page. Laissez-les vides pour qu'ils n'apparaissent pas du tout.
-\newcommand{\nftelephone}{}   % ex. : 06 12 34 56 78
-\newcommand{\nfsiret}{}       % ex. : 123 456 789 00012
+\newcommand{\nftelephone}{+33~6~19~77~31~33}
+\newcommand{\nfsiret}{104 780 820 00015}
 
 \newcommand{\nfsite}{nf-software.com}
 \newcommand{\nfmail}{noamfav@nf-software.com}
@@ -208,8 +208,12 @@ fonctionnement plutôt qu'un logiciel générique auquel il faut s'adapter.
 {\color{nfcyan}\faGlobe}~\textbf{\nfsite}\hfill
 {\color{nfcyan}\faAt}~\nfmail\hfill
 {\color{nfcyan}\faGithub}~\nfgithub%
-\ifdefempty{\nftelephone}{}{\\[0.6em]{\color{nfcyan}\faPhone}~\nftelephone}
-\ifdefempty{\nfsiret}{}{\\[0.5em]{\scriptsize SIRET : \nfsiret}}
+\ifdefempty{\nftelephone}{%
+  \ifdefempty{\nfsiret}{}{\\[0.6em]{\scriptsize SIRET : \nfsiret}}%
+}{%
+  \\[0.6em]{\color{nfcyan}\faPhone}~\nftelephone%
+  \ifdefempty{\nfsiret}{}{\hfill{\scriptsize SIRET : \nfsiret}}%
+}
 \end{minipage}}}
 
 \end{document}
