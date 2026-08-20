@@ -1,0 +1,231 @@
+% CV Noam Favier - Template Hipster, contenu moderne (version francaise)
+% Base sur le template simplehipstercv
+
+\documentclass[lighthipster]{simplehipstercv}
+\usepackage[utf8]{inputenc}
+\usepackage[french]{babel}
+\usepackage[default]{raleway}
+\usepackage[margin=0.8cm, a4paper]{geometry}
+
+%------------------------------------------------------------------ Variables
+
+\newlength{\rightcolwidth}
+\newlength{\leftcolwidth}
+\setlength{\leftcolwidth}{0.23\textwidth}
+\setlength{\rightcolwidth}{0.75\textwidth}
+
+%------------------------------------------------------------------
+\title{CV Noam Favier}
+\author{Noam Favier}
+\date{Décembre 2025}
+
+\pagestyle{empty}
+\begin{document}
+
+\thispagestyle{empty}
+%-------------------------------------------------------------
+
+\section*{Start}
+
+% En-tête personnalisé avec logo
+\tikz[remember picture,overlay] {%
+\node[rectangle, fill=headercolour, anchor=north, minimum width=\paperwidth, minimum height=3.5cm](header) at (current page.north){};%
+\node[draw=none, align=left](name) at (header) {%
+{\Huge \color{white} Noam \textbf{Favier} }%
+};%
+\node[draw=none, below](description) at (name.south) {\color{white}Ingénieur logiciel · Architecte systèmes · Spécialiste outillage IA};%
+\node[anchor=east] at ([xshift=-1cm]header.east) {\includegraphics[height=2.5cm]{logo.png}};%
+}\vspace{-0.7cm}%
+
+%------------------------------------------------
+
+\subsection*{}
+\vspace{3em}
+
+\setlength{\columnsep}{1.5cm}
+\columnratio{0.23}[0.75]
+\begin{paracol}{2}
+\hbadness5000
+
+\paracolbackgroundoptions
+
+\footnotesize
+{\setasidefontcolour
+\flushleft
+
+\vspace{1em}
+
+\bg{cvgreen}{white}{À propos}\\[0.5em]
+
+{\footnotesize
+Ingénieur full-stack spécialisé en IA locale, traitement temps réel et outils de développement haute performance. Fondateur de NF Software. Je conçois des systèmes de zéro : pipelines, agents, CLI, TUI, graphes de mémoire et outillage bas niveau.}
+\bigskip
+
+\bg{cvgreen}{white}{Profil} \\[0.5em]
+Âge : 20 ans
+
+Localisation : Paris, FR
+
+Nationalité : française
+
+\bigskip
+
+\bg{cvgreen}{white}{Domaines clés} \\[0.5em]
+
+Architecture local-first ~•~
+Systèmes temps réel ~•~
+Agents IA ~•~
+Automatisation DevOps ~•~
+Conception TUI/CLI ~•~
+Programmation système
+
+\bigskip
+
+\bg{cvgreen}{white}{Stack technique}\\[0.5em]
+
+\textbf{Principaux :}
+Go, Python, Java, C
+
+\textbf{Avancés :}
+Lua, JavaScript, C++, Rust, Swift
+
+\textbf{Outils :}
+Docker, GitHub Actions, Neovim, Bubble Tea, sherpa-onnx, Ollama, OpenGL, Terraform, Tauri
+
+\bigskip
+
+\bg{cvgreen}{white}{Compétences humaines}\\[0.5em]
+
+Discipline (10 ans de gymnastique), encadrement d'équipe, rédaction technique, product ownership, vision full-stack, résolution créative de problèmes, musculation depuis 5 ans et bonne condition physique
+
+\bigskip
+
+\bg{cvgreen}{white}{Philosophie}\\[0.5em]
+
+{\footnotesize\textit{Le local avant le cloud. Le terminal comme outil. Une architecture lisible vaut mieux qu'un code astucieux.}}
+
+\vspace{1em}
+
+\bg{cvgreen}{white}{Contact}\\[0.5em]
+
+\scalebox{0.8}{%
+  \infobubble{\faAt}{cvgreen}{white}{noamfav@nf-software.com}%
+}
+
+\infobubble{\faGithub}{cvgreen}{white}{NoamFav}
+
+\infobubble{\faGlobe}{cvgreen}{white}{nf-software.com}
+
+\bigskip
+
+\bg{cvgreen}{white}{Langues}\\[0.5em]
+
+Français (C2 - langue maternelle)
+
+Anglais (C2)
+
+Espagnol (B1)
+
+Néerlandais (A2)
+
+\bigskip
+
+\bg{cvgreen}{white}{Certifications}\\[0.5em]
+
+{\footnotesize TOEFL 106/120
+
+Java, Python, Go (SoloLearn)
+
+Spécialisations IA \& DevOps}
+
+\vfill
+
+}
+%-----------------------------------------------------------
+\switchcolumn
+
+\small
+\section*{Expérience professionnelle}
+
+\begin{tabular}{r| p{0.55\textwidth}}
+    \textbf{2023--aujourd'hui} & \textbf{Fondateur \& ingénieur principal} · \textcolor{cvgreen}{NF Software} · Paris, FR \\
+    & {\footnotesize Conception d'Iris, assistant vocal IA embarqué (Go, du mot-clé au TTS via STT et LLM). Développement d'Iskra, CLI d'automatisation Git succédant à Zvezda, et de NF-ToolBox, serveur de licences Go avec facturation Stripe sur Postgres. Responsabilité complète : architecture, pipelines IA, UI/UX, DevOps, produit.} \\[0.8em]
+
+    \textbf{Juin--juil. 2026} & \textbf{Piscine 42} · \textcolor{cvgreen}{42 Paris} · Paris, FR \\
+    & {\footnotesize Bootcamp de sélection intensif de 4 semaines en C : projets en solo et en binôme, sous forte pression temporelle et évaluation par les pairs. Terminé avec de bons résultats ; admis au cursus principal débutant en nov. 2026.} \\[0.8em]
+
+    \textbf{2024--2025} & \textbf{Ingénieur logiciel} · \textcolor{cvgreen}{Freelance} · À distance \\
+    & {\footnotesize Pipelines LLM sur mesure, outils d'automatisation et solutions d'IA locale pour des clients. Intégration de workflows IA dans l'infrastructure existante.} \\
+\end{tabular}
+
+\vspace{0.9em}
+
+\section*{Portfolio de projets}
+
+\begin{tabular}{r| p{0.55\textwidth}}
+    \textbf{Iris} & \textbf{Assistant vocal IA local} \\
+    & {\footnotesize Pipeline embarqué (mot-clé $\to$ STT $\to$ LLM $\to$ TTS) en Go, propulsé par sherpa-onnx et entièrement hors ligne sur Apple Silicon. Aucune dépendance au cloud.} \\[0.8em]
+
+    \textbf{Iskra} & \textbf{CLI d'automatisation Git} \\
+    & {\footnotesize Binaire Go unique : messages de commit générés par IA, synchronisation multi-dépôts, vues d'état. Successeur de Zvezda, repensé pour la vitesse et la simplicité.} \\[0.8em]
+
+    \textbf{sketchybar} & \textbf{Barre d'état macOS} \\
+    & {\footnotesize Configuration SketchyBar au thème Tokyo Night (Lua, SbarLua) avec intégration multi-écran des espaces AeroSpace, widgets WiFi/batterie/CPU/média en direct et police d'icônes sur mesure. Dépôt le plus étoilé sur GitHub.} \\[0.8em]
+
+    \textbf{Nvim-config} & \textbf{Configuration IDE Neovim} \\
+    & {\footnotesize Installation Neovim complète : 28 serveurs de langage câblés via \texttt{vim.lsp.config} natif, sans passer par \texttt{nvim-lspconfig}, complétion blink.cmp, Treesitter, Harpoon, LazyGit, diagnostics Trouble, plus le support Jupyter et LaTeX.} \\[0.8em]
+
+    \textbf{Mew} & \textbf{Clone POSIX de \texttt{cat} en C} \\
+    & {\footnotesize Réimplémentation stricte de \texttt{cat} en C11 : zéro dépendance, options POSIX complètes, ASAN/UBSAN en debug. Outil système volontairement petit et correct.} \\
+\end{tabular}
+
+\vspace{0.9em}
+
+\section*{Projets académiques}
+
+\begin{tabular}{r| p{0.55\textwidth}}
+    \textbf{Févr.--juil. 2025} & \textbf{Plateforme d'analyse d'e-mails par IA -- EnronBox} \\
+    & {\footnotesize Projet de recherche NLP full-stack (Flask, React, Tauri) classifiant, résumant et détectant l'émotion dans le corpus d'e-mails Enron à l'aide de modèles transformeurs (BART, DistilBERT), avec accélération GPU et réponses générées par Ollama.} \\[0.7em]
+
+    \textbf{Sept.--déc. 2024} & \textbf{Chef d'équipe -- Frisian Draught} · Université de Maastricht \\
+    & {\footnotesize Direction d'une équipe de 5 développeurs pour une application Java/JavaFX avec agents IA DQN et Minimax, gestion d'état et moteur multijoueur. Mise en œuvre de stratégies d'apprentissage par renforcement.} \\[0.7em]
+
+    \textbf{2023--2024} & \textbf{Développeur principal -- PotPotGolf} · Université de Maastricht \\
+    & {\footnotesize Moteur 3D développé de zéro en Java/LWJGL/OpenGL avec simulation physique, éclairage HDR, pipeline de shaders et rendu de terrain. Agents ML pour la génération procédurale de parcours, validés par recherche A*. Prix du meilleur projet.} \\
+\end{tabular}
+
+\vspace{0.9em}
+
+\begin{minipage}[t]{0.45\textwidth}
+\section*{Programmation}
+\begin{tabular}{r @{\hspace{0.3em}}l}
+     \bg{skilllabelcolour}{iconcolour}{Go} & \barrule{0.65}{0.5em}{cvgreen} {\footnotesize 90\%} \\
+     \bg{skilllabelcolour}{iconcolour}{Python} & \barrule{0.6}{0.5em}{cvpurple} {\footnotesize 85\%} \\
+     \bg{skilllabelcolour}{iconcolour}{Java} & \barrule{0.6}{0.5em}{cvgreen} {\footnotesize 85\%} \\
+     \bg{skilllabelcolour}{iconcolour}{C} & \barrule{0.55}{0.5em}{cvpurple} {\footnotesize 75\%} \\
+     \bg{skilllabelcolour}{iconcolour}{Lua} & \barrule{0.45}{0.5em}{cvgreen} {\footnotesize 65\%} \\
+     \bg{skilllabelcolour}{iconcolour}{JavaScript} & \barrule{0.4}{0.5em}{cvpurple} {\footnotesize 60\%} \\
+     \bg{skilllabelcolour}{iconcolour}{C++} & \barrule{0.35}{0.5em}{cvgreen} {\footnotesize 55\%} \\
+     \bg{skilllabelcolour}{iconcolour}{Rust} & \barrule{0.3}{0.5em}{cvpurple} {\footnotesize 45\%} \\
+     \bg{skilllabelcolour}{iconcolour}{Swift} & \barrule{0.25}{0.5em}{cvgreen} {\footnotesize 40\%} \\
+\end{tabular}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.5\textwidth}
+\section*{Formation}
+\begin{tabular}{>{\footnotesize}p{0.9\linewidth}}
+    \textbf{42 Paris} \\
+    Ingénierie logicielle · rentrée nov. 2026 \\
+    Admis après la Piscine \\[0.5em]
+
+    \textbf{Licence Data Science \& IA} \\
+    Université de Maastricht · 2022--2025 \\[0.5em]
+
+    \textbf{Baccalauréat} (mention bien) \\
+    Lycée Français \\
+    20/20 en maths, 17/20 en physique \\
+\end{tabular}
+\end{minipage}
+
+\end{paracol}
+
+\end{document}
