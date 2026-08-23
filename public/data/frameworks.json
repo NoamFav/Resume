@@ -1,28 +1,44 @@
 {
     "framework": [
         {
-            "name": "Spring",
-            "percentage": 90,
+            "name": "Bubble Tea",
+            "percentage": 80,
             "favorite": true,
             "learning": false,
-            "language": "Java",
-            "image": "https://cdn.simpleicons.org/spring"
+            "language": "Go",
+            "image": "https://cdn.simpleicons.org/go"
         },
         {
-            "name": "LWJGL",
-            "percentage": 80,
+            "name": "Lip Gloss",
+            "percentage": 75,
             "favorite": true,
-            "learning": true,
-            "language": "Java",
-            "image": "https://cdn.simpleicons.org/webgl"
+            "learning": false,
+            "language": "Go",
+            "image": "https://cdn.simpleicons.org/go"
         },
         {
-            "name": "Maven",
-            "percentage": 80,
+            "name": "sherpa-onnx",
+            "percentage": 60,
             "favorite": true,
             "learning": true,
-            "language": "Java",
-            "image": "https://cdn.simpleicons.org/apachemaven"
+            "language": "Go",
+            "image": "https://cdn.simpleicons.org/onnx"
+        },
+        {
+            "name": "go-chi",
+            "percentage": 65,
+            "favorite": false,
+            "learning": true,
+            "language": "Go",
+            "image": "https://cdn.simpleicons.org/go"
+        },
+        {
+            "name": "Cobra",
+            "percentage": 65,
+            "favorite": false,
+            "learning": false,
+            "language": "Go",
+            "image": "https://cdn.simpleicons.org/go"
         },
         {
             "name": "JavaFX",
@@ -33,88 +49,104 @@
             "image": "https://cdn.simpleicons.org/openjdk"
         },
         {
+            "name": "LWJGL",
+            "percentage": 80,
+            "favorite": true,
+            "learning": false,
+            "language": "Java",
+            "image": "https://cdn.simpleicons.org/webgl"
+        },
+        {
+            "name": "Maven",
+            "percentage": 80,
+            "favorite": true,
+            "learning": false,
+            "language": "Java",
+            "image": "https://cdn.simpleicons.org/apachemaven"
+        },
+        {
             "name": "Swing",
-            "percentage": 70,
+            "percentage": 60,
             "favorite": false,
             "learning": false,
             "language": "Java",
             "image": "https://cdn.simpleicons.org/openjdk"
         },
         {
-            "name": "React",
+            "name": "Flask",
             "percentage": 80,
             "favorite": true,
-            "learning": true,
-            "language": "Javascript",
-            "image": "https://cdn.simpleicons.org/react"
-        },
-        {
-            "name": "Node.js",
-            "percentage": 70,
-            "favorite": true,
-            "learning": true,
-            "language": "Javascript",
-            "image": "https://cdn.simpleicons.org/nodedotjs"
-        },
-        {
-            "name": "Flask",
-            "percentage": 70,
-            "favorite": false,
             "learning": false,
             "language": "Python",
             "image": "https://cdn.simpleicons.org/flask"
         },
         {
-            "name": "Matplotlib",
-            "percentage": 90,
-            "favorite": false,
+            "name": "Transformers",
+            "percentage": 70,
+            "favorite": true,
             "learning": true,
             "language": "Python",
-            "image": "https://cdn.simpleicons.org/python"
+            "image": "https://cdn.simpleicons.org/huggingface"
         },
         {
             "name": "Pandas",
-            "percentage": 80,
+            "percentage": 75,
             "favorite": true,
             "learning": false,
             "language": "Python",
             "image": "https://cdn.simpleicons.org/pandas"
         },
         {
-            "name": "Scikit-learn",
-            "percentage": 60,
-            "favorite": true,
-            "learning": true,
-            "language": "Python",
-            "image": "https://cdn.simpleicons.org/scikitlearn"
-        },
-        {
-            "name": "TensorFlow",
-            "percentage": 60,
+            "name": "FastAPI",
+            "percentage": 55,
             "favorite": false,
             "learning": true,
             "language": "Python",
-            "image": "https://cdn.simpleicons.org/tensorflow"
+            "image": "https://cdn.simpleicons.org/fastapi"
         },
         {
-            "name": "PyTorch",
+            "name": "React",
+            "percentage": 85,
+            "favorite": true,
+            "learning": false,
+            "language": "JavaScript",
+            "image": "https://cdn.simpleicons.org/react"
+        },
+        {
+            "name": "TailwindCSS",
+            "percentage": 80,
+            "favorite": true,
+            "learning": false,
+            "language": "JavaScript",
+            "image": "https://cdn.simpleicons.org/tailwindcss"
+        },
+        {
+            "name": "Framer Motion",
+            "percentage": 75,
+            "favorite": true,
+            "learning": false,
+            "language": "JavaScript",
+            "image": "https://cdn.simpleicons.org/framer"
+        },
+        {
+            "name": "Vue",
+            "percentage": 55,
+            "favorite": false,
+            "learning": true,
+            "language": "JavaScript",
+            "image": "https://cdn.simpleicons.org/vuedotjs"
+        },
+        {
+            "name": "Fastify",
             "percentage": 50,
-            "favorite": true,
-            "learning": true,
-            "language": "Python",
-            "image": "https://cdn.simpleicons.org/pytorch"
-        },
-        {
-            "name": "Diesel",
-            "percentage": 60,
             "favorite": false,
             "learning": true,
-            "language": "Rust",
-            "image": "https://cdn.simpleicons.org/rust"
+            "language": "JavaScript",
+            "image": "https://cdn.simpleicons.org/fastify"
         },
         {
             "name": "SwiftUI",
-            "percentage": 60,
+            "percentage": 70,
             "favorite": true,
             "learning": true,
             "language": "Swift",
@@ -122,83 +154,19 @@
         },
         {
             "name": "Unity",
-            "percentage": 80,
+            "percentage": 70,
             "favorite": true,
             "learning": true,
             "language": "C#",
             "image": "https://cdn.simpleicons.org/unity"
         },
         {
-            "name": "OpenGL",
-            "percentage": 60,
-            "favorite": true,
-            "learning": false,
-            "language": "C++",
-            "image": "https://cdn.simpleicons.org/opengl"
-        },
-        {
-            "name": "Tailwind",
-            "percentage": 30,
-            "favorite": true,
-            "learning": true,
-            "language": "HTML/CSS",
-            "image": "https://cdn.simpleicons.org/tailwindcss"
-        },
-        {
-            "name": "SQLAlchemy",
-            "percentage": 50,
-            "favorite": false,
-            "learning": false,
-            "language": "SQL",
-            "image": "https://cdn.simpleicons.org/sqlalchemy"
-        },
-        {
-            "name": "Flyway",
-            "percentage": 70,
-            "favorite": false,
-            "learning": true,
-            "language": "SQL",
-            "image": "https://cdn.simpleicons.org/flyway"
-        },
-        {
-            "name": "Framer Motion",
-            "percentage": 70,
-            "favorite": true,
-            "learning": false,
-            "language": "JavaScript",
-            "image": "https://cdn.simpleicons.org/framer"
-        },
-        {
             "name": "Tauri",
-            "percentage": 40,
+            "percentage": 55,
             "favorite": true,
             "learning": true,
             "language": "Rust",
             "image": "https://cdn.simpleicons.org/tauri"
-        },
-        {
-            "name": "Bubble Tea",
-            "percentage": 70,
-            "favorite": true,
-            "learning": false,
-            "language": "Go",
-            "image": "https://cdn.simpleicons.org/go"
-        },
-        {
-            "name": "Lipgloss",
-            "percentage": 60,
-            "favorite": true,
-            "learning": true,
-            "language": "Go",
-            "image": "https://cdn.simpleicons.org/go"
-        },
-        {
-            "name": "FastAPI",
-            "percentage": 60,
-            "favorite": true,
-            "learning": false,
-            "language": "Python",
-            "image": "https://cdn.simpleicons.org/fastapi"
         }
     ]
 }
