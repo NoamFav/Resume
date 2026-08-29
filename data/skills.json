@@ -1,330 +1,214 @@
 {
     "skill": [
         {
-            "name": "Programming",
+            "name": "Systems Programming",
             "percentage": 90,
             "category": "Technical",
-            "description": "Proficient in multiple programming paradigms and languages"
+            "description": "Building low-level, dependency-free software with direct OS and hardware access"
         },
         {
-            "name": "Data Analysis",
-            "percentage": 80,
+            "name": "TUI/CLI Design",
+            "percentage": 88,
             "category": "Technical",
-            "description": "Analyzing and processing large datasets to extract meaningful insights"
+            "description": "Crafting fast, ergonomic terminal tools and command-line interfaces"
         },
         {
-            "name": "Machine Learning",
-            "percentage": 75,
-            "category": "Technical",
-            "description": "Implementing and integrating ML models into applications"
-        },
-        {
-            "name": "Web Development",
+            "name": "AI Agent Development",
             "percentage": 85,
             "category": "Technical",
-            "description": "Building responsive and interactive web applications"
+            "description": "Designing local-first AI pipelines, from wake-word detection to LLM reasoning"
         },
         {
-            "name": "DevOps",
-            "percentage": 70,
+            "name": "Full-Stack Web Development",
+            "percentage": 85,
             "category": "Technical",
-            "description": "Setting up and maintaining CI/CD pipelines and infrastructure"
+            "description": "Shipping complete products end-to-end, from database schema to polished UI"
         },
         {
-            "name": "Networking",
-            "percentage": 75,
+            "name": "Backend & API Development",
+            "percentage": 85,
             "category": "Technical",
-            "description": "Understanding of network protocols and traffic analysis"
+            "description": "Building REST APIs, auth, and billing infrastructure for production services"
         },
         {
-            "name": "Databases",
+            "name": "Real-Time Systems",
+            "percentage": 78,
+            "category": "Technical",
+            "description": "Capturing and visualizing live data streams with minimal latency"
+        },
+        {
+            "name": "Game Development",
             "percentage": 80,
             "category": "Technical",
-            "description": "Designing and optimizing database structures and queries"
+            "description": "Building 3D engines, physics simulations, and game AI from scratch"
         },
         {
-            "name": "Software Engineering",
+            "name": "AI/ML for Text & Data",
+            "percentage": 75,
+            "category": "Technical",
+            "description": "Applying transformer models for classification, summarization, and sentiment analysis"
+        },
+        {
+            "name": "DevOps & Automation",
+            "percentage": 75,
+            "category": "Technical",
+            "description": "Docker, CI/CD, and cloud deployment for shipping and maintaining tools"
+        },
+        {
+            "name": "Mobile Development",
+            "percentage": 65,
+            "category": "Technical",
+            "description": "Building native iOS apps with SwiftUI"
+        },
+        {
+            "name": "Database Design",
+            "percentage": 70,
+            "category": "Technical",
+            "description": "Schema design and migrations across MySQL, SQLite, and Postgres"
+        },
+        {
+            "name": "Discipline",
             "percentage": 90,
-            "category": "Technical",
-            "description": "Applying engineering principles to software development"
-        },
-        {
-            "name": "Team Management",
-            "percentage": 75,
             "category": "Soft",
-            "description": "Leading and coordinating development teams effectively"
+            "description": "10+ years of competitive gymnastics and 5 years of bodybuilding"
         },
         {
-            "name": "Project Management",
-            "percentage": 70,
-            "category": "Soft",
-            "description": "Planning, executing, and closing projects successfully"
-        },
-        {
-            "name": "Problem Solving",
-            "percentage": 95,
-            "category": "Soft",
-            "description": "Analyzing complex issues and developing effective solutions"
-        },
-        {
-            "name": "Communication",
-            "percentage": 85,
-            "category": "Soft",
-            "description": "Clearly conveying technical concepts to various audiences"
-        },
-        {
-            "name": "Creativity",
+            "name": "Team Leadership",
             "percentage": 80,
             "category": "Soft",
-            "description": "Thinking outside the box to solve challenging problems"
+            "description": "Leading development teams from architecture decisions to delivery"
         },
         {
-            "name": "Algorithms",
-            "percentage": 85,
-            "category": "Technical",
-            "description": "Designing and implementing efficient algorithms"
+            "name": "Product Ownership",
+            "percentage": 80,
+            "category": "Soft",
+            "description": "Owning a product end-to-end: systems design, UI/UX, DevOps, and direction"
         },
         {
-            "name": "Data Structures",
+            "name": "Technical Writing",
             "percentage": 85,
-            "category": "Technical",
-            "description": "Utilizing appropriate data structures for optimal performance"
+            "category": "Soft",
+            "description": "Documenting architecture, changelogs, and contribution guides that others can follow"
+        },
+        {
+            "name": "Creative Problem Solving",
+            "percentage": 90,
+            "category": "Soft",
+            "description": "Breaking down ambiguous, complex problems into shippable solutions"
         }
     ],
     "specialization": [
         {
-            "name": "Low-level System Programming & Hardware Integration",
-            "description": "Developing efficient software with direct hardware access and control",
-            "proficiency": 85,
-            "related_skills": [
-                "Programming",
-                "Problem Solving",
-                "Performance Optimization"
-            ],
-            "key_projects": ["Sysmon-CLI", "SysDash Ultra"],
-            "languages": ["C/C++", "Rust"]
-        },
-        {
-            "name": "Real-time Data Processing, Monitoring & Analytics",
-            "description": "Building systems that collect, process, and visualize data with minimal latency",
-            "proficiency": 80,
-            "related_skills": ["Data Analysis", "Algorithms", "Databases"],
-            "key_projects": ["SysDash Ultra", "NetViz Pro", "WorkTime"],
-            "languages": ["Rust", "Swift", "Python"]
-        },
-        {
-            "name": "AI/ML Integration & Data-driven Insights",
-            "description": "Incorporating machine learning models and AI capabilities into applications",
-            "proficiency": 75,
-            "related_skills": [
-                "Machine Learning",
-                "Data Analysis",
-                "Problem Solving"
-            ],
-            "key_projects": [
-                "Smart-Commit",
-                "Iris - AI Coding Assistant",
-                "Chess Bot"
-            ],
-            "languages": ["Python", "C++", "Rust"]
-        },
-        {
-            "name": "UI/UX Design & Interactive Visualization",
-            "description": "Creating intuitive interfaces and data visualizations for complex information",
+            "name": "Local-First AI & Voice Systems",
+            "description": "Building fully offline AI pipelines — wake word detection, speech-to-text, LLM reasoning, and text-to-speech — with zero cloud dependency",
             "proficiency": 80,
             "related_skills": [
-                "Web Development",
-                "Creativity",
-                "Communication"
+                "AI Agent Development",
+                "Systems Programming",
+                "Real-Time Systems"
             ],
-            "key_projects": ["SysDash Ultra", "NetViz Pro", "QueryCrust"],
-            "languages": ["Swift", "TypeScript", "React"]
+            "key_projects": ["Iris", "Briz"],
+            "languages": ["Go", "Python"]
         },
         {
-            "name": "Performance Optimization & Resource Efficiency",
-            "description": "Tuning software for maximum speed and minimal resource consumption",
-            "proficiency": 85,
-            "related_skills": [
-                "Algorithms",
-                "Data Structures",
-                "Problem Solving"
-            ],
-            "key_projects": ["Sysmon-CLI", "CodeGrep", "Chess Bot"],
-            "languages": ["C/C++", "Rust", "Go"]
+            "name": "Developer Tooling & CLI Design",
+            "description": "Designing fast, ergonomic command-line tools for git automation and developer workflows",
+            "proficiency": 92,
+            "related_skills": ["TUI/CLI Design", "Backend & API Development"],
+            "key_projects": ["Iskra", "Mew"],
+            "languages": ["Go", "C"]
         },
         {
-            "name": "Cross-platform & Distributed Development",
-            "description": "Building applications that work across different operating systems and distributed environments",
-            "proficiency": 75,
-            "related_skills": ["Programming", "DevOps", "Networking"],
-            "key_projects": ["Sysmon-CLI", "IDraughts Pro", "QueryCrust"],
-            "languages": ["Rust", "Swift", "TypeScript"]
-        },
-        {
-            "name": "Network Traffic Analysis & Security Monitoring",
-            "description": "Analyzing network data for performance optimization and security purposes",
-            "proficiency": 70,
-            "related_skills": ["Networking", "Data Analysis", "Security"],
-            "key_projects": ["NetViz Pro"],
-            "languages": ["Rust", "TypeScript"]
-        },
-        {
-            "name": "Automated Workflow & Productivity Tools",
-            "description": "Developing tools to streamline and automate development workflows",
+            "name": "Terminal Environment Engineering",
+            "description": "Building and customizing the terminal, editor, and window-manager environment that everything else runs in",
             "proficiency": 90,
-            "related_skills": ["Programming", "DevOps", "Problem Solving"],
-            "key_projects": [
-                "Smart-Commit",
-                "CodeGrep",
-                "Neovim Config",
-                "AutoSort"
-            ],
-            "languages": ["C++", "Rust", "Lua", "Go"]
+            "related_skills": ["TUI/CLI Design", "Systems Programming"],
+            "key_projects": ["sketchybar", "Nvim-config", "Zarya.nvim"],
+            "languages": ["Lua", "Shell"]
+        },
+        {
+            "name": "Real-Time & Network Visualization",
+            "description": "Capturing live system and network data and rendering it as it happens",
+            "proficiency": 65,
+            "related_skills": ["Real-Time Systems", "Systems Programming"],
+            "key_projects": ["Setka", "Astrotop"],
+            "languages": ["Go", "Rust"]
+        },
+        {
+            "name": "SaaS & DevOps Infrastructure",
+            "description": "Shipping licensing, billing, and deployment infrastructure for commercial tools",
+            "proficiency": 65,
+            "related_skills": ["Backend & API Development", "DevOps & Automation"],
+            "key_projects": ["NF-ToolBox"],
+            "languages": ["Go"]
+        },
+        {
+            "name": "Game & Simulation Development",
+            "description": "Building 3D engines, physics simulations, and AI opponents from scratch",
+            "proficiency": 88,
+            "related_skills": ["Game Development"],
+            "key_projects": ["PotPotGolf", "Frisian Draught", "ShadowedHunter"],
+            "languages": ["Java", "C#"]
+        },
+        {
+            "name": "AI/ML for Text & Research",
+            "description": "Applying transformer models to classify, summarize, and analyze large text datasets",
+            "proficiency": 80,
+            "related_skills": ["AI/ML for Text & Data", "Database Design"],
+            "key_projects": ["EnronBox"],
+            "languages": ["Python"]
+        },
+        {
+            "name": "Full-Stack Product Engineering",
+            "description": "Shipping complete web products end-to-end, from database schema to polished, animated UI",
+            "proficiency": 85,
+            "related_skills": ["Full-Stack Web Development"],
+            "key_projects": ["QueryCrust", "BitVoyager", "Psycho", "Lucie-study"],
+            "languages": ["Python", "JavaScript", "Vue"]
         }
     ],
     "paradigm": [
         {
-            "name": "Functional & Reactive Programming",
-            "description": "Using immutable data and function composition to build reactive systems",
-            "proficiency": 80,
-            "related_skills": ["Programming", "Data Structures"],
-            "key_languages": ["Rust", "TypeScript"]
-        },
-        {
-            "name": "Object-Oriented & Component-based Design",
-            "description": "Structuring code around objects and reusable components",
-            "proficiency": 85,
-            "related_skills": ["Programming", "Software Engineering"],
-            "key_languages": ["C++", "Swift", "Java", "C#"]
-        },
-        {
-            "name": "Systems Architecture & Microservices",
-            "description": "Designing complex software systems with modular, independent services",
-            "proficiency": 75,
-            "related_skills": ["DevOps", "Software Engineering", "Networking"],
-            "key_projects": ["NetViz Pro", "QueryCrust"]
+            "name": "Local-First & Offline-First Architecture",
+            "description": "Designing systems that run fully on-device with no cloud dependency",
+            "proficiency": 88,
+            "related_skills": ["Systems Programming", "AI Agent Development"],
+            "key_projects": ["Iris", "sketchybar", "Nvim-config"]
         },
         {
             "name": "Concurrent & Parallel Programming",
-            "description": "Developing software that effectively utilizes multiple threads and processes",
-            "proficiency": 80,
-            "related_skills": ["Programming", "Performance Optimization"],
-            "key_languages": ["Rust", "C++", "Go"]
+            "description": "Using goroutines and multi-threading to build responsive, high-throughput systems",
+            "proficiency": 75,
+            "related_skills": ["Real-Time Systems"],
+            "key_languages": ["Go", "Rust"]
         },
         {
-            "name": "Data-driven & Event-driven Development",
-            "description": "Building applications that respond to data changes and events",
+            "name": "Object-Oriented & Component-based Design",
+            "description": "Structuring code around objects and reusable, testable components",
             "proficiency": 85,
-            "related_skills": ["Data Analysis", "Programming"],
-            "key_projects": ["SysDash Ultra", "WorkTime", "NetViz Pro"]
+            "related_skills": ["Game Development", "Mobile Development"],
+            "key_languages": ["Java", "C#", "Swift"]
         },
         {
-            "name": "Test-driven & Behavior-driven Development",
-            "description": "Writing tests before implementation to ensure software meets requirements",
-            "proficiency": 75,
-            "related_skills": ["Programming", "Software Engineering"],
-            "key_projects": ["Smart-Commit", "CodeGrep", "QueryCrust"]
+            "name": "Event-Driven & Real-Time Development",
+            "description": "Building applications that react to live data and events as they arrive",
+            "proficiency": 78,
+            "related_skills": ["Real-Time Systems"],
+            "key_projects": ["Setka", "Iris"]
         },
         {
-            "name": "Agile Methodologies & Iterative Prototyping",
-            "description": "Using flexible, collaborative approaches to software development",
+            "name": "Test-Driven & CI-Verified Development",
+            "description": "Writing sanitizer-checked tests and CI pipelines that catch regressions before release",
+            "proficiency": 82,
+            "related_skills": ["Systems Programming", "DevOps & Automation"],
+            "key_projects": ["Mew", "Iskra"]
+        },
+        {
+            "name": "Agile & Iterative Team Leadership",
+            "description": "Leading small teams through flexible, collaborative development cycles",
             "proficiency": 80,
-            "related_skills": [
-                "Project Management",
-                "Team Management",
-                "Communication"
-            ],
-            "key_projects": ["ShadowedHunter", "BitVoyager", "Thynkly"]
-        },
-        {
-            "name": "Secure Coding Practices & Robust Engineering",
-            "description": "Implementing security best practices throughout the development lifecycle",
-            "proficiency": 75,
-            "related_skills": [
-                "Programming",
-                "Software Engineering",
-                "Security"
-            ],
-            "key_projects": [
-                "NetViz Pro",
-                "QueryCrust",
-                "Iris - AI Coding Assistant"
-            ]
+            "related_skills": ["Team Leadership", "Product Ownership"],
+            "key_projects": ["Frisian Draught"]
         }
-    ],
-    "language_categories": {
-        "systems_programming": ["C", "C++", "Rust", "Go"],
-        "application_development": ["Java", "Swift", "C#", "Python", "Lua"],
-        "web_technologies": [
-            "JavaScript",
-            "TypeScript",
-            "HTML",
-            "CSS",
-            "React",
-            "TailwindCSS",
-            "Framer Motion",
-            "GraphQL"
-        ],
-        "scripting": ["Bash", "Zsh", "Vimscript", "AppleScript", "Python"],
-        "data_processing": [
-            "SQL",
-            "Python",
-            "Julia",
-            "Markdown",
-            "LaTeX",
-            "Regex"
-        ],
-        "config_and_markup": ["YAML", "JSON", "HTML", "Markdown"]
-    },
-    "tool_categories": {
-        "development_environments": [
-            "Neovim",
-            "VS Code",
-            "Xcode",
-            "Unity",
-            "Warp",
-            "iTerm2",
-            "UTM"
-        ],
-        "version_control": ["Git", "libgit2", "GitHub Actions"],
-        "containerization": ["Docker", "Docker Compose", "Kubernetes"],
-        "databases": ["MySQL", "SQLite", "PostgreSQL", "Redis", "MongoDB"],
-        "frameworks": [
-            "Spring",
-            "Flask",
-            "React",
-            "TailwindCSS",
-            "SwiftUI",
-            "UIKit",
-            "Unity",
-            "Tauri",
-            "FastAPI",
-            "Bubble Tea",
-            "Lipgloss",
-            "Tree-sitter"
-        ],
-        "network_analysis": ["libpcap", "BPF", "Wireshark"],
-        "data_visualization": ["D3.js", "WebGL", "Matplotlib"],
-        "automation": ["fsnotify", "OCR/Tesseract", "Onefetch"],
-        "server_and_proxy": ["Nginx", "Caddy"]
-    },
-    "framework_categories": {
-        "web_frontend": ["React", "TailwindCSS", "Framer Motion"],
-        "web_backend": ["Flask", "FastAPI", "Node.js"],
-        "mobile_ui": ["SwiftUI", "UIKit"],
-        "game_engines": ["Unity", "LWJGL"],
-        "data_science": [
-            "Pandas",
-            "Matplotlib",
-            "Scikit-learn",
-            "TensorFlow",
-            "PyTorch"
-        ],
-        "database_orm": ["SQLAlchemy", "Flyway", "Diesel"],
-        "cli_and_tui": ["Bubble Tea", "Lipgloss"],
-        "native_ui": ["Tauri", "JavaFX", "Swing"],
-        "graphics": ["OpenGL", "WebGL", "D3.js"],
-        "infra_and_devops": ["Maven", "libgit2", "Onefetch"],
-        "parsing_and_lang_tools": ["Tree-sitter"]
-    }
+    ]
 }
