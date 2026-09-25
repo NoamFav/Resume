@@ -1,17 +1,24 @@
 {
   "experience": [
     {
+      "company": "NF Software",
+      "position": "Founder",
+      "start_date": "2023",
+      "end_date": "",
+      "description": "Independent studio building developer tools, local-first software, and custom work — open source where it counts."
+    },
+    {
       "company": "Freelance",
       "position": "Web Developer",
       "start_date": "2020-09-01",
-      "end_date": "",
+      "end_date": "2025",
       "description": "Developing websites for clients"
     },
     {
       "company": "Freelance",
       "position": "Software Engineer",
       "start_date": "2022-09-01",
-      "end_date": "",
+      "end_date": "2025",
       "description": "Developing software solutions for clients"
     },
     {
