@@ -2,58 +2,246 @@
 @tailwind components;
 @tailwind utilities;
 
-html {
-    scroll-behavior: smooth;
+/* Self-hosted: the official Victor Mono build carries the box-drawing, block
+   and arrow glyphs the Google Fonts subset drops, and nobody's IP goes to a
+   font CDN. */
+@font-face {
+    font-family: "Victor Mono";
+    src: url("/fonts/VictorMono-Regular.woff2") format("woff2");
+    font-weight: 100 500;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: "Victor Mono";
+    src: url("/fonts/VictorMono-Italic.woff2") format("woff2");
+    font-weight: 100 500;
+    font-style: italic;
+    font-display: swap;
+}
+@font-face {
+    font-family: "Victor Mono";
+    src: url("/fonts/VictorMono-Bold.woff2") format("woff2");
+    font-weight: 600 900;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: "Victor Mono";
+    src: url("/fonts/VictorMono-BoldItalic.woff2") format("woff2");
+    font-weight: 600 900;
+    font-style: italic;
+    font-display: swap;
+}
+@font-face {
+    font-family: "Source Serif 4";
+    src: url("/fonts/source-serif-4-latin-wght-normal.woff2") format("woff2");
+    font-weight: 200 900;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: "Source Serif 4";
+    src: url("/fonts/source-serif-4-latin-wght-italic.woff2") format("woff2");
+    font-weight: 200 900;
+    font-style: italic;
+    font-display: swap;
 }
 
-body {
-    background-color: #000;
+/* Colorschemes. RGB triplets so Tailwind's /opacity modifiers work. */
+:root,
+[data-scheme="night"] {
+    --bg: 10 11 13;
+    --surface: 16 18 21;
+    --raise: 24 27 31;
+    --line: 40 44 50;
+    --fg: 234 231 224;
+    --muted: 142 146 153;
+    --dim: 86 90 98;
+    --accent: 197 242 105;
+    --ink: 13 15 8;
+    --warn: 242 191 92;
+    --err: 240 113 103;
+    color-scheme: dark;
+}
+[data-scheme="paper"] {
+    --bg: 243 240 232;
+    --surface: 236 232 222;
+    --raise: 250 248 243;
+    --line: 212 206 193;
+    --fg: 27 27 25;
+    --muted: 104 100 93;
+    --dim: 160 155 145;
+    --accent: 52 104 16;
+    --ink: 243 240 232;
+    --warn: 166 104 0;
+    --err: 180 50 40;
+    color-scheme: light;
+}
+[data-scheme="amber"] {
+    --bg: 15 10 4;
+    --surface: 22 16 7;
+    --raise: 31 22 10;
+    --line: 63 46 19;
+    --fg: 255 192 100;
+    --muted: 196 140 62;
+    --dim: 118 84 36;
+    --accent: 255 222 140;
+    --ink: 15 10 4;
+    --warn: 255 160 80;
+    --err: 255 110 80;
+    color-scheme: dark;
+}
+
+@layer base {
+    html {
+        font-family: theme("fontFamily.mono");
+        font-size: 15px;
+        background: rgb(var(--bg));
+        color: rgb(var(--fg));
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
+        scroll-padding-top: 72px;
+    }
+    body {
+        background: rgb(var(--bg));
+        min-height: 100vh;
+    }
+    ::selection {
+        background: rgb(var(--accent));
+        color: rgb(var(--ink));
+    }
+    :focus-visible {
+        outline: 1px solid rgb(var(--accent));
+        outline-offset: 2px;
+    }
+    em {
+        /* Victor Mono's italic is a cursive — it is the house accent voice */
+        font-style: italic;
+    }
+}
+
+@layer components {
+    /* A TUI pane: a box whose title sits in the top border, btop-style. */
+    .pane {
+        @apply relative border border-line rounded-md;
+    }
+    .pane-title {
+        @apply absolute z-10 -top-[0.7em] left-3 px-1.5 bg-bg text-[12px] leading-none text-muted whitespace-nowrap;
+    }
+    .pane-title-right {
+        @apply absolute z-10 -top-[0.7em] right-3 px-1.5 bg-bg text-[12px] leading-none text-dim whitespace-nowrap;
+    }
+
+    .btn {
+        @apply inline-flex items-center gap-2 px-4 h-10 border border-line text-fg transition-colors duration-150;
+    }
+    .btn:hover {
+        @apply border-fg;
+    }
+    .btn-primary {
+        @apply inline-flex items-center gap-2 px-4 h-10 bg-accent text-ink font-bold transition-[filter] duration-150;
+    }
+    .btn-primary:hover {
+        filter: brightness(1.08);
+    }
+
+    .kbd {
+        @apply inline-flex items-center justify-center min-w-[1.5em] h-[1.5em] px-1 border border-line rounded-[3px] text-[11px] leading-none text-muted;
+    }
+
+    .link {
+        @apply underline decoration-dim underline-offset-4 hover:decoration-accent hover:text-fg transition-colors;
+    }
+
+    .section-label {
+        @apply text-[12px] text-dim tracking-wide;
+    }
+
+    /* A row that highlights like a TUI selection when hovered */
+    .tui-row {
+        @apply transition-colors duration-100;
+    }
+    .tui-row:hover {
+        @apply bg-raise;
+    }
+
+    /* ASCII art blocks: line-height matches the font's box so block and
+       box-drawing glyphs join up without gaps. */
+    .ascii {
+        font-family: theme("fontFamily.mono");
+        line-height: 1.227;
+        white-space: pre;
+        font-variant-ligatures: none;
+    }
+
+    .cursor-blink {
+        animation: blink 1.1s steps(1) infinite;
+    }
+}
+
+@keyframes blink {
+    50% {
+        opacity: 0;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .cursor-blink {
+        animation: none;
+    }
+    html {
+        scroll-behavior: auto;
+    }
+}
+
+@layer components {
+    /* A figlet banner: block glyphs in one colour, the box-drawing shadow in
+       another. Sized by its container, so it always fills the column. */
+    .figlet {
+        container-type: inline-size;
+    }
+    .figlet pre {
+        font-size: calc(100cqw / var(--cols) / 0.5455);
+        line-height: 1.15;
+        white-space: pre;
+        font-variant-ligatures: none;
+    }
+
+    /* Selectable pills that read like a TUI radio group: [x] all  [ ] done */
+    .opt {
+        @apply px-2 h-7 text-[12px] text-muted hover:text-fg whitespace-nowrap;
+    }
+    .opt[aria-pressed="true"] {
+        @apply bg-accent text-ink font-bold;
+    }
+
+    .field {
+        @apply h-8 bg-transparent border border-line px-2 text-[13px] text-fg outline-none focus:border-accent;
+    }
+    select.field {
+        @apply pr-6 appearance-none;
+        background-image: none;
+    }
+
+    .tag {
+        @apply inline-block px-1.5 text-[11px] leading-[1.6] border border-line text-muted whitespace-nowrap;
+    }
 }
 
 .no-scrollbar::-webkit-scrollbar {
     display: none;
 }
-
 .no-scrollbar {
-    -ms-overflow-style: none;
     scrollbar-width: none;
 }
 
-::selection {
-    background-color: rgba(99, 102, 241, 0.35);
-    color: #fff;
+.meter-fill {
+    transition: width 0.9s steps(18, end);
 }
-
-* {
-    scrollbar-color: #3f3f46 transparent;
-}
-
-::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
-}
-
-::-webkit-scrollbar-track {
-    background: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-    background-color: #27272a;
-    border-radius: 9999px;
-    border: 2px solid #000;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background-color: #3f3f46;
-}
-
 @media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-        scroll-behavior: auto !important;
+    .meter-fill {
+        transition: none;
     }
 }

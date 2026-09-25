@@ -1,97 +1,110 @@
 import { useMemo, useState } from "react";
-import { motion } from "framer-motion";
-import {
-    FaStar,
-    FaChartBar,
-    FaBullseye,
-    FaBrain,
-    FaLayerGroup,
-} from "react-icons/fa";
-
+import { Link, useSearchParams } from "react-router-dom";
+import AsciiObject from "../ascii/AsciiObject";
+import PageHead from "../ui/PageHead";
+import Meter from "../ui/Meter";
+import Pane from "../ui/Pane";
+import Section from "../ui/Section";
+import ProcTable from "../ui/ProcTable";
+import { SearchField, Options, Summary } from "../ui/Filters";
+import { LoadingState, EmptyState } from "../ui/States";
 import { useData } from "../lib/useData";
-import PageHeader from "../components/ui/PageHeader";
-import StatGrid from "../components/ui/StatGrid";
-import FilterBar from "../components/ui/FilterBar";
-import ProgressBar from "../components/ui/ProgressBar";
-import { LoadingState } from "../components/ui/States";
+import { useDesktop } from "../lib/useMedia";
+import { slug } from "../lib/format";
 
-function SkillCard({ skill, index }) {
-    return (
-        <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.4, delay: Math.min(index, 8) * 0.04 }}
-            className="bg-zinc-900 border border-zinc-800 rounded-xl p-5 hover:border-zinc-700 transition-colors"
-        >
-            <div className="flex justify-between items-center mb-2">
-                <h3 className="text-white font-medium">{skill.name}</h3>
-                <span className="text-xs text-zinc-500">
-                    {skill.percentage}%
-                </span>
-            </div>
-            <ProgressBar value={skill.percentage} className="mb-3" />
-            <p className="text-sm text-zinc-500">{skill.description}</p>
-        </motion.div>
-    );
-}
-
-function ExpertiseCard({ item, index, accent }) {
-    const tags = item.related_skills || [];
-    const projects = item.key_projects || [];
+function ExpertisePane({ item, title }) {
     const langs = item.languages || item.key_languages || [];
-
+    const projects = item.key_projects || [];
+    const related = item.related_skills || [];
     return (
-        <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.4, delay: Math.min(index, 8) * 0.04 }}
-            className="bg-zinc-900 border border-zinc-800 rounded-xl p-6 hover:border-zinc-700 transition-colors"
-        >
-            <div className="flex justify-between items-start gap-3 mb-2">
-                <h3 className="text-white font-medium">{item.name}</h3>
-                <span className="text-xs text-zinc-500 shrink-0">
-                    {item.proficiency}%
-                </span>
-            </div>
-            <ProgressBar value={item.proficiency} className="mb-3" />
-            <p className="text-sm text-zinc-500 mb-4">{item.description}</p>
-
-            {(tags.length > 0 || projects.length > 0 || langs.length > 0) && (
-                <div className="flex flex-wrap gap-1.5 pt-3 border-t border-zinc-800">
-                    {langs.map((l) => (
-                        <span
-                            key={l}
-                            className={`text-xs px-2 py-0.5 rounded-full ${accent}`}
-                        >
-                            {l}
-                        </span>
-                    ))}
-                    {projects.slice(0, 3).map((p) => (
-                        <span
-                            key={p}
-                            className="text-xs px-2 py-0.5 rounded-full bg-zinc-800 text-zinc-400"
-                        >
-                            {p}
-                        </span>
-                    ))}
-                </div>
+        <Pane title={title} right={`${item.proficiency}%`} className="px-5 pt-7 pb-5">
+            <h3 className="text-fg font-bold">{item.name}</h3>
+            <Meter value={item.proficiency} label={item.name} className="mt-3" />
+            <p className="mt-4 text-[13px] text-muted leading-relaxed">{item.description}</p>
+            {(langs.length > 0 || projects.length > 0 || related.length > 0) && (
+                <dl className="mt-5 pt-4 border-t border-line grid grid-cols-[5.5rem_minmax(0,1fr)] gap-y-2 text-[12px]">
+                    {langs.length > 0 && (
+                        <>
+                            <dt className="text-dim">langs</dt>
+                            <dd className="flex flex-wrap gap-1.5">
+                                {langs.map((l) => (
+                                    <span key={l} className="tag border-accent/60 text-accent">
+                                        {l}
+                                    </span>
+                                ))}
+                            </dd>
+                        </>
+                    )}
+                    {projects.length > 0 && (
+                        <>
+                            <dt className="text-dim">projects</dt>
+                            <dd className="flex flex-wrap gap-x-3 gap-y-1">
+                                {projects.map((p) => (
+                                    <Link
+                                        key={p}
+                                        to={`/projects?open=${slug(p)}`}
+                                        className="text-fg hover:text-accent"
+                                    >
+                                        ./{slug(p)}
+                                    </Link>
+                                ))}
+                            </dd>
+                        </>
+                    )}
+                    {related.length > 0 && (
+                        <>
+                            <dt className="text-dim">uses</dt>
+                            <dd className="text-muted">{related.join(" · ")}</dd>
+                        </>
+                    )}
+                </dl>
             )}
-        </motion.div>
+        </Pane>
     );
 }
+
+const columns = [
+    {
+        key: "pid",
+        label: "PID",
+        className: "text-dim tabular-nums",
+        render: (_, i) => String(i + 1).padStart(3, "0"),
+    },
+    {
+        key: "name",
+        label: "SKILL",
+        value: (s) => s.name,
+        render: (s) => <span className="block truncate text-fg">{s.name}</span>,
+    },
+    {
+        key: "cat",
+        label: "TYPE",
+        value: (s) => s.category,
+        render: (s) => <span className="text-muted">{s.category.toLowerCase()}</span>,
+    },
+    {
+        key: "pct",
+        label: "LEVEL",
+        value: (s) => s.percentage,
+        desc: true,
+        render: (s) => <Meter value={s.percentage} label={s.name} />,
+    },
+    {
+        key: "desc",
+        label: "COMMAND",
+        render: (s) => <span className="block truncate text-dim" title={s.description}>{s.description}</span>,
+    },
+];
 
 export default function Skills() {
     const { data, isLoading } = useData(["skills"]);
-    const [search, setSearch] = useState("");
+    const desktop = useDesktop();
+    const [params] = useSearchParams();
+    const [search, setSearch] = useState(() => params.get("q") ?? "");
     const [category, setCategory] = useState("all");
 
     const skills = useMemo(() => data?.skills?.skill || [], [data]);
-    const specializations = useMemo(
-        () => data?.skills?.specialization || [],
-        [data],
-    );
+    const specializations = useMemo(() => data?.skills?.specialization || [], [data]);
     const paradigms = useMemo(() => data?.skills?.paradigm || [], [data]);
 
     const categories = useMemo(
@@ -100,101 +113,104 @@ export default function Skills() {
     );
 
     const filteredSkills = useMemo(() => {
+        const q = search.toLowerCase();
         return skills.filter((skill) => {
             if (
-                search &&
-                !skill.name.toLowerCase().includes(search.toLowerCase()) &&
-                !skill.description?.toLowerCase().includes(search.toLowerCase())
+                q &&
+                !skill.name.toLowerCase().includes(q) &&
+                !skill.description?.toLowerCase().includes(q)
             )
                 return false;
-            if (category !== "all" && skill.category !== category)
-                return false;
+            if (category !== "all" && skill.category !== category) return false;
             return true;
         });
     }, [skills, search, category]);
 
-    if (isLoading) return <LoadingState label="Loading skills..." />;
-
-    const avg = Math.round(
-        skills.reduce((sum, s) => sum + s.percentage, 0) / (skills.length || 1),
-    );
-
-    const stats = [
-        { label: "Core Skills", value: skills.length, icon: FaStar },
-        {
-            label: "Specializations",
-            value: specializations.length,
-            icon: FaBullseye,
-        },
-        { label: "Paradigms", value: paradigms.length, icon: FaBrain },
-        { label: "Avg. Level", value: `${avg}%`, icon: FaChartBar },
-    ];
+    const avg = Math.round(skills.reduce((sum, s) => sum + s.percentage, 0) / (skills.length || 1));
 
     return (
-        <div className="max-w-6xl mx-auto px-6 pt-32 pb-24">
-            <PageHeader
-                eyebrow="Expertise"
+        <>
+            <PageHead
+                path="~/skills"
                 title="Skills"
-                description="Core technical and soft skills, plus the specializations and paradigms I lean on most in my work."
-            />
-            <StatGrid stats={stats} />
+                lead="Core technical and soft skills, plus the specializations and paradigms I lean on most in my work."
+                aside={
+                    <AsciiObject
+                        scene="bars"
+                        className="h-[220px] md:h-[300px]"
+                        fontSize={desktop ? 9 : 7}
+                        scale={1.35}
+                    />
+                }
+            >
+                {!isLoading && (
+                    <Summary
+                        items={[
+                            ["core skills", skills.length],
+                            ["specializations", specializations.length],
+                            ["paradigms", paradigms.length],
+                            ["avg. level", `${avg}%`],
+                        ]}
+                    />
+                )}
+            </PageHead>
 
-            <FilterBar
-                search={search}
-                onSearchChange={setSearch}
-                searchPlaceholder="Search skills..."
-                categories={categories}
-                category={category}
-                onCategoryChange={setCategory}
-            />
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-20">
-                {filteredSkills.map((skill, i) => (
-                    <SkillCard key={skill.name} skill={skill} index={i} />
-                ))}
-            </div>
-
-            {specializations.length > 0 && (
-                <div className="mb-20">
-                    <div className="flex items-center gap-2 mb-8">
-                        <FaBullseye className="h-4 w-4 text-blue-400" />
-                        <h2 className="text-2xl font-semibold text-white">
-                            Specializations
-                        </h2>
-                    </div>
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                        {specializations.map((spec, i) => (
-                            <ExpertiseCard
-                                key={spec.name}
-                                item={spec}
-                                index={i}
-                                accent="bg-blue-500/10 text-blue-300"
+            {isLoading ? (
+                <LoadingState label="spawning htop" />
+            ) : (
+                <>
+                    <section className="max-w-page mx-auto px-4 md:px-6">
+                        <div className="flex flex-col lg:flex-row lg:items-center gap-3 mb-6">
+                            <SearchField value={search} onChange={setSearch} placeholder="Search skills..." />
+                            <Options
+                                options={[
+                                    { key: "all", label: "all" },
+                                    ...categories.map((c) => ({ key: c, label: c.toLowerCase() })),
+                                ]}
+                                value={category}
+                                onChange={setCategory}
                             />
-                        ))}
-                    </div>
-                </div>
-            )}
-
-            {paradigms.length > 0 && (
-                <div>
-                    <div className="flex items-center gap-2 mb-8">
-                        <FaLayerGroup className="h-4 w-4 text-purple-400" />
-                        <h2 className="text-2xl font-semibold text-white">
-                            Paradigms
-                        </h2>
-                    </div>
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-                        {paradigms.map((paradigm, i) => (
-                            <ExpertiseCard
-                                key={paradigm.name}
-                                item={paradigm}
-                                index={i}
-                                accent="bg-purple-500/10 text-purple-300"
+                        </div>
+                        {filteredSkills.length === 0 ? (
+                            <EmptyState
+                                query={search}
+                                onClear={() => {
+                                    setSearch("");
+                                    setCategory("all");
+                                }}
                             />
-                        ))}
-                    </div>
-                </div>
+                        ) : (
+                            <ProcTable
+                                columns={columns}
+                                rows={filteredSkills}
+                                rowKey={(s) => s.name}
+                                initial={{ key: "pct", desc: true }}
+                                template="3ch minmax(10rem,15rem) 6rem minmax(12rem,1fr) minmax(10rem,1.2fr)"
+                            />
+                        )}
+                    </section>
+
+                    {specializations.length > 0 && (
+                        <Section n="01" title="Specializations" aside={`${specializations.length} areas`} className="mt-28">
+                            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                                {specializations.map((spec) => (
+                                    <ExpertisePane key={spec.name} item={spec} title={`spec/${slug(spec.name)}`} />
+                                ))}
+                            </div>
+                        </Section>
+                    )}
+
+                    {paradigms.length > 0 && (
+                        <Section n="02" title="Paradigms" aside={`${paradigms.length} ways of working`} className="mt-28">
+                            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                                {paradigms.map((p) => (
+                                    <ExpertisePane key={p.name} item={p} title={`paradigm/${slug(p.name)}`} />
+                                ))}
+                            </div>
+                        </Section>
+                    )}
+                </>
             )}
-        </div>
+        </>
     );
 }

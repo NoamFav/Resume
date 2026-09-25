@@ -1,527 +1,369 @@
 import { useMemo } from "react";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
-import {
-    FaGithub,
-    FaLinkedin,
-    FaInstagram,
-    FaCode,
-    FaEnvelope,
-    FaArrowRight,
-    FaFileDownload,
-    FaBriefcase,
-    FaGraduationCap,
-    FaCertificate,
-    FaStar,
-    FaBook,
-    FaGlobe,
-} from "react-icons/fa";
-
-import Logo from "../assets/logo.png";
-import { useData } from "../lib/useData";
+import AsciiObject from "../ascii/AsciiObject";
+import Figlet, { figlet } from "../ui/Figlet";
+import Fetch from "../ui/Fetch";
+import Meter from "../ui/Meter";
+import Pane from "../ui/Pane";
+import Section from "../ui/Section";
+import Terminal from "../term/Terminal";
+import { LoadingState } from "../ui/States";
+import { useData, ALL } from "../lib/useData";
 import { useGithubStats } from "../lib/useGithub";
-import { formatDate, isOngoing } from "../lib/format";
-import ProgressBar from "../components/ui/ProgressBar";
-import { LoadingState } from "../components/ui/States";
+import { useDesktop } from "../lib/useMedia";
+import { formatDate, isOngoing, sha, slug, ym } from "../lib/format";
+import { useShell } from "../shell/shell-context";
 
-const SOCIAL_ICONS = {
-    website: FaGlobe,
-    github: FaGithub,
-    linkedin: FaLinkedin,
-    instagram: FaInstagram,
-    leetcode: FaCode,
-};
+const NAME_COLS = figlet("FAVIER")[0].length;
+const byStart = (a, b) => new Date(b.start_date) - new Date(a.start_date);
+const topBy = (list, n) =>
+    [...(list ?? [])]
+        .sort((a, b) => b.favorite - a.favorite || b.percentage - a.percentage)
+        .slice(0, n);
 
-const fadeUp = {
-    hidden: { opacity: 0, y: 16 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
-};
-
-function SectionHeading({ eyebrow, title, action }) {
+function GitLog({ entries }) {
     return (
-        <div className="flex items-end justify-between mb-8 gap-4">
-            <div>
-                <span className="text-xs font-medium tracking-wide uppercase text-blue-400">
-                    {eyebrow}
-                </span>
-                <h2 className="text-2xl md:text-3xl font-semibold text-white mt-1">
-                    {title}
-                </h2>
-            </div>
-            {action}
+        <ol className="text-[13px] leading-6">
+            {entries.map((e, i) => {
+                const live = isOngoing(e.end_date);
+                const last = i === entries.length - 1;
+                return (
+                    <li
+                        key={`${e.company}-${e.position}-${e.start_date}`}
+                        className="grid grid-cols-[1.5rem_minmax(0,1fr)]"
+                    >
+                        <span className="flex flex-col items-start text-accent select-none" aria-hidden>
+                            <span>{live ? "*" : "○"}</span>
+                            {!last && <span className="flex-1 border-l border-dim ml-[0.3em]" />}
+                        </span>
+                        <div className={last ? "" : "pb-7"}>
+                            <p>
+                                <span className="text-warn">
+                                    commit {sha(e.company + e.position + e.start_date)}
+                                </span>
+                                {i === 0 && <span className="text-accent"> (HEAD -&gt; main)</span>}
+                                {live && i !== 0 && <span className="text-accent"> (ongoing)</span>}
+                            </p>
+                            <p className="text-muted">
+                                Date:{"   "}
+                                <span className="tabular-nums">
+                                    {formatDate(e.start_date)} – {formatDate(e.end_date)}
+                                </span>
+                            </p>
+                            <p className="mt-2 pl-4 md:pl-8 text-fg font-bold">
+                                {e.position}{" "}
+                                <span className="font-normal text-muted">@ {e.company}</span>
+                            </p>
+                            <p className="pl-4 md:pl-8 text-muted">{e.description}</p>
+                        </div>
+                    </li>
+                );
+            })}
+        </ol>
+    );
+}
+
+function Tree({ education }) {
+    const list = [...education].sort(byStart);
+    return (
+        <div className="text-[13px] leading-7">
+            <p className="text-accent font-bold">~/education</p>
+            {list.map((e, i) => {
+                const last = i === list.length - 1;
+                const years = `${new Date(e.start_date).getFullYear()}–${
+                    e.end_date ? new Date(e.end_date).getFullYear() : "now"
+                }`;
+                return (
+                    <div key={`${e.school}-${e.degree}`}>
+                        <p className="flex gap-2">
+                            <span className="text-dim shrink-0">{last ? "└──" : "├──"}</span>
+                            <span>
+                                <span className="text-warn tabular-nums">{years}</span>{" "}
+                                <span className="text-fg font-bold">{e.degree}</span>
+                                <span className="text-muted"> · {e.school}</span>
+                            </span>
+                        </p>
+                        <p className="flex gap-2">
+                            <span className="text-dim shrink-0 whitespace-pre">
+                                {last ? "    └──" : "│   └──"}
+                            </span>
+                            <em className="text-accent">{e.field}</em>
+                        </p>
+                    </div>
+                );
+            })}
         </div>
     );
 }
 
-function ViewAllLink({ to, children }) {
+function Certs({ certs }) {
+    const list = [...certs].sort((a, b) => new Date(b.date) - new Date(a.date));
     return (
-        <Link
-            to={to}
-            className="hidden sm:flex items-center gap-1.5 text-sm text-zinc-400 hover:text-white transition-colors shrink-0"
-        >
-            {children} <FaArrowRight className="h-3 w-3" />
-        </Link>
+        <div className="text-[13px] leading-7 overflow-x-auto no-scrollbar">
+            <p className="text-muted">total {list.length}</p>
+            <table className="whitespace-nowrap">
+                <tbody>
+                    {list.map((c) => (
+                        <tr key={c.name} className="tui-row">
+                            <td className="pr-3 text-dim">-r--r--r--</td>
+                            <td className="pr-3 text-muted tabular-nums">{ym(c.date)}</td>
+                            <td className="pr-3 text-right tabular-nums">
+                                {c.grade ? (
+                                    <span className="text-accent">{c.grade}/100</span>
+                                ) : (
+                                    <span className="text-dim">—</span>
+                                )}
+                            </td>
+                            <td className="pr-3 text-fg">{c.name}</td>
+                            <td className="text-dim">{c.organization}</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+        </div>
     );
 }
 
-function TechColumn({ title, items, to }) {
-    const top = [...items]
-        .sort((a, b) => b.favorite - a.favorite || b.percentage - a.percentage)
-        .slice(0, 4);
-
+function TechPane({ title, items, to }) {
     return (
-        <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-6">
-            <div className="flex items-center justify-between mb-5">
-                <h3 className="font-medium text-white">{title}</h3>
-                <Link
-                    to={to}
-                    className="text-xs text-zinc-500 hover:text-white transition-colors"
-                >
-                    View all
-                </Link>
-            </div>
-            <div className="space-y-4">
-                {top.map((item) => (
-                    <div key={item.name}>
-                        <div className="flex items-center justify-between mb-1.5">
-                            <div className="flex items-center gap-2 min-w-0">
-                                {item.image && (
-                                    <img
-                                        src={item.image}
-                                        alt=""
-                                        className="w-4 h-4 shrink-0"
-                                    />
-                                )}
-                                <span className="text-sm text-zinc-300 truncate">
-                                    {item.name}
-                                </span>
-                            </div>
-                            <span className="text-xs text-zinc-500 shrink-0">
-                                {item.percentage}%
-                            </span>
-                        </div>
-                        <ProgressBar value={item.percentage} />
-                    </div>
+        <Pane title={title} right={`${items.length} total`} className="px-5 pt-7 pb-5">
+            <ul className="space-y-2.5">
+                {topBy(items, 5).map((it) => (
+                    <li
+                        key={it.name}
+                        className="grid grid-cols-[minmax(0,7.5rem)_minmax(0,1fr)] gap-3 items-center text-[13px]"
+                    >
+                        <span className="truncate text-fg">
+                            {it.name}
+                            {it.favorite && <span className="text-accent"> ★</span>}
+                        </span>
+                        <Meter value={it.percentage} label={it.name} />
+                    </li>
+                ))}
+            </ul>
+            <Link to={to} className="mt-5 inline-block text-[12px] text-muted hover:text-fg">
+                :e {to.slice(1)}/ <span className="text-dim">→</span>
+            </Link>
+        </Pane>
+    );
+}
+
+function ProjectPane({ p }) {
+    return (
+        <Pane
+            as="article"
+            title={`~/projects/${slug(p.title)}`}
+            right={p.progress_percentage === 100 ? "✓ done" : `${p.progress_percentage}%`}
+            className="px-5 pt-7 pb-5 flex flex-col"
+        >
+            <p className="text-[12px] text-dim">{p.category}</p>
+            <h3 className="mt-1 text-lg font-bold text-fg">{p.title}</h3>
+            <p className="mt-3 text-[13px] text-muted leading-relaxed line-clamp-4 flex-1">
+                {p.description}
+            </p>
+            <Meter value={p.progress_percentage} label={`${p.title} progress`} className="mt-4" />
+            <div className="mt-4 flex flex-wrap gap-1.5">
+                {(p.languages ?? []).slice(0, 4).map((l) => (
+                    <span key={l} className="tag">
+                        {l}
+                    </span>
                 ))}
             </div>
-        </div>
+            <div className="mt-5 flex gap-5 text-[12px]">
+                <Link to={`/projects?open=${slug(p.title)}`} className="text-muted hover:text-fg">
+                    cat README <span className="text-dim">→</span>
+                </Link>
+                {p.git_url && (
+                    <a
+                        href={p.git_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-muted hover:text-fg"
+                    >
+                        git clone <span className="text-dim">↗</span>
+                    </a>
+                )}
+            </div>
+        </Pane>
     );
 }
 
 export default function Home() {
-    const { data, isLoading } = useData([
-        "config",
-        "contact",
-        "skills",
-        "programming_languages",
-        "tools",
-        "frameworks",
-        "projects",
-        "experience",
-        "education",
-    ]);
+    const { data, isLoading } = useData(ALL);
     const github = useGithubStats();
+    const desktop = useDesktop();
+    const { wget } = useShell();
 
-    const specializations = useMemo(
-        () => data?.skills?.specialization?.slice(0, 3) || [],
+    const experience = useMemo(
+        () => [...(data?.experience?.experience ?? [])].sort(byStart),
         [data],
     );
-
-    const featuredProjects = useMemo(() => {
-        if (!data?.projects?.project) return [];
-        return [...data.projects.project]
-            .sort((a, b) => b.progress_percentage - a.progress_percentage)
-            .slice(0, 3);
-    }, [data]);
-
+    const featured = useMemo(
+        () =>
+            [...(data?.projects?.project ?? [])]
+                .sort((a, b) => b.progress_percentage - a.progress_percentage)
+                .slice(0, 3),
+        [data],
+    );
     const topSkills = useMemo(
         () =>
-            [...(data?.skills?.skill || [])]
+            [...(data?.skills?.skill ?? [])]
                 .sort((a, b) => b.percentage - a.percentage)
-                .slice(0, 6),
+                .slice(0, 8),
         [data],
     );
 
-    const sortedExperience = useMemo(
-        () =>
-            [...(data?.experience?.experience || [])].sort(
-                (a, b) => new Date(b.start_date) - new Date(a.start_date),
-            ),
-        [data],
-    );
-
-    if (isLoading) return <LoadingState label="Loading profile..." />;
+    if (isLoading) return <LoadingState label="mounting /home/noam" />;
 
     const { config, contact, education } = data;
-    const contactInfo = contact?.contact;
+    const email = contact?.contact?.email;
+    const social = Object.entries(contact?.social ?? {}).filter(([k]) => k !== "website");
+    const specs = data.skills?.specialization?.slice(0, 3) ?? [];
 
     return (
-        <div>
-            {/* Hero */}
-            <section className="max-w-6xl mx-auto px-6 pt-40 pb-24">
-                <div className="flex flex-col md:flex-row items-center md:items-start gap-12">
-                    <motion.div
-                        initial={{ opacity: 0, scale: 0.95 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 0.5 }}
-                        className="shrink-0"
-                    >
-                        <img
-                            src={Logo}
-                            alt="Noam Favier"
-                            className="w-36 h-36 md:w-44 md:h-44 rounded-2xl object-cover border border-zinc-800"
-                        />
-                    </motion.div>
+        <>
+            <header className="max-w-page mx-auto px-4 md:px-6 pt-12 md:pt-16">
+                <p className="text-[12px] text-dim mb-8">
+                    <span className="text-accent">$</span> figlet -f &quot;ANSI Shadow&quot; noam favier
+                </p>
+                <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] gap-8 lg:gap-12 items-center">
+                    <div>
+                        <h1 className="sr-only">{config.site.title.split(" - ")[0]}</h1>
+                        <Figlet text="NOAM" cols={NAME_COLS} />
+                        <Figlet text="FAVIER" cols={NAME_COLS} solid="text-accent" className="mt-1" />
 
-                    <motion.div
-                        initial="hidden"
-                        animate="visible"
-                        variants={{
-                            visible: { transition: { staggerChildren: 0.08 } },
-                        }}
-                        className="text-center md:text-left"
-                    >
-                        <motion.h1
-                            variants={fadeUp}
-                            className="text-4xl md:text-6xl font-semibold tracking-tight text-white mb-4"
-                        >
-                            {config.site.title.split(" - ")[0]}
-                        </motion.h1>
-                        <motion.p
-                            variants={fadeUp}
-                            className="text-xl md:text-2xl text-zinc-400 mb-6"
-                        >
-                            {config.site.description}
-                        </motion.p>
-
-                        {specializations.length > 0 && (
-                            <motion.div
-                                variants={fadeUp}
-                                className="flex flex-wrap gap-2 justify-center md:justify-start mb-8"
-                            >
-                                {specializations.map((spec) => (
-                                    <span
-                                        key={spec.name}
-                                        className="px-3 py-1.5 bg-zinc-900 border border-zinc-800 rounded-full text-xs text-zinc-400"
-                                    >
-                                        {spec.name.split(" &")[0]}
-                                    </span>
+                        <p className="mt-10 text-[clamp(1.15rem,2vw,1.5rem)] leading-snug">
+                            <em className="text-accent">{config.site.description}</em>
+                        </p>
+                        {specs.length > 0 && (
+                            <ul className="mt-5 flex flex-wrap gap-2">
+                                {specs.map((s) => (
+                                    <li key={s.name} className="tag">
+                                        {s.name.split(" &")[0]}
+                                    </li>
                                 ))}
-                            </motion.div>
+                            </ul>
                         )}
 
-                        <motion.div
-                            variants={fadeUp}
-                            className="flex flex-wrap gap-3 justify-center md:justify-start mb-8"
-                        >
-                            <Link
-                                to="/projects"
-                                className="px-6 py-3 bg-white text-black rounded-full text-sm font-medium hover:opacity-90 transition-opacity flex items-center gap-2"
-                            >
-                                View Projects <FaArrowRight className="h-3 w-3" />
+                        <div className="mt-9 flex flex-wrap gap-3 text-[13px]">
+                            <Link to="/projects" className="btn-primary">
+                                ./projects <span>→</span>
                             </Link>
-                            <a
-                                href={`${import.meta.env.BASE_URL}resume.pdf`}
-                                download
-                                className="px-6 py-3 border border-zinc-800 hover:border-zinc-700 rounded-full text-sm font-medium text-white transition-colors flex items-center gap-2"
-                            >
-                                Download Resume <FaFileDownload className="h-3 w-3" />
-                            </a>
-                            {contactInfo && (
-                                <a
-                                    href={`mailto:${contactInfo.email}`}
-                                    className="px-6 py-3 border border-zinc-800 hover:border-zinc-700 rounded-full text-sm font-medium text-white transition-colors flex items-center gap-2"
-                                >
-                                    Get in Touch <FaEnvelope className="h-3 w-3" />
+                            <button type="button" onClick={wget} className="btn">
+                                wget resume.pdf <span className="text-accent">↓</span>
+                            </button>
+                            {email && (
+                                <a href={`mailto:${email}`} className="btn">
+                                    mail noam <span className="text-dim">↗</span>
                                 </a>
                             )}
-                        </motion.div>
-
-                        <motion.div
-                            variants={fadeUp}
-                            className="flex gap-5 justify-center md:justify-start"
-                        >
-                            {Object.entries(contact.social || {}).map(
-                                ([platform, url]) => {
-                                    const Icon = SOCIAL_ICONS[platform];
-                                    if (!Icon || !url) return null;
-                                    return (
-                                        <a
-                                            key={platform}
-                                            href={url}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="text-zinc-500 hover:text-white transition-colors"
-                                            aria-label={platform}
-                                        >
-                                            <Icon className="h-5 w-5" />
-                                        </a>
-                                    );
-                                },
-                            )}
-                        </motion.div>
-                    </motion.div>
+                        </div>
+                        <ul className="mt-6 flex flex-wrap gap-x-5 gap-y-1 text-[12px]">
+                            {social.map(([k, url]) => (
+                                <li key={k}>
+                                    <a
+                                        href={url}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="text-muted hover:text-fg"
+                                    >
+                                        {k} <span className="text-dim">↗</span>
+                                    </a>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                    <AsciiObject
+                        scene="monogram"
+                        className="h-[300px] md:h-[440px] lg:h-[540px]"
+                        fontSize={desktop ? 9 : 7}
+                        scale={0.95}
+                        field={0.4}
+                        fieldRadius={0.75}
+                    />
                 </div>
+            </header>
 
-                {/* GitHub live stats */}
-                {github && (
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        whileInView={{ opacity: 1 }}
-                        viewport={{ once: true }}
-                        className="grid grid-cols-3 gap-px bg-zinc-800 border border-zinc-800 rounded-xl overflow-hidden mt-16 max-w-xl mx-auto md:mx-0"
-                    >
-                        <div className="bg-black p-5 text-center">
-                            <div className="text-2xl font-semibold text-white">
-                                {github.publicRepos}
-                            </div>
-                            <div className="text-xs text-zinc-500 mt-1">
-                                Public Repos
-                            </div>
-                        </div>
-                        <div className="bg-black p-5 text-center">
-                            <div className="text-2xl font-semibold text-white">
-                                {github.stars}
-                            </div>
-                            <div className="text-xs text-zinc-500 mt-1">
-                                GitHub Stars
-                            </div>
-                        </div>
-                        <div className="bg-black p-5 text-center">
-                            <div className="text-2xl font-semibold text-white">
-                                {github.followers}
-                            </div>
-                            <div className="text-xs text-zinc-500 mt-1">
-                                Followers
-                            </div>
-                        </div>
-                    </motion.div>
-                )}
-            </section>
+            <Section n="01" title="whoami" aside="neofetch · zsh" className="mt-24">
+                <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] gap-10 lg:gap-12">
+                    <Fetch data={data} github={github} />
+                    <Terminal
+                        data={data}
+                        fetch={<Fetch data={data} github={github} compact />}
+                        className="h-[460px]"
+                    />
+                </div>
+            </Section>
 
-            {/* About */}
             {config.site.intro && (
-                <section className="max-w-6xl mx-auto px-6 py-20 border-t border-zinc-900">
-                    <SectionHeading eyebrow="About" title="A little about me" />
-                    <motion.p
-                        initial={{ opacity: 0, y: 12 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        className="text-lg text-zinc-400 leading-relaxed max-w-3xl"
-                    >
+                <Section n="02" title="about" aside="cat README.md" className="mt-28">
+                    <p className="font-serif text-[clamp(1.15rem,1.7vw,1.4rem)] leading-[1.7] text-fg/90 max-w-3xl">
                         {config.site.intro}
-                    </motion.p>
-                </section>
+                    </p>
+                </Section>
             )}
 
-            {/* Experience */}
-            <section className="max-w-6xl mx-auto px-6 py-20 border-t border-zinc-900">
-                <SectionHeading eyebrow="Experience" title="Where I've worked" />
-                <div className="space-y-3">
-                    {sortedExperience.map((exp) => (
-                        <motion.div
-                            key={`${exp.company}-${exp.position}-${exp.start_date}`}
-                            initial={{ opacity: 0, y: 10 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-6 bg-zinc-900 border border-zinc-800 rounded-xl p-5 hover:border-zinc-700 transition-colors"
-                        >
-                            <div className="flex items-center gap-3 sm:w-56 shrink-0">
-                                <FaBriefcase className="h-4 w-4 text-zinc-600 shrink-0" />
-                                <div>
-                                    <div className="text-white font-medium leading-tight">
-                                        {exp.position}
-                                    </div>
-                                    <div className="text-sm text-zinc-500">
-                                        {exp.company}
-                                    </div>
-                                </div>
-                            </div>
-                            <p className="text-sm text-zinc-400 flex-1">
-                                {exp.description}
-                            </p>
-                            <div className="text-xs text-zinc-500 sm:text-right shrink-0 flex sm:flex-col items-center sm:items-end gap-2">
-                                <span>
-                                    {formatDate(exp.start_date)} –{" "}
-                                    {formatDate(exp.end_date)}
-                                </span>
-                                {isOngoing(exp.end_date) && (
-                                    <span className="text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full">
-                                        Current
-                                    </span>
-                                )}
-                            </div>
-                        </motion.div>
-                    ))}
-                </div>
-            </section>
+            <Section n="03" title="experience" aside="git log" className="mt-28">
+                <GitLog entries={experience} />
+            </Section>
 
-            {/* Education */}
-            <section className="max-w-6xl mx-auto px-6 py-20 border-t border-zinc-900">
-                <SectionHeading eyebrow="Background" title="Education & certifications" />
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+            <Section n="04" title="education & certifications" aside="tree · ls -l" className="mt-28">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                    <Tree education={education.education} />
                     <div>
-                        <h3 className="flex items-center gap-2 text-sm font-medium text-zinc-400 mb-5">
-                            <FaGraduationCap className="text-blue-400" />
-                            Education
-                        </h3>
-                        <div className="space-y-5">
-                            {education.education.map((edu) => (
-                                <div
-                                    key={`${edu.school}-${edu.degree}`}
-                                    className="pl-4 border-l-2 border-zinc-800"
-                                >
-                                    <div className="text-xs text-zinc-500 mb-1">
-                                        {new Date(
-                                            edu.start_date,
-                                        ).getFullYear()}{" "}
-                                        –{" "}
-                                        {edu.end_date
-                                            ? new Date(
-                                                  edu.end_date,
-                                              ).getFullYear()
-                                            : "Present"}
-                                    </div>
-                                    <div className="text-white font-medium">
-                                        {edu.degree}
-                                    </div>
-                                    <div className="text-sm text-zinc-400">
-                                        {edu.school}
-                                    </div>
-                                    <div className="text-sm text-blue-400/80 mt-0.5">
-                                        {edu.field}
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-
-                    <div>
-                        <h3 className="flex items-center gap-2 text-sm font-medium text-zinc-400 mb-5">
-                            <FaCertificate className="text-blue-400" />
-                            Certifications
-                        </h3>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                            {education.certification.map((cert) => (
-                                <div
-                                    key={cert.name}
-                                    className="bg-zinc-900 border border-zinc-800 rounded-lg p-4"
-                                >
-                                    <div className="text-white text-sm font-medium mb-1">
-                                        {cert.name}
-                                    </div>
-                                    <div className="text-xs text-zinc-500">
-                                        {cert.organization}
-                                    </div>
-                                    <div className="text-xs text-zinc-600 mt-2">
-                                        {formatDate(cert.date)}
-                                        {cert.grade && ` · ${cert.grade}/100`}
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
+                        <p className="text-[13px] text-accent font-bold">~/certs</p>
+                        <Certs certs={education.certification} />
                     </div>
                 </div>
-            </section>
+            </Section>
 
-            {/* Skills */}
-            <section className="max-w-6xl mx-auto px-6 py-20 border-t border-zinc-900">
-                <SectionHeading
-                    eyebrow="Skills"
-                    title="Core competencies"
-                    action={
-                        <ViewAllLink to="/skills">
-                            <FaStar className="h-3 w-3" /> View all
-                        </ViewAllLink>
-                    }
-                />
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                    {topSkills.map((skill) => (
-                        <div
-                            key={skill.name}
-                            className="bg-zinc-900 border border-zinc-800 rounded-xl p-5"
+            <Section n="05" title="skills" aside="htop" className="mt-28">
+                <ul className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-3">
+                    {topSkills.map((s, i) => (
+                        <li
+                            key={s.name}
+                            className="grid grid-cols-[2rem_minmax(0,12rem)_minmax(0,1fr)] gap-3 items-center text-[13px]"
                         >
-                            <div className="flex justify-between items-center mb-2">
-                                <span className="text-white text-sm font-medium">
-                                    {skill.name}
-                                </span>
-                                <span className="text-xs text-zinc-500">
-                                    {skill.percentage}%
-                                </span>
-                            </div>
-                            <ProgressBar value={skill.percentage} />
-                        </div>
+                            <span className="text-dim tabular-nums">
+                                {String(i + 1).padStart(2, "0")}
+                            </span>
+                            <span className="truncate text-fg">{s.name}</span>
+                            <Meter value={s.percentage} label={s.name} />
+                        </li>
                     ))}
-                </div>
-            </section>
+                </ul>
+                <Link to="/skills" className="mt-6 inline-block text-[12px] text-muted hover:text-fg">
+                    :e skills/ <span className="text-dim">→</span>
+                </Link>
 
-            {/* Tech stack */}
-            <section className="max-w-6xl mx-auto px-6 py-20 border-t border-zinc-900">
-                <SectionHeading eyebrow="Toolkit" title="Technologies I use" />
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-                    <TechColumn
-                        title="Languages"
+                <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <TechPane
+                        title="languages"
                         items={data.programming_languages.programming_language}
                         to="/languages"
                     />
-                    <TechColumn
-                        title="Frameworks"
-                        items={data.frameworks.framework}
-                        to="/frameworks"
-                    />
-                    <TechColumn
-                        title="Tools"
-                        items={data.tools.tool}
-                        to="/tools"
-                    />
+                    <TechPane title="frameworks" items={data.frameworks.framework} to="/frameworks" />
+                    <TechPane title="tools" items={data.tools.tool} to="/tools" />
                 </div>
-            </section>
+            </Section>
 
-            {/* Projects */}
-            <section className="max-w-6xl mx-auto px-6 py-20 border-t border-zinc-900">
-                <SectionHeading
-                    eyebrow="Portfolio"
-                    title="Featured projects"
-                    action={
-                        <ViewAllLink to="/projects">
-                            <FaBook className="h-3 w-3" /> View all
-                        </ViewAllLink>
-                    }
-                />
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-                    {featuredProjects.map((project) => (
-                        <motion.div
-                            key={project.title}
-                            initial={{ opacity: 0, y: 12 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            className="bg-zinc-900 border border-zinc-800 rounded-xl p-6 hover:border-zinc-700 transition-colors flex flex-col"
-                        >
-                            <div className="flex items-start justify-between gap-2 mb-3">
-                                <h3 className="text-white font-medium">
-                                    {project.title}
-                                </h3>
-                                <span className="text-xs text-zinc-500 shrink-0">
-                                    {project.progress_percentage}%
-                                </span>
-                            </div>
-                            <p className="text-sm text-zinc-500 line-clamp-3 mb-4 flex-1">
-                                {project.description}
-                            </p>
-                            <div className="flex flex-wrap gap-1.5">
-                                {project.languages?.slice(0, 3).map((lang) => (
-                                    <span
-                                        key={lang}
-                                        className="text-xs px-2 py-0.5 rounded-full bg-zinc-800 text-zinc-400"
-                                    >
-                                        {lang}
-                                    </span>
-                                ))}
-                            </div>
-                        </motion.div>
+            <Section
+                n="06"
+                title="featured projects"
+                aside={`ls ~/projects | head -${featured.length}`}
+                className="mt-28"
+            >
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    {featured.map((p) => (
+                        <ProjectPane key={p.title} p={p} />
                     ))}
                 </div>
-            </section>
-        </div>
+                <Link to="/projects" className="btn mt-10 text-[13px]">
+                    ls ~/projects{" "}
+                    <span className="text-dim">({data.projects.project.length})</span>{" "}
+                    <span>→</span>
+                </Link>
+            </Section>
+        </>
     );
 }

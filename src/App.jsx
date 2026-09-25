@@ -1,51 +1,29 @@
-import { useEffect } from "react";
-import {
-    HashRouter as Router,
-    Route,
-    Routes,
-    useLocation,
-} from "react-router-dom";
-
-import Navbar from "./components/layout/Navbar";
-import Footer from "./components/layout/Footer";
+import { HashRouter, Route, Routes } from "react-router-dom";
+import { SchemeProvider } from "./shell/scheme";
+import Shell from "./shell/Shell";
 import Home from "./pages/Home";
 import Projects from "./pages/Projects";
 import Skills from "./pages/Skills";
-import Languages from "./pages/Languages";
-import Frameworks from "./pages/Frameworks";
-import Tools from "./pages/Tools";
-import { useData } from "./lib/useData";
+import Inventory from "./pages/Inventory";
+import NotFound from "./pages/NotFound";
 
-function ScrollToTop() {
-    const { pathname } = useLocation();
-    useEffect(() => {
-        window.scrollTo(0, 0);
-    }, [pathname]);
-    return null;
-}
-
-function App() {
-    const { data } = useData(["contact"]);
-
+// Hash routing: GitHub Pages serves this from /Resume/ with no rewrites.
+export default function App() {
     return (
-        <Router>
-            <ScrollToTop />
-            <div className="min-h-screen bg-black text-white flex flex-col">
-                <Navbar />
-                <main className="flex-1">
+        <HashRouter>
+            <SchemeProvider>
+                <Shell>
                     <Routes>
                         <Route path="/" element={<Home />} />
                         <Route path="/projects" element={<Projects />} />
                         <Route path="/skills" element={<Skills />} />
-                        <Route path="/languages" element={<Languages />} />
-                        <Route path="/frameworks" element={<Frameworks />} />
-                        <Route path="/tools" element={<Tools />} />
+                        <Route path="/languages" element={<Inventory key="languages" kind="languages" />} />
+                        <Route path="/frameworks" element={<Inventory key="frameworks" kind="frameworks" />} />
+                        <Route path="/tools" element={<Inventory key="tools" kind="tools" />} />
+                        <Route path="*" element={<NotFound />} />
                     </Routes>
-                </main>
-                <Footer contact={data?.contact} />
-            </div>
-        </Router>
+                </Shell>
+            </SchemeProvider>
+        </HashRouter>
     );
 }
-
-export default App;
