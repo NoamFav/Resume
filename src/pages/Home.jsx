@@ -11,8 +11,9 @@ import { LoadingState } from "../ui/States";
 import { useData, ALL } from "../lib/useData";
 import { useGithubStats } from "../lib/useGithub";
 import { useDesktop } from "../lib/useMedia";
-import { formatDate, isOngoing, sha, slug, ym } from "../lib/format";
+import { byRecent, formatDate, isOngoing, sha, slug, ym } from "../lib/format";
 import { useShell } from "../shell/shell-context";
+import { HIRE } from "../shell/nav";
 
 const NAME_COLS = figlet("FAVIER")[0].length;
 const byStart = (a, b) => new Date(b.start_date) - new Date(a.start_date);
@@ -195,7 +196,7 @@ export default function Home() {
     const { wget } = useShell();
 
     const experience = useMemo(
-        () => [...(data?.experience?.experience ?? [])].sort(byStart),
+        () => [...(data?.experience?.experience ?? [])].sort(byRecent),
         [data],
     );
     const featured = useMemo(
@@ -252,6 +253,9 @@ export default function Home() {
                             <button type="button" onClick={wget} className="btn">
                                 wget resume.pdf <span className="text-accent">↓</span>
                             </button>
+                            <a href={HIRE} target="_blank" rel="noopener noreferrer" className="btn">
+                                start your project <span className="text-dim">↗</span>
+                            </a>
                             {email && (
                                 <a href={`mailto:${email}`} className="btn">
                                     mail noam <span className="text-dim">↗</span>

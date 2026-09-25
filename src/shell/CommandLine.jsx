@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { NAV, NF } from "./nav";
+import { HIRE, NAV, NF } from "./nav";
 import { SCHEMES, useScheme } from "./schemes";
 import { useData, ALL } from "../lib/useData";
 import { slug } from "../lib/format";
@@ -71,6 +71,7 @@ const buildItems = (d) => {
                 run: open(url),
             })),
         { label: "nf-software", hint: "nf-software.com", kind: "open", run: open(NF) },
+        { label: "hire", hint: "nf-software.com/contact — start your project", kind: "open", run: open(HIRE) },
         { label: "help", hint: "keys and commands", kind: "help", run: ({ openHelp }) => openHelp() },
     ];
     return items.map((it, i) => ({ ...it, id: i }));
@@ -108,10 +109,10 @@ const EX = {
         close();
         wget();
     },
-    wq: ({ say, close, email }) => {
+    wq: ({ say, close }) => {
         close();
-        if (email) location.href = `mailto:${email}`;
-        say('"offer.txt" [New] — let\'s talk');
+        window.open(HIRE, "_blank", "noopener");
+        say('"project.md" [New] — tell me what to build');
     },
 };
 EX.x = EX.wq;
@@ -157,7 +158,6 @@ export default function CommandLine({ onClose, say, wget, openHelp }) {
         wget,
         openHelp,
         close: onClose,
-        email: data?.contact?.contact?.email,
     };
 
     const run = (item) => {

@@ -1,6 +1,13 @@
 {
   "experience": [
     {
+      "company": "NF Software",
+      "position": "Founder",
+      "start_date": "2023",
+      "end_date": "",
+      "description": "Independent studio building developer tools, local-first software, and custom work — open source where it counts."
+    },
+    {
       "company": "Freelance",
       "position": "Web Developer",
       "start_date": "2020-09-01",

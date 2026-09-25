@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import { cwd } from "./nav";
+import { HIRE, cwd } from "./nav";
 import { useShell } from "./shell-context";
 
 const MODE_STYLE = {
@@ -73,9 +73,14 @@ export default function StatusLine() {
             <span role="status" className="flex-1 min-w-0 px-3 truncate text-muted">
                 {message}
             </span>
-            <span className="hidden md:flex items-center gap-1.5 px-3 text-muted">
+            <a
+                href={HIRE}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hidden md:flex items-center gap-1.5 px-3 text-muted hover:text-fg"
+            >
                 <span className="text-accent">●</span> open for work
-            </span>
+            </a>
             <span className="hidden lg:block px-3 text-dim">utf-8</span>
             <span aria-hidden="true" className="hidden sm:block px-3 text-muted tabular-nums">
                 {time}

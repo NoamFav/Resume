@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { NAV, NF } from "./nav";
+import { HIRE, NAV, NF } from "./nav";
 import { useData } from "../lib/useData";
 import { useShell } from "./shell-context";
 import Figlet from "../ui/Figlet";
@@ -71,6 +71,11 @@ export default function Footer() {
                         <li>
                             <a href={NF} target="_blank" rel="noopener noreferrer" className="text-muted hover:text-fg">
                                 nf-software <span className="text-dim">↗</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href={HIRE} target="_blank" rel="noopener noreferrer" className="text-muted hover:text-fg">
+                                start your project <span className="text-dim">↗</span>
                             </a>
                         </li>
                     </Col>

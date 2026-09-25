@@ -19,3 +19,4 @@ export const cwd = (pathname) => {
 
 export const PDF = `${import.meta.env.BASE_URL}resume.pdf`;
 export const NF = "https://nf-software.com";
+export const HIRE = `${NF}/contact`;

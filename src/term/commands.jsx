@@ -1,8 +1,8 @@
 // The home page shell. Each command gets the argv and a context, and returns
 // what to print (a string, a node, or an array of either) or `CLEAR`.
 import { SCHEMES } from "../shell/schemes";
-import { NF } from "../shell/nav";
-import { isOngoing, slug, ym } from "../lib/format";
+import { HIRE, NF } from "../shell/nav";
+import { byRecent, isOngoing, slug, ym } from "../lib/format";
 
 export const CLEAR = Symbol("clear");
 
@@ -62,6 +62,7 @@ const HELP = [
     ["htop", "top skills"],
     ["wget resume.pdf", "download the PDF"],
     ["theme [name]", SCHEMES.map((s) => s.id).join(" · ")],
+    ["hire", "start your project on nf-software.com"],
     ["mail", "write to me"],
     ["clear", "or ctrl-l"],
 ];
@@ -197,6 +198,8 @@ export const COMMANDS = {
         const url =
             what === "nf-software" || what === "website"
                 ? NF
+                : what === "hire" || what === "contact"
+                ? HIRE
                 : social[what] ?? findProject(d, what)?.git_url;
         if (!url) return <Err>open: {args[0]}: nothing by that name</Err>;
         window.open(url, "_blank", "noopener");
@@ -214,7 +217,7 @@ export const COMMANDS = {
             ];
         if (args[0] !== "log") return <Err>git: &apos;{args[0] ?? ""}&apos; is not supported here. try git log</Err>;
         return [...(d?.experience?.experience ?? [])]
-            .sort((a, b) => new Date(b.start_date) - new Date(a.start_date))
+            .sort(byRecent)
             .map((e) => (
                 <span key={e.company + e.position + e.start_date}>
                     <span className="text-warn">{ym(e.start_date)}</span> {e.position}
@@ -271,7 +274,10 @@ COMMANDS.nvim = COMMANDS.vim;
 COMMANDS.vi = COMMANDS.vim;
 COMMANDS.dir = COMMANDS.ls;
 COMMANDS.curl = COMMANDS.wget;
-COMMANDS.hire = COMMANDS.mail;
+COMMANDS.hire = () => {
+    window.open(HIRE, "_blank", "noopener");
+    return <Dim>opening nf-software.com/contact …</Dim>;
+};
 COMMANDS.contact = (a, c) => COMMANDS.cat(["contact.txt"], c);
 COMMANDS.about = (a, c) => COMMANDS.cat(["about.txt"], c);
 COMMANDS.top = COMMANDS.htop;
