@@ -4,6 +4,25 @@
         <meta charset="UTF-8" />
         <link rel="icon" type="image/png" href="/Resume/favicon.png" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+            rel="preload"
+            href="/Resume/fonts/VictorMono-Regular.woff2"
+            as="font"
+            type="font/woff2"
+            crossorigin
+        />
+        <!-- Colorscheme before first paint, so a returning visitor on "paper"
+             never sees a flash of "night". Same key the scheme switcher writes. -->
+        <script>
+            (function () {
+                var s;
+                try { s = localStorage.getItem("nf-scheme"); } catch (e) {}
+                if (s !== "night" && s !== "paper" && s !== "amber") {
+                    s = matchMedia("(prefers-color-scheme: light)").matches ? "paper" : "night";
+                }
+                document.documentElement.dataset.scheme = s;
+            })();
+        </script>
 
         <title>Noam Favier — Software Engineer &amp; Data Scientist</title>
         <meta
@@ -19,11 +38,11 @@
             content="Portfolio and resume of Noam Favier, a software developer specializing in systems programming, AI-driven tools, and interactive applications."
         />
 
-        <meta name="theme-color" content="#000000" />
-      <script type="module" crossorigin src="/Resume/assets/index-IIOqiKJM.js"></script>
-      <link rel="stylesheet" crossorigin href="/Resume/assets/index-CDi95dq1.css">
+        <meta name="theme-color" content="rgb(10,11,13)" />
+      <script type="module" crossorigin src="/Resume/assets/index-Cxjh8gzy.js"></script>
+      <link rel="stylesheet" crossorigin href="/Resume/assets/index-DSqnERfu.css">
     </head>
-    <body class="bg-black">
+    <body>
         <div id="root"></div>
     </body>
 </html>
