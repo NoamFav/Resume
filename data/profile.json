@@ -1,0 +1,66 @@
+{
+  "name": "Noam Favier",
+  "handle": "NoamFav",
+  "tagline": "Software Engineer · Systems Architect · AI Tooling Specialist",
+  "summary": "Full-stack engineer specializing in local-first AI, real-time processing, and high-performance developer tools. Founder of NF Software. I architect systems from scratch—pipelines, agents, CLIs, TUIs, memory graphs, and OS-level tooling.",
+  "summary_anon": "Full-stack engineer specializing in local-first AI, real-time processing, and high-performance developer tools. Founder of an independent software company. I architect systems from scratch—pipelines, agents, CLIs, TUIs, memory graphs, and OS-level tooling.",
+  "philosophy": "Local-first over cloud. Terminal workflows. Readable architecture beats clever code.",
+  "nationality": "French",
+  "spoken": [
+    { "name": "French", "code": "fr_FR", "level": "C2", "note": "native" },
+    { "name": "English", "code": "en_GB", "level": "C2" },
+    { "name": "Spanish", "code": "es_ES", "level": "B1" },
+    { "name": "Dutch", "code": "nl_NL", "level": "A2" }
+  ],
+  "cv": {
+    "expertise": [
+      "Local-First Architecture",
+      "Real-Time Systems",
+      "AI Agents",
+      "DevOps Automation",
+      "TUI/CLI Design",
+      "Systems Programming"
+    ],
+    "experience": ["NF Software", "42 Paris", "Freelance/Software Engineer"],
+    "languages": ["Go", "Python", "Java", "C", "Lua", "JavaScript", "C++", "Rust", "Swift"],
+    "stack": {
+      "primary": "Go, Python, Java, C",
+      "advanced": "Lua, JavaScript, C++, Rust, Swift",
+      "tools": "Docker, GitHub Actions, Neovim, Bubble Tea, sherpa-onnx, Ollama, OpenGL, Terraform, Tauri"
+    },
+    "soft": [
+      { "text": "Discipline (10+ years gymnastics)" },
+      { "text": "Team leadership" },
+      { "text": "Technical writing" },
+      { "text": "Product ownership" },
+      { "text": "Full-stack thinking" },
+      { "text": "Creative problem solving" },
+      { "text": "Bodybuilding for 5 years and physically fit", "personal": true }
+    ],
+    "certifications": [
+      "TOEFL 106/120",
+      "Java, Python, Go (SoloLearn)",
+      "AI & DevOps specializations"
+    ],
+    "education": [
+      { "school": "42 Paris", "title": "42 Paris", "line": "Software Engineering · Starting Nov 2026", "note": "Admitted after passing the Piscine" },
+      { "school": "Maastricht University", "title": "BSc Data Science & AI", "line": "Maastricht University · 2022–2025" },
+      { "school": "Lycee Jeanne D'arc", "title": "Baccalauréat (Mention Bien)", "line": "Lycée Français", "note": "20/20 Math, 17/20 Physics" }
+    ],
+    "projects": [
+      { "title": "Iris", "title_anon": "voice-assistant", "role": "Local Voice AI Assistant", "text": "On-device pipeline (wake word → STT → LLM → TTS) in Go, powered by sherpa-onnx, running fully offline on Apple Silicon. No cloud dependency." },
+      { "title": "Iskra", "title_anon": "git-cli", "role": "Git Automation CLI", "text": "Single Go binary handling AI-generated commit messages, bulk multi-repo sync, and status overviews. Successor to Zvezda, rebuilt for speed and simplicity.", "text_anon": "Single Go binary handling AI-generated commit messages, bulk multi-repo sync, and status overviews. Successor to an earlier tool, rebuilt for speed and simplicity." },
+      { "title": "sketchybar", "role": "macOS Status Bar", "text": "Tokyo Night-themed SketchyBar config (Lua, SbarLua) with multi-monitor AeroSpace workspace integration, live WiFi/battery/CPU/media widgets, and a custom icon font. Most-starred repo on GitHub." },
+      { "title": "Nvim-config", "role": "Neovim IDE Configuration", "text": "Batteries-included Neovim setup: 28 language servers wired through native `vim.lsp.config` with no `nvim-lspconfig` boilerplate, blink.cmp completion, Treesitter, Harpoon, LazyGit, Trouble diagnostics, plus Jupyter and LaTeX support." },
+      { "title": "Mew", "role": "POSIX `cat` Clone in C", "text": "Strict C11 reimplementation of `cat`: zero dependencies, full POSIX flag handling, ASAN/UBSAN-checked in debug builds. A deliberately small, correct systems tool." }
+    ],
+    "academic": [
+      { "title": "EnronBox", "dates": "Feb–Jul 2025", "role": "AI Email Analysis Platform", "text": "Full-stack NLP research project (Flask, React, Tauri) classifying, summarizing, and detecting emotion across the Enron email corpus using transformer models (BART, DistilBERT), with GPU acceleration and Ollama-generated responses." },
+      { "title": "Frisian Draught", "dates": "Sep–Dec 2024", "role": "Team Lead", "org": "Maastricht University", "text": "Led a 5-developer team building a Java/JavaFX application with DQN and Minimax AI agents, state management, and a multiplayer engine. Implemented reinforcement learning strategies." },
+      { "title": "PotPotGolf", "dates": "2023–2024", "role": "Lead Developer", "org": "Maastricht University", "text": "Built 3D engine from scratch using Java/LWJGL/OpenGL with physics simulation, HDR lighting, shader pipeline, terrain rendering. Created ML agents for procedural courses with A* pathfinding validation. Won best project award." }
+    ],
+    "anon": {
+      "replace": { "NF Software": "Independent Software Company" }
+    }
+  }
+}

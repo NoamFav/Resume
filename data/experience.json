@@ -2,10 +2,21 @@
   "experience": [
     {
       "company": "NF Software",
-      "position": "Founder",
+      "position": "Founder & Lead Engineer",
+      "location": "Paris, FR",
       "start_date": "2023",
       "end_date": "",
-      "description": "Independent studio building developer tools, local-first software, and custom work — open source where it counts."
+      "description": "Independent studio building developer tools, local-first software, and custom work — open source where it counts.",
+      "details": "Architected Iris, an on-device voice AI assistant (Go, wake word to STT to LLM to TTS). Built Iskra, a Git automation CLI succeeding Zvezda, and NF-ToolBox, a Go license server with Stripe billing on Postgres. Full ownership: systems design, AI pipelines, UI/UX, DevOps, product direction.",
+      "details_anon": "Architected an on-device voice AI assistant (Go, wake word to STT to LLM to TTS). Built a Git automation CLI in Go with AI-generated commits and bulk multi-repo sync, and a Go license server with Stripe billing on Postgres. Full ownership: systems design, AI pipelines, UI/UX, DevOps, product direction."
+    },
+    {
+      "company": "42 Paris",
+      "position": "42 Piscine",
+      "location": "Paris, FR",
+      "start_date": "2026-06-01",
+      "end_date": "2026-07-31",
+      "description": "Intensive 4-week C selection bootcamp: solo and pair-programming projects under strict time pressure and peer evaluation. Completed with strong results; admitted to the core program starting Nov 2026."
     },
     {
       "company": "Freelance",
@@ -17,9 +28,11 @@
     {
       "company": "Freelance",
       "position": "Software Engineer",
+      "location": "Remote",
       "start_date": "2022-09-01",
       "end_date": "2025",
-      "description": "Developing software solutions for clients"
+      "description": "Developing software solutions for clients",
+      "details": "Delivered custom LLM pipelines, automation tools, and local-first AI solutions for clients. Integrated AI workflows into existing infrastructure."
     },
     {
       "company": "Capgemini",

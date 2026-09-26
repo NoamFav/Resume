@@ -11,8 +11,15 @@
       "school": "Maastricht University",
       "degree": "Bachelor of Science",
       "field": "Data Science and Artificial Intelligence",
-      "start_date": "2023-09-01",
-      "end_date": "2026-06-30"
+      "start_date": "2022-09-01",
+      "end_date": "2025-06-30"
+    },
+    {
+      "school": "42 Paris",
+      "degree": "Software Engineering",
+      "field": "Core program, admitted after passing the Piscine",
+      "start_date": "2026-11-01",
+      "end_date": ""
     }
   ],
   "certification": [
@@ -25,7 +32,8 @@
     {
       "name": "TOEFL IBT",
       "date": "2022-06-22",
-      "grade": 85,
+      "grade": 106,
+      "scale": 120,
       "organization": "ETS"
     },
     {
