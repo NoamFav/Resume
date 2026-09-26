@@ -37,7 +37,9 @@ pnpm run deploy   # build, then publish dist/ to gh-pages
 | Where | What |
 | --- | --- |
 | `public/data/*.json` | All the content: experience, education, projects, skills, languages, frameworks, tools, contact |
-| `public/resume.pdf` | The PDF behind `wget resume.pdf` (built from `latex/`) |
+| `public/data/profile.json` | What only the CV needs: summary, spoken languages, which projects make the one page |
+| `cv/` | The PDF résumé: `nfcv.cls` (the terminal look as a LaTeX class), `build.mjs` (writes `resume.tex`, `resume-anon.tex` and `RESUME.md` from the JSON), bundled fonts |
+| `public/resume.pdf` | The PDF behind `wget resume.pdf`, from `pnpm run build:cv` (needs XeLaTeX) |
 | `src/shell/` | tmux window list, vim statusline, `:` command line, help, boot log, footer, colorschemes |
 | `src/term/` | The shell on the home page and its commands |
 | `src/ascii/` | The GPU ASCII renderer, shared with NF Software, plus two scenes of its own (`code`, `stack`) |

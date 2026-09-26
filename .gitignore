@@ -21,3 +21,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# CV build output (the PDF that ships is copied to public/)
+cv/build

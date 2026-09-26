@@ -1,21 +1,8 @@
-// Text in the ANSI Shadow figlet face. Built from per-letter rows so nobody
-// has to hand-align an 85-column string. Solid blocks take one colour and the
+// Text in the ANSI Shadow figlet face. Solid blocks take one colour and the
 // box-drawing "shadow" another, which is what makes the face read as 3D.
-const L = {
-    N: ["███╗   ██╗", "████╗  ██║", "██╔██╗ ██║", "██║╚██╗██║", "██║ ╚████║", "╚═╝  ╚═══╝"],
-    O: [" ██████╗ ", "██╔═══██╗", "██║   ██║", "██║   ██║", "╚██████╔╝", " ╚═════╝ "],
-    A: [" █████╗ ", "██╔══██╗", "███████║", "██╔══██║", "██║  ██║", "╚═╝  ╚═╝"],
-    M: ["███╗   ███╗", "████╗ ████║", "██╔████╔██║", "██║╚██╔╝██║", "██║ ╚═╝ ██║", "╚═╝     ╚═╝"],
-    F: ["███████╗", "██╔════╝", "█████╗  ", "██╔══╝  ", "██║     ", "╚═╝     "],
-    V: ["██╗   ██╗", "██║   ██║", "██║   ██║", "╚██╗ ██╔╝", " ╚████╔╝ ", "  ╚═══╝  "],
-    I: ["██╗", "██║", "██║", "██║", "██║", "╚═╝"],
-    E: ["███████╗", "██╔════╝", "█████╗  ", "██╔══╝  ", "███████╗", "╚══════╝"],
-    R: ["██████╗ ", "██╔══██╗", "██████╔╝", "██╔══██╗", "██║  ██║", "╚═╝  ╚═╝"],
-    " ": ["  ", "  ", "  ", "  ", "  ", "  "],
-};
+import { figlet } from "./figlet-font";
 
-export const figlet = (text) =>
-    [0, 1, 2, 3, 4, 5].map((row) => [...text].map((c) => L[c][row]).join(""));
+export { figlet };
 
 // Split a row into runs of solid and shadow glyphs
 const runs = (row) => row.match(/█+|[^█]+/g) ?? [];

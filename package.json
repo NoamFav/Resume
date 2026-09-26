@@ -7,6 +7,7 @@
         "dev": "vite",
         "build": "vite build",
         "build:data": "node ./scripts/toml-to-json.js",
+        "build:cv": "node ./cv/build.mjs --pdf",
         "lint": "eslint .",
         "preview": "vite preview",
         "predeploy": "npm run build",
