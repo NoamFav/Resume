@@ -2,7 +2,7 @@
     "project": [
         {
             "title": "Iris",
-            "description": "A fully offline AI suite for Apple Silicon. Iris Core is the voice assistant: wake word detection, streaming speech-to-text, LLM reasoning, and text-to-speech, all on-device with zero cloud dependency. Around it: a push-to-talk Voice CLI for the terminal, Iris Factory for generating agents on demand, and Iris Memory, a physics-based graph where concepts join by Hebbian springs that strengthen with use and decay with time. Uses sherpa-onnx for wake word and STT, llama.cpp on Metal for reasoning, and Kokoro for TTS.",
+            "description": "A fully offline AI suite for Apple Silicon. Iris Core is the voice assistant: wake word detection, streaming speech-to-text, LLM reasoning, and text-to-speech, all on-device with zero cloud dependency. Around it: a terminal Voice CLI woken by the “Hey Iris” wake word, Iris Factory for generating agents on demand, and Iris Memory, a physics-based graph where concepts join by Hebbian springs that strengthen with use and decay with time. Uses sherpa-onnx for wake word and STT, llama.cpp on Metal for reasoning, and Kokoro for TTS.",
             "git_url": "https://github.com/NoamFav/iris",
             "category": "AI & Voice Systems",
             "languages": ["Go", "Swift", "Python"],
