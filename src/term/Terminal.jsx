@@ -27,7 +27,7 @@ const lcp = (xs) =>
 export default function Terminal({ data, fetch, className = "" }) {
     const navigate = useNavigate();
     const { setScheme } = useScheme();
-    const { wget } = useShell();
+    const { wget, wipe, train, pending, clearPending } = useShell();
     const [lines, setLines] = useState(() => [{ out: lastLogin() }]);
     const [input, setInput] = useState("");
     const [history, setHistory] = useState([]);
@@ -36,6 +36,7 @@ export default function Terminal({ data, fetch, className = "" }) {
     const scrollRef = useRef(null);
     const inputRef = useRef(null);
     const [seenRef, seen] = useSeen();
+    const skipIntro = useRef(false);
 
     const run = useCallback(
         (raw) => {
@@ -45,7 +46,7 @@ export default function Terminal({ data, fetch, className = "" }) {
                 const [name, ...args] = line.split(/\s+/);
                 const fn = COMMANDS[name.toLowerCase()];
                 const res = fn
-                    ? fn(args, { d: data, navigate, setScheme, wget, fetch, history: [...history, line] })
+                    ? fn(args, { d: data, navigate, setScheme, wget, wipe, train, fetch, history: [...history, line] })
                     : `zsh: command not found: ${name}`;
                 if (res === CLEAR) {
                     setLines([]);
@@ -58,12 +59,23 @@ export default function Terminal({ data, fetch, className = "" }) {
             }
             setLines((ls) => [...ls, entry]);
         },
-        [data, navigate, setScheme, wget, fetch, history],
+        [data, navigate, setScheme, wget, wipe, train, fetch, history],
     );
+
+    // A command sent from the vim command line with :!
+    useEffect(() => {
+        if (!pending || !data) return;
+        // it came here to run this, so no typing `help` to itself first
+        skipIntro.current = true;
+        run(pending);
+        clearPending();
+        // after the page's own scroll-to-top on navigation
+        setTimeout(() => seenRef.current?.scrollIntoView({ block: "center" }), 60);
+    }, [pending, data, run, clearPending, seenRef]);
 
     // The first time it's on screen, it types `help` to itself
     useEffect(() => {
-        if (!seen || !data) return;
+        if (!seen || !data || skipIntro.current) return;
         if (matchMedia("(prefers-reduced-motion: reduce)").matches) {
             run("help");
             return;

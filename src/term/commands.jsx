@@ -1,5 +1,6 @@
 // The home page shell. Each command gets the argv and a context, and returns
 // what to print (a string, a node, or an array of either) or `CLEAR`.
+import { useEffect, useMemo, useRef, useState } from "react";
 import { SCHEMES } from "../shell/schemes";
 import { HIRE, NF } from "../shell/nav";
 import { byRecent, isOngoing, slug, ym } from "../lib/format";
@@ -35,6 +36,59 @@ const cols = (names) => (
 const projects = (d) => d?.projects?.project ?? [];
 const findProject = (d, name) =>
     projects(d).find((p) => slug(p.title) === slug(name.replace(/\/$/, "")));
+
+// rm -rf --no-preserve-root /: the deletion log scrolls past, fast, from the
+// real files on this machine, then the whole page goes down.
+const Wipe = ({ d, onDone }) => {
+    const paths = useMemo(() => {
+        const home = "/home/noam";
+        const names = (list) => (list ?? []).map((x) => slug(x.name));
+        return [
+            ...projects(d).flatMap((p) => [`${home}/projects/${slug(p.title)}/README.md`, `${home}/projects/${slug(p.title)}`]),
+            ...names(d?.skills?.skill).map((s) => `${home}/skills/${s}`),
+            ...names(d?.programming_languages?.programming_language).map((s) => `${home}/languages/${s}`),
+            ...names(d?.frameworks?.framework).map((s) => `${home}/frameworks/${s}`),
+            ...names(d?.tools?.tool).map((s) => `${home}/tools/${s}`),
+            ...FILES.map((f) => `${home}/${f}`),
+            ...DIRS.map((x) => `${home}/${x}`),
+            home,
+            "/home",
+            "/usr/bin/zsh",
+            "/usr/bin",
+            "/etc/hostname",
+            "/etc",
+            "/boot/vmlinuz",
+            "/boot",
+        ];
+    }, [d]);
+    const [n, setN] = useState(() =>
+        matchMedia("(prefers-reduced-motion: reduce)").matches ? paths.length : 0,
+    );
+    const end = useRef(null);
+
+    useEffect(() => {
+        end.current?.scrollIntoView({ block: "nearest" });
+        if (n >= paths.length) {
+            const t = setTimeout(onDone, 350);
+            return () => clearTimeout(t);
+        }
+        // a couple of seconds however many files there are
+        const step = Math.max(1, Math.ceil(paths.length / 70));
+        const t = setTimeout(() => setN((x) => Math.min(paths.length, x + step)), 26);
+        return () => clearTimeout(t);
+    }, [n, paths.length, onDone]);
+
+    return (
+        <>
+            {paths.slice(0, n).map((p) => (
+                <div key={p}>
+                    <Dim>removed </Dim>&apos;{p}&apos;
+                </div>
+            ))}
+            <div ref={end} />
+        </>
+    );
+};
 
 const top = (list, n) =>
     [...(list ?? [])].sort((a, b) => b.percentage - a.percentage).slice(0, n);
@@ -209,6 +263,12 @@ export const COMMANDS = {
     neofetch: (_, { fetch }) => fetch,
 
     git: (args, { d }) => {
+        if (args[0] === "push")
+            return args.includes("-f") || args.includes("--force") ? (
+                <Err>remote: error: GH006: Protected branch update failed for refs/heads/main.</Err>
+            ) : (
+                "Everything up-to-date"
+            );
         if (args[0] === "status")
             return [
                 "On branch main",
@@ -263,10 +323,35 @@ export const COMMANDS = {
     exit: () => <Dim>logout? there&apos;s a whole résumé left. try cd projects.</Dim>,
 
     sudo: () => <Err>guest is not in the sudoers file. This incident will be reported.</Err>,
-    rm: () => <Err>rm: permission denied. nice try.</Err>,
+    rm: (args, { d, wipe }) => {
+        const flags = args.filter((a) => a.startsWith("-"));
+        const targets = args.filter((a) => !a.startsWith("-"));
+        if (!targets.length) return <Err>rm: missing operand</Err>;
+        const recursive = flags.some((f) => /^-[a-z]*r/i.test(f));
+        const root = targets.some((t) => t === "/" || t === "/*");
+        if (root && recursive && flags.includes("--no-preserve-root"))
+            return <Wipe d={d} onDone={wipe} />;
+        if (root && recursive)
+            return [
+                <Err key="a">rm: it is dangerous to operate recursively on &apos;/&apos;</Err>,
+                <Err key="b">rm: use --no-preserve-root to override this failsafe</Err>,
+            ];
+        return targets.map((t) => (
+            <Err key={t}>rm: cannot remove &apos;{t}&apos;: Read-only file system</Err>
+        ));
+    },
+    sl: (_, { train }) => {
+        train();
+        return null;
+    },
     vim: () => <Dim>you&apos;re already in it. look at the statusline.</Dim>,
     emacs: () => <Err>zsh: command not found: emacs</Err>,
-    make: (args) => <Err>make: *** No rule to make target &apos;{args[0] ?? "all"}&apos;.  Stop.</Err>,
+    make: (args) =>
+        args[0] ? (
+            <Err>make: *** No rule to make target &apos;{args[0]}&apos;.  Stop.</Err>
+        ) : (
+            <Err>make: *** No targets specified and no makefile found.  Stop.</Err>
+        ),
     ping: () => <Dim>64 bytes from noam: icmp_seq=0 ttl=64 time=0.4 ms</Dim>,
 };
 
@@ -283,7 +368,17 @@ COMMANDS.about = (a, c) => COMMANDS.cat(["about.txt"], c);
 COMMANDS.top = COMMANDS.htop;
 COMMANDS.btop = COMMANDS.htop;
 COMMANDS.colorscheme = COMMANDS.theme;
-COMMANDS.man = () => <Dim>no manual entry. try help.</Dim>;
+COMMANDS.logout = COMMANDS.exit;
+COMMANDS.nano = () => <Err>zsh: command not found: nano</Err>;
+// man <project> prints its README; man <command> its line from help
+COMMANDS.man = (args, c) => {
+    if (!args[0]) return "What manual page do you want?";
+    const p = findProject(c.d, args[0]);
+    if (p) return COMMANDS.cat([`projects/${slug(p.title)}/README.md`], c);
+    const h = HELP.find(([usage]) => usage.split(" ")[0] === args[0]);
+    if (h) return table([h]);
+    return <Err>No manual entry for {args[0]}</Err>;
+};
 
 // Everything tab can complete after a command
 export const completions = (d) => [

@@ -6,7 +6,8 @@ import CommandLine from "./CommandLine";
 import Help from "./Help";
 import Footer from "./Footer";
 import Boot, { shouldBoot } from "./Boot";
-import { NAV, PDF } from "./nav";
+import Train from "./Train";
+import { HIRE, NAV, PDF } from "./nav";
 import { useScheme } from "./schemes";
 import { ShellContext } from "./shell-context";
 
@@ -31,8 +32,12 @@ export default function Shell({ children }) {
     const [help, setHelp] = useState(false);
     const [boot, setBoot] = useState(shouldBoot);
     const [message, setMessage] = useState("");
+    const [wiping, setWiping] = useState("");
+    const [train, setTrain] = useState(false);
+    const [pending, setPending] = useState(null);
     const msgTimer = useRef(0);
     const wgetTimer = useRef(0);
+    const rebooting = useRef(false);
 
     const say = useCallback((m) => {
         setMessage(m);
@@ -58,7 +63,52 @@ export default function Shell({ children }) {
         }, 45);
     }, [say]);
 
-    const endBoot = useCallback(() => setBoot(false), []);
+    // rm -rf --no-preserve-root /: the page falls away, the machine reboots
+    // through the boot log, and everything comes back from HEAD
+    const wipe = useCallback(() => {
+        if (matchMedia("(prefers-reduced-motion: reduce)").matches) {
+            say("removed '/'. restored from HEAD — it's all in git");
+            return;
+        }
+        setWiping("fall");
+        say("rm: removing '/' …");
+        setTimeout(() => {
+            rebooting.current = true;
+            setBoot(true);
+        }, 1300);
+    }, [say]);
+
+    const endBoot = useCallback(() => {
+        setBoot(false);
+        if (!rebooting.current) return;
+        rebooting.current = false;
+        setWiping("back");
+        say("restored from HEAD — it's all in git");
+        setTimeout(() => setWiping(""), 700);
+    }, [say]);
+
+    // sl: the train you get for mistyping ls
+    const runTrain = useCallback(() => {
+        if (matchMedia("(prefers-reduced-motion: reduce)").matches) {
+            say("sl: steam locomotive — did you mean ls?");
+            return;
+        }
+        setTrain(true);
+    }, [say]);
+    const trainDone = useCallback(() => {
+        setTrain(false);
+        say("did you mean ls?");
+    }, [say]);
+
+    // :!cmd hands the command to the shell on the home page, like vim's :!
+    const exec = useCallback(
+        (command) => {
+            setPending(command);
+            if (pathname !== "/") navigate("/");
+        },
+        [pathname, navigate],
+    );
+    const clearPending = useCallback(() => setPending(null), []);
 
     // INSERT while a text field has focus, like vim
     useEffect(() => {
@@ -75,6 +125,7 @@ export default function Shell({ children }) {
 
     useEffect(() => {
         let lastG = 0;
+        let lastZ = 0;
         const onKey = (e) => {
             if (cmd || help || boot) return;
             if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
@@ -122,6 +173,14 @@ export default function Shell({ children }) {
                 case "G":
                     scrollTo({ top: document.documentElement.scrollHeight });
                     break;
+                case "Z":
+                    // ZZ: vim's save-and-quit, same as :wq
+                    if (Date.now() - lastZ < 500) {
+                        window.open(HIRE, "_blank", "noopener");
+                        say('"project.md" [New] — tell me what to build');
+                        lastZ = 0;
+                    } else lastZ = Date.now();
+                    break;
                 case "g":
                     if (Date.now() - lastG < 500) {
                         scrollTo({ top: 0 });
@@ -133,7 +192,7 @@ export default function Shell({ children }) {
         };
         addEventListener("keydown", onKey);
         return () => removeEventListener("keydown", onKey);
-    }, [cmd, help, boot, cycle, navigate, wget]);
+    }, [cmd, help, boot, cycle, navigate, wget, say]);
 
     // New page starts at the top
     useEffect(() => {
@@ -145,6 +204,11 @@ export default function Shell({ children }) {
         message,
         say,
         wget,
+        wipe,
+        train: runTrain,
+        exec,
+        pending,
+        clearPending,
         openCommand: () => setCmd(true),
         openHelp: () => setHelp(true),
     };
@@ -163,7 +227,11 @@ export default function Shell({ children }) {
                     Skip to content
                 </a>
                 <TopBar />
-                <main id="main" tabIndex={-1} className="flex-1 outline-none">
+                <main
+                    id="main"
+                    tabIndex={-1}
+                    className={`flex-1 outline-none ${wiping ? `wipe-${wiping}` : ""}`}
+                >
                     {children}
                 </main>
                 <Footer />
@@ -174,9 +242,11 @@ export default function Shell({ children }) {
                     onClose={() => setCmd(false)}
                     say={say}
                     wget={wget}
+                    exec={exec}
                     openHelp={() => setHelp(true)}
                 />
             )}
+            {train && <Train onDone={trainDone} />}
             {help && <Help onClose={() => setHelp(false)} />}
             {boot && <Boot onDone={endBoot} />}
         </ShellContext.Provider>

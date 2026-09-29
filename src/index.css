@@ -181,6 +181,50 @@
     }
 }
 
+/* rm -rf --no-preserve-root /: every block drops out of view and stays gone
+   while the machine reboots, then fades back in. */
+.wipe-fall {
+    overflow: clip;
+}
+.wipe-fall > * {
+    --tilt: 3deg;
+    animation: wipe-fall 1.1s cubic-bezier(0.55, 0, 0.9, 0.4) both;
+}
+.wipe-fall > *:nth-child(even) {
+    --tilt: -4deg;
+}
+.wipe-fall > *:nth-child(2) { animation-delay: 0.07s; }
+.wipe-fall > *:nth-child(3) { animation-delay: 0.14s; }
+.wipe-fall > *:nth-child(4) { animation-delay: 0.21s; }
+.wipe-fall > *:nth-child(n + 5) { animation-delay: 0.28s; }
+@keyframes wipe-fall {
+    to {
+        transform: translateY(110vh) rotate(var(--tilt));
+        opacity: 0;
+    }
+}
+.wipe-back > * {
+    animation: wipe-back 0.6s ease-out both;
+}
+@keyframes wipe-back {
+    from {
+        opacity: 0;
+    }
+}
+
+/* sl: the train enters from the right and leaves on the left */
+.sl-train {
+    animation: sl-train 4.2s linear both;
+}
+@keyframes sl-train {
+    from {
+        transform: translateX(100vw);
+    }
+    to {
+        transform: translateX(-100%);
+    }
+}
+
 @keyframes blink {
     50% {
         opacity: 0;

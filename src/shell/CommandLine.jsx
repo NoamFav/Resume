@@ -117,7 +117,7 @@ const EX = {
 };
 EX.x = EX.wq;
 
-export default function CommandLine({ onClose, say, wget, openHelp }) {
+export default function CommandLine({ onClose, say, wget, exec, openHelp }) {
     const navigate = useNavigate();
     const { setScheme } = useScheme();
     const { data } = useData(ALL);
@@ -168,6 +168,11 @@ export default function CommandLine({ onClose, say, wget, openHelp }) {
     const submit = () => {
         const q = query.trim();
         if (EX[q]) return EX[q](ctx);
+        // :!cmd, and the shell commands people type here anyway, go to the shell
+        if (q.startsWith("!") || /^(?:rm|sudo|sl)\b/.test(q)) {
+            onClose();
+            return exec(q.replace(/^!\s*/, ""));
+        }
         if (results[sel]) return run(results[sel]);
         onClose();
         say(`E492: Not an editor command: ${q}`);
