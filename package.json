@@ -6,7 +6,6 @@
     "scripts": {
         "dev": "vite",
         "build": "vite build",
-        "build:data": "node ./scripts/toml-to-json.js",
         "build:cv": "node ./cv/build.mjs --pdf",
         "lint": "eslint .",
         "preview": "vite preview",
@@ -14,30 +13,29 @@
         "deploy": "gh-pages -d dist"
     },
     "dependencies": {
-        "@tailwindcss/postcss": "^4.0.7",
-        "eslint-plugin-react": "^7.37.4",
+        "@tailwindcss/postcss": "^4.3.3",
+        "eslint-plugin-react": "^7.37.5",
         "react": "^18.3.1",
         "react-dom": "^18.3.1",
-        "react-router-dom": "^7.6.0",
-        "toml": "^3.0.0"
+        "react-router-dom": "^7.18.4"
     },
     "devDependencies": {
-        "@eslint/js": "^9.17.0",
-        "@types/node": "^24.2.1",
-        "@types/react": "^18.3.17",
-        "@types/react-dom": "^18.3.5",
-        "@vitejs/plugin-react": "^4.3.4",
-        "autoprefixer": "^10.4.20",
-        "eslint": "^9.17.0",
-        "eslint-plugin-react-hooks": "^5.0.0",
-        "eslint-plugin-react-refresh": "^0.4.16",
-        "gh-pages": "^6.2.0",
-        "globals": "^15.13.0",
-        "postcss": "^8.4.49",
-        "tailwindcss": "^3.4.17",
-        "typescript": "~5.6.2",
-        "typescript-eslint": "^8.18.1",
-        "vite": "^6.3.5"
+        "@eslint/js": "^9.39.5",
+        "@types/node": "^24.19.0",
+        "@types/react": "^18.3.31",
+        "@types/react-dom": "^18.3.7",
+        "@vitejs/plugin-react": "^4.7.0",
+        "autoprefixer": "^10.6.1",
+        "eslint": "^9.39.5",
+        "eslint-plugin-react-hooks": "^5.2.0",
+        "eslint-plugin-react-refresh": "^0.4.26",
+        "gh-pages": "^6.3.0",
+        "globals": "^15.15.0",
+        "postcss": "^8.5.28",
+        "tailwindcss": "^3.4.19",
+        "typescript": "~5.6.3",
+        "typescript-eslint": "^8.70.1",
+        "vite": "^6.4.3"
     },
     "overrides": {
         "esbuild": "latest"
