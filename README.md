@@ -1,27 +1,30 @@
-# 📄 Resume
+<div align="center">
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset=".github/brand/banner-night.svg">
+  <img alt="Resume: A fully interactive personal website with project demos, language knowledge and a fully interactive blog. (under construction)" src=".github/brand/banner-paper.svg" width="100%">
+</picture>
+<br><br>
+<a href="#setup"><picture><source media="(prefers-color-scheme: dark)" srcset=".github/brand/tab-setup-night.svg"><img alt="setup" src=".github/brand/tab-setup-paper.svg"></picture></a>
+<a href="#how-its-put-together"><picture><source media="(prefers-color-scheme: dark)" srcset=".github/brand/tab-how-its-put-together-night.svg"><img alt="how it's put together" src=".github/brand/tab-how-its-put-together-paper.svg"></picture></a>
+<a href="#license"><picture><source media="(prefers-color-scheme: dark)" srcset=".github/brand/tab-license-night.svg"><img alt="license" src=".github/brand/tab-license-paper.svg"></picture></a>
+</div>
+
+<br>
 
 <div align="center">
 
-<img src="https://img.shields.io/badge/react-18-61DAFB.svg?style=for-the-badge&logo=react&logoColor=white" alt="React">
-<img src="https://img.shields.io/badge/vite-6-646CFF.svg?style=for-the-badge&logo=vite&logoColor=white" alt="Vite">
-<img src="https://img.shields.io/badge/pnpm-12-F69220.svg?style=for-the-badge&logo=pnpm&logoColor=white" alt="pnpm">
-<img src="https://img.shields.io/badge/license-MIT-green.svg?style=for-the-badge" alt="License">
-
-**Interactive personal resume website**
-
-[noamfav.github.io/Resume](https://noamfav.github.io/Resume/) · [Setup](#setup) · [How it's put together](#how-its-put-together)
+[noamfav.github.io/Resume](https://noamfav.github.io/Resume/)
 
 </div>
-
----
 
 A résumé you can drive like a terminal. Same design language as
 [nf-software.com](https://nf-software.com), pushed further: a boot log, a working
 shell, htop meters, git-log history, and live ASCII-rendered 3D objects.
 
----
-
-## Setup
+<p>
+<a name="setup"></a>
+<picture><source media="(prefers-color-scheme: dark)" srcset=".github/brand/section-setup-night.svg"><img alt="setup" src=".github/brand/section-setup-paper.svg" width="100%"></picture>
+</p>
 
 ```bash
 pnpm install
@@ -30,9 +33,10 @@ pnpm run build    # production build into dist/
 pnpm run deploy   # build, then publish dist/ to gh-pages
 ```
 
----
-
-## How it's put together
+<p>
+<a name="how-its-put-together"></a>
+<picture><source media="(prefers-color-scheme: dark)" srcset=".github/brand/section-how-its-put-together-night.svg"><img alt="how it's put together" src=".github/brand/section-how-its-put-together-paper.svg" width="100%"></picture>
+</p>
 
 | Where | What |
 | --- | --- |
@@ -48,14 +52,22 @@ pnpm run deploy   # build, then publish dist/ to gh-pages
 Keys: `1`–`6` pages · `:` or `⌘K` command line · `/` search · `d` download the PDF ·
 `t` colorscheme · `?` everything else.
 
----
-
-## License
+<p>
+<a name="license"></a>
+<picture><source media="(prefers-color-scheme: dark)" srcset=".github/brand/section-license-night.svg"><img alt="license" src=".github/brand/section-license-paper.svg" width="100%"></picture>
+</p>
 
 MIT — see [LICENSE](LICENSE).
-
----
 
 <div align="center">
 Made with ❤️ by <a href="https://github.com/NoamFav">NoamFav</a>
 </div>
+
+<br>
+
+<a href="https://nf-software.com">
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset=".github/brand/footer-night.svg">
+  <img alt="NF Software" src=".github/brand/footer-paper.svg" width="100%">
+</picture>
+</a>
